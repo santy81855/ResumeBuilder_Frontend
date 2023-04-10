@@ -19,10 +19,26 @@
     justify-content: flex-end;
 }
 
+.Header-logout {
+    text-decoration: none;
+    color: #333;
+}
+
+.Header-logout button {
+    border: none;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    font-size: medium;
+}
+
 .Header-right a {
     margin-left: 1rem;
     text-decoration: none;
     color: #333;
+    font-size: large;
 }
 
 .Header-logo {

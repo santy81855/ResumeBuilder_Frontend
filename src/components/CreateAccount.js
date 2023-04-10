@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/CreateAccount.css";
+import { login } from "../store";
 
 function CreateAccount() {
     const [name, setName] = useState("");
@@ -33,6 +34,10 @@ function CreateAccount() {
                     console.log(data.status);
                     console.log(data.message);
                     // handle login response (success or fail)
+                    // success creation
+                    if (data.status == 201) {
+                        login(data.user, data.token);
+                    }
                 })
                 .catch((error) => {
                     console.log(error);

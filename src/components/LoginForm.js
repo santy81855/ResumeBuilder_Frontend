@@ -20,7 +20,12 @@ function LoginForm() {
             .then((data) => {
                 console.log(data.status);
                 console.log(data.message);
+                console.log(data.user);
                 // handle login response (success or fail)
+                if (data.status == 200) {
+                    // successful login
+                    login(data.user, data.token);
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -40,8 +45,6 @@ function LoginForm() {
         };
         login(user);
     };
-
-    const handleCreateAccount = () => {};
 
     return (
         <div className="login-background">
@@ -70,10 +73,7 @@ function LoginForm() {
                 </form>
                 <div className="login-options">
                     <a href="/create-account">
-                        <button
-                            className="create-account-btn"
-                            onClick={handleCreateAccount}
-                        >
+                        <button className="create-account-btn">
                             Create an account
                         </button>
                     </a>
