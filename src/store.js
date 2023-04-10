@@ -10,7 +10,7 @@ const store = observable({
         if (token) {
             this.isLoggedIn = true;
             // fetch user information using token and set it to user
-            fetch("http://localhost:3000/users/isLoggedIn", {
+            fetch("http://localhost:3000/users/id", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
