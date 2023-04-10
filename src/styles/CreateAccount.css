@@ -1,5 +1,5 @@
-/* LoginForm.css */
-.login-background {
+/* createAccount.css */
+.create-account-background {
     background-image: url("../images/LoginBackground.png");
     background-size: cover;
     min-height: 100vh;
@@ -9,25 +9,25 @@
     background-position: center;
 }
 
-.login-form {
+.create-account-form {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 20px;
     margin: 50px 50px 50px 50px;
-    height: 50%;
+    height: 80%;
 }
 
-.login-form h2 {
+.create-account-form h2 {
     text-align: center;
 }
 
-.login-form label {
+.create-account-form label {
     display: block;
     margin-bottom: 10px;
     text-align: left;
 }
 
-.login-form input {
+.create-account-form input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -36,7 +36,7 @@
     box-sizing: border-box;
 }
 
-.login-form .login-btn {
+.create-account-form .submit-btn {
     background-color: #008080;
     color: white;
     padding: 10px 20px;
@@ -45,8 +45,8 @@
     cursor: pointer;
 }
 
-.login-form .google-login-btn {
-    background-color: #008080;
+.create-account-form .cancel-btn {
+    background-color: #db4437;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -54,48 +54,26 @@
     cursor: pointer;
 }
 
-.login-form a {
-    padding: 0px 0px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.login-form .create-account-btn {
-    min-width: 100%;
-    min-height: 100%;
-    background-color: #008080;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="submit"] {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.login-form .login-options {
+.create-account-form .form-options {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.login-form .login-options button {
+.create-account-form .form-options button {
     width: 48%;
 }
 
-.login-form .login-options a {
-    width: 48%;
+.create-account-form .form-options button:first-child {
+    background-color: #008080;
 }
 
-.login-form .login-options a:first-child {
-    background-color: #4285f4;
-}
-
-.login-form .login-options button:last-child {
+.create-account-form .form-options button:last-child {
     background-color: #db4437;
+}
+
+.create-account-form .password-match-error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
 }
