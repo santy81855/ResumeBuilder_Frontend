@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import CreateAccount from "./components/CreateAccount";
+import Home from "./components/Home"; // import the Home component
 
 function App() {
     const [message, setMessage] = useState("");
@@ -13,6 +14,8 @@ function App() {
             <Router>
                 <Header />
                 <Routes>
+                    <Route path="/" element={<Home />} />{" "}
+                    {/* add the new route for Home */}
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/create-account" element={<CreateAccount />} />
                     {/* add other routes here */}
