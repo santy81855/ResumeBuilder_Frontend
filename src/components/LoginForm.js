@@ -1,26 +1,30 @@
 import React, { useState } from "react";
 import "../styles/LoginForm.css";
-import { store } from "../store";
+import { login } from "../store";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (event) => {
+        const data1 = { username: email, password: password };
         event.preventDefault();
-        fetch("/login", {
+        fetch("http://localhost:3000/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            /*body: JSON.stringify(data1),*/
             body: JSON.stringify({ email, password }),
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("success");
-                // Handle successful login
+                // handle login response (success or fail)
+                console.log(data.status);
+                console.log(data.message);
             })
             .catch((error) => {
+                console.log(error);
                 console.log("fail");
                 // Handle login error
             });
@@ -31,15 +35,15 @@ function LoginForm() {
             username: "example_user",
             email: "example_user@example.com",
         };
-        store.login(user);
+        login(user);
     };
 
     return (
-        <form onSubmit={handleSubmit2}>
+        <form onSubmit={handleSubmit}>
             <label>
                 Email:
                 <input
-                    type="email"
+                    type="username"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />

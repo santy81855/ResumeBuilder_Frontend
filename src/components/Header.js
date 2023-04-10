@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../images/logo.png";
 import "../styles/Header.css";
 import { observer } from "mobx-react-lite";
-import { store } from "../store";
+import { store, login, logout } from "../store";
 
 const Header = observer(() => {
     const renderAuthButton = () => {
@@ -13,7 +13,9 @@ const Header = observer(() => {
         }
     };
 
-    const handleLogout = () => {};
+    const handleLogout = () => {
+        logout();
+    };
 
     return (
         <div className="Header">
