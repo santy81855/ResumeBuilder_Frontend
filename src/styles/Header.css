@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
     background-color: white;
@@ -16,7 +16,7 @@
 
 .Header-app-name {
     font-family: "Montserrat", sans-serif; /* replace with your desired font */
-    font-size: 1.5rem;
+    font-size: 18px;
     margin-left: 0.5rem;
 }
 
@@ -49,5 +49,5 @@
 }
 
 .Header-logo {
-    height: 30px;
+    height: 50px;
 }
