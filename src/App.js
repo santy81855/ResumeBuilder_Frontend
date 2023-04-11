@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import CreateAccount from "./components/CreateAccount";
 import Home from "./components/Home"; // import the Home component
+import ResumeEditor from "./components/ResumeEditor";
 
 function App() {
     const [message, setMessage] = useState("");
@@ -18,6 +19,7 @@ function App() {
                     {/* add the new route for Home */}
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/create-account" element={<CreateAccount />} />
+                    <Route path="/edit-resume" element={<ResumeEditor />} />
                     {/* add other routes here */}
                 </Routes>
             </Router>

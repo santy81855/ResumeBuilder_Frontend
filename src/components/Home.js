@@ -1,9 +1,11 @@
 import React from "react";
 import "../styles/Home.css";
+import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
 
 function Home() {
+    const navigate = useNavigate();
     const CreateResume = () => {
-        console.log("create resume button pressed");
+        navigate("/edit-resume");
     };
 
     return (
