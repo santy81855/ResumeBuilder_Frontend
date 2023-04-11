@@ -7,7 +7,6 @@
 .background-image {
     background-image: url("../images/background.png");
     background-size: cover;
-    min-height: 100vh;
     align-items: center;
     justify-content: center;
     background-position: center;
@@ -16,13 +15,12 @@
 }
 
 .content-container {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
     text-align: center;
     align-items: center;
     width: 100%;
     display: flex;
     flex-direction: column;
-    overflow: visible;
 }
 
 .content-container h1 {
@@ -57,38 +55,30 @@
     height: 50px;
 }
 
-@media screen and (max-width: 768px) {
-    .content-container p {
-        font-size: 14px;
-    }
-    .content-container h1 {
-        font-size: 30px;
-    }
-    .content-container h4 {
-        font-size: 14px;
-    }
-}
-
 .chatbox {
-    background-color: #222;
+    background-color: rgb(0, 0, 0);
     color: #fff;
     padding-top: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-top: 50px;
-    min-width: 300px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 0px;
+    width: 280px;
     max-width: 600px;
-    height: 550px;
-    margin-bottom: -275px;
+    min-height: 450px;
+    margin-bottom: -300px;
     border-radius: 10px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
 }
 
 .message {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .received {
@@ -100,7 +90,8 @@
 }
 
 .received h3 {
-    background-color: #264653;
+    font-weight: normal;
+    background-color: #323232;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -108,7 +99,8 @@
 }
 
 .sent h3 {
-    background-color: #008080;
+    font-weight: normal;
+    background-color: #489ac0;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -123,9 +115,27 @@
     border-top-right-radius: 0;
 }
 
-.received h3:last-child,
-.sent h3:last-child {
-    border-radius: 5px;
+.received h3:last-child {
+    border-radius: 10px;
     border-bottom-left-radius: 0;
+}
+
+.sent h3:last-child {
+    border-radius: 10px;
     border-bottom-right-radius: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .content-container p {
+        font-size: 14px;
+    }
+    .content-container h1 {
+        font-size: 30px;
+    }
+    .content-container h4 {
+        font-size: 14px;
+    }
+    .chatbox {
+        width: 200px;
+    }
 }
