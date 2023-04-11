@@ -10,7 +10,14 @@
 }
 
 .Header-left {
-    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.Header-app-name {
+    font-family: "Montserrat", sans-serif; /* replace with your desired font */
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
 }
 
 .Header-right {

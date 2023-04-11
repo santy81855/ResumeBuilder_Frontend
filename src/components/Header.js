@@ -37,6 +37,7 @@ const Header = observer(() => {
         <div className="Header">
             <div className="Header-left">
                 <img src={logo} className="Header-logo" alt="logo" />
+                <span className="Header-app-name">Ai Resume</span>
             </div>
             <div className="Header-right">
                 <a href="/">Home</a>

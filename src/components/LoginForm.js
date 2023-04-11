@@ -25,6 +25,9 @@ function LoginForm() {
                 if (data.status == 200) {
                     // successful login
                     login(data.user, data.token);
+                    // clear input fields
+                    setEmail("");
+                    setPassword("");
                 }
             })
             .catch((error) => {
@@ -36,14 +39,6 @@ function LoginForm() {
 
     const handleGoogleLogin = () => {
         // handle Google login functionality
-    };
-
-    const handleDemoLogin = () => {
-        const user = {
-            username: "example_user",
-            email: "example_user@example.com",
-        };
-        login(user);
     };
 
     return (

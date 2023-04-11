@@ -1,5 +1,6 @@
 .home-container {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
@@ -10,30 +11,121 @@
     align-items: center;
     justify-content: center;
     background-position: center;
-    filter: blur(2.5px);
+    filter: blur(0px);
     z-index: -1;
 }
 
 .content-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
-    max-width: 600px;
+    align-items: center;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: visible;
 }
 
 .content-container h1 {
     font-size: 48px;
+    max-width: 800px;
     margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.content-container h4 {
+    padding-top: 20px;
 }
 
 .content-container p {
     font-size: 24px;
     line-height: 1.5;
+    max-width: 800px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 40px;
+}
+
+.content-container button {
+    font-size: large;
+    background-color: #008080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .content-container p {
+        font-size: 14px;
+    }
+    .content-container h1 {
+        font-size: 30px;
+    }
+    .content-container h4 {
+        font-size: 14px;
+    }
+}
+
+.chatbox {
+    background-color: #222;
+    color: #fff;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 50px;
+    min-width: 300px;
+    max-width: 600px;
+    height: 550px;
+    margin-bottom: -275px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.received {
+    justify-content: flex-start;
+}
+
+.sent {
+    justify-content: flex-end;
+}
+
+.received h3 {
+    background-color: #264653;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.sent h3 {
+    background-color: #008080;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.received h3 {
+    border-top-left-radius: 0;
+}
+
+.sent h3 {
+    border-top-right-radius: 0;
+}
+
+.received h3:last-child,
+.sent h3:last-child {
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
