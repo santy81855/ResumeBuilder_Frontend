@@ -1,0 +1,77 @@
+.editor-page-background {
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.editor-page-vert-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(227, 227, 227, 0.7);
+}
+
+.editor-page-hor-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.options {
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.resume-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-background {
+    background-color: rgb(176, 176, 176);
+    width: 695px;
+    height: 900px;
+    min-width: 695px;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.resume {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(161, 161, 161);
+    border-width: 1px;
+    box-shadow: 0 0 10px rgba(161, 161, 161, 0.5);
+    border-radius: 4px;
+}
+
+.resume-title {
+    font-weight: 500;
+    margin: 10px;
+}
