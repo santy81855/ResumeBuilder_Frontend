@@ -24,7 +24,6 @@ const store = observable({
                         console.log(data.user);
                     } else {
                         console.log("hey");
-                        this.logout();
                     }
                 })
                 .catch((error) => {

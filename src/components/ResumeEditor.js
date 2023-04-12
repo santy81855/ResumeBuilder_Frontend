@@ -1,7 +1,14 @@
-// LoginForm.js
-import React, { useState } from "react";
+// ResumeEditor.js
+import React, { useState, useRef } from "react";
 
 function ResumeEditor() {
+    const [content, setContent] = useState("");
+
+    const handleEditorChange = (event, editor) => {
+        const data = editor.getData();
+        setContent(data);
+    };
+
     const [text, setText] = useState("");
 
     const handleChange = (event) => {
@@ -41,16 +48,6 @@ function ResumeEditor() {
         console.log(data);
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Text:
-                <input type="text" value={text} onChange={handleChange} />
-                <p>The text you entered is: {text}</p>
-            </label>
-            <button type="submit">Submit</button>
-        </form>
-    );
+    return <div>hey</div>;
 }
-
 export default ResumeEditor;

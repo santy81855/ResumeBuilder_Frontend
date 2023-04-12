@@ -175,6 +175,9 @@
     .horizontal-container p {
         font-size: 14px;
     }
+    .horizontal-container h2 {
+        font-size: 30px;
+    }
     .chatbox {
         width: 300px;
     }
