@@ -10,8 +10,9 @@ function LoginForm() {
 
     const handleLoginSubmit = (event) => {
         event.preventDefault();
-        fetch("http://localhost:3000/auth/login", {
+        fetch("http://myhost.com:3000/auth/login", {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -29,6 +30,10 @@ function LoginForm() {
                     // clear input fields
                     setEmail("");
                     setPassword("");
+                    // redirect to home
+                    window.location.href = data.redirect;
+                } else if (data.status == 401) {
+                    alert(data.message);
                 }
             })
             .catch((error) => {

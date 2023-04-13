@@ -3,8 +3,8 @@ import "../styles/CreateAccount.css";
 import { login } from "../store";
 
 function CreateAccount() {
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [first, setFirst] = useState("");
+    const [last, setLast] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,12 +17,13 @@ function CreateAccount() {
         } else {
             // Handle creating the account with the form data
             const user = {
-                name,
+                first,
+                last,
                 username,
                 email,
                 password,
             };
-            fetch("http://localhost:3000/users", {
+            fetch("http://myhost.com:3000/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -37,6 +38,7 @@ function CreateAccount() {
                     // success creation
                     if (data.status == 201) {
                         login(data.user, data.token);
+                        window.location.href = data.redirect;
                     }
                 })
                 .catch((error) => {
@@ -56,16 +58,16 @@ function CreateAccount() {
                         Name:
                         <input
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={first}
+                            onChange={(e) => setFirst(e.target.value)}
                         />
                     </label>
                     <label>
                         Last Name:
                         <input
                             type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+                            value={last}
+                            onChange={(e) => setLast(e.target.value)}
                         />
                     </label>
                     <label>

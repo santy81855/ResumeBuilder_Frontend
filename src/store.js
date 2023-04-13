@@ -6,11 +6,12 @@ const store = observable({
 
     initialize() {
         const token = localStorage.getItem("token");
-        console.log("frontend token: " + token);
-        if (token) {
+        console.log(token);
+        console.log("user: " + this.user);
+        if (token && !this.user) {
             this.isLoggedIn = true;
             // fetch user information using token and set it to user
-            fetch("http://localhost:3000/users/id", {
+            fetch("http://myhost.com:3000/users/get-user/", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,

@@ -1,11 +1,14 @@
 import React from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
+import Cookies from "js-cookie";
 
 function Home() {
     const navigate = useNavigate();
     const CreateResume = () => {
-        navigate("/edit-resume");
+        const sessionId = Cookies.get("sessionId");
+        console.log("frontend sessionid: " + sessionId);
+        navigate("/templates/basic");
     };
 
     return (

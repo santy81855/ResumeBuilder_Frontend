@@ -48,8 +48,8 @@ const Header = observer(() => {
     };
 
     const renderAuthButton = () => {
-        initialize();
-        if (store.isLoggedIn) {
+        const token = localStorage.getItem("token");
+        if (token) {
             return (
                 <a className="Header-logout">
                     <button onClick={handleLogout}>Logout</button>
@@ -62,7 +62,7 @@ const Header = observer(() => {
 
     const handleLogout = () => {
         // fetch user information using token and set it to user
-        fetch("http://localhost:3000/auth/logout")
+        fetch("http://myhost.com:3000/auth/logout")
             .then((response) => {
                 if (response.ok) {
                     console.log("Logged out successfully");
@@ -71,7 +71,7 @@ const Header = observer(() => {
                 }
             })
             .catch((error) => console.error(error));
-
+        window.location.href = "/login";
         logout();
     };
 
@@ -79,7 +79,6 @@ const Header = observer(() => {
         const vertMenu = document.getElementsByClassName(
             "Header-right-vertical"
         )[0];
-        const hamMenu = document.getElementsByClassName("Header-hamburger")[0];
         if (isHamburgerClicked == false) {
             setIsHamburgerClicked(true);
             showElement(vertMenu);
