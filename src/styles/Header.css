@@ -10,6 +10,9 @@
     padding-right: 1rem;
     background-color: white;
     z-index: 1;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(103, 103, 103, 0.4);
 }
 
 .Header-hamburger {
@@ -53,6 +56,28 @@
     text-align: center;
 }
 
+.Header-account {
+    cursor: pointer;
+    height: 50px;
+}
+
+.Header-account-dropdown {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.Header-account-dropdown a {
+    padding: 5px;
+    text-align: center;
+}
+
+.Header-account-dropdown button {
+    padding: 5px;
+    text-align: center;
+}
+
 @media screen and (max-width: 400px) {
     .Header-right {
         display: none;
@@ -60,6 +85,11 @@
 
     .Header-hamburger {
         display: flex;
+    }
+
+    .Header {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 }
 

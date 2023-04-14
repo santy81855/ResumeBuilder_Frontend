@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import logo from "../images/AEyeLogo.png";
+import accountIcon from "../images/account-pics/option3.png";
 import "../styles/Header.css";
 import { observer } from "mobx-react-lite";
 import { store, logout, initialize } from "../store";
 
 const Header = observer(() => {
     const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
+    const [isDropdownClicked, setIsDropdownClicked] = useState(false);
+
+    const handleDropdownClick = () => {
+        setIsDropdownClicked(!isDropdownClicked);
+    };
 
     useEffect(() => {
         function handleResize() {
@@ -51,8 +57,21 @@ const Header = observer(() => {
         const token = localStorage.getItem("token");
         if (token) {
             return (
-                <a className="Header-logout">
-                    <button onClick={handleLogout}>Logout</button>
+                <a>
+                    <img
+                        className="Header-account"
+                        src={accountIcon}
+                        alt="account"
+                        onClick={handleDropdownClick}
+                    />
+                    {isDropdownClicked && (
+                        <div className="Header-account-dropdown">
+                            <a href="/account">Account</a>
+                            <a href="/u/resumes">Resumes</a>
+                            <a href="/settings">Settings</a>
+                            <a onClick={handleLogout}>Logout</a>
+                        </div>
+                    )}
                 </a>
             );
         } else {
@@ -103,9 +122,9 @@ const Header = observer(() => {
                 {renderAuthButton()}
             </div>
             <div className="Header-right-vertical">
+                {renderAuthButton()}
                 <a href="/">Home</a>
                 <a href="/about">About</a>
-                {renderAuthButton()}
             </div>
         </div>
     );

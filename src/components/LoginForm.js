@@ -1,12 +1,27 @@
 // LoginForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/LoginForm.css";
-import { login } from "../store";
+import { login, getLoginStatus } from "../store";
 import googleLogo from "../images/googleLogo.png";
+import loginRequest from "../requests";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // to redirect the user to homepage if they try to go to the login route while logged in
+    const navigate = useNavigate();
+
+    const checkLoginStatus = () => {
+        const isLoggedIn = getLoginStatus();
+        if (isLoggedIn) {
+            navigate("/");
+        }
+    };
+
+    useEffect(() => {
+        checkLoginStatus();
+    }, [navigate]);
 
     const handleLoginSubmit = (event) => {
         event.preventDefault();

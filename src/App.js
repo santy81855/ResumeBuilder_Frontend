@@ -7,6 +7,7 @@ import CreateAccount from "./components/CreateAccount";
 import Home from "./components/Home"; // import the Home component
 import ResumeEditor from "./components/ResumeEditor";
 import BasicTemplate from "./components/templates/BasicTemplate";
+import ResumePage from "./components/ResumePage";
 
 function App() {
     const [message, setMessage] = useState("");
@@ -25,6 +26,7 @@ function App() {
                         path="/templates/basic"
                         element={<BasicTemplate />}
                     />
+                    <Route path="/u/resumes" element={<ResumePage />} />
                     {/* add other routes here */}
                 </Routes>
             </Router>

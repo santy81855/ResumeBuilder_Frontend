@@ -33,6 +33,12 @@ const store = observable({
         }
     },
 
+    // return whether the user is logged in or not
+    getLoginStatus() {
+        const token = localStorage.getItem("token");
+        return token ? true : false;
+    },
+
     login(user, token) {
         this.isLoggedIn = true;
         this.user = user;
@@ -51,8 +57,9 @@ const store = observable({
 });
 
 const initialize = action(store.initialize.bind(store));
+const getLoginStatus = action(store.getLoginStatus.bind(store));
 const login = action(store.login.bind(store));
 const logout = action(store.logout.bind(store));
 const setUser = action(store.setUser.bind(store));
 
-export { store, initialize, login, logout, setUser };
+export { store, initialize, login, logout, setUser, getLoginStatus };

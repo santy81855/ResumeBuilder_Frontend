@@ -1,13 +1,57 @@
 import React from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
-import Cookies from "js-cookie";
 
 function Home() {
     const navigate = useNavigate();
+    const createResume2 = async (resumeData) => {
+        const token = localStorage.getItem("token");
+        try {
+            const response = await fetch(
+                "http://myhost.com:3000/resume/create",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(resumeData),
+                }
+            );
+            const data = await response.json();
+            console.log(data);
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const newResume = {
+        resumeTitle: "First Resume",
+        name: "John Doe",
+        email: "johndoe@example.com",
+        phone: "555-555-5555",
+        summary: "I am a software engineer with 5 years of experience.",
+        experience: [
+            {
+                title: "Software Engineer",
+                company: "Acme Corporation",
+                startDate: "01/01/2018",
+                endDate: "01/01/2021",
+                description:
+                    "Worked on the development of a web-based project management tool using React and Node.js.",
+            },
+        ],
+        education: [
+            {
+                school: "University of Example",
+                degree: "Bachelor of Science in Computer Science",
+                graduationDate: "05/01/2017",
+            },
+        ],
+    };
+
     const CreateResume = () => {
-        const sessionId = Cookies.get("sessionId");
-        console.log("frontend sessionid: " + sessionId);
         navigate("/templates/basic");
     };
 
