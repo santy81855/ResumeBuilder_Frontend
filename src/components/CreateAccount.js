@@ -23,6 +23,7 @@ function CreateAccount() {
                 email,
                 password,
             };
+            console.log(user);
             fetch("http://myhost.com:3000/users", {
                 method: "POST",
                 headers: {

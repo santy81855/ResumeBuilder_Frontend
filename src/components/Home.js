@@ -51,8 +51,14 @@ function Home() {
         ],
     };
 
+    // when they press create resume button they will be either redirected to the login page or to the first question
     const CreateResume = () => {
-        navigate("/templates/basic");
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/u/create-resume");
+        } else {
+            navigate("/login");
+        }
     };
 
     return (

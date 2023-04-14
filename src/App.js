@@ -8,10 +8,9 @@ import Home from "./components/Home"; // import the Home component
 import ResumeEditor from "./components/ResumeEditor";
 import BasicTemplate from "./components/templates/BasicTemplate";
 import ResumePage from "./components/ResumePage";
+import CreateResume from "./components/CreateResume";
 
 function App() {
-    const [message, setMessage] = useState("");
-
     return (
         <div>
             <Router>
@@ -27,6 +26,7 @@ function App() {
                         element={<BasicTemplate />}
                     />
                     <Route path="/u/resumes" element={<ResumePage />} />
+                    <Route path="/u/create-resume" element={<CreateResume />} />
                     {/* add other routes here */}
                 </Routes>
             </Router>
