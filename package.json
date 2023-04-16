@@ -12,6 +12,8 @@
         "fs": "^0.0.1-security",
         "fs-extra": "^11.1.1",
         "js-cookie": "^3.0.1",
+        "json-resume": "^1.0.4",
+        "lit-element": "^3.3.1",
         "mobx": "^6.9.0",
         "mobx-react": "^7.6.0",
         "pdfkit": "^0.13.0",

@@ -26,7 +26,7 @@
     padding-bottom: 30px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: #1a237e;
+    border-bottom-color: black;
 }
 
 .PageTitle {
@@ -42,7 +42,7 @@
     width: 180px;
     height: 50px;
     cursor: pointer;
-    background-color: #1a237e;
+    background-color: #008080;
 }
 
 .CreateResumeButton p {
@@ -57,7 +57,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    overflow-x: scroll;
+    overflow-x: auto;
     align-self: center;
     align-items: center;
     height: 350px;
@@ -65,11 +65,13 @@
     min-width: 200px;
     padding-right: 50px;
     border-radius: 10px;
-    background-image: url("../images/psychedelic.png");
+    background-image: url("../images/LoginBackground.png");
     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-color: rgba(255, 255, 255, 0.74);
     border-color: rgba(240, 248, 255, 0.5);
-    box-shadow: 0px 0px 20px rgba(93, 117, 142, 0.3);
+    box-shadow: 0px 0px 20px rgba(93, 117, 142, 1);
 }
 
 .ResumeTile {

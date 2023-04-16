@@ -42,15 +42,19 @@ function ResumePage() {
         }
     }, []);
 
+    const handleResumeClick = (resumeId) => {
+        console.log("clicked resume " + resumeId);
+    };
+
     function makeResumeTile(resumeData) {
-        const { resumeTitle } = resumeData;
+        const { resumeTitle, _id } = resumeData;
+
         return (
-            <div className="ResumeTile">
+            <div className="ResumeTile" onClick={() => handleResumeClick(_id)}>
                 <div className="ResumePic"></div>
                 <div className="ResumeDetails">
                     <h2>{resumeTitle}</h2>
                     <p>date</p>
-                    <p>Description of Resume 1ostnahutoaheutnsoehaustnhoea</p>
                 </div>
             </div>
         );
