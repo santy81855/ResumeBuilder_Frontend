@@ -9,6 +9,9 @@ import ResumeEditor from "./components/ResumeEditor";
 import BasicTemplate from "./components/templates/BasicTemplate";
 import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
+import CleanTemplate from "./components/templates/CleanTemplate";
+
+import resumeData from "./resume-schema.json";
 
 function App() {
     return (
@@ -24,6 +27,10 @@ function App() {
                     <Route
                         path="/templates/basic"
                         element={<BasicTemplate />}
+                    />
+                    <Route
+                        path="/templates/clean"
+                        element={<CleanTemplate resumeData={resumeData} />}
                     />
                     <Route path="/u/resumes" element={<ResumePage />} />
                     <Route path="/u/create-resume" element={<CreateResume />} />

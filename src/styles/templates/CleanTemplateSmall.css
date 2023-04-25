@@ -1,0 +1,39 @@
+.page-container {
+    background-color: red;
+    width: 60vw;
+    height: 100vh;
+}
+
+.container-small {
+    background-color: white;
+    /*width: 100%;*/
+    width: 100%;
+    min-width: 124px;
+    aspect-ratio: 8.5/11;
+    /*border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;*/
+}
+
+.template-small {
+    background-color: white;
+    font-size: 2.5px;
+    /*font-size: 1vw;*/
+    /*font-size: clamp(1px, 0.5vw, 24px);*/
+}
+
+.header-section-small {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-section-small h2 {
+    font-size: 2.5px;
+}
+
+.contact-info-small p {
+    /*font-size: clamp(5px, 0.9vw, 20px);*/
+    font-size: 1.5px;
+}

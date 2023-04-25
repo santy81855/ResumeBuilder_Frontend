@@ -4,14 +4,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     background-color: white;
     z-index: 1;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom-width: 0px;
     border-bottom-color: rgba(103, 103, 103, 0.4);
 }
 
@@ -37,6 +37,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    background-color: lightgray;
+    border-radius: 25px;
+    padding-inline: 10px;
 }
 
 .Header-right-vertical {
@@ -78,7 +81,7 @@
     text-align: center;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     .Header-right {
         display: none;
     }

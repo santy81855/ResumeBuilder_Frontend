@@ -6,7 +6,7 @@
         "email": "johndoe@gmail.com",
         "phone": "(123) 456-7890",
         "website": "https://johndoe.com",
-        "summary": "Experienced web developer with a passion for creating efficient and user-friendly applications.",
+        "summary": "Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications.",
         "location": {
             "address": "123 Main St",
             "postalCode": "12345",
@@ -33,7 +33,7 @@
             "position": "Web Developer",
             "website": "https://abc.com",
             "startDate": "2018-01-01",
-            "endDate": "",
+            "endDate": "current",
             "summary": "Developed and maintained web applications for clients using HTML, CSS, and JavaScript.",
             "highlights": [
                 "Implemented responsive design to improve user experience on mobile devices.",

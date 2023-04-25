@@ -12,6 +12,7 @@ const Header = observer(() => {
     const handleDropdownClick = () => {
         setIsDropdownClicked(!isDropdownClicked);
     };
+    const HAMBURGER_WIDTH = 450;
 
     useEffect(() => {
         function handleResize() {
@@ -21,15 +22,18 @@ const Header = observer(() => {
             )[0];
             const hamMenu =
                 document.getElementsByClassName("Header-hamburger")[0];
-            if (window.innerWidth < 400 && isHamburgerClicked) {
+            if (window.innerWidth < HAMBURGER_WIDTH && isHamburgerClicked) {
                 showElement(vertMenu);
                 showElement(hamMenu);
                 hideElement(horMenu);
-            } else if (window.innerWidth < 400 && !isHamburgerClicked) {
+            } else if (
+                window.innerWidth < HAMBURGER_WIDTH &&
+                !isHamburgerClicked
+            ) {
                 showElement(hamMenu);
                 hideElement(horMenu);
                 hideElement(vertMenu);
-            } else if (window.innerWidth >= 400) {
+            } else if (window.innerWidth >= HAMBURGER_WIDTH) {
                 setIsHamburgerClicked(false);
                 showElement(horMenu);
                 hideElement(hamMenu);

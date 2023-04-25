@@ -1,0 +1,5 @@
+.create-resume-page-container {
+    display: flex;
+    justify-content: flex-start;
+    background-color: lightgray;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "../../styles/questions/BasicInfo.css";
 
-const Question1 = ({ handleNext }) => {
+const BasicInfo = ({ handleNext }) => {
     const [answer, setAnswer] = useState("");
 
     const handleInputChange = (event) => {
@@ -13,12 +14,12 @@ const Question1 = ({ handleNext }) => {
     };
 
     return (
-        <div>
-            <h2>Select a template</h2>
+        <div className="question-container">
+            <h2>Basic Information</h2>
             <input type="text" value={answer} onChange={handleInputChange} />
             <button onClick={handleNextClick}>Next</button>
         </div>
     );
 };
 
-export default Question1;
+export default BasicInfo;

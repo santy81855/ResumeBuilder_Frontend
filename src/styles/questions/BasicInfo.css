@@ -1,0 +1,6 @@
+.question-container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    flex: 1;
+}

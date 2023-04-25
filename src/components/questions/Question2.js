@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import resumeData from "./resume.json";
-
 const Question2 = ({ handleNext, handlePrev }) => {
     const [answer, setAnswer] = useState("");
 

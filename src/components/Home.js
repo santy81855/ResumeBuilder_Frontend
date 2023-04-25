@@ -77,42 +77,37 @@ function Home() {
                         now!
                     </p>
                     <button onClick={CreateResume}>Create Resume</button>
-                    <div className="horizontal-container">
-                        <div className="vertical-container">
-                            <h2>Don't know where to start with your resume?</h2>
-                            <p>
-                                Let our chatbot guide you. Say goodbye to
-                                confusion and frustration. Our chatbot will
-                                answer all your resume-related questions. Get
-                                personalized and quick responses to your resume
-                                questions..
-                            </p>
-                        </div>
-                        <div className="chatbox">
-                            <div className="message sent">
-                                <h3>
-                                    Write a short and professional bio for a
-                                    junior software engineer.
-                                </h3>
-                            </div>
-                            <div className="message received">
-                                <h3>
-                                    As a junior software engineer with a strong
-                                    passion for technology and problem-solving,
-                                    I am eager to learn and grow in the field.
-                                    With experience in ...{" "}
-                                </h3>
-                            </div>
-                            <div className="message sent">
-                                <h3>
-                                    Can you mention my experience with
-                                    JavaScript?
-                                </h3>
-                            </div>
-                            <div className="message received">
-                                <h3>...</h3>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div className="horizontal-container">
+                <div className="vertical-container">
+                    <h2>Don't know where to start with your resume?</h2>
+                    <p>
+                        Let our chatbot guide you. Say goodbye to confusion and
+                        frustration. Our chatbot will answer all your
+                        resume-related questions. Get personalized and quick
+                        responses to your resume questions..
+                    </p>
+                </div>
+                <div className="chatbox">
+                    <div className="message sent">
+                        <h3>
+                            Write a short and professional bio for a junior
+                            software engineer.
+                        </h3>
+                    </div>
+                    <div className="message received">
+                        <h3>
+                            As a junior software engineer with a strong passion
+                            for technology and problem-solving, I am eager to
+                            learn and grow in the field. With experience in ...{" "}
+                        </h3>
+                    </div>
+                    <div className="message sent">
+                        <h3>Can you mention my experience with JavaScript?</h3>
+                    </div>
+                    <div className="message received">
+                        <h3>...</h3>
                     </div>
                 </div>
             </div>

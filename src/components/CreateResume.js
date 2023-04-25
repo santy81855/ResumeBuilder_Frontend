@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import "../styles/CreateResume.css";
-import Question1 from "./questions/Question1";
+
+import BasicInfo from "./questions/BasicInfo";
 import Question2 from "./questions/Question2";
+
+import JSONResumeData from "../resume-schema.json";
+import CleanTemplate from "./templates/CleanTemplate";
 
 function CreateResume() {
     const [currentQuestion, setCurrentQuestion] = useState(1);
+    const [currentTemplate, setCurrentTemplate] = useState(1);
 
     const handleNext = () => {
         setCurrentQuestion(currentQuestion + 1);
@@ -17,7 +22,7 @@ function CreateResume() {
     const renderQuestion = () => {
         switch (currentQuestion) {
             case 1:
-                return <Question1 handleNext={handleNext} />;
+                return <BasicInfo handleNext={handleNext} />;
             case 2:
                 return (
                     <Question2
@@ -29,8 +34,21 @@ function CreateResume() {
                 return null;
         }
     };
+    const renderTemplate = () => {
+        switch (currentTemplate) {
+            case 1:
+                return <CleanTemplate resumeData={JSONResumeData} />;
+            default:
+                return null;
+        }
+    };
 
-    return <div>{renderQuestion()}</div>;
+    return (
+        <div className="create-resume-page-container">
+            {renderQuestion()}
+            {renderTemplate()}
+        </div>
+    );
 }
 
 export default CreateResume;
