@@ -22,7 +22,12 @@ function CreateResume() {
     const renderQuestion = () => {
         switch (currentQuestion) {
             case 1:
-                return <BasicInfo handleNext={handleNext} />;
+                return (
+                    <BasicInfo
+                        resumeData={JSONResumeData}
+                        handleNext={handleNext}
+                    />
+                );
             case 2:
                 return (
                     <Question2

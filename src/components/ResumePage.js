@@ -101,6 +101,7 @@ function ResumePage() {
             </div>
             <div className="ResumeTiles">
                 {createResumeTile}
+                <div className="VerticalLine"></div>
                 {resumeArr}
             </div>
             <div className="CoverLetter"></div>

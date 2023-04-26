@@ -1,5 +1,12 @@
 .create-resume-page-container {
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    padding: 20px;
     background-color: lightgray;
+}
+
+@media screen and (max-width: 1070px) {
+    .create-resume-page-container {
+        flex-direction: column;
+    }
 }

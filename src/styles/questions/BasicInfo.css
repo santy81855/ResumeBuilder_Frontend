@@ -1,6 +1,26 @@
 .question-container {
     display: flex;
     flex-direction: column;
-    background-color: red;
-    flex: 1;
+    align-items: flex-start;
+}
+
+.basic-info-input {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.short-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.short-input-container h3 {
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+}
+
+.short-input {
+    padding-block: 10px;
 }
