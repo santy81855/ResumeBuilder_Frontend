@@ -11,6 +11,8 @@ function CreateResume() {
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [currentTemplate, setCurrentTemplate] = useState(1);
 
+    const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
+
     const handleNext = () => {
         setCurrentQuestion(currentQuestion + 1);
     };
@@ -19,13 +21,19 @@ function CreateResume() {
         setCurrentQuestion(currentQuestion - 1);
     };
 
+    const handleResumeDataChange = (newResumeData) => {
+        // callback function to update the resumeData state
+        setResumeData(newResumeData);
+    };
+
     const renderQuestion = () => {
         switch (currentQuestion) {
             case 1:
                 return (
                     <BasicInfo
-                        resumeData={JSONResumeData}
+                        resumeData={resumeData}
                         handleNext={handleNext}
+                        onResumeDataChange={handleResumeDataChange} // passing down the callback function as props
                     />
                 );
             case 2:
@@ -42,7 +50,7 @@ function CreateResume() {
     const renderTemplate = () => {
         switch (currentTemplate) {
             case 1:
-                return <CleanTemplate resumeData={JSONResumeData} />;
+                return <CleanTemplate resumeData={resumeData} />;
             default:
                 return null;
         }
