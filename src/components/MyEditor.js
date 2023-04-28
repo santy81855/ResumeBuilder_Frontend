@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import "../styles/Editor.css";
 
-function Editor() {
+function MyEditor() {
     const editorRef = useRef(null);
     const log = () => {
         if (editorRef.current) {
@@ -99,4 +99,4 @@ function Editor() {
         </div>
     );
 }
-export default Editor;
+export default MyEditor;

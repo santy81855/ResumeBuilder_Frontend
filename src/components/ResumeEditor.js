@@ -3,6 +3,13 @@ import React, { useState, useRef } from "react";
 import "../styles/ResumeEditor.css";
 
 function ResumeEditor() {
+    const options = (
+        <div className="options-container">
+            <div className="options">1</div>
+            <div className="options">2</div>
+            <div className="options">3</div>
+        </div>
+    );
     return (
         <div className="editor-page-background">
             <div className="editor-page-vert-container">
@@ -12,11 +19,6 @@ function ResumeEditor() {
                         <div className="resume-background">
                             <div className="resume"></div>
                         </div>
-                    </div>
-                    <div className="options-container">
-                        <div className="options">1</div>
-                        <div className="options">2</div>
-                        <div className="options">3</div>
                     </div>
                 </div>
                 <div className="chatbot-container">chatbot</div>

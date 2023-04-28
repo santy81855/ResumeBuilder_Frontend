@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { savePDF } from "@progress/kendo-react-pdf";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/CleanTemplate.css";
 
 function CleanTemplate(props) {
+    const [divSize, setDivSize] = useState({ width: 0, height: 0 });
+    const containerRef = useRef(null);
+    const templateRef = useRef(null);
+
+    useEffect(() => {
+        if (props.isPreview === true) {
+            console.log("hi");
+        }
+        function handleResize() {
+            const { width, height } =
+                templateRef.current.getBoundingClientRect();
+            setDivSize({ width, height });
+            console.log(width + " " + height);
+
+            const template = templateRef.current;
+            if (template) {
+                let size = 12 * (width / 610);
+                template.style.fontSize = size + "px";
+            }
+        }
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     const exportPDF = () => {
         const content = document.getElementById("template");
         savePDF(content, {
             paperSize: "Letter",
-            margin: 40,
+            margin: 0,
             fileName: "resume.pdf",
             landscape: false,
             pdf: {
@@ -20,16 +47,20 @@ function CleanTemplate(props) {
     };
 
     function sectionMouseOver(e) {
-        const section = e.target.closest(".summary-section");
-        section.style.backgroundColor = "red";
-        section.style.cursor = "pointer";
-        //e.target.style.backgroundColor = "red";
+        if (props.isPreview === false) {
+            const section = e.target.closest(".section");
+            section.style.backgroundColor = "lightgrey";
+            section.style.cursor = "pointer";
+            //e.target.style.backgroundColor = "red";
+        }
     }
 
     function sectionMouseOut(e) {
-        const section = e.target.closest(".summary-section");
-        section.style.backgroundColor = "white";
-        //e.target.style.backgroundColor = "white";
+        if (props.isPreview === false) {
+            const section = e.target.closest(".section");
+            section.style.backgroundColor = "white";
+            //e.target.style.backgroundColor = "white";
+        }
     }
 
     const { name, label, email, phone, website, summary, location, profiles } =
@@ -40,16 +71,31 @@ function CleanTemplate(props) {
     const languages = props.resumeData.languages;
     const interests = props.resumeData.interests;
 
-    const exportPDFButton = <button onClick={exportPDF}>Download PDF</button>;
+    const exportPDFButton = (
+        <button className="export-button" onClick={exportPDF}>
+            Download PDF
+        </button>
+    );
     const summarySection = (
-        <div className="summary-section section">
+        <div
+            className="summary-section section"
+            onMouseOver={sectionMouseOver}
+            onMouseOut={sectionMouseOut}
+            onClick={() => {
+                props.handleSectionChange(2);
+            }}
+        >
             <hr />
             <h3>Summary</h3>
             <p>{summary}</p>
         </div>
     );
     const skillsSection = (
-        <div className="skills-section section">
+        <div
+            className="skills-section section"
+            onMouseOver={sectionMouseOver}
+            onMouseOut={sectionMouseOut}
+        >
             <hr />
             <h3>Skills</h3>
             <ul className="horizontal-list">
@@ -60,7 +106,11 @@ function CleanTemplate(props) {
         </div>
     );
     const experienceSection = (
-        <div className="experience-section section">
+        <div
+            className="experience-section section"
+            onMouseOver={sectionMouseOver}
+            onMouseOut={sectionMouseOut}
+        >
             <hr />
             <h3>Experience</h3>
             {work.map((job) => (
@@ -78,7 +128,11 @@ function CleanTemplate(props) {
         </div>
     );
     const educationSection = (
-        <div className="education-section section">
+        <div
+            className="education-section section"
+            onMouseOver={sectionMouseOver}
+            onMouseOut={sectionMouseOut}
+        >
             <hr />
             <h3>Education</h3>
             {education.map((school) => (
@@ -103,22 +157,27 @@ function CleanTemplate(props) {
         </div>
     );
     const headerSection = (
-        <div>
-            <div className="header-section">
-                <div className="name">
-                    <h3>{name}</h3>
-                </div>
-                <div className="contact-info">
-                    <p>{email}</p>
-                    <p>{phone}</p>
-                    <p>{website}</p>
-                </div>
+        <div
+            className="header-section section"
+            onMouseOver={sectionMouseOver}
+            onMouseOut={sectionMouseOut}
+            onClick={() => {
+                props.handleSectionChange(1);
+            }}
+        >
+            <div className="header-name">
+                <h3>{name}</h3>
+            </div>
+            <div className="header-contact-info">
+                <p>{email}</p>
+                <p>{phone}</p>
+                <p>{website}</p>
             </div>
         </div>
     );
     return (
-        <div className="container">
-            <div className="template" id="template">
+        <div className="container" ref={containerRef}>
+            <div className="template" ref={templateRef} id="template">
                 {headerSection}
                 {summarySection}
                 {skillsSection}

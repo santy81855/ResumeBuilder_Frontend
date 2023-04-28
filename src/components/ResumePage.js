@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/ResumePage.css";
 import { useNavigate } from "react-router-dom";
-import CleanTemplateSmall from "./templates/CleanTemplateSmall";
+import CleanTemplate from "./templates/CleanTemplate";
 import JSONResumeData from "../resume-schema.json";
 
 function ResumePage() {
@@ -61,7 +61,10 @@ function ResumePage() {
                     <p>date</p>
                 </div>
                 <div className="ResumePic">
-                    <CleanTemplateSmall resumeData={JSONResumeData} />
+                    <CleanTemplate
+                        resumeData={JSONResumeData}
+                        isPreview={true}
+                    />
                 </div>
             </div>
         );

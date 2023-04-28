@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/questions/BasicInfo.css";
+import "../../styles/questions/ResumeInput.css";
 
 /*
 Basic info takes input of the following fields:
@@ -15,7 +15,6 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
     const [email, setEmail] = useState("JohnDoe@example.com");
     const [phone, setPhone] = useState("(123) 456-7890");
     const [website, setWebsite] = useState("johndoe.com");
-    const [summary, setSummary] = useState("lorem ipsum");
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -43,12 +42,6 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
                 ...resumeData,
                 basics: { ...resumeData.basics, website: value },
             });
-        } else if (name === "summary") {
-            setSummary(value);
-            onResumeDataChange({
-                ...resumeData,
-                basics: { ...resumeData.basics, summary: value },
-            });
         }
     };
 
@@ -58,9 +51,9 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
 
     return (
         <div className="question-container">
-            <h2>Basic Information</h2>
+            <h2>Header</h2>
             <div className="basic-info-input">
-                <div className="short-input-container">
+                <div className="input-container">
                     <h3>Name:</h3>
                     <input
                         className="short-input"
@@ -70,7 +63,7 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="short-input-container">
+                <div className="input-container">
                     <h3>Email:</h3>
                     <input
                         className="short-input"
@@ -80,7 +73,7 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="short-input-container">
+                <div className="input-container">
                     <h3>Phone:</h3>
                     <input
                         className="short-input"
@@ -90,7 +83,7 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="short-input-container">
+                <div className="input-container">
                     <h3>Website:</h3>
                     <input
                         className="short-input"
@@ -98,17 +91,6 @@ const BasicInfo = ({ resumeData, handleNext, onResumeDataChange }) => {
                         name="website"
                         value={website}
                         onChange={handleInputChange}
-                    />
-                </div>
-                <div className="short-input-container">
-                    <h3>Summary:</h3>
-                    <textarea
-                        className="long-input"
-                        type="text"
-                        name="summary"
-                        value={summary}
-                        onChange={handleInputChange}
-                        rows="5"
                     />
                 </div>
             </div>
