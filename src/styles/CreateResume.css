@@ -171,7 +171,7 @@
     .create-resume-buttons-container {
         width: 80%;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: center;
         column-gap: 0.5em;
     }
 
@@ -180,6 +180,7 @@
         height: 35px;
         font-size: 1em;
         justify-content: center;
+        border-radius: 0px;
     }
 
     .create-resume-button .template-icon {

@@ -87,6 +87,7 @@ function ResumePage() {
                     <CleanTemplate
                         resumeData={JSONResumeData}
                         isPreview={true}
+                        handleSectionChange={handleResumeClick}
                     />
                 </div>
             </div>
@@ -117,18 +118,19 @@ function ResumePage() {
                     </h4>
                 </div>
             </div>
-
-            <div className="PageTitleContainer">
-                <div className="PageTitle">Resumes</div>
-                <div className="CreateResumeButton" onClick={createResume}>
-                    <p>+</p>
-                    <p>Create New</p>
+            <div className="circular-section">
+                <div className="PageTitleContainer">
+                    <div className="PageTitle">Resumes</div>
+                    <div className="CreateResumeButton" onClick={createResume}>
+                        <p>+</p>
+                        <p>Create New</p>
+                    </div>
                 </div>
-            </div>
-            <div className="ResumeTiles">
-                {createResumeTile}
-                <div className="VerticalLine"></div>
-                {resumeArr}
+                <div className="ResumeTiles">
+                    {createResumeTile}
+                    <div className="VerticalLine"></div>
+                    {resumeArr}
+                </div>
             </div>
             <div className="CoverLetter"></div>
         </div>

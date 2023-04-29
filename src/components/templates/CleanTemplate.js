@@ -3,12 +3,12 @@ import { savePDF } from "@progress/kendo-react-pdf";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/CleanTemplate.css";
 
-function CleanTemplate(props) {
+const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
 
     useEffect(() => {
-        if (props.isPreview === true) {
+        if (isPreview === true) {
             console.log("hi");
         }
         function handleResize() {
@@ -46,7 +46,7 @@ function CleanTemplate(props) {
     };
 
     function sectionMouseOver(e) {
-        if (props.isPreview === false) {
+        if (isPreview === false) {
             const resumeSection = e.target.closest(".resume-section");
             resumeSection.style.backgroundColor = "rgba(0, 128, 128, 0.5)";
             resumeSection.style.cursor = "pointer";
@@ -55,7 +55,7 @@ function CleanTemplate(props) {
     }
 
     function sectionMouseOut(e) {
-        if (props.isPreview === false) {
+        if (isPreview === false) {
             const resumeSection = e.target.closest(".resume-section");
             resumeSection.style.backgroundColor = "white";
             //e.target.style.backgroundColor = "white";
@@ -63,12 +63,12 @@ function CleanTemplate(props) {
     }
 
     const { name, label, email, phone, website, summary, location, profiles } =
-        props.resumeData.basics;
-    const work = props.resumeData.work;
-    const education = props.resumeData.education;
-    const skills = props.resumeData.skills;
-    const languages = props.resumeData.languages;
-    const interests = props.resumeData.interests;
+        resumeData.basics;
+    const work = resumeData.work;
+    const education = resumeData.education;
+    const skills = resumeData.skills;
+    const languages = resumeData.languages;
+    const interests = resumeData.interests;
 
     const exportPDFButton = (
         <button className="export-button" onClick={exportPDF}>
@@ -81,7 +81,7 @@ function CleanTemplate(props) {
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
             onClick={() => {
-                props.handleSectionChange(2);
+                handleSectionChange(2);
             }}
         >
             <hr />
@@ -161,7 +161,7 @@ function CleanTemplate(props) {
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
             onClick={() => {
-                props.handleSectionChange(1);
+                handleSectionChange(1);
             }}
         >
             <div className="header-name">
@@ -185,6 +185,6 @@ function CleanTemplate(props) {
             </div>
         </div>
     );
-}
+};
 
 export default CleanTemplate;
