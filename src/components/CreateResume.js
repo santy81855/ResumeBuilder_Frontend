@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../styles/CreateResume.css";
 
 import BasicInfo from "./questions/BasicInfo";
@@ -11,7 +11,38 @@ import Modal from "react-modal";
 
 import { savePDF } from "@progress/kendo-react-pdf";
 
+import { useQuery, useMutation } from "@tanstack/react-query";
+
+import { createResume } from "../api/resume/ResumeRequests";
+
 function CreateResume() {
+    //--------------------------------------//
+    const titleRef = useRef();
+    const descriptionRef = useRef();
+
+    const createPostMutation = useMutation({
+        mutationFn: createResume,
+        onSuccess: (data, variables, context) => {
+            console.log(context);
+            console.log(variables);
+        },
+        onError: (error, variables, context) => {
+            console.log("hey buddy");
+            console.log(error);
+        },
+        onMutate: (variables) => {
+            return { hi: "bye" };
+        },
+    });
+
+    function handleSave() {
+        createPostMutation.mutate({
+            resumeTitleParam: titleRef.current.value.toString(),
+            resumeDescriptionParam: descriptionRef.current.value.toString(),
+            jsonParam: JSONResumeData,
+        });
+    }
+    //--------------------------------------//
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [currentTemplate, setCurrentTemplate] = useState(1);
     const [currentlySelectedSection, setCurrentlySelectedSection] =
@@ -19,17 +50,6 @@ function CreateResume() {
 
     const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
 
-    const customStyles = {
-        content: {
-            top: "10%",
-            left: "10%",
-            right: "10%",
-            bottom: "10%",
-            overflow: "scroll",
-        },
-    };
-
-    let title;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     function openModal() {
@@ -138,10 +158,15 @@ function CreateResume() {
     return (
         <div className="create-resume-page-container">
             <div className="create-resume-title-container">
-                <input placeholder="Untitled" className="resume-title"></input>
+                <input
+                    className="resume-title"
+                    ref={titleRef}
+                    placeholder="Untitled"
+                ></input>
                 <textarea
-                    placeholder="No description..."
                     className="resume-description"
+                    ref={descriptionRef}
+                    placeholder="No description..."
                 ></textarea>
             </div>
 
@@ -166,7 +191,10 @@ function CreateResume() {
                         <p>Export</p>
                         <span className="export-icon"></span>
                     </button>
-                    <button className="create-resume-button save-button">
+                    <button
+                        className="create-resume-button save-button"
+                        onClick={handleSave}
+                    >
                         <p>Save</p>
                         <span className="save-icon"></span>
                     </button>

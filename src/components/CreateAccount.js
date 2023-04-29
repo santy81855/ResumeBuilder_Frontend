@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../styles/CreateAccount.css";
 import { login } from "../store";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { createUser } from "../api/user/UserRequests";
 
 function CreateAccount() {
     const [first, setFirst] = useState("");
@@ -10,6 +12,40 @@ function CreateAccount() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    //--------------------------------------//
+    const createUserQuery = useMutation({
+        queryKey: ["createUser"],
+        mutationFn: createUser,
+        onSuccess: (data, variables, context) => {
+            // successful login
+            login(data.user, data.token);
+            window.location.href = data.redirect;
+        },
+        onError: (error, variables, context) => {
+            console.log("Error creating account");
+            console.log(error);
+            console.log(variables);
+            alert(error.message);
+        },
+        enabled: false,
+    });
+
+    const handleCreateAccount = (event) => {
+        event.preventDefault();
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+        } else {
+            createUserQuery.mutate({
+                first: first,
+                last: last,
+                username: username,
+                email: email,
+                password: password,
+            });
+        }
+    };
+    //--------------------------------------//
+    /*
     const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
@@ -49,11 +85,11 @@ function CreateAccount() {
                 });
         }
     };
-
+*/
     return (
         <div className="create-account-background">
             <div className="create-account-form">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleCreateAccount}>
                     <h2>Create an Account</h2>
                     <label>
                         Name:

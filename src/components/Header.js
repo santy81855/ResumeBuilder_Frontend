@@ -4,6 +4,8 @@ import accountIcon from "../images/account-pics/option3.png";
 import "../styles/Header.css";
 import { observer } from "mobx-react-lite";
 import { store, logout, initialize } from "../store";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { logoutUser } from "../api/user/UserRequests";
 
 const Header = observer(() => {
     const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
@@ -14,6 +16,23 @@ const Header = observer(() => {
     };
     const HAMBURGER_WIDTH = 450;
 
+    /*
+    const handleLogout = () => {
+        // fetch user information using token and set it to user
+        fetch("http://myhost.com:3000/auth/logout")
+            .then((response) => {
+                if (response.ok) {
+                    console.log("Logged out successfully");
+                    alert("hey");
+                } else {
+                    throw new Error("Failed to log out");
+                }
+            })
+            .catch((error) => console.error(error));
+        window.location.href = "/login";
+        logout();
+    };
+*/
     useEffect(() => {
         function handleResize() {
             const horMenu = document.getElementsByClassName("Header-right")[0];
@@ -49,6 +68,27 @@ const Header = observer(() => {
         };
     }, []);
 
+    //********************************************//
+    const logoutQuery = useQuery({
+        queryKey: ["logoutUser"],
+        queryFn: logoutUser,
+        onSuccess: (data, variables, context) => {
+            console.log("Logged out successfully");
+            window.location.href = "/login";
+            logout();
+        },
+        onError: (error, variables, context) => {
+            console.log("Error logging out");
+            console.log(error);
+        },
+        enabled: false,
+    });
+
+    const handleUserLogout = () => {
+        logoutQuery.refetch({});
+    };
+    //********************************************//
+
     const hideElement = (element) => {
         element.style.display = "none";
     };
@@ -73,7 +113,7 @@ const Header = observer(() => {
                             <a href="/account">Account</a>
                             <a href="/u/resumes">Resumes</a>
                             <a href="/settings">Settings</a>
-                            <a onClick={handleLogout}>Logout</a>
+                            <a onClick={handleUserLogout}>Logout</a>
                         </div>
                     )}
                 </a>
@@ -81,21 +121,6 @@ const Header = observer(() => {
         } else {
             return <a href="/login">Log In</a>;
         }
-    };
-
-    const handleLogout = () => {
-        // fetch user information using token and set it to user
-        fetch("http://myhost.com:3000/auth/logout")
-            .then((response) => {
-                if (response.ok) {
-                    console.log("Logged out successfully");
-                } else {
-                    throw new Error("Failed to log out");
-                }
-            })
-            .catch((error) => console.error(error));
-        window.location.href = "/login";
-        logout();
     };
 
     const handleMenuClick = () => {

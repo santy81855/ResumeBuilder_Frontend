@@ -4,15 +4,38 @@ import { useNavigate } from "react-router-dom";
 import CleanTemplate from "./templates/CleanTemplate";
 import JSONResumeData from "../resume-schema.json";
 
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { createResume, getAllUserResumes } from "../api/resume/ResumeRequests";
+
 function ResumePage() {
     const [resumeArr, setResumeArr] = useState([]);
     const navigate = useNavigate();
+
+    //********************************************//
+    const resumesQuery = useQuery({
+        queryKey: ["getAllUserResumes"],
+        queryFn: getAllUserResumes,
+        onSuccess: (data, variables, context) => {
+            if (resumeArr.length == 0) {
+                const tempArr = [];
+                data.reverse().forEach((element) => {
+                    tempArr.push(makeResumeTile(element));
+                });
+                setResumeArr(tempArr);
+            }
+        },
+        onError: (error, variables, context) => {
+            console.log("Error Fetching resumes");
+            console.log(error);
+        },
+    });
+    //********************************************//
 
     const createResume = () => {
         console.log("create-resume");
         navigate("/u/create-resume");
     };
-
+    /*
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -31,7 +54,7 @@ function ResumePage() {
                 .then((data) => {
                     if (resumeArr.length == 0) {
                         const tempArr = [];
-                        data.forEach((element) => {
+                        data.reverse().forEach((element) => {
                             tempArr.push(makeResumeTile(element));
                         });
                         setResumeArr(tempArr);
@@ -45,20 +68,20 @@ function ResumePage() {
                 });
         }
     }, []);
-
+*/
     const handleResumeClick = (resumeId) => {
         console.log("clicked resume " + resumeId);
     };
 
     function makeResumeTile(resumeData) {
-        const { resumeTitle, _id } = resumeData;
-        console.log(resumeData.basics);
+        const { resumeTitle, _id, lastFetched, json } = resumeData;
+        const options = { weekday: "long", year: "numeric", month: "long" };
 
         return (
             <div className="ResumeTile" onClick={() => handleResumeClick(_id)}>
                 <div className="ResumeDetails">
                     <h2>{resumeTitle}</h2>
-                    <p>date</p>
+                    <p>{lastFetched.toString()}</p>
                 </div>
                 <div className="ResumePic">
                     <CleanTemplate

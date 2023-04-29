@@ -69,7 +69,8 @@
 
 .ResumeTiles {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: auto;
     justify-content: flex-start;
     align-self: center;
     align-items: center;

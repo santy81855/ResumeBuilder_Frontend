@@ -48,7 +48,8 @@
     border: none;
     margin-bottom: 15px;
     box-sizing: border-box;
-    background-color: rgb(170, 230, 241);
+    background-color: rgb(202, 247, 255);
+    border: 1px solid rgba(167, 219, 228, 0.4);
 }
 
 .login-form .login-btn {
