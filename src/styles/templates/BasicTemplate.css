@@ -1,11 +1,5 @@
 .template {
     font-family: Arial, sans-serif;
-    font-size: 0.1em; /* or any other value in em */
-    line-height: 1;
-    color: #333;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
 }
 
 .header {
@@ -23,17 +17,6 @@
 .contact-info p {
     margin: 0px;
     font-size: 0.2em;
-}
-
-.horizontal-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.horizontal-list li {
-    display: inline-block;
-    margin-right: 10px;
 }
 
 .title {

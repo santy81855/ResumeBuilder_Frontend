@@ -5,7 +5,6 @@ import "../../styles/templates/CleanTemplate.css";
 
 function CleanTemplate(props) {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
-    const containerRef = useRef(null);
     const templateRef = useRef(null);
 
     useEffect(() => {
@@ -20,7 +19,7 @@ function CleanTemplate(props) {
 
             const template = templateRef.current;
             if (template) {
-                let size = 12 * (width / 610);
+                let size = 11 * (width / 610);
                 template.style.fontSize = size + "px";
             }
         }
@@ -48,17 +47,17 @@ function CleanTemplate(props) {
 
     function sectionMouseOver(e) {
         if (props.isPreview === false) {
-            const section = e.target.closest(".section");
-            section.style.backgroundColor = "lightgrey";
-            section.style.cursor = "pointer";
+            const resumeSection = e.target.closest(".resume-section");
+            resumeSection.style.backgroundColor = "rgba(0, 128, 128, 0.5)";
+            resumeSection.style.cursor = "pointer";
             //e.target.style.backgroundColor = "red";
         }
     }
 
     function sectionMouseOut(e) {
         if (props.isPreview === false) {
-            const section = e.target.closest(".section");
-            section.style.backgroundColor = "white";
+            const resumeSection = e.target.closest(".resume-section");
+            resumeSection.style.backgroundColor = "white";
             //e.target.style.backgroundColor = "white";
         }
     }
@@ -78,7 +77,7 @@ function CleanTemplate(props) {
     );
     const summarySection = (
         <div
-            className="summary-section section"
+            className="summary-section resume-section"
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
             onClick={() => {
@@ -92,7 +91,7 @@ function CleanTemplate(props) {
     );
     const skillsSection = (
         <div
-            className="skills-section section"
+            className="skills-section resume-section"
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
         >
@@ -107,7 +106,7 @@ function CleanTemplate(props) {
     );
     const experienceSection = (
         <div
-            className="experience-section section"
+            className="experience-section resume-section"
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
         >
@@ -129,7 +128,7 @@ function CleanTemplate(props) {
     );
     const educationSection = (
         <div
-            className="education-section section"
+            className="education-section resume-section"
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
         >
@@ -158,7 +157,7 @@ function CleanTemplate(props) {
     );
     const headerSection = (
         <div
-            className="header-section section"
+            className="header-section resume-section"
             onMouseOver={sectionMouseOver}
             onMouseOut={sectionMouseOut}
             onClick={() => {
@@ -176,14 +175,13 @@ function CleanTemplate(props) {
         </div>
     );
     return (
-        <div className="container" ref={containerRef}>
+        <div className="container">
             <div className="template" ref={templateRef} id="template">
                 {headerSection}
                 {summarySection}
                 {skillsSection}
                 {experienceSection}
                 {educationSection}
-                {exportPDFButton}
             </div>
         </div>
     );

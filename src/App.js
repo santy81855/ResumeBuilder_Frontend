@@ -5,8 +5,6 @@ import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import CreateAccount from "./components/CreateAccount";
 import Home from "./components/Home"; // import the Home component
-import ResumeEditor from "./components/ResumeEditor";
-import BasicTemplate from "./components/templates/BasicTemplate";
 import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
 import CleanTemplate from "./components/templates/CleanTemplate";
@@ -23,11 +21,6 @@ function App() {
                     {/* add the new route for Home */}
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/create-account" element={<CreateAccount />} />
-                    <Route path="/edit-resume" element={<ResumeEditor />} />
-                    <Route
-                        path="/templates/basic"
-                        element={<BasicTemplate />}
-                    />
                     <Route
                         path="/templates/clean"
                         element={<CleanTemplate resumeData={resumeData} />}

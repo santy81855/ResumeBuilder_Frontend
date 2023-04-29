@@ -6,15 +6,17 @@
 
 /* 610px is the width that translates to the pdf*/
 .container {
-    /*width: 100%;*/
     width: 100%;
     aspect-ratio: 8.5/11;
-
     background-color: white;
     position: relative;
 }
 
 .template {
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    color: #333;
+    box-sizing: border-box;
     /*font-size: 2.5px;*/
     top: 0;
     left: 0;
@@ -22,7 +24,6 @@
     height: 100%;
     overflow: hidden;
     position: absolute;
-
     margin: 0em;
     padding: 3em;
 }
@@ -34,7 +35,24 @@
     align-items: flex-start;
 }
 
-.section {
+.header-contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    row-gap: 0.5em;
+}
+
+.template .header-contact-info p {
+    margin-bottom: 0px;
+    margin-top: 0em;
+}
+
+.template .header-name h3 {
+    margin-bottom: 0px;
+    margin-top: 0em;
+}
+
+.resume-section {
     margin: 0px;
 }
 
@@ -48,6 +66,17 @@
 
 .template li {
     color: black;
+}
+
+.horizontal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.horizontal-list li {
+    display: inline-block;
+    margin-right: 1em;
 }
 
 .export-button {

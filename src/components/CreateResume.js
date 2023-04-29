@@ -9,6 +9,8 @@ import CleanTemplate from "./templates/CleanTemplate";
 
 import Modal from "react-modal";
 
+import { savePDF } from "@progress/kendo-react-pdf";
+
 function CreateResume() {
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [currentTemplate, setCurrentTemplate] = useState(1);
@@ -56,6 +58,21 @@ function CreateResume() {
     const handleSectionChange = (selectedSection) => {
         setIsOpen(true);
         setCurrentlySelectedSection(selectedSection);
+    };
+
+    const exportPDF = () => {
+        const content = document.getElementById("template");
+        savePDF(content, {
+            paperSize: "Letter",
+            margin: 0,
+            fileName: "resume.pdf",
+            landscape: false,
+            pdf: {
+                multiPage: false,
+                font: "Arial",
+                fontSize: 12,
+            },
+        });
     };
 
     const renderQuestion = () => {
@@ -120,12 +137,40 @@ function CreateResume() {
 
     return (
         <div className="create-resume-page-container">
-            {renderQuestion()}
-            <div className="input-chat-container">
-                <div className="resume-chatbox"></div>
+            <div className="create-resume-title-container">
+                <input placeholder="Untitled" className="resume-title"></input>
+                <textarea
+                    placeholder="No description..."
+                    className="resume-description"
+                ></textarea>
             </div>
-            <div className="create-resume-template-container">
-                {renderTemplate()}
+
+            {renderQuestion()}
+            <div className="create-resume-template-section">
+                <div className="create-resume-template-container">
+                    {renderTemplate()}
+                </div>
+                <div className="create-resume-buttons-container">
+                    <button className="create-resume-button">
+                        <p>Template</p>
+                        <span className="template-icon"></span>
+                    </button>
+                    <button className="create-resume-button">
+                        <p>Sections</p>
+                        <span className="sections-icon"></span>
+                    </button>
+                    <button
+                        onClick={exportPDF}
+                        className="create-resume-button"
+                    >
+                        <p>Export</p>
+                        <span className="export-icon"></span>
+                    </button>
+                    <button className="create-resume-button save-button">
+                        <p>Save</p>
+                        <span className="save-icon"></span>
+                    </button>
+                </div>
             </div>
         </div>
     );

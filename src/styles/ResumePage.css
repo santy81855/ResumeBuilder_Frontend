@@ -74,7 +74,7 @@
     align-self: center;
     align-items: center;
     /*height: 350px;*/
-    width: calc(100% - 40px);
+    width: calc(100% - 2rem);
     min-width: 200px;
     border-radius: 0px;
     /*background-image: url("../images/LoginBackground.png");*/
@@ -130,7 +130,7 @@
     border-width: 1px;
     border-radius: 4px;
     border-color: rgba(240, 248, 255, 0.5);
-    box-shadow: 0px 0px 20px rgba(93, 117, 142, 0.8);
+    box-shadow: 0px 0px 20px rgb(0, 128, 128, 0.5);
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -147,7 +147,7 @@
     border-width: 1px;
     border-radius: 4px;
     border-color: rgba(240, 248, 255, 0.5);
-    box-shadow: 0px 0px 20px rgba(93, 117, 142, 0.8);
+    box-shadow: 0px 0px 20px rgb(0, 128, 128, 0.5);
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -163,7 +163,7 @@
     height: 50px;
     width: 50px;
     transition: background-image 0.4s ease-in-out;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.15s ease-in-out;
 }
 
 .ResumeDetails {
