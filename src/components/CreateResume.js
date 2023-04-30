@@ -13,36 +13,9 @@ import { savePDF } from "@progress/kendo-react-pdf";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 
-import { createResume } from "../api/resume/ResumeRequests";
+import { createResume, updateResumeById } from "../api/resume/ResumeRequests";
 
 function CreateResume() {
-    //--------------------------------------//
-    const titleRef = useRef();
-    const descriptionRef = useRef();
-
-    const createPostMutation = useMutation({
-        mutationFn: createResume,
-        onSuccess: (data, variables, context) => {
-            console.log(context);
-            console.log(variables);
-        },
-        onError: (error, variables, context) => {
-            console.log("hey buddy");
-            console.log(error);
-        },
-        onMutate: (variables) => {
-            return { hi: "bye" };
-        },
-    });
-
-    function handleSave() {
-        createPostMutation.mutate({
-            resumeTitleParam: titleRef.current.value.toString(),
-            resumeDescriptionParam: descriptionRef.current.value.toString(),
-            jsonParam: JSONResumeData,
-        });
-    }
-    //--------------------------------------//
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [currentTemplate, setCurrentTemplate] = useState(1);
     const [currentlySelectedSection, setCurrentlySelectedSection] =
@@ -51,6 +24,68 @@ function CreateResume() {
     const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    // example of how to modify
+    // modifiedData.basics.name = "John Doe";
+
+    //--------------------------------------//
+    const titleRef = useRef();
+    const descriptionRef = useRef();
+
+    const createResumeMutation = useMutation({
+        mutationFn: createResume,
+        onSuccess: (data, variables, context) => {
+            // add resumeId to local storage
+            localStorage.setItem("resumeId", data._id);
+            console.log("Resume Created Successfully");
+            //console.log(context);
+            //console.log(variables);
+        },
+        onError: (error, variables, context) => {
+            console.log("Problem Creating Resume");
+            console.log(error);
+        },
+        onMutate: (variables) => {
+            return { hello: "goodbye" };
+        },
+    });
+
+    const updateResumeMutation = useMutation({
+        mutationFn: updateResumeById,
+        onSuccess: (data, variables, context) => {
+            console.log("Resume Updated Successfully");
+            //console.log(context);
+            //console.log(variables);
+        },
+        onError: (error, variables, context) => {
+            console.log("Problem Updating Resume");
+            console.log(error);
+        },
+        onMutate: (variables) => {
+            return { hi: "bye" };
+        },
+    });
+
+    function handleSave() {
+        const resumeId = localStorage.getItem("resumeId");
+        console.log(resumeId);
+        if (resumeId) {
+            console.log("we need to update a resume");
+            updateResumeMutation.mutate({
+                resumeTitleParam: titleRef.current.value.toString(),
+                resumeDescriptionParam: descriptionRef.current.value.toString(),
+                jsonParam: resumeData,
+            });
+        } else {
+            console.log("we need to create a resume");
+            console.log(resumeData);
+            createResumeMutation.mutate({
+                resumeTitleParam: titleRef.current.value.toString(),
+                resumeDescriptionParam: descriptionRef.current.value.toString(),
+                jsonParam: resumeData,
+            });
+        }
+    }
+    //--------------------------------------//
 
     function openModal() {
         setIsOpen(true);
@@ -72,6 +107,7 @@ function CreateResume() {
 
     const handleResumeDataChange = (newResumeData) => {
         // callback function to update the resumeData state
+        console.log("here");
         setResumeData(newResumeData);
     };
 

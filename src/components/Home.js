@@ -55,6 +55,7 @@ function Home() {
     const CreateResume = () => {
         const token = localStorage.getItem("token");
         if (token) {
+            localStorage.removeItem("resumeId");
             navigate("/u/create-resume");
         } else {
             navigate("/login");

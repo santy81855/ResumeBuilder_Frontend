@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/ResumePage.css";
 import { useNavigate } from "react-router-dom";
 import CleanTemplate from "./templates/CleanTemplate";
 import JSONResumeData from "../resume-schema.json";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { createResume, getAllUserResumes } from "../api/resume/ResumeRequests";
+import {
+    deleteResumeById,
+    getAllUserResumes,
+} from "../api/resume/ResumeRequests";
 
 function ResumePage() {
     const [resumeArr, setResumeArr] = useState([]);
@@ -16,7 +19,7 @@ function ResumePage() {
         queryKey: ["getAllUserResumes"],
         queryFn: getAllUserResumes,
         onSuccess: (data, variables, context) => {
-            if (resumeArr.length == 0) {
+            if (resumeArr.length === 0) {
                 const tempArr = [];
                 data.reverse().forEach((element) => {
                     tempArr.push(makeResumeTile(element));
@@ -29,10 +32,42 @@ function ResumePage() {
             console.log(error);
         },
     });
-    //********************************************//
 
+    const deleteResumeMutation = useMutation({
+        mutationFn: deleteResumeById,
+        onSuccess: (data, variables, context) => {
+            console.log("Resume Deleted Successfully");
+            // remove the resume from the resume arr in order to remove it from the screen
+            const id = variables.id;
+            const updatedResumeArr = resumeArr.filter(
+                (item) => item.key !== id
+            );
+            setResumeArr(updatedResumeArr);
+        },
+        onError: (error, variables, context) => {
+            console.log("Problem Deleting Resume");
+            console.log(error);
+        },
+        onMutate: (variables) => {
+            return { hello: "goodbye" };
+        },
+    });
+
+    //********************************************//
+    /*
+       localStorage.setItem("token", token);
+    },
+
+    logout() {
+        this.isLoggedIn = false;
+        this.user = null;
+        localStorage.removeItem("token");
+    */
     const createResume = () => {
         console.log("create-resume");
+        // clear the current resume being stored in local storage
+        localStorage.removeItem("resumeId");
+        // ensure that there is no "current resume" stored in local storage so that this resume can be stored as a new resume
         navigate("/u/create-resume");
     };
     /*
@@ -69,26 +104,94 @@ function ResumePage() {
         }
     }, []);
 */
-    const handleResumeClick = (resumeId) => {
-        console.log("clicked resume " + resumeId);
+    const handleResumeUnhover = (event, id) => {
+        // get the ResumePic element
+        const div = event.currentTarget;
+        // get the Template component
+        const child = div.children;
+        // show the template component
+        child[0].style.display = "flex";
+        child[1].style.transition = "";
+        // hide the options menu
+        child[1].style.display = "none";
     };
+
+    const handleResumeHover = (event, id) => {
+        // get the ResumePic element
+        const div = event.currentTarget;
+        // get the Template component
+        const child = div.children;
+        // hide the template component
+        child[0].style.display = "none";
+        // show the options menu
+        child[1].style.display = "flex";
+    };
+
+    const handleEditClick = (event, id) => {
+        console.log(event);
+        const div = event.currentTarget;
+    };
+
+    const handleDeleteClick = (event, id) => {
+        console.log(event);
+        const div = event.currentTarget;
+
+        console.log("we need to delete a resume");
+        deleteResumeMutation.mutate({
+            id: id,
+        });
+    };
+
+    const handleExportClick = (event, id) => {
+        console.log(event);
+        const div = event.currentTarget;
+    };
+
+    const doNothingFunction = () => {};
 
     function makeResumeTile(resumeData) {
         const { resumeTitle, _id, lastFetched, json } = resumeData;
         const options = { weekday: "long", year: "numeric", month: "long" };
-
+        console.log(_id);
         return (
-            <div className="ResumeTile" onClick={() => handleResumeClick(_id)}>
+            <div className="ResumeTile" key={_id}>
                 <div className="ResumeDetails">
                     <h2>{resumeTitle}</h2>
-                    <p>{lastFetched.toString()}</p>
+                    <div className="DateButtonContainer">
+                        <p>{lastFetched.toString()}</p>
+                        <button className="ResumeTileOptionsButton"></button>
+                    </div>
                 </div>
-                <div className="ResumePic">
+                <div
+                    className="ResumePic"
+                    onMouseEnter={(event) => handleResumeHover(event, _id)}
+                    onMouseLeave={(event) => handleResumeUnhover(event, _id)}
+                >
                     <CleanTemplate
-                        resumeData={JSONResumeData}
+                        resumeData={json}
                         isPreview={true}
-                        handleSectionChange={handleResumeClick}
+                        handleSectionChange={doNothingFunction}
                     />
+                    <div className="ResumeOptionsMenu">
+                        <button
+                            className="EditResume"
+                            onClick={(event) => handleEditClick(event, _id)}
+                        >
+                            Edit
+                        </button>
+                        <button
+                            className="DeleteResume"
+                            onClick={(event) => handleDeleteClick(event, _id)}
+                        >
+                            Delete
+                        </button>
+                        <button
+                            className="ExportResume"
+                            onClick={(event) => handleExportClick(event, _id)}
+                        >
+                            Export
+                        </button>
+                    </div>
                 </div>
             </div>
         );
@@ -118,20 +221,20 @@ function ResumePage() {
                     </h4>
                 </div>
             </div>
-            <div className="circular-section">
-                <div className="PageTitleContainer">
-                    <div className="PageTitle">Resumes</div>
-                    <div className="CreateResumeButton" onClick={createResume}>
-                        <p>+</p>
-                        <p>Create New</p>
-                    </div>
-                </div>
-                <div className="ResumeTiles">
-                    {createResumeTile}
-                    <div className="VerticalLine"></div>
-                    {resumeArr}
+
+            <div className="PageTitleContainer">
+                <div className="PageTitle">Resumes</div>
+                <div className="CreateResumeButton" onClick={createResume}>
+                    <p>+</p>
+                    <p>Create New</p>
                 </div>
             </div>
+            <div className="ResumeTiles">
+                {createResumeTile}
+                <div className="VerticalLine"></div>
+                {resumeArr}
+            </div>
+
             <div className="CoverLetter"></div>
         </div>
     );

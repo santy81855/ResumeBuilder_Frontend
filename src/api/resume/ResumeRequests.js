@@ -22,6 +22,26 @@ const createResume = (data) => {
         .then((res) => res.data);
 };
 
+const deleteResumeById = (data) => {
+    const resumeId = data.id;
+    return axios
+        .delete("http://myhost.com:3000/resume/delete/" + resumeId)
+        .then((res) => res.data);
+};
+
+const updateResumeById = (data) => {
+    const d = new Date();
+    const resumeId = localStorage.getItem("resumeId");
+    return axios
+        .put("http://myhost.com:3000/resume/update/" + resumeId, {
+            resumeTitle: data.resumeTitleParam,
+            resumeDescription: data.resumeDescriptionParam,
+            lastFetched: d.toDateString(),
+            json: data.jsonParam,
+        })
+        .then((res) => res.data);
+};
+
 const getAllUserResumes = () => {
     const token = localStorage.getItem("token");
     return axios
@@ -33,4 +53,4 @@ const getAllUserResumes = () => {
         .then((res) => res.data);
 };
 
-export { createResume, getAllUserResumes };
+export { createResume, getAllUserResumes, updateResumeById, deleteResumeById };
