@@ -1,6 +1,6 @@
 /* LoginForm.css */
 .login-background {
-    background-image: url("../images/LoginBackground.png");
+    background-image: url("../images/LoginBackgroundBlur.png");
     background-size: cover;
     height: 100vh;
     background-position: center;

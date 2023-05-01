@@ -3,11 +3,17 @@ import { savePDF } from "@progress/kendo-react-pdf";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/CleanTemplate.css";
 
-const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
+const CleanTemplate = ({
+    resumeData,
+    setResumeData,
+    isPreview,
+    handleSectionChange,
+}) => {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
-
+    const TEMPLATE_NAME = "Clean";
     useEffect(() => {
+        // handle the text scaling
         function handleResize() {
             const { width, height } =
                 templateRef.current.getBoundingClientRect();
@@ -23,6 +29,11 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
 
         window.addEventListener("resize", handleResize);
         handleResize();
+
+        // code for checking if the user already has a Clean entry in their json and if not then adding it
+
+        // loop through their templates array, and if "Clean" is not in the array then add it
+        // if the name is not there we add it
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -59,8 +70,9 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
         }
     }
 
-    const { name, label, email, phone, website, summary, location, profiles } =
-        resumeData.basics;
+    const contact = resumeData.contact;
+    const label = resumeData.label;
+    const summary = resumeData.summary;
     const work = resumeData.work;
     const education = resumeData.education;
     const skills = resumeData.skills;
@@ -164,12 +176,12 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
             }}
         >
             <div className="header-name">
-                <h3>{name}</h3>
+                <h3>{contact.name}</h3>
             </div>
             <div className="header-contact-info">
-                <p>{email}</p>
-                <p>{phone}</p>
-                <p>{website}</p>
+                <p>{contact.email}</p>
+                <p>{contact.phone}</p>
+                <p>{contact.website}</p>
             </div>
         </div>
     );
@@ -185,9 +197,6 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
                     {experienceSection}
                     {educationSection}
                     {educationSection}
-                    {hi}
-                    {hi}
-                    {hi}
                 </div>
             </div>
         </div>

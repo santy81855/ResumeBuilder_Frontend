@@ -1,7 +1,6 @@
 .create-resume-page-container {
-    height: 100vh;
     padding-block-start: 1rem;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .create-resume-edit-container {
@@ -17,7 +16,6 @@
 .create-resume-page-left-section {
     display: flex;
     flex-direction: column;
-    padding-inline-start: 1rem;
     row-gap: 1rem;
     width: 75%;
     max-width: 800px;
@@ -138,8 +136,8 @@
 .create-resume-button .template-icon {
     background-image: url(../images/template-icon.png);
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -150,8 +148,8 @@
     background-image: url(../images/sections-icon.png);
     transform: rotate(0deg);
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -162,8 +160,8 @@
     background-image: url(../images/export-icon.png);
     transform: rotate(0deg);
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -174,8 +172,8 @@
     background-image: url(../images/save-icon.png);
     transform: rotate(0deg);
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -206,6 +204,7 @@
 
     .create-resume-button {
         font-size: 0.7em;
+        height: 50px;
         padding-inline: 0.5rem;
     }
     /*

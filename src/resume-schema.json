@@ -1,42 +1,12 @@
 {
-    "basics": {
-        "name": "John Doe",
-        "label": "Web Developer",
-        "picture": "",
-        "email": "johndoe@gmail.com",
-        "phone": "(123) 456-7890",
-        "website": "https://johndoe.com",
-        "summary": "Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications.",
-        "location": {
-            "address": "123 Main St",
-            "postalCode": "12345",
-            "city": "Anytown",
-            "countryCode": "US",
-            "region": "Somewhere"
-        },
-        "profiles": [
-            {
-                "network": "LinkedIn",
-                "username": "johndoe",
-                "url": "https://www.linkedin.com/in/johndoe"
-            },
-            {
-                "network": "GitHub",
-                "username": "johndoe",
-                "url": "https://github.com/johndoe"
-            }
-        ]
-    },
+    "templates": [],
+    "template": "",
     "picture": {
-        "display": false,
         "url": "link-to-image"
     },
-    "summary": {
-        "display": false,
-        "content": "Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications."
-    },
+    "label": "Web Developer",
+    "summary": "Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications.",
     "contact": {
-        "display": false,
         "name": "John Doe",
         "email": "johndoe@gmail.com",
         "phone": "(123) 456-7890",
@@ -134,5 +104,6 @@
             "name": "Sports",
             "keywords": ["Basketball", "Soccer", "Tennis"]
         }
-    ]
+    ],
+    "custom": []
 }

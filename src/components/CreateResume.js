@@ -25,7 +25,11 @@ function CreateResume() {
     const [currentlySelectedSection, setCurrentlySelectedSection] =
         useState(null);
 
-    const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
+    const [resumeData, setResumeData] = useState(
+        !!sessionStorage.getItem("resumeData")
+            ? JSONResumeData
+            : sessionStorage.getItem("resumeData")
+    ); // lifted state
 
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -62,7 +66,6 @@ function CreateResume() {
         // if we are editing a resume then fetch the data
         if (resumeId) {
             if (getResumeQuery.status === "success") {
-                console.log("hello");
                 titleRef.current.value = getResumeQuery.data.resumeTitle;
                 descriptionRef.current.value =
                     getResumeQuery.data.resumeDescription;
@@ -135,6 +138,49 @@ function CreateResume() {
             // otherwise // create
         } else {
             console.log(resumeData);
+            if (
+                resumeData.templates.some((obj) => obj.name === "Clean") ===
+                false
+            ) {
+                console.log("adding template");
+                const newTemplate = {
+                    name: "Clean",
+                    availableSections: [
+                        {
+                            name: "contact",
+                            used: true,
+                        },
+                        {
+                            name: "summary",
+                            used: true,
+                        },
+                        {
+                            name: "skills",
+                            used: true,
+                        },
+                        {
+                            name: "work",
+                            used: true,
+                        },
+                        {
+                            name: "education",
+                            used: true,
+                        },
+                        {
+                            name: "languages",
+                            used: true,
+                        },
+                        {
+                            name: "interests",
+                            used: true,
+                        },
+                    ],
+                };
+                setResumeData({
+                    ...resumeData,
+                    templates: [...resumeData.templates, newTemplate],
+                });
+            }
             createResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
@@ -232,6 +278,7 @@ function CreateResume() {
                         resumeData={resumeData}
                         handleSectionChange={handleSectionChange}
                         isPreview={false}
+                        setResumeData={setResumeData}
                     />
                 );
             default:

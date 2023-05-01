@@ -3,16 +3,38 @@
         {
             "name": "Clean",
             "availableSections": [
-                "contact",
-                "summary",
-                "skills",
-                "work",
-                "education",
-                "languages",
-                "interests"
+                {
+                    "name": "contact",
+                    "used": true
+                },
+                {
+                    "name": "summary",
+                    "used": false
+                },
+                {
+                    "name": "skills",
+                    "used": true
+                },
+                {
+                    "name": "work",
+                    "used": false
+                },
+                {
+                    "name": "education",
+                    "used": true
+                },
+                {
+                    "name": "languages",
+                    "used": false
+                },
+                {
+                    "name": "interests",
+                    "used": true
+                }
             ]
         }
     ],
+    "currentTemplate": "",
     "basics": {
         "name": "John Doe",
         "label": "Web Developer",

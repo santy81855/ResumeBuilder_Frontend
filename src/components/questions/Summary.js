@@ -8,7 +8,7 @@ const Summary = ({
     closeModal,
     isLoading,
 }) => {
-    const [summary, setSummary] = useState(resumeData.basics.summary);
+    const [summary, setSummary] = useState(resumeData.summary);
     const summaryRef = useRef();
 
     // update resumeData useState variable everytime textbox is edited
@@ -17,7 +17,7 @@ const Summary = ({
         setSummary(value);
         setResumeData({
             ...resumeData,
-            basics: { ...resumeData.basics, summary: value },
+            summary: value,
         });
     };
 
