@@ -54,15 +54,7 @@ function ResumePage() {
     });
 
     //********************************************//
-    /*
-       localStorage.setItem("token", token);
-    },
 
-    logout() {
-        this.isLoggedIn = false;
-        this.user = null;
-        localStorage.removeItem("token");
-    */
     const createResume = () => {
         console.log("create-resume");
         // clear the current resume being stored in local storage
@@ -111,7 +103,6 @@ function ResumePage() {
         const child = div.children;
         // show the template component
         child[0].style.display = "flex";
-        child[1].style.transition = "";
         // hide the options menu
         child[1].style.display = "none";
     };
@@ -151,14 +142,22 @@ function ResumePage() {
 
     function makeResumeTile(resumeData) {
         const { resumeTitle, _id, lastFetched, json } = resumeData;
-        const options = { weekday: "long", year: "numeric", month: "long" };
         console.log(_id);
+        const dateString = lastFetched;
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleString("en-US", {
+            weekday: "long",
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+        });
+
         return (
             <div className="ResumeTile" key={_id}>
                 <div className="ResumeDetails">
                     <h2>{resumeTitle}</h2>
                     <div className="DateButtonContainer">
-                        <p>{lastFetched.toString()}</p>
+                        <p>{formattedDate}</p>
                         <button className="ResumeTileOptionsButton"></button>
                     </div>
                 </div>
@@ -231,7 +230,6 @@ function ResumePage() {
             </div>
             <div className="ResumeTiles">
                 {createResumeTile}
-                <div className="VerticalLine"></div>
                 {resumeArr}
             </div>
 

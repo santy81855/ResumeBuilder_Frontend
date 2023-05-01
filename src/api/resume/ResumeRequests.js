@@ -22,6 +22,13 @@ const createResume = (data) => {
         .then((res) => res.data);
 };
 
+const getResumeById = () => {
+    const resumeId = localStorage.getItem("resumeId");
+    return axios
+        .get("http://myhost.com:3000/resume/" + resumeId)
+        .then((res) => res.data);
+};
+
 const deleteResumeById = (data) => {
     const resumeId = data.id;
     return axios
@@ -53,4 +60,10 @@ const getAllUserResumes = () => {
         .then((res) => res.data);
 };
 
-export { createResume, getAllUserResumes, updateResumeById, deleteResumeById };
+export {
+    createResume,
+    getAllUserResumes,
+    updateResumeById,
+    deleteResumeById,
+    getResumeById,
+};

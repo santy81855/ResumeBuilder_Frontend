@@ -1,4 +1,18 @@
 {
+    "templates": [
+        {
+            "name": "Clean",
+            "availableSections": [
+                "contact",
+                "summary",
+                "skills",
+                "work",
+                "education",
+                "languages",
+                "interests"
+            ]
+        }
+    ],
     "basics": {
         "name": "John Doe",
         "label": "Web Developer",

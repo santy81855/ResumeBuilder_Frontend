@@ -8,9 +8,6 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
     const templateRef = useRef(null);
 
     useEffect(() => {
-        if (isPreview === true) {
-            console.log("hi");
-        }
         function handleResize() {
             const { width, height } =
                 templateRef.current.getBoundingClientRect();
@@ -70,6 +67,24 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
     const languages = resumeData.languages;
     const interests = resumeData.interests;
 
+    const checkoverflow = () => {
+        const contentHeight =
+            document.getElementById("template-content").clientHeight;
+        const container = document.getElementById("template");
+
+        const containerHeightWithoutPadding =
+            container.clientHeight -
+            parseFloat(getComputedStyle(container).paddingTop) -
+            parseFloat(getComputedStyle(container).paddingBottom);
+        console.log(contentHeight);
+        console.log(containerHeightWithoutPadding);
+        if (contentHeight > containerHeightWithoutPadding) {
+            console.log("overflow");
+        } else {
+            console.log("no overflow");
+        }
+    };
+
     const exportPDFButton = (
         <button className="export-button" onClick={exportPDF}>
             Download PDF
@@ -78,8 +93,6 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
     const summarySection = (
         <div
             className="summary-section resume-section"
-            onMouseOver={sectionMouseOver}
-            onMouseOut={sectionMouseOut}
             onClick={() => {
                 handleSectionChange(2);
             }}
@@ -90,11 +103,7 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
         </div>
     );
     const skillsSection = (
-        <div
-            className="skills-section resume-section"
-            onMouseOver={sectionMouseOver}
-            onMouseOut={sectionMouseOut}
-        >
+        <div className="skills-section resume-section" onClick={checkoverflow}>
             <hr />
             <h3>Skills</h3>
             <ul className="horizontal-list">
@@ -105,11 +114,7 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
         </div>
     );
     const experienceSection = (
-        <div
-            className="experience-section resume-section"
-            onMouseOver={sectionMouseOver}
-            onMouseOut={sectionMouseOut}
-        >
+        <div className="experience-section resume-section">
             <hr />
             <h3>Experience</h3>
             {work.map((job) => (
@@ -127,11 +132,7 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
         </div>
     );
     const educationSection = (
-        <div
-            className="education-section resume-section"
-            onMouseOver={sectionMouseOver}
-            onMouseOut={sectionMouseOut}
-        >
+        <div className="education-section resume-section">
             <hr />
             <h3>Education</h3>
             {education.map((school) => (
@@ -158,8 +159,6 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
     const headerSection = (
         <div
             className="header-section resume-section"
-            onMouseOver={sectionMouseOver}
-            onMouseOut={sectionMouseOut}
             onClick={() => {
                 handleSectionChange(1);
             }}
@@ -174,14 +173,22 @@ const CleanTemplate = ({ resumeData, isPreview, handleSectionChange }) => {
             </div>
         </div>
     );
+
+    const hi = <div>hi</div>;
     return (
-        <div className="container">
+        <div className="container" id="container">
             <div className="template" ref={templateRef} id="template">
-                {headerSection}
-                {summarySection}
-                {skillsSection}
-                {experienceSection}
-                {educationSection}
+                <div className="template-content" id="template-content">
+                    {headerSection}
+                    {summarySection}
+                    {skillsSection}
+                    {experienceSection}
+                    {educationSection}
+                    {educationSection}
+                    {hi}
+                    {hi}
+                    {hi}
+                </div>
             </div>
         </div>
     );

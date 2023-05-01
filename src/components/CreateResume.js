@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../styles/CreateResume.css";
 
 import BasicInfo from "./questions/BasicInfo";
@@ -13,7 +13,11 @@ import { savePDF } from "@progress/kendo-react-pdf";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 
-import { createResume, updateResumeById } from "../api/resume/ResumeRequests";
+import {
+    createResume,
+    updateResumeById,
+    getResumeById,
+} from "../api/resume/ResumeRequests";
 
 function CreateResume() {
     const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -23,25 +27,69 @@ function CreateResume() {
 
     const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
 
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(false);
     // example of how to modify
     // modifiedData.basics.name = "John Doe";
 
     //--------------------------------------//
     const titleRef = useRef();
     const descriptionRef = useRef();
+    const LOADING_TIME = 1000;
+
+    const getResumeQuery = useQuery({
+        queryKey: ["getResumeById"],
+        queryFn: getResumeById,
+        onSuccess: (data, variables, context) => {
+            console.log(
+                "Just fetched resume data in CreateResume component. Data: "
+            );
+            console.log(data);
+        },
+        onError: (error, variables, context) => {
+            console.log(
+                "Error Fetching resumes in CreateResume component. Error: "
+            );
+            console.log(error);
+        },
+        enabled: !!localStorage.getItem("resumeId"),
+    });
+
+    // useeffect hook to ensure that the correct title and description are showed on refresh
+    useEffect(() => {
+        const resumeId = localStorage.getItem("resumeId");
+        // if we are editing a resume then fetch the data
+        if (resumeId) {
+            if (getResumeQuery.status === "success") {
+                console.log("hello");
+                titleRef.current.value = getResumeQuery.data.resumeTitle;
+                descriptionRef.current.value =
+                    getResumeQuery.data.resumeDescription;
+                setResumeData(getResumeQuery.data.json);
+            }
+        }
+    }, [getResumeQuery.status]);
 
     const createResumeMutation = useMutation({
         mutationFn: createResume,
         onSuccess: (data, variables, context) => {
             // add resumeId to local storage
             localStorage.setItem("resumeId", data._id);
-            console.log("Resume Created Successfully");
+            console.log(
+                "Resume Created Successfully in CreateResume component."
+            );
+            // wait LOADING_TIME so user has feedback about the process
+            setTimeout(function () {
+                setIsLoading(false);
+            }, LOADING_TIME);
             //console.log(context);
             //console.log(variables);
         },
         onError: (error, variables, context) => {
-            console.log("Problem Creating Resume");
+            console.log(
+                "Problem Creating Resume in CreateResume component. Error: "
+            );
             console.log(error);
         },
         onMutate: (variables) => {
@@ -52,12 +100,20 @@ function CreateResume() {
     const updateResumeMutation = useMutation({
         mutationFn: updateResumeById,
         onSuccess: (data, variables, context) => {
-            console.log("Resume Updated Successfully");
+            console.log(
+                "Resume Updated Successfully in CreateResume component."
+            );
+            // wait LOADING_TIME so user has feedback about the process
+            setTimeout(function () {
+                setIsLoading(false);
+            }, LOADING_TIME);
             //console.log(context);
             //console.log(variables);
         },
         onError: (error, variables, context) => {
-            console.log("Problem Updating Resume");
+            console.log(
+                "Problem Updating Resume in CreateResume component. Error: "
+            );
             console.log(error);
         },
         onMutate: (variables) => {
@@ -68,15 +124,16 @@ function CreateResume() {
     function handleSave() {
         const resumeId = localStorage.getItem("resumeId");
         console.log(resumeId);
+        setIsLoading(true);
+        // if there is a resumeId we UPDATE
         if (resumeId) {
-            console.log("we need to update a resume");
             updateResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
                 jsonParam: resumeData,
             });
+            // otherwise // create
         } else {
-            console.log("we need to create a resume");
             console.log(resumeData);
             createResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
@@ -86,6 +143,13 @@ function CreateResume() {
         }
     }
     //--------------------------------------//
+    const handleResumeDataChange = (newResumeData) => {
+        // callback function to update the resumeData state
+        setResumeData(newResumeData);
+        console.log(newResumeData);
+        console.log(resumeData);
+        handleSave();
+    };
 
     function openModal() {
         setIsOpen(true);
@@ -96,20 +160,6 @@ function CreateResume() {
     function closeModal() {
         setIsOpen(false);
     }
-
-    const handleNext = () => {
-        setCurrentQuestion(currentQuestion + 1);
-    };
-
-    const handlePrev = () => {
-        setCurrentQuestion(currentQuestion - 1);
-    };
-
-    const handleResumeDataChange = (newResumeData) => {
-        // callback function to update the resumeData state
-        console.log("here");
-        setResumeData(newResumeData);
-    };
 
     const handleSectionChange = (selectedSection) => {
         setIsOpen(true);
@@ -126,7 +176,6 @@ function CreateResume() {
             pdf: {
                 multiPage: false,
                 font: "Arial",
-                fontSize: 12,
             },
         });
     };
@@ -137,7 +186,6 @@ function CreateResume() {
                 return (
                     <BasicInfo
                         resumeData={resumeData}
-                        handleNext={handleNext}
                         currentlySelectedSection={currentlySelectedSection}
                         onResumeDataChange={handleResumeDataChange} // passing down the callback function as props
                     />
@@ -154,11 +202,10 @@ function CreateResume() {
                     >
                         <Summary
                             resumeData={resumeData}
-                            handleNext={handleNext}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
                             closeModal={closeModal}
-                            currentlySelectedSection={currentlySelectedSection}
-                            onResumeDataChange={handleResumeDataChange} // passing down the callback function as props
-                            handlePrev={handlePrev}
+                            isLoading={isLoading}
                         />
                     </Modal>
                 );
@@ -166,16 +213,17 @@ function CreateResume() {
                 return (
                     <Summary
                         resumeData={resumeData}
-                        handleNext={handleNext}
                         currentlySelectedSection={currentlySelectedSection}
                         onResumeDataChange={handleResumeDataChange} // passing down the callback function as props
-                        handlePrev={handlePrev}
                     />
                 );
             default:
                 return null;
         }
     };
+
+    const templateArr = () => {};
+
     const renderTemplate = () => {
         switch (currentTemplate) {
             case 1:
@@ -193,23 +241,25 @@ function CreateResume() {
 
     return (
         <div className="create-resume-page-container">
-            <div className="create-resume-title-container">
-                <input
-                    className="resume-title"
-                    ref={titleRef}
-                    placeholder="Untitled"
-                ></input>
-                <textarea
-                    className="resume-description"
-                    ref={descriptionRef}
-                    placeholder="No description..."
-                ></textarea>
-            </div>
+            <div className="create-resume-edit-container">
+                <div className="create-resume-page-left-section">
+                    <div className="create-resume-title-container">
+                        <input
+                            className="resume-title"
+                            ref={titleRef}
+                            placeholder="Untitled"
+                        ></input>
+                        <textarea
+                            className="resume-description"
+                            ref={descriptionRef}
+                            placeholder="No description..."
+                        ></textarea>
+                    </div>
 
-            {renderQuestion()}
-            <div className="create-resume-template-section">
-                <div className="create-resume-template-container">
-                    {renderTemplate()}
+                    {renderQuestion()}
+                    <div className="create-resume-template-container">
+                        {renderTemplate()}
+                    </div>
                 </div>
                 <div className="create-resume-buttons-container">
                     <button className="create-resume-button">
@@ -227,13 +277,20 @@ function CreateResume() {
                         <p>Export</p>
                         <span className="export-icon"></span>
                     </button>
-                    <button
-                        className="create-resume-button save-button"
-                        onClick={handleSave}
-                    >
-                        <p>Save</p>
-                        <span className="save-icon"></span>
-                    </button>
+                    {isLoading ? (
+                        <button className="create-resume-button save-button">
+                            <p>Saving...</p>
+                            <span className="save-icon"></span>
+                        </button>
+                    ) : (
+                        <button
+                            className="create-resume-button save-button"
+                            onClick={handleSave}
+                        >
+                            <p>Save</p>
+                            <span className="save-icon"></span>
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

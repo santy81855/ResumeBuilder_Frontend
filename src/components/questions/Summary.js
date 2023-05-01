@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 
-const Summary = ({ resumeData, onResumeDataChange, closeModal }) => {
-    const [summary, setSummary] = useState("");
+const Summary = ({
+    resumeData,
+    setResumeData,
+    handleSave,
+    closeModal,
+    isLoading,
+}) => {
+    const [summary, setSummary] = useState(resumeData.basics.summary);
+    const summaryRef = useRef();
 
-    const handleInputChange = (event) => {
-        const value = event.target.value;
+    // update resumeData useState variable everytime textbox is edited
+    const handleSummaryChange = (event) => {
+        const value = summaryRef.current.value;
         setSummary(value);
-        onResumeDataChange({
+        setResumeData({
             ...resumeData,
             basics: { ...resumeData.basics, summary: value },
         });
@@ -26,14 +34,41 @@ const Summary = ({ resumeData, onResumeDataChange, closeModal }) => {
             </p>
             <div className="long-input-container">
                 <textarea
+                    ref={summaryRef}
                     className="long-input summary"
                     placeholder="+ Write your summary here."
                     type="text"
                     name="summary"
                     value={summary}
-                    onChange={handleInputChange}
+                    onChange={(event) => {
+                        setSummary(event?.target?.value);
+                        handleSummaryChange(event);
+                    }}
                     rows="10"
                 />
+            </div>
+            <div className="question-container-button-container">
+                <button
+                    className="question-container-close-button"
+                    onClick={closeModal}
+                >
+                    Close
+                </button>
+                {isLoading ? (
+                    <button
+                        className="question-container-apply-button"
+                        onClick={handleSave}
+                    >
+                        Saving...
+                    </button>
+                ) : (
+                    <button
+                        className="question-container-apply-button"
+                        onClick={handleSave}
+                    >
+                        Apply
+                    </button>
+                )}
             </div>
             <button className="close-modal-button" onClick={closeModal}>
                 x

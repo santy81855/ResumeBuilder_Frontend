@@ -1,9 +1,3 @@
-.page-container {
-    background-color: red;
-    width: 60vw;
-    height: 100vh;
-}
-
 /* 610px is the width that translates to the pdf*/
 .container {
     width: 100%;
@@ -26,6 +20,10 @@
     position: absolute;
     margin: 0em;
     padding: 3em;
+}
+
+.template-content {
+    background-color: white;
 }
 
 .header-section {
@@ -54,6 +52,37 @@
 
 .resume-section {
     margin: 0px;
+    position: relative;
+    z-index: 0;
+}
+
+@media (pointer: fine) {
+    .resume-section::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        align-self: center;
+    }
+
+    .resume-section:hover::after {
+        background-color: rgba(0, 128, 128, 0.5);
+        transform: scaleX(1.05);
+        cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+        .resume-section:hover::after {
+            background-color: rgba(0, 128, 128, 0.5);
+            transform: scaleX(1.05);
+            border-radius: 0px;
+            cursor: pointer;
+        }
+    }
 }
 
 .template h3 {
@@ -62,6 +91,11 @@
 
 .template p {
     color: black;
+    margin-block: 0;
+}
+
+.template ul {
+    margin-block-end: 0;
 }
 
 .template li {

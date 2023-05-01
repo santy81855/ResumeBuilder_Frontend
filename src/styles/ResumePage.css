@@ -228,6 +228,7 @@
     border-radius: 10px;
     border: 1px solid rgb(0, 128, 128);
     color: rgb(0, 128, 128);
+    background-color: white;
 }
 
 .ResumeOptionsMenu .DeleteResume {
@@ -239,6 +240,7 @@
     border-radius: 10px;
     border: 1px solid rgb(0, 128, 128);
     color: rgb(0, 128, 128);
+    background-color: white;
 }
 
 .ResumeOptionsMenu .ExportResume {
@@ -250,6 +252,7 @@
     border-radius: 10px;
     border: 1px solid rgb(0, 128, 128);
     color: rgb(0, 128, 128);
+    background-color: white;
 }
 
 @media (pointer: fine) {
