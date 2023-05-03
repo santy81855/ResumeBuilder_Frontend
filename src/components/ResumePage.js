@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/ResumePage.css";
 import { useNavigate } from "react-router-dom";
-import { templateToString, getTemplateComponent } from "../lib/TemplateKeys";
+import {
+    templateToString,
+    getTemplateComponent,
+    templateNameToExport,
+} from "../lib/TemplateKeys";
 import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
 import JSONResumeData from "../resume-schema.json";
@@ -159,7 +163,7 @@ function ResumePage() {
     const doNothingFunction = () => {};
 
     const exportPDF = () => {
-        const content = document.getElementById("modern-template");
+        const content = document.getElementById("template-to-print");
         savePDF(content, {
             paperSize: "Letter",
             margin: 0,
@@ -189,6 +193,7 @@ function ResumePage() {
                     isPreview: true,
                     handleSectionChange: doNothingFunction,
                     template: getResumeQuery.data.template,
+                    isExport: true,
                 })
             ) : (
                 <div>

@@ -9,7 +9,11 @@ import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 import JSONResumeData from "../resume-schema.json";
 import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
-import { templateToString } from "../lib/TemplateKeys";
+import {
+    templateToString,
+    templateNameToExport,
+    templateToInt,
+} from "../lib/TemplateKeys";
 
 import Modal from "react-modal";
 
@@ -84,6 +88,7 @@ function CreateResume() {
                 "Just fetched resume data in CreateResume component. Data: "
             );
             setResumeData(data.json);
+            setCurrentTemplate(templateToInt[data.template]);
             console.log(data);
         },
         onError: (error, variables, context) => {
@@ -97,7 +102,7 @@ function CreateResume() {
 
     useEffect(() => {
         const resumeId = localStorage.getItem("resumeId");
-
+        console.log(getResumeQuery);
         // if this is not a new resume
         if (!!resumeId) {
             getResumeQuery.refetch();
@@ -159,7 +164,6 @@ function CreateResume() {
         const resumeId = localStorage.getItem("resumeId");
         console.log(resumeId);
         setIsLoading(true);
-        console.log("here");
         console.log(templateToString[currentTemplate]);
         // if there is a resumeId we UPDATE
         if (resumeId) {
@@ -205,11 +209,9 @@ function CreateResume() {
         setCurrentlySelectedSection(selectedSection);
     };
 
-    const templateNameArr = ["clean-template", "modern-template"];
-
     const exportPDF = () => {
         const content = document.getElementById(
-            templateNameArr[currentTemplate]
+            templateNameToExport[currentTemplate]
         );
         savePDF(content, {
             paperSize: "Letter",
@@ -369,9 +371,11 @@ function CreateResume() {
             </div>
         );
     }
+    // if error
     if (getResumeQuery.status === "error") return <div>error</div>;
     // if new resume
-    if (getResumeQuery.isLoading && getResumeQuery.fetchStatus === "idle") {
+    if (!!localStorage.getItem("resumeId") === false) {
+        console.log(!!localStorage.getItem("resumeId"));
         return (
             <div className="create-resume-page-container">
                 <div className="create-resume-edit-container">
@@ -403,6 +407,7 @@ function CreateResume() {
     }
     // if successful data fetch
     if (getResumeQuery.isSuccess) {
+        console.log(!!localStorage.getItem("resumeId"));
         return (
             <div className="create-resume-page-container">
                 <div className="create-resume-edit-container">

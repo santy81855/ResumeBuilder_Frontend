@@ -9,6 +9,7 @@ const ModernTemplate = ({
     setResumeData,
     isPreview,
     handleSectionChange,
+    isExport,
 }) => {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
@@ -217,7 +218,7 @@ const ModernTemplate = ({
             <div
                 className="modern-template"
                 ref={templateRef}
-                id="modern-template"
+                id={isExport ? "template-to-print" : "modern-template"}
             >
                 <div
                     className="modern-template-content"

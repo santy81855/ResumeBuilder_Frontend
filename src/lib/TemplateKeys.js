@@ -6,6 +6,18 @@ const templateToString = {
     1: "modern",
 };
 
+const templateToInt = {
+    clean: 0,
+    modern: 1,
+};
+
+const templateNameToExport = {
+    0: "clean-template",
+    clean: "clean-template",
+    1: "modern-template",
+    modern: "modern-template",
+};
+
 const getTemplateComponent = (data) => {
     switch (data.template) {
         case "clean":
@@ -14,6 +26,7 @@ const getTemplateComponent = (data) => {
                     resumeData={data.json}
                     isPreview={data.isPreview}
                     handleSectionChange={data.handleSectionChange}
+                    isExport={data.isExport}
                 />
             );
         case "modern":
@@ -22,6 +35,7 @@ const getTemplateComponent = (data) => {
                     resumeData={data.json}
                     isPreview={data.isPreview}
                     handleSectionChange={data.handleSectionChange}
+                    isExport={data.isExport}
                 />
             );
 
@@ -30,4 +44,9 @@ const getTemplateComponent = (data) => {
     }
 };
 
-export { templateToString, getTemplateComponent };
+export {
+    templateToString,
+    getTemplateComponent,
+    templateNameToExport,
+    templateToInt,
+};

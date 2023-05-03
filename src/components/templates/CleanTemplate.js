@@ -8,6 +8,7 @@ const CleanTemplate = ({
     setResumeData,
     isPreview,
     handleSectionChange,
+    isExport,
 }) => {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
@@ -196,7 +197,7 @@ const CleanTemplate = ({
             <div
                 className="clean-template"
                 ref={templateRef}
-                id="clean-template"
+                id={isExport ? "template-to-print" : "modern-template"}
             >
                 <div
                     className="clean-template-content"
