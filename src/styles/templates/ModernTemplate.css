@@ -191,6 +191,12 @@
     z-index: 0;
 }
 
+.modern-resume-section-preview {
+    margin: 0px;
+    position: relative;
+    z-index: 0;
+}
+
 @media (pointer: fine) {
     .modern-resume-section::after {
         content: "";

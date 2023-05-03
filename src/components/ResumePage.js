@@ -6,6 +6,7 @@ import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
 import JSONResumeData from "../resume-schema.json";
 import Modal from "react-modal";
+import { savePDF } from "@progress/kendo-react-pdf";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
@@ -18,6 +19,7 @@ function ResumePage() {
     const [resumeArr, setResumeArr] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+    const resumeToPrintRef = useRef();
 
     //********************************************//
     const getResumeQuery = useQuery({
@@ -156,6 +158,20 @@ function ResumePage() {
 
     const doNothingFunction = () => {};
 
+    const exportPDF = () => {
+        const content = document.getElementById("modern-template");
+        savePDF(content, {
+            paperSize: "Letter",
+            margin: 0,
+            fileName: "resume.pdf",
+            landscape: false,
+            pdf: {
+                multiPage: false,
+                font: "Arial",
+            },
+        });
+    };
+
     const exportModal = (
         <Modal
             className="export-modal"
@@ -165,6 +181,7 @@ function ResumePage() {
             contentLabel="export-modal"
             overlayClassName="export-overlay"
         >
+            <button onClick={exportPDF}>hi</button>
             {getResumeQuery.isSuccess ? (
                 // determine the correct template
                 getTemplateComponent({

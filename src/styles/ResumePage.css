@@ -337,9 +337,7 @@
 .export-modal {
     position: absolute;
     top: 10%;
-    left: 10%;
-    right: 10%;
-    bottom: 10%;
+    left: calc((100vw - 610px) / 2);
     width: 610px;
     aspect-ratio: 8.5/11;
     overflow: auto;

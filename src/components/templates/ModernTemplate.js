@@ -67,6 +67,10 @@ const ModernTemplate = ({
     const interests = resumeData.interests;
     const horizontalLine = <div className="horizontal-line" />;
 
+    const sectionClass = isPreview
+        ? "modern-resume-section-preview"
+        : "modern-resume-section";
+
     const checkoverflow = () => {
         const contentHeight = document.getElementById(
             "modern-template-content"
@@ -86,22 +90,11 @@ const ModernTemplate = ({
         }
     };
 
-    const summarySection = (
-        <div
-            className="summary-section modern-resume-section"
-            onClick={() => {
-                handleSectionChange(2);
-            }}
-        >
-            <hr />
-            <h3>Summary</h3>
-            <p>{summary}</p>
-        </div>
-    );
-
     const languagesSection = (
         <div
-            className="modern-resume-section vertical-block-section languages-section "
+            className={
+                sectionClass + " vertical-block-section languages-section"
+            }
             onClick={checkoverflow}
         >
             <h2>Languages</h2>
@@ -116,7 +109,7 @@ const ModernTemplate = ({
 
     const skillsSection = (
         <div
-            className="modern-resume-section vertical-block-section skills-section "
+            className={sectionClass + " vertical-block-section skills-section"}
             onClick={checkoverflow}
         >
             <h2>Skills</h2>
@@ -130,7 +123,11 @@ const ModernTemplate = ({
     );
 
     const educationSection = (
-        <div className="modern-resume-section vertical-block-section education-section">
+        <div
+            className={
+                sectionClass + " vertical-block-section education-section"
+            }
+        >
             <h2>Education</h2>
             {horizontalLine}
             {education.map((school) => (
@@ -144,7 +141,9 @@ const ModernTemplate = ({
         </div>
     );
     const contactSection = (
-        <div className="modern-resume-section vertical-block-section contact-section">
+        <div
+            className={sectionClass + " vertical-block-section contact-section"}
+        >
             <h2>Contact</h2>
             {horizontalLine}
             <div className="container">
@@ -168,7 +167,7 @@ const ModernTemplate = ({
 
     const headerSection = (
         <div
-            className="modern-resume-section right-section header-section"
+            className={sectionClass + " right-section header-section"}
             onClick={() => {
                 handleSectionChange(2);
             }}
@@ -180,7 +179,7 @@ const ModernTemplate = ({
     );
 
     const experienceSection = (
-        <div className="modern-resume-section right-section experience-section">
+        <div className={sectionClass + " right-section experience-section"}>
             <h2>Experience</h2>
             {horizontalLine}
 
