@@ -273,16 +273,16 @@ function ResumePage() {
                             Edit
                         </button>
                         <button
-                            className="DeleteResume"
-                            onClick={(event) => handleDeleteClick(event, _id)}
-                        >
-                            Delete
-                        </button>
-                        <button
                             className="ExportResume"
                             onClick={(event) => handleExportClick(event, _id)}
                         >
                             Export
+                        </button>
+                        <button
+                            className="DeleteResume"
+                            onClick={(event) => handleDeleteClick(event, _id)}
+                        >
+                            Delete
                         </button>
                     </div>
                 </div>

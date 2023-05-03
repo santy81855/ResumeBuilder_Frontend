@@ -319,8 +319,7 @@ function CreateResume() {
             </button>
             {isLoadingState ? (
                 <button className="create-resume-button save-button">
-                    <p>Saving...</p>
-                    <span className="save-icon icon"></span>
+                    <div className="loader"></div>
                 </button>
             ) : (
                 <button
