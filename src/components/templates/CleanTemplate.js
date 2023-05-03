@@ -39,7 +39,7 @@ const CleanTemplate = ({
     }, []);
 
     const exportPDF = () => {
-        const content = document.getElementById("template");
+        const content = document.getElementById("clean-template");
         savePDF(content, {
             paperSize: "Letter",
             margin: 0,
@@ -55,7 +55,7 @@ const CleanTemplate = ({
 
     function sectionMouseOver(e) {
         if (isPreview === false) {
-            const resumeSection = e.target.closest(".resume-section");
+            const resumeSection = e.target.closest(".clean-resume-section");
             resumeSection.style.backgroundColor = "rgba(0, 128, 128, 0.5)";
             resumeSection.style.cursor = "pointer";
             //e.target.style.backgroundColor = "red";
@@ -64,7 +64,7 @@ const CleanTemplate = ({
 
     function sectionMouseOut(e) {
         if (isPreview === false) {
-            const resumeSection = e.target.closest(".resume-section");
+            const resumeSection = e.target.closest(".clean-resume-section");
             resumeSection.style.backgroundColor = "white";
             //e.target.style.backgroundColor = "white";
         }
@@ -80,9 +80,10 @@ const CleanTemplate = ({
     const interests = resumeData.interests;
 
     const checkoverflow = () => {
-        const contentHeight =
-            document.getElementById("template-content").clientHeight;
-        const container = document.getElementById("template");
+        const contentHeight = document.getElementById(
+            "clean-template-content"
+        ).clientHeight;
+        const container = document.getElementById("clean-template");
 
         const containerHeightWithoutPadding =
             container.clientHeight -
@@ -104,7 +105,7 @@ const CleanTemplate = ({
     );
     const summarySection = (
         <div
-            className="summary-section resume-section"
+            className="summary-section clean-resume-section"
             onClick={() => {
                 handleSectionChange(2);
             }}
@@ -115,7 +116,10 @@ const CleanTemplate = ({
         </div>
     );
     const skillsSection = (
-        <div className="skills-section resume-section" onClick={checkoverflow}>
+        <div
+            className="skills-section clean-resume-section"
+            onClick={checkoverflow}
+        >
             <hr />
             <h3>Skills</h3>
             <ul className="horizontal-list">
@@ -126,7 +130,7 @@ const CleanTemplate = ({
         </div>
     );
     const experienceSection = (
-        <div className="experience-section resume-section">
+        <div className="experience-section clean-resume-section">
             <hr />
             <h3>Experience</h3>
             {work.map((job) => (
@@ -144,7 +148,7 @@ const CleanTemplate = ({
         </div>
     );
     const educationSection = (
-        <div className="education-section resume-section">
+        <div className="education-section clean-resume-section">
             <hr />
             <h3>Education</h3>
             {education.map((school) => (
@@ -170,7 +174,7 @@ const CleanTemplate = ({
     );
     const headerSection = (
         <div
-            className="header-section resume-section"
+            className="header-section clean-resume-section"
             onClick={() => {
                 handleSectionChange(1);
             }}
@@ -188,9 +192,16 @@ const CleanTemplate = ({
 
     const hi = <div>hi</div>;
     return (
-        <div className="container" id="container">
-            <div className="template" ref={templateRef} id="template">
-                <div className="template-content" id="template-content">
+        <div className="clean-template-container" id="clean-template-container">
+            <div
+                className="clean-template"
+                ref={templateRef}
+                id="clean-template"
+            >
+                <div
+                    className="clean-template-content"
+                    id="clean-template-content"
+                >
                     {headerSection}
                     {summarySection}
                     {skillsSection}

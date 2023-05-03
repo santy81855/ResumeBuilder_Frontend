@@ -1,12 +1,12 @@
 /* 610px is the width that translates to the pdf*/
-.container {
+.clean-template-container {
     width: 100%;
     aspect-ratio: 8.5/11;
     background-color: white;
     position: relative;
 }
 
-.template {
+.clean-template {
     font-family: Arial, sans-serif;
     line-height: 1;
     color: #333;
@@ -22,42 +22,42 @@
     padding: 3em;
 }
 
-.template-content {
+.clean-template-content {
     background-color: white;
 }
 
-.header-section {
+.clean-template-content .header-section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.header-contact-info {
+.clean-template .header-contact-info {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     row-gap: 0.5em;
 }
 
-.template .header-contact-info p {
+.clean-template .header-contact-info p {
     margin-bottom: 0px;
     margin-top: 0em;
 }
 
-.template .header-name h3 {
+.clean-template .header-name h3 {
     margin-bottom: 0px;
     margin-top: 0em;
 }
 
-.resume-section {
+.clean-resume-section {
     margin: 0px;
     position: relative;
     z-index: 0;
 }
 
 @media (pointer: fine) {
-    .resume-section::after {
+    .clean-resume-section::after {
         content: "";
         position: absolute;
         z-index: 1;
@@ -69,14 +69,14 @@
         align-self: center;
     }
 
-    .resume-section:hover::after {
+    .clean-resume-section:hover::after {
         background-color: rgba(0, 128, 128, 0.5);
         transform: scaleX(1.05);
         cursor: pointer;
     }
 
     @media (max-width: 480px) {
-        .resume-section:hover::after {
+        .clean-resume-section:hover::after {
             background-color: rgba(0, 128, 128, 0.5);
             transform: scaleX(1.05);
             border-radius: 0px;
@@ -85,35 +85,35 @@
     }
 }
 
-.template h3 {
+.clean-template h3 {
     color: black;
 }
 
-.template p {
+.clean-template p {
     color: black;
     margin-block: 0;
 }
 
-.template ul {
+.clean-template ul {
     margin-block-end: 0;
 }
 
-.template li {
+.clean-template li {
     color: black;
 }
 
-.horizontal-list {
+.clean-template .horizontal-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.horizontal-list li {
+.clean-template .horizontal-list li {
     display: inline-block;
     margin-right: 1em;
 }
 
-.export-button {
+.clean-template .export-button {
     width: 10%;
     height: 5%;
     margin: 0em;

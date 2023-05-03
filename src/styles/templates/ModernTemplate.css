@@ -1,0 +1,287 @@
+/* 610px is the width that translates to the pdf*/
+.modern-template-container {
+    width: 100%;
+    aspect-ratio: 8.5/11;
+    background-color: white;
+    position: relative;
+}
+
+.modern-template {
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    color: #333;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    margin: 0em;
+    padding-inline: 0em;
+    padding-block: 0em;
+}
+
+.modern-template-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.modern-vertical-block {
+    display: flex;
+    flex-direction: column;
+    margin-inline-start: 0rem;
+    height: 100%;
+    width: 30%;
+    background-color: #323b4c;
+    row-gap: 2em;
+}
+
+.modern-right-container {
+    width: 70%;
+}
+
+.modern-template .right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 2em;
+}
+
+.modern-template .job-progress-bar-container {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+
+.modern-template .job-progress-bar {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modern-template .job-progress-bar .circle {
+    width: 30%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0.1em solid #323b4c;
+}
+
+.modern-template .job-progress-bar .line {
+    height: 100%;
+    width: 1px;
+    background-color: #323b4c;
+}
+
+.modern-template .right-section .container {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 1em;
+    row-gap: 2em;
+}
+
+.modern-template .job-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+}
+
+.modern-template .job-container h4 {
+    font-weight: 200;
+}
+
+.modern-template .right-section h3 {
+}
+
+.modern-template .right-section h2 {
+    color: #323b4c;
+}
+
+.modern-template .right-section p {
+    color: #323b4c;
+    font-size: 85%;
+}
+
+.modern-template .horizontal-line {
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: red;
+    margin-block-start: 0.5em;
+    margin-block-end: 0;
+}
+
+.right-section .horizontal-line {
+    background-color: #323b4c;
+}
+
+.modern-template-content .experience-section {
+    padding-block-start: 3em;
+}
+
+.modern-template-content .header-section {
+    padding-block-start: 4em;
+}
+
+.modern-template-content .header-section h1 {
+    color: #323b4c;
+    font-size: 350%;
+    margin: 0;
+    margin-block-end: 0em;
+}
+
+.modern-template-content .header-section h2 {
+    color: #323b4c;
+    font-size: 200%;
+    margin: 0;
+    margin-block-end: 0.5em;
+    font-weight: 100;
+}
+
+.modern-image-container {
+    background-image: url("../../images/account-pics/option1.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 15em;
+    margin-block-start: 1em;
+}
+
+.modern-template .vertical-block-section {
+    color: white;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-end;
+}
+
+.vertical-block-section .horizontal-line {
+    background-color: white;
+}
+
+.modern-template .contact-info-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.modern-template .contact-info-entry p {
+    font-size: 85%;
+}
+
+.modern-template .contact-info-entry h3 {
+    margin-block-end: 0.5em;
+}
+
+.modern-template .vertical-block-section .container {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 1em;
+    padding-inline-end: 1em;
+    row-gap: 1em;
+}
+
+.modern-resume-section {
+    margin: 0px;
+    position: relative;
+    z-index: 0;
+}
+
+@media (pointer: fine) {
+    .modern-resume-section::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        align-self: center;
+    }
+
+    .modern-resume-section:hover::after {
+        background-color: rgba(0, 128, 128, 0.5);
+
+        cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+        .modern-resume-section:hover::after {
+            background-color: rgba(0, 128, 128, 0.5);
+
+            border-radius: 0px;
+            cursor: pointer;
+        }
+    }
+}
+
+.modern-template h2 {
+    margin-block: 0;
+}
+
+.modern-template h3 {
+    margin-block: 0;
+}
+
+.modern-template h4 {
+    margin-block: 0;
+}
+
+.modern-template p {
+    margin-block: 0;
+}
+
+.modern-template ul {
+    margin-block: 0;
+    padding-left: 3em;
+}
+
+.modern-template li {
+    font-size: 85%;
+}
+
+.modern-template .horizontal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modern-template .horizontal-list li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.modern-template .export-button {
+    width: 10%;
+    height: 5%;
+    margin: 0em;
+}
+/*
+.header-section h2 {
+    font-size: 16px;
+}
+
+.header-contact-info p {
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+
+.header-section:hover {
+    background-color: rgb(233, 233, 233);
+    cursor: pointer;
+}
+
+.section:hover {
+    background-color: rgb(130, 238, 150);
+    cursor: pointer;
+}
+*/

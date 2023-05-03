@@ -6,6 +6,7 @@ import Summary from "./questions/Summary";
 
 import JSONResumeData from "../resume-schema.json";
 import CleanTemplate from "./templates/CleanTemplate";
+import ModernTemplate from "./templates/ModernTemplate";
 
 import Modal from "react-modal";
 
@@ -25,11 +26,7 @@ function CreateResume() {
     const [currentlySelectedSection, setCurrentlySelectedSection] =
         useState(null);
 
-    const [resumeData, setResumeData] = useState(
-        !!sessionStorage.getItem("resumeData")
-            ? JSONResumeData
-            : sessionStorage.getItem("resumeData")
-    ); // lifted state
+    const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
 
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -212,8 +209,12 @@ function CreateResume() {
         setCurrentlySelectedSection(selectedSection);
     };
 
+    const templateNameArr = ["clean-template", "modern-template"];
+
     const exportPDF = () => {
-        const content = document.getElementById("template");
+        const content = document.getElementById(
+            templateNameArr[currentTemplate]
+        );
         savePDF(content, {
             paperSize: "Letter",
             margin: 0,
@@ -268,13 +269,20 @@ function CreateResume() {
         }
     };
 
-    const templateArr = () => {};
-
     const renderTemplate = () => {
         switch (currentTemplate) {
-            case 1:
+            case 0:
                 return (
                     <CleanTemplate
+                        resumeData={resumeData}
+                        handleSectionChange={handleSectionChange}
+                        isPreview={false}
+                        setResumeData={setResumeData}
+                    />
+                );
+            case 1:
+                return (
+                    <ModernTemplate
                         resumeData={resumeData}
                         handleSectionChange={handleSectionChange}
                         isPreview={false}
@@ -286,18 +294,49 @@ function CreateResume() {
         }
     };
 
+    const createResumeSideBar = (
+        <div className="create-resume-buttons-container">
+            <button className="create-resume-button">
+                <p>Template</p>
+                <span className="template-icon icon"></span>
+            </button>
+            <button className="create-resume-button">
+                <p>Sections</p>
+                <span className="sections-icon icon"></span>
+            </button>
+            <button onClick={exportPDF} className="create-resume-button">
+                <p>Export</p>
+                <span className="export-icon icon"></span>
+            </button>
+            {isLoading ? (
+                <button className="create-resume-button save-button">
+                    <p>Saving...</p>
+                    <span className="save-icon icon"></span>
+                </button>
+            ) : (
+                <button
+                    className="create-resume-button save-button"
+                    onClick={handleSave}
+                >
+                    <p>Save</p>
+                    <span className="save-icon icon"></span>
+                </button>
+            )}
+        </div>
+    );
+
     return (
         <div className="create-resume-page-container">
             <div className="create-resume-edit-container">
-                <div className="create-resume-page-left-section">
+                <div className="create-resume-page-right-section">
                     <div className="create-resume-title-container">
                         <input
-                            className="resume-title"
+                            className="resume-title input"
                             ref={titleRef}
                             placeholder="Untitled"
                         ></input>
                         <textarea
-                            className="resume-description"
+                            className="resume-description input"
                             ref={descriptionRef}
                             placeholder="No description..."
                         ></textarea>
@@ -308,37 +347,7 @@ function CreateResume() {
                         {renderTemplate()}
                     </div>
                 </div>
-                <div className="create-resume-buttons-container">
-                    <button className="create-resume-button">
-                        <p>Template</p>
-                        <span className="template-icon"></span>
-                    </button>
-                    <button className="create-resume-button">
-                        <p>Sections</p>
-                        <span className="sections-icon"></span>
-                    </button>
-                    <button
-                        onClick={exportPDF}
-                        className="create-resume-button"
-                    >
-                        <p>Export</p>
-                        <span className="export-icon"></span>
-                    </button>
-                    {isLoading ? (
-                        <button className="create-resume-button save-button">
-                            <p>Saving...</p>
-                            <span className="save-icon"></span>
-                        </button>
-                    ) : (
-                        <button
-                            className="create-resume-button save-button"
-                            onClick={handleSave}
-                        >
-                            <p>Save</p>
-                            <span className="save-icon"></span>
-                        </button>
-                    )}
-                </div>
+                {createResumeSideBar}
             </div>
         </div>
     );

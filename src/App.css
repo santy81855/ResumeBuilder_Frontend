@@ -2,6 +2,11 @@ body {
     min-width: 320px; /* Set the minimum width to 320 pixels */
 }
 
+:root {
+    /*account for bottom border of the header*/
+    --header-height: calc(80px + 1px);
+}
+
 .App {
     text-align: center;
 }
