@@ -11,6 +11,7 @@ const createResume = (data) => {
                 resumeTitle: data.resumeTitleParam,
                 resumeDescription: data.resumeDescriptionParam,
                 lastFetched: d.toDateString(),
+                template: data.templateParam,
                 json: data.jsonParam,
             },
             {
@@ -44,6 +45,7 @@ const updateResumeById = (data) => {
             resumeTitle: data.resumeTitleParam,
             resumeDescription: data.resumeDescriptionParam,
             lastFetched: d.toDateString(),
+            template: data.templateParam,
             json: data.jsonParam,
         })
         .then((res) => res.data);

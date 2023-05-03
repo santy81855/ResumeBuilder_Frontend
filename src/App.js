@@ -27,6 +27,7 @@ function App() {
                     />
                     <Route path="/u/resumes" element={<ResumePage />} />
                     <Route path="/u/create-resume" element={<CreateResume />} />
+                    <Route path="/u/edit-resume" element={<CreateResume />} />
                     {/* add other routes here */}
                 </Routes>
             </Router>

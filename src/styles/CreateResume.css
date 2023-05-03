@@ -163,7 +163,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    margin-left: 5px;
 }
 
 .create-resume-button .sections-icon {
@@ -175,7 +174,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    margin-left: 5px;
 }
 
 .create-resume-button .export-icon {
@@ -186,7 +184,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    margin-left: 5px;
 }
 
 .create-resume-button .save-icon {
@@ -198,7 +195,16 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    margin-left: 5px;
+}
+
+.create-resume-button .back-icon {
+    background-image: url(../images/back-arrow-icon.png);
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .save-button {

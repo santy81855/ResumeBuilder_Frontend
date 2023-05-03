@@ -1,20 +1,43 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/ResumePage.css";
 import { useNavigate } from "react-router-dom";
+import { templateToString, getTemplateComponent } from "../lib/TemplateKeys";
 import CleanTemplate from "./templates/CleanTemplate";
+import ModernTemplate from "./templates/ModernTemplate";
 import JSONResumeData from "../resume-schema.json";
+import Modal from "react-modal";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
     deleteResumeById,
     getAllUserResumes,
+    getResumeById,
 } from "../api/resume/ResumeRequests";
 
 function ResumePage() {
     const [resumeArr, setResumeArr] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
     //********************************************//
+    const getResumeQuery = useQuery({
+        queryKey: ["getResumeById"],
+        queryFn: getResumeById,
+        onSuccess: (data, variables, context) => {
+            console.log(
+                "Just fetched resume data in CreateResume component. Data: "
+            );
+            console.log(data);
+        },
+        onError: (error, variables, context) => {
+            console.log(
+                "Error Fetching resumes in CreateResume component. Error: "
+            );
+            console.log(error);
+        },
+        enabled: false,
+    });
+
     const resumesQuery = useQuery({
         queryKey: ["getAllUserResumes"],
         queryFn: getAllUserResumes,
@@ -54,7 +77,7 @@ function ResumePage() {
     });
 
     //********************************************//
-
+    // when they click on the create resume button
     const createResume = () => {
         console.log("create-resume");
         // clear the current resume being stored in local storage
@@ -118,9 +141,53 @@ function ResumePage() {
         child[1].style.display = "flex";
     };
 
+    function openModal() {
+        setIsOpen(true);
+    }
+    function afterOpenModal() {}
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    function resumearrPrint() {
+        return resumeArr[0].resumeTitle;
+    }
+
+    const doNothingFunction = () => {};
+
+    const exportModal = (
+        <Modal
+            className="export-modal"
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            contentLabel="export-modal"
+            overlayClassName="export-overlay"
+        >
+            {getResumeQuery.isSuccess ? (
+                // determine the correct template
+                getTemplateComponent({
+                    json: getResumeQuery.data.json,
+                    isPreview: true,
+                    handleSectionChange: doNothingFunction,
+                    template: getResumeQuery.data.template,
+                })
+            ) : (
+                <div>
+                    hasoestsnuhaostnuhaosentuhsaontehusoantehustnaoehutnsaoheutnsaoehutnsoeahu
+                </div>
+            )}
+        </Modal>
+    );
+
     const handleEditClick = (event, id) => {
         console.log(event);
-        const div = event.currentTarget;
+        console.log("edit-resume");
+        // add the resumeid to the local storage
+        localStorage.setItem("resumeId", id);
+        // go to edit resume page
+        navigate("/u/edit-resume");
     };
 
     const handleDeleteClick = (event, id) => {
@@ -134,14 +201,15 @@ function ResumePage() {
     };
 
     const handleExportClick = (event, id) => {
-        console.log(event);
         const div = event.currentTarget;
+        console.log(typeof id);
+        localStorage.setItem("resumeId", id);
+        getResumeQuery.refetch();
+        openModal();
     };
 
-    const doNothingFunction = () => {};
-
     function makeResumeTile(resumeData) {
-        const { resumeTitle, _id, lastFetched, json } = resumeData;
+        const { resumeTitle, _id, lastFetched, template, json } = resumeData;
         console.log(_id);
         const dateString = lastFetched;
         const date = new Date(dateString);
@@ -150,6 +218,14 @@ function ResumePage() {
             month: "short",
             day: "2-digit",
             year: "numeric",
+        });
+
+        // determine the correct template
+        const templateToShow = getTemplateComponent({
+            json: json,
+            isPreview: true,
+            handleSectionChange: doNothingFunction,
+            template: template,
         });
 
         return (
@@ -166,11 +242,7 @@ function ResumePage() {
                     onMouseEnter={(event) => handleResumeHover(event, _id)}
                     onMouseLeave={(event) => handleResumeUnhover(event, _id)}
                 >
-                    <CleanTemplate
-                        resumeData={json}
-                        isPreview={true}
-                        handleSectionChange={doNothingFunction}
-                    />
+                    {templateToShow}
                     <div className="ResumeOptionsMenu">
                         <button
                             className="EditResume"
@@ -234,6 +306,7 @@ function ResumePage() {
             </div>
 
             <div className="CoverLetter"></div>
+            {exportModal}
         </div>
     );
 }

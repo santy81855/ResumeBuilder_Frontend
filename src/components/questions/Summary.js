@@ -41,7 +41,7 @@ const Summary = ({
                     name="summary"
                     value={summary}
                     onChange={(event) => {
-                        setSummary(event?.target?.value);
+                        setSummary(event.target.value);
                         handleSummaryChange(event);
                     }}
                     rows="10"

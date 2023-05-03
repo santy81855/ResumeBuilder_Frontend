@@ -1,12 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/CreateResume.css";
 
 import BasicInfo from "./questions/BasicInfo";
 import Summary from "./questions/Summary";
+import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 
 import JSONResumeData from "../resume-schema.json";
 import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
+import { templateToString } from "../lib/TemplateKeys";
 
 import Modal from "react-modal";
 
@@ -21,24 +24,24 @@ import {
 } from "../api/resume/ResumeRequests";
 
 function CreateResume() {
-    const [currentQuestion, setCurrentQuestion] = useState(1);
+    const navigate = useNavigate();
     const [currentTemplate, setCurrentTemplate] = useState(1);
     const [currentlySelectedSection, setCurrentlySelectedSection] =
         useState(null);
 
     const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
-
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [isLoadingState, setIsLoading] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(false);
-    // example of how to modify
-    // modifiedData.basics.name = "John Doe";
+    const [resumeTitle, setResumeTitle] = useState("");
+    const [resumeDescription, setResumeDescription] = useState("");
 
     //--------------------------------------//
     const titleRef = useRef();
     const descriptionRef = useRef();
     const LOADING_TIME = 1000;
 
+    /*
     const getResumeQuery = useQuery({
         queryKey: ["getResumeById"],
         queryFn: getResumeById,
@@ -58,6 +61,7 @@ function CreateResume() {
     });
 
     // useeffect hook to ensure that the correct title and description are showed on refresh
+
     useEffect(() => {
         const resumeId = localStorage.getItem("resumeId");
         // if we are editing a resume then fetch the data
@@ -70,6 +74,35 @@ function CreateResume() {
             }
         }
     }, [getResumeQuery.status]);
+    */
+
+    const getResumeQuery = useQuery({
+        queryKey: ["getResumeById"],
+        queryFn: getResumeById,
+        onSuccess: (data, variables, context) => {
+            console.log(
+                "Just fetched resume data in CreateResume component. Data: "
+            );
+            setResumeData(data.json);
+            console.log(data);
+        },
+        onError: (error, variables, context) => {
+            console.log(
+                "Error Fetching resumes in CreateResume component. Error: "
+            );
+            console.log(error);
+        },
+        enabled: false,
+    });
+
+    useEffect(() => {
+        const resumeId = localStorage.getItem("resumeId");
+
+        // if this is not a new resume
+        if (!!resumeId) {
+            getResumeQuery.refetch();
+        }
+    }, []);
 
     const createResumeMutation = useMutation({
         mutationFn: createResume,
@@ -95,6 +128,7 @@ function CreateResume() {
         onMutate: (variables) => {
             return { hello: "goodbye" };
         },
+        enabled: false,
     });
 
     const updateResumeMutation = useMutation({
@@ -125,62 +159,24 @@ function CreateResume() {
         const resumeId = localStorage.getItem("resumeId");
         console.log(resumeId);
         setIsLoading(true);
+        console.log("here");
+        console.log(templateToString[currentTemplate]);
         // if there is a resumeId we UPDATE
         if (resumeId) {
+            console.log(resumeData);
             updateResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
+                templateParam: templateToString[currentTemplate],
                 jsonParam: resumeData,
             });
             // otherwise // create
         } else {
             console.log(resumeData);
-            if (
-                resumeData.templates.some((obj) => obj.name === "Clean") ===
-                false
-            ) {
-                console.log("adding template");
-                const newTemplate = {
-                    name: "Clean",
-                    availableSections: [
-                        {
-                            name: "contact",
-                            used: true,
-                        },
-                        {
-                            name: "summary",
-                            used: true,
-                        },
-                        {
-                            name: "skills",
-                            used: true,
-                        },
-                        {
-                            name: "work",
-                            used: true,
-                        },
-                        {
-                            name: "education",
-                            used: true,
-                        },
-                        {
-                            name: "languages",
-                            used: true,
-                        },
-                        {
-                            name: "interests",
-                            used: true,
-                        },
-                    ],
-                };
-                setResumeData({
-                    ...resumeData,
-                    templates: [...resumeData.templates, newTemplate],
-                });
-            }
             createResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
+                templateParam: templateToString[currentTemplate],
                 jsonParam: resumeData,
             });
         }
@@ -227,6 +223,10 @@ function CreateResume() {
         });
     };
 
+    const handleBack = () => {
+        navigate("/u/resumes");
+    };
+
     const renderQuestion = () => {
         switch (currentlySelectedSection) {
             case 1:
@@ -252,7 +252,7 @@ function CreateResume() {
                             setResumeData={setResumeData}
                             handleSave={handleSave}
                             closeModal={closeModal}
-                            isLoading={isLoading}
+                            isLoadingState={isLoadingState}
                         />
                     </Modal>
                 );
@@ -290,7 +290,7 @@ function CreateResume() {
                     />
                 );
             default:
-                return null;
+                return <div>naur</div>;
         }
     };
 
@@ -308,7 +308,14 @@ function CreateResume() {
                 <p>Export</p>
                 <span className="export-icon icon"></span>
             </button>
-            {isLoading ? (
+            <button
+                className="create-resume-button back-button"
+                onClick={handleBack}
+            >
+                <p>back</p>
+                <span className="back-icon icon"></span>
+            </button>
+            {isLoadingState ? (
                 <button className="create-resume-button save-button">
                     <p>Saving...</p>
                     <span className="save-icon icon"></span>
@@ -325,32 +332,108 @@ function CreateResume() {
         </div>
     );
 
-    return (
-        <div className="create-resume-page-container">
-            <div className="create-resume-edit-container">
-                <div className="create-resume-page-right-section">
-                    <div className="create-resume-title-container">
-                        <input
-                            className="resume-title input"
-                            ref={titleRef}
-                            placeholder="Untitled"
-                        ></input>
-                        <textarea
-                            className="resume-description input"
-                            ref={descriptionRef}
-                            placeholder="No description..."
-                        ></textarea>
-                    </div>
+    const handleResumeTitleChange = (event) => {
+        setResumeTitle(event.target.value);
+    };
+    const handleResumeDescriptionChange = (event) => {
+        setResumeDescription(event.target.value);
+    };
+    // if loading
+    if (getResumeQuery.isLoading && getResumeQuery.fetchStatus !== "idle") {
+        return (
+            <div className="create-resume-page-container">
+                <div className="create-resume-edit-container">
+                    <div className="create-resume-page-right-section">
+                        <div className="create-resume-title-container">
+                            <input
+                                className="resume-title input"
+                                ref={titleRef}
+                                placeholder="Untitled"
+                                onChange={handleResumeTitleChange}
+                            ></input>
+                            <textarea
+                                className="resume-description input"
+                                ref={descriptionRef}
+                                placeholder="No description..."
+                                onChange={handleResumeDescriptionChange}
+                            ></textarea>
+                        </div>
 
-                    {renderQuestion()}
-                    <div className="create-resume-template-container">
-                        {renderTemplate()}
+                        {renderQuestion()}
+                        <div className="create-resume-template-container">
+                            <ResumeSkeleton />
+                        </div>
                     </div>
+                    {createResumeSideBar}
                 </div>
-                {createResumeSideBar}
             </div>
-        </div>
-    );
+        );
+    }
+    if (getResumeQuery.status === "error") return <div>error</div>;
+    // if new resume
+    if (getResumeQuery.isLoading && getResumeQuery.fetchStatus === "idle") {
+        return (
+            <div className="create-resume-page-container">
+                <div className="create-resume-edit-container">
+                    <div className="create-resume-page-right-section">
+                        <div className="create-resume-title-container">
+                            <input
+                                className="resume-title input"
+                                ref={titleRef}
+                                placeholder="Untitled"
+                                onChange={handleResumeTitleChange}
+                            ></input>
+                            <textarea
+                                className="resume-description input"
+                                ref={descriptionRef}
+                                placeholder="No description..."
+                                onChange={handleResumeDescriptionChange}
+                            ></textarea>
+                        </div>
+
+                        {renderQuestion()}
+                        <div className="create-resume-template-container">
+                            {renderTemplate()}
+                        </div>
+                    </div>
+                    {createResumeSideBar}
+                </div>
+            </div>
+        );
+    }
+    // if successful data fetch
+    if (getResumeQuery.isSuccess) {
+        return (
+            <div className="create-resume-page-container">
+                <div className="create-resume-edit-container">
+                    <div className="create-resume-page-right-section">
+                        <div className="create-resume-title-container">
+                            <input
+                                className="resume-title input"
+                                ref={titleRef}
+                                placeholder="Untitled"
+                                value={getResumeQuery.data.resumeTitle}
+                                onChange={handleResumeTitleChange}
+                            ></input>
+                            <textarea
+                                className="resume-description input"
+                                ref={descriptionRef}
+                                placeholder="No description..."
+                                value={getResumeQuery.data.resumeDescription}
+                                onChange={handleResumeDescriptionChange}
+                            ></textarea>
+                        </div>
+
+                        {renderQuestion()}
+                        <div className="create-resume-template-container">
+                            {renderTemplate()}
+                        </div>
+                    </div>
+                    {createResumeSideBar}
+                </div>
+            </div>
+        );
+    }
 }
 
 export default CreateResume;
