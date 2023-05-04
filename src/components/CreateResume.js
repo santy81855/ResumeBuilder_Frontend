@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CreateResume.css";
 
+import Loader from "./ui/Loader";
 import BasicInfo from "./questions/BasicInfo";
 import Summary from "./questions/Summary";
 import ResumeSkeleton from "./skeletons/ResumeSkeleton";
@@ -40,45 +41,22 @@ function CreateResume() {
     const [resumeTitle, setResumeTitle] = useState("");
     const [resumeDescription, setResumeDescription] = useState("");
 
-    //--------------------------------------//
     const titleRef = useRef();
     const descriptionRef = useRef();
     const LOADING_TIME = 1000;
 
-    /*
-    const getResumeQuery = useQuery({
-        queryKey: ["getResumeById"],
-        queryFn: getResumeById,
-        onSuccess: (data, variables, context) => {
-            console.log(
-                "Just fetched resume data in CreateResume component. Data: "
-            );
-            console.log(data);
-        },
-        onError: (error, variables, context) => {
-            console.log(
-                "Error Fetching resumes in CreateResume component. Error: "
-            );
-            console.log(error);
-        },
-        enabled: !!localStorage.getItem("resumeId"),
-    });
-
-    // useeffect hook to ensure that the correct title and description are showed on refresh
-
     useEffect(() => {
         const resumeId = localStorage.getItem("resumeId");
-        // if we are editing a resume then fetch the data
-        if (resumeId) {
-            if (getResumeQuery.status === "success") {
-                titleRef.current.value = getResumeQuery.data.resumeTitle;
-                descriptionRef.current.value =
-                    getResumeQuery.data.resumeDescription;
-                setResumeData(getResumeQuery.data.json);
-            }
+        // if this is not a new resume
+        if (!!resumeId) {
+            getResumeQuery.refetch();
         }
-    }, [getResumeQuery.status]);
-    */
+
+        // handle resize for the floating menu at the bottom of the page
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const getResumeQuery = useQuery({
         queryKey: ["getResumeById"],
@@ -88,6 +66,8 @@ function CreateResume() {
                 "Just fetched resume data in CreateResume component. Data: "
             );
             setResumeData(data.json);
+            setResumeTitle(data.resumeTitle);
+            setResumeDescription(data.resumeDescription);
             setCurrentTemplate(templateToInt[data.template]);
             console.log(data);
         },
@@ -100,15 +80,6 @@ function CreateResume() {
         enabled: false,
     });
 
-    useEffect(() => {
-        const resumeId = localStorage.getItem("resumeId");
-        console.log(getResumeQuery);
-        // if this is not a new resume
-        if (!!resumeId) {
-            getResumeQuery.refetch();
-        }
-    }, []);
-
     const createResumeMutation = useMutation({
         mutationFn: createResume,
         onSuccess: (data, variables, context) => {
@@ -120,18 +91,14 @@ function CreateResume() {
             // wait LOADING_TIME so user has feedback about the process
             setTimeout(function () {
                 setIsLoading(false);
+                navigate("/u/edit-resume");
             }, LOADING_TIME);
-            //console.log(context);
-            //console.log(variables);
         },
         onError: (error, variables, context) => {
             console.log(
                 "Problem Creating Resume in CreateResume component. Error: "
             );
             console.log(error);
-        },
-        onMutate: (variables) => {
-            return { hello: "goodbye" };
         },
         enabled: false,
     });
@@ -155,19 +122,13 @@ function CreateResume() {
             );
             console.log(error);
         },
-        onMutate: (variables) => {
-            return { hi: "bye" };
-        },
     });
 
     function handleSave() {
         const resumeId = localStorage.getItem("resumeId");
-        console.log(resumeId);
         setIsLoading(true);
-        console.log(templateToString[currentTemplate]);
         // if there is a resumeId we UPDATE
         if (resumeId) {
-            console.log(resumeData);
             updateResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
@@ -176,7 +137,6 @@ function CreateResume() {
             });
             // otherwise // create
         } else {
-            console.log(resumeData);
             createResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
@@ -185,12 +145,39 @@ function CreateResume() {
             });
         }
     }
-    //--------------------------------------//
+
+    // handle when screen is < 480 and user clicks out of thu floating menu
+    const handleClick = (event, width) => {
+        const sideBar = document.getElementById("side-bar");
+        const button = document.getElementById("side-bar-toggle-button");
+
+        // Check if the clicked element is outside the sidebar and the toggle button
+        if (!!sideBar && !!button && width < 480)
+            if (!sideBar.contains(event.target) && event.target !== button) {
+                closeSideBar();
+            }
+    };
+    // handle resize for when the floating menu should or should not be toggleable
+    function handleResize() {
+        if (window.innerWidth > 480) {
+            const sideBar = document.getElementById("side-bar");
+            const button = document.getElementById("side-bar-toggle-button");
+
+            if (!!sideBar && !!button) {
+                sideBar.style.transform = "translateY(0%)";
+                sideBar.style.left = "2.5%";
+                sideBar.style.bottom = "0.5em";
+                button.style.display = "none";
+            }
+        }
+        document.addEventListener("click", (event) =>
+            handleClick(event, window.innerWidth)
+        );
+    }
+
     const handleResumeDataChange = (newResumeData) => {
         // callback function to update the resumeData state
         setResumeData(newResumeData);
-        console.log(newResumeData);
-        console.log(resumeData);
         handleSave();
     };
 
@@ -205,7 +192,7 @@ function CreateResume() {
     }
 
     const handleSectionChange = (selectedSection) => {
-        setIsOpen(true);
+        openModal(true);
         setCurrentlySelectedSection(selectedSection);
     };
 
@@ -213,10 +200,12 @@ function CreateResume() {
         const content = document.getElementById(
             templateNameToExport[currentTemplate]
         );
+        console.log(templateNameToExport[currentTemplate]);
         savePDF(content, {
+            // paperSize: "auto",
             paperSize: "Letter",
             margin: 0,
-            fileName: "resume.pdf",
+            fileName: titleRef.current.value,
             landscape: false,
             pdf: {
                 multiPage: false,
@@ -227,6 +216,32 @@ function CreateResume() {
 
     const handleBack = () => {
         navigate("/u/resumes");
+    };
+
+    const handleResumeTitleChange = (event) => {
+        setResumeTitle(event.target.value);
+    };
+    const handleResumeDescriptionChange = (event) => {
+        setResumeDescription(event.target.value);
+    };
+
+    const openSideBar = (event) => {
+        const sideBar = document.getElementById("side-bar");
+        const button = event.target;
+
+        sideBar.style.transform = "translateY(0%)";
+        sideBar.style.left = "2.5%";
+        sideBar.style.bottom = "0.5em";
+        button.style.display = "none";
+    };
+
+    const closeSideBar = (event) => {
+        const button = document.getElementById("side-bar-toggle-button");
+        const sideBar = document.getElementById("side-bar");
+        sideBar.style.transform = "translateY(100%)";
+        sideBar.style.left = "0";
+        sideBar.style.bottom = "0";
+        button.style.display = "flex";
     };
 
     const renderQuestion = () => {
@@ -296,8 +311,25 @@ function CreateResume() {
         }
     };
 
+    const toggleSideBarButton = (
+        <button
+            className="toggle-sidebar-button"
+            id="side-bar-toggle-button"
+            onClick={openSideBar}
+        >
+            &#9776;
+        </button>
+    );
+
     const createResumeSideBar = (
-        <div className="create-resume-buttons-container">
+        <div className="create-resume-buttons-container" id="side-bar">
+            <button
+                className="create-resume-button back-button"
+                onClick={handleBack}
+            >
+                <p>back</p>
+                <span className="back-icon icon"></span>
+            </button>
             <button className="create-resume-button">
                 <p>Template</p>
                 <span className="template-icon icon"></span>
@@ -310,16 +342,12 @@ function CreateResume() {
                 <p>Export</p>
                 <span className="export-icon icon"></span>
             </button>
-            <button
-                className="create-resume-button back-button"
-                onClick={handleBack}
-            >
-                <p>back</p>
-                <span className="back-icon icon"></span>
-            </button>
             {isLoadingState ? (
-                <button className="create-resume-button save-button">
-                    <div className="loader"></div>
+                <button
+                    className="create-resume-button save-button"
+                    onClick={handleSave}
+                >
+                    <Loader />
                 </button>
             ) : (
                 <button
@@ -333,12 +361,6 @@ function CreateResume() {
         </div>
     );
 
-    const handleResumeTitleChange = (event) => {
-        setResumeTitle(event.target.value);
-    };
-    const handleResumeDescriptionChange = (event) => {
-        setResumeDescription(event.target.value);
-    };
     // if loading
     if (getResumeQuery.isLoading && getResumeQuery.fetchStatus !== "idle") {
         return (
@@ -366,6 +388,7 @@ function CreateResume() {
                         </div>
                     </div>
                     {createResumeSideBar}
+                    {toggleSideBarButton}
                 </div>
             </div>
         );
@@ -400,6 +423,7 @@ function CreateResume() {
                         </div>
                     </div>
                     {createResumeSideBar}
+                    {toggleSideBarButton}
                 </div>
             </div>
         );
@@ -407,6 +431,7 @@ function CreateResume() {
     // if successful data fetch
     if (getResumeQuery.isSuccess) {
         console.log(!!localStorage.getItem("resumeId"));
+        console.log(getResumeQuery.data);
         return (
             <div className="create-resume-page-container">
                 <div className="create-resume-edit-container">
@@ -416,14 +441,14 @@ function CreateResume() {
                                 className="resume-title input"
                                 ref={titleRef}
                                 placeholder="Untitled"
-                                value={getResumeQuery.data.resumeTitle}
+                                value={resumeTitle}
                                 onChange={handleResumeTitleChange}
                             ></input>
                             <textarea
                                 className="resume-description input"
                                 ref={descriptionRef}
                                 placeholder="No description..."
-                                value={getResumeQuery.data.resumeDescription}
+                                value={resumeDescription}
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
                         </div>
@@ -434,6 +459,7 @@ function CreateResume() {
                         </div>
                     </div>
                     {createResumeSideBar}
+                    {toggleSideBarButton}
                 </div>
             </div>
         );

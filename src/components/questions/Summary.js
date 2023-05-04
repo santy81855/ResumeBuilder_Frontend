@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
+import Loader from "../ui/Loader";
 
 const Summary = ({
     resumeData,
     setResumeData,
     handleSave,
     closeModal,
-    isLoading,
+    isLoadingState,
 }) => {
     const [summary, setSummary] = useState(resumeData.summary);
     const summaryRef = useRef();
@@ -54,21 +55,14 @@ const Summary = ({
                 >
                     Close
                 </button>
-                {isLoading ? (
-                    <button
-                        className="question-container-apply-button"
-                        onClick={handleSave}
-                    >
-                        Saving...
-                    </button>
-                ) : (
-                    <button
-                        className="question-container-apply-button"
-                        onClick={handleSave}
-                    >
-                        Apply
-                    </button>
-                )}
+
+                <button
+                    className="question-container-apply-button"
+                    onClick={handleSave}
+                    disabled={isLoadingState}
+                >
+                    {isLoadingState ? <Loader /> : "apply"}
+                </button>
             </div>
             <button className="close-modal-button" onClick={closeModal}>
                 x
