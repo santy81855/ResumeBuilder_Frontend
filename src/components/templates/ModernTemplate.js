@@ -167,14 +167,18 @@ const ModernTemplate = ({
     const imageSection = <div className="modern-image-container"></div>;
 
     const headerSection = (
+        <div className={sectionClass + " right-section header-section"}>
+            <h1>{contact.name}</h1>
+            <h2>{label}</h2>
+        </div>
+    );
+    const summarySection = (
         <div
-            className={sectionClass + " right-section header-section"}
+            className={sectionClass + " right-section summary-section"}
             onClick={() => {
                 handleSectionChange(2);
             }}
         >
-            <h1>{contact.name}</h1>
-            <h2>{label}</h2>
             <p>{summary}</p>
         </div>
     );
@@ -209,6 +213,18 @@ const ModernTemplate = ({
         </div>
     );
 
+    const interestsSection = (
+        <div className={sectionClass + " right-section interests-section"}>
+            <h2>Interests</h2>
+            {horizontalLine}
+            <div className="container">
+                {interests.map((interest) => (
+                    <h4>{interest.name}</h4>
+                ))}
+            </div>
+        </div>
+    );
+
     const hi = <div>hi</div>;
     return (
         <div
@@ -233,7 +249,9 @@ const ModernTemplate = ({
                     </div>
                     <div className="modern-right-container">
                         {headerSection}
+                        {summarySection}
                         {experienceSection}
+                        {interestsSection}
                     </div>
                 </div>
             </div>

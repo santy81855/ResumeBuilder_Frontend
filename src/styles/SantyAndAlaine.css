@@ -1,0 +1,41 @@
+.our-container {
+    height: 100vh;
+    background-color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.story-container {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+
+.story-page {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 0;
+}
+
+.story-page p {
+    width: 50%;
+    margin: 0;
+}
+
+.story-page .image-container {
+    border: none;
+    outline: none;
+    width: 50%;
+}
+
+.story-page .image {
+    background-image: url("../components/pic1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}

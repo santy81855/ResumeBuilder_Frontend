@@ -30,7 +30,7 @@ import {
 
 function CreateResume() {
     const navigate = useNavigate();
-    const [currentTemplate, setCurrentTemplate] = useState(1);
+    const [currentTemplate, setCurrentTemplate] = useState(0);
     const [currentlySelectedSection, setCurrentlySelectedSection] =
         useState(null);
 
@@ -99,6 +99,7 @@ function CreateResume() {
                 "Problem Creating Resume in CreateResume component. Error: "
             );
             console.log(error);
+            setIsLoading(false);
         },
         enabled: false,
     });
@@ -121,6 +122,7 @@ function CreateResume() {
                 "Problem Updating Resume in CreateResume component. Error: "
             );
             console.log(error);
+            setIsLoading(false);
         },
     });
 
@@ -321,6 +323,14 @@ function CreateResume() {
         </button>
     );
 
+    const toggleTemplates = () => {
+        if (currentTemplate == 1) {
+            setCurrentTemplate(0);
+        } else if (currentTemplate == 0) {
+            setCurrentTemplate(1);
+        }
+    };
+
     const createResumeSideBar = (
         <div className="create-resume-buttons-container" id="side-bar">
             <button
@@ -330,7 +340,7 @@ function CreateResume() {
                 <p>back</p>
                 <span className="back-icon icon"></span>
             </button>
-            <button className="create-resume-button">
+            <button className="create-resume-button" onClick={toggleTemplates}>
                 <p>Template</p>
                 <span className="template-icon icon"></span>
             </button>
@@ -397,7 +407,6 @@ function CreateResume() {
     if (getResumeQuery.status === "error") return <div>error</div>;
     // if new resume
     if (!!localStorage.getItem("resumeId") === false) {
-        console.log(!!localStorage.getItem("resumeId"));
         return (
             <div className="create-resume-page-container">
                 <div className="create-resume-edit-container">
@@ -429,9 +438,7 @@ function CreateResume() {
         );
     }
     // if successful data fetch
-    if (getResumeQuery.isSuccess) {
-        console.log(!!localStorage.getItem("resumeId"));
-        console.log(getResumeQuery.data);
+    if (!!localStorage.getItem("resumeId")) {
         return (
             <div className="create-resume-page-container">
                 <div className="create-resume-edit-container">

@@ -138,7 +138,9 @@ function ResumePage() {
 
     const handleResumeHover = (event, id) => {
         // get the ResumePic element
-        const div = event.currentTarget;
+        //const div = event.currentTarget;
+        const div = document.getElementById(id);
+        console.log(div);
         // get the Template component
         const child = div.children;
         // hide the template component
@@ -254,12 +256,15 @@ function ResumePage() {
                     <h2>{resumeTitle}</h2>
                     <div className="DateButtonContainer">
                         <p>{formattedDate}</p>
-                        <button className="ResumeTileOptionsButton"></button>
+                        <button
+                            className="ResumeTileOptionsButton"
+                            onClick={(event) => handleResumeHover(event, _id)}
+                        ></button>
                     </div>
                 </div>
                 <div
                     className="ResumePic"
-                    onMouseEnter={(event) => handleResumeHover(event, _id)}
+                    id={_id}
                     onMouseLeave={(event) => handleResumeUnhover(event, _id)}
                 >
                     {templateToShow}

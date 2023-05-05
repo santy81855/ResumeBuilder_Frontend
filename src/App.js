@@ -11,6 +11,8 @@ import CleanTemplate from "./components/templates/CleanTemplate";
 
 import resumeData from "./resume-schema.json";
 
+import SantyAndAlaine from "./components/SantyAndAlaine";
+
 function App() {
     return (
         <div>
@@ -28,6 +30,10 @@ function App() {
                     <Route path="/u/resumes" element={<ResumePage />} />
                     <Route path="/u/create-resume" element={<CreateResume />} />
                     <Route path="/u/edit-resume" element={<CreateResume />} />
+                    <Route
+                        path="santy-and-alaine"
+                        element={<SantyAndAlaine />}
+                    />
                     {/* add other routes here */}
                 </Routes>
             </Router>

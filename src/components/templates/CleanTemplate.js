@@ -175,15 +175,15 @@ const CleanTemplate = ({
     );
     const headerSection = (
         <div
-            className="header-section clean-resume-section"
+            className="header-section"
             onClick={() => {
                 handleSectionChange(1);
             }}
         >
-            <div className="header-name">
+            <div className="header-name clean-resume-section">
                 <h3>{contact.name}</h3>
             </div>
-            <div className="header-contact-info">
+            <div className="header-contact-info clean-resume-section">
                 <p>{contact.email}</p>
                 <p>{contact.phone}</p>
                 <p>{contact.website}</p>
