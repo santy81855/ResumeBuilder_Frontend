@@ -1,5 +1,5 @@
 .create-resume-page-container {
-    background-color: white;
+    background-color: rgb(248, 248, 248);
 }
 
 .create-resume-edit-container {
@@ -8,7 +8,6 @@
     flex-direction: row-reverse;
     align-items: stretch;
     justify-content: stretch;
-    background-color: rgba(225, 244, 244, 0.5);
     /*max-width: 900px;*/
 }
 
@@ -219,6 +218,35 @@
     margin-top: auto;
 }
 
+.toggle-sidebar-button {
+    display: none;
+}
+
+.section-selection-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 0em;
+    width: 100%;
+    border: 1px solid rgba(0, 128, 128, 0.2);
+    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+}
+
+.section-option {
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+    padding-inline: 0.5em;
+    padding-block: 0.5em;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch-item {
+    transform: scale(0.6);
+}
+
 @media screen and (width < 768px) {
     .create-resume-page-right-section {
         row-gap: 0.5rem;
@@ -232,13 +260,7 @@
     .create-resume-title-container .resume-description {
         font-size: 10px;
     }
-}
 
-.toggle-sidebar-button {
-    display: none;
-}
-
-@media (width < 480px) {
     .toggle-sidebar-button {
         display: flex;
         position: fixed;
@@ -255,11 +277,6 @@
         color: white;
         cursor: pointer;
     }
-
-    .create-resume-title-container .resume-description {
-        font-size: 8px;
-    }
-
     .create-resume-buttons-container {
         flex-direction: row;
         padding: 0;
@@ -328,14 +345,6 @@
     .create-resume-button p {
         font-weight: 100;
     }
-
-    .create-resume-page-right-section {
-        width: 95%;
-        align-self: center;
-        padding-inline: 0;
-        padding-block-end: 2rem;
-    }
-
     .create-resume-edit-container {
         flex-direction: column;
     }
@@ -346,6 +355,19 @@
 
     .create-resume-button .export-icon {
         transform: rotate(270deg);
+    }
+}
+
+@media (width < 480px) {
+    .create-resume-title-container .resume-description {
+        font-size: 8px;
+    }
+
+    .create-resume-page-right-section {
+        width: 95%;
+        align-self: center;
+        padding-inline: 0;
+        padding-block-end: 2rem;
     }
 }
 

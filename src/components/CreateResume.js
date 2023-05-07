@@ -17,6 +17,7 @@ import {
 } from "../lib/TemplateKeys";
 
 import Modal from "react-modal";
+import Switch from "react-switch";
 
 import { savePDF } from "@progress/kendo-react-pdf";
 
@@ -44,6 +45,8 @@ function CreateResume() {
     const titleRef = useRef();
     const descriptionRef = useRef();
     const LOADING_TIME = 1000;
+
+    const TOGGLE_SIDEBAR_SIZE = 768;
 
     useEffect(() => {
         const resumeId = localStorage.getItem("resumeId");
@@ -154,14 +157,14 @@ function CreateResume() {
         const button = document.getElementById("side-bar-toggle-button");
 
         // Check if the clicked element is outside the sidebar and the toggle button
-        if (!!sideBar && !!button && width < 480)
+        if (!!sideBar && !!button && width < TOGGLE_SIDEBAR_SIZE)
             if (!sideBar.contains(event.target) && event.target !== button) {
                 closeSideBar();
             }
     };
     // handle resize for when the floating menu should or should not be toggleable
     function handleResize() {
-        if (window.innerWidth > 480) {
+        if (window.innerWidth > TOGGLE_SIDEBAR_SIZE) {
             const sideBar = document.getElementById("side-bar");
             const button = document.getElementById("side-bar-toggle-button");
 
@@ -288,6 +291,39 @@ function CreateResume() {
         }
     };
 
+    const selectionChange = (event) => {
+        console.log(event);
+    };
+
+    const test = <div>hello this is em</div>;
+    function SwitchContainer() {
+        const switchItems = [true, false, true, false, true, true, false]; // Example array of switch states
+
+        return (
+            <div className="section-selection-container">
+                {switchItems.map((item, index) => (
+                    <div className="section-option">
+                        <Switch
+                            key={index}
+                            checked={item}
+                            onChange={() => {}}
+                            className="switch-item"
+                        />
+                        <p>hi</p>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+    const renderSectionSelector = () => {
+        switch (currentTemplate) {
+            case 0:
+                return <SwitchContainer />;
+            default:
+                return <div>naur</div>;
+        }
+    };
+
     const renderTemplate = () => {
         switch (currentTemplate) {
             case 0:
@@ -391,7 +427,6 @@ function CreateResume() {
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
                         </div>
-
                         {renderQuestion()}
                         <div className="create-resume-template-container">
                             <ResumeSkeleton />
@@ -425,7 +460,7 @@ function CreateResume() {
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
                         </div>
-
+                        {renderSectionSelector()}
                         {renderQuestion()}
                         <div className="create-resume-template-container">
                             {renderTemplate()}
@@ -459,7 +494,7 @@ function CreateResume() {
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
                         </div>
-
+                        {renderSectionSelector()}
                         {renderQuestion()}
                         <div className="create-resume-template-container">
                             {renderTemplate()}
