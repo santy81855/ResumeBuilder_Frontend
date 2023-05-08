@@ -296,7 +296,7 @@ function CreateResume() {
     };
 
     const test = <div>hello this is em</div>;
-    function SwitchContainer() {
+    function SectionContainer() {
         const switchItems = [true, false, true, false, true, true, false]; // Example array of switch states
 
         return (
@@ -318,7 +318,7 @@ function CreateResume() {
     const renderSectionSelector = () => {
         switch (currentTemplate) {
             case 0:
-                return <SwitchContainer />;
+                return <SectionContainer />;
             default:
                 return <div>naur</div>;
         }
