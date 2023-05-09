@@ -223,12 +223,10 @@
 }
 
 .section-selection-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    row-gap: 0em;
     width: 100%;
+    display: grid;
+    column-gap: 0.5em;
+    grid-template-columns: repeat(3, 1fr);
     border: 1px solid rgba(0, 128, 128, 0.2);
     box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
 }
@@ -236,15 +234,33 @@
 .section-option {
     display: flex;
     flex-direction: row;
-    background-color: red;
-    padding-inline: 0.5em;
-    padding-block: 0.5em;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-inline: 0.5em;
 }
 
-.switch-item {
-    transform: scale(0.6);
+.section-option p {
+    font-size: 90%;
+    font-weight: 500;
+}
+
+.section-checkbox-false {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgb(0, 128, 128);
+    margin-inline-end: 0.5em;
+    cursor: pointer;
+}
+
+.section-checkbox-true {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgb(0, 128, 128);
+    background-color: rgb(0, 128, 128);
+    margin-inline-end: 0.5em;
+    cursor: pointer;
 }
 
 @media screen and (width < 768px) {
@@ -368,6 +384,10 @@
         align-self: center;
         padding-inline: 0;
         padding-block-end: 2rem;
+    }
+
+    .section-selection-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

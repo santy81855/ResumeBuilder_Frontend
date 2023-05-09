@@ -1,5 +1,70 @@
 {
-    "templates": [],
+    "templateSections": {
+        "clean": {
+            "contact": {
+                "show": true,
+                "email": true,
+                "phone": true,
+                "website": true
+            },
+            "summary": {
+                "show": true
+            },
+            "skills": {
+                "show": true
+            },
+            "experience": {
+                "show": true,
+                "summary": true,
+                "hightlights": true
+            },
+            "education": {
+                "startDate": true,
+                "gpa": true,
+                "courses": false
+            },
+            "interests": {
+                "show": false
+            },
+            "languages": {
+                "show": false
+            }
+        },
+        "modern": {
+            "image": {
+                "show": true
+            },
+            "contact": {
+                "show": true,
+                "email": true,
+                "phone": true,
+                "website": true
+            },
+            "summary": {
+                "show": true
+            },
+            "skills": {
+                "show": true
+            },
+            "experience": {
+                "show": true,
+                "summary": true,
+                "hightlights": true
+            },
+            "education": {
+                "show": true,
+                "startDate": false,
+                "gpa": true,
+                "courses": false
+            },
+            "interests": {
+                "show": true
+            },
+            "languages": {
+                "show": true
+            }
+        }
+    },
     "template": "",
     "picture": {
         "url": "link-to-image"

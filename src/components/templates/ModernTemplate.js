@@ -15,6 +15,7 @@ const ModernTemplate = ({
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Clean";
     useEffect(() => {
+        console.log(resumeData.templateSections.modern.image);
         // handle the text scaling
         function handleResize() {
             const { width, height } =
@@ -91,139 +92,167 @@ const ModernTemplate = ({
         }
     };
 
-    const languagesSection = (
-        <div
-            className={
-                sectionClass + " vertical-block-section languages-section"
-            }
-            onClick={checkoverflow}
-        >
-            <h2>Languages</h2>
-            {horizontalLine}
-            <div className="container">
-                {languages.map((language) => (
-                    <p>{language.language + " - " + language.fluency}</p>
-                ))}
-            </div>
-        </div>
-    );
-
-    const skillsSection = (
-        <div
-            className={sectionClass + " vertical-block-section skills-section"}
-            onClick={checkoverflow}
-        >
-            <h2>Skills</h2>
-            {horizontalLine}
-            <div className="container">
-                {skills.map((skill) => (
-                    <p>{skill.name}</p>
-                ))}
-            </div>
-        </div>
-    );
-
-    const educationSection = (
-        <div
-            className={
-                sectionClass + " vertical-block-section education-section"
-            }
-        >
-            <h2>Education</h2>
-            {horizontalLine}
-            {education.map((school) => (
+    const LanguagesSection = () => {
+        return (
+            <div
+                className={
+                    sectionClass + " vertical-block-section languages-section"
+                }
+                onClick={checkoverflow}
+            >
+                <h2>Languages</h2>
+                {horizontalLine}
                 <div className="container">
-                    <p>{school.endDate}</p>
-                    <h4>{school.area + " " + school.studyType}</h4>
-                    <h4>{school.institution}</h4>
-                    <p>{"GPA: " + school.gpa}</p>
-                </div>
-            ))}
-        </div>
-    );
-    const contactSection = (
-        <div
-            className={sectionClass + " vertical-block-section contact-section"}
-        >
-            <h2>Contact</h2>
-            {horizontalLine}
-            <div className="container">
-                <div className="contact-info-entry">
-                    <h3>Email</h3>
-                    <p>{contact.email}</p>
-                </div>
-                <div className="contact-info-entry">
-                    <h3>Phone</h3>
-                    <p>{contact.phone}</p>
-                </div>
-                <div className="contact-info-entry">
-                    <h3>Website</h3>
-                    <p>{contact.website}</p>
+                    {languages.map((language) => (
+                        <p>{language.language + " - " + language.fluency}</p>
+                    ))}
                 </div>
             </div>
-        </div>
-    );
+        );
+    };
 
-    const imageSection = <div className="modern-image-container"></div>;
+    const SkillsSection = () => {
+        return (
+            <div
+                className={
+                    sectionClass + " vertical-block-section skills-section"
+                }
+                onClick={checkoverflow}
+            >
+                <h2>Skills</h2>
+                {horizontalLine}
+                <div className="container">
+                    {skills.map((skill) => (
+                        <p>{skill.name}</p>
+                    ))}
+                </div>
+            </div>
+        );
+    };
 
-    const headerSection = (
-        <div className={sectionClass + " right-section header-section"}>
-            <h1>{contact.name}</h1>
-            <h2>{label}</h2>
-        </div>
-    );
-    const summarySection = (
-        <div
-            className={sectionClass + " right-section summary-section"}
-            onClick={() => {
-                handleSectionChange(2);
-            }}
-        >
-            <p>{summary}</p>
-        </div>
-    );
-
-    const experienceSection = (
-        <div className={sectionClass + " right-section experience-section"}>
-            <h2>Experience</h2>
-            {horizontalLine}
-
-            <div className="container">
-                {work.map((job) => (
-                    <div className="job-progress-bar-container">
-                        <div className="job-progress-bar">
-                            <div className="circle"></div>
-                            <div className="line"></div>
-                        </div>
-                        <div className="job-container">
-                            <h3>{job.startDate + " - " + job.endDate}</h3>
-                            <h4>{job.company}</h4>
-                            <h3>{job.position}</h3>
-
-                            <p>{job.summary}</p>
-                            <ul>
-                                {job.highlights.map((highlight) => (
-                                    <li>{highlight}</li>
-                                ))}
-                            </ul>
-                        </div>
+    const EducationSection = () => {
+        return (
+            <div
+                className={
+                    sectionClass + " vertical-block-section education-section"
+                }
+            >
+                <h2>Education</h2>
+                {horizontalLine}
+                {education.map((school) => (
+                    <div className="container">
+                        <p>{school.endDate}</p>
+                        <h4>{school.area + " " + school.studyType}</h4>
+                        <h4>{school.institution}</h4>
+                        <p>{"GPA: " + school.gpa}</p>
                     </div>
                 ))}
             </div>
-        </div>
-    );
-
-    const interestsSection = (
-        <div className={sectionClass + " right-section interests-section"}>
-            <h2>Interests</h2>
-            {horizontalLine}
-            <div className="container">
-                {interests.map((interest) => (
-                    <h4>{interest.name}</h4>
-                ))}
+        );
+    };
+    const ContactSection = () => {
+        return (
+            <div
+                className={
+                    sectionClass + " vertical-block-section contact-section"
+                }
+            >
+                <h2>Contact</h2>
+                {horizontalLine}
+                <div className="container">
+                    <div className="contact-info-entry">
+                        <h3>Email</h3>
+                        <p>{contact.email}</p>
+                    </div>
+                    <div className="contact-info-entry">
+                        <h3>Phone</h3>
+                        <p>{contact.phone}</p>
+                    </div>
+                    <div className="contact-info-entry">
+                        <h3>Website</h3>
+                        <p>{contact.website}</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    );
+        );
+    };
+
+    const ImageSection = () => {
+        return <div className="modern-image-container"></div>;
+    };
+
+    const HeaderSection = () => {
+        return (
+            <div className={sectionClass + " right-section header-section"}>
+                <h1>{contact.name}</h1>
+                <h2>{label}</h2>
+            </div>
+        );
+    };
+    const SummarySection = () => {
+        return (
+            <div
+                className={sectionClass + " right-section summary-section"}
+                onClick={() => {
+                    handleSectionChange(2);
+                }}
+            >
+                <p>{summary}</p>
+            </div>
+        );
+    };
+
+    const ExperienceSection = () => {
+        return (
+            <div className={sectionClass + " right-section experience-section"}>
+                <h2>Experience</h2>
+                {horizontalLine}
+
+                <div className="container">
+                    {work.map((job) => (
+                        <div className="job-progress-bar-container">
+                            <div className="job-progress-bar">
+                                <div className="circle"></div>
+                                <div className="line"></div>
+                            </div>
+                            <div className="job-container">
+                                <h3>{job.startDate + " - " + job.endDate}</h3>
+                                <h4>{job.company}</h4>
+                                <h3>{job.position}</h3>
+
+                                <p>{job.summary}</p>
+                                <ul>
+                                    {job.highlights.map((highlight) => (
+                                        <li>{highlight}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
+    const InterestsSection = () => {
+        return (
+            resumeData.templateSections.modern.interests && (
+                <div
+                    className={
+                        sectionClass + " right-section interests-section"
+                    }
+                >
+                    <h2>Interests</h2>
+                    {horizontalLine}
+                    <div className="container">
+                        {interests.map((interest) => (
+                            <h4>{interest.name}</h4>
+                        ))}
+                    </div>
+                </div>
+            )
+        );
+    };
 
     const hi = <div>hi</div>;
     return (
@@ -241,17 +270,33 @@ const ModernTemplate = ({
                     id="modern-template-content"
                 >
                     <div className="modern-vertical-block">
-                        {imageSection}
-                        {contactSection}
-                        {skillsSection}
-                        {educationSection}
-                        {languagesSection}
+                        {resumeData.templateSections.modern.image.show && (
+                            <ImageSection />
+                        )}
+                        {resumeData.templateSections.modern.contact.show && (
+                            <ContactSection />
+                        )}
+                        {resumeData.templateSections.modern.skills.show && (
+                            <SkillsSection />
+                        )}
+                        {resumeData.templateSections.modern.education.show && (
+                            <EducationSection />
+                        )}
+                        {resumeData.templateSections.modern.languages.show && (
+                            <LanguagesSection />
+                        )}
                     </div>
                     <div className="modern-right-container">
-                        {headerSection}
-                        {summarySection}
-                        {experienceSection}
-                        {interestsSection}
+                        <HeaderSection />
+                        {resumeData.templateSections.modern.summary.show && (
+                            <SummarySection />
+                        )}
+                        {resumeData.templateSections.modern.experience.show && (
+                            <ExperienceSection />
+                        )}
+                        {resumeData.templateSections.modern.interests.show && (
+                            <InterestsSection />
+                        )}
                     </div>
                 </div>
             </div>

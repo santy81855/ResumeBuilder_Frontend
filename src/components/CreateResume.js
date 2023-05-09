@@ -34,6 +34,7 @@ function CreateResume() {
     const [currentTemplate, setCurrentTemplate] = useState(0);
     const [currentlySelectedSection, setCurrentlySelectedSection] =
         useState(null);
+    const [showSectionsComponent, setShowSectionsComponent] = useState(false);
 
     const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -294,34 +295,64 @@ function CreateResume() {
     const selectionChange = (event) => {
         console.log(event);
     };
+    /*
 
-    const test = <div>hello this is me</div>;
-    function SectionContainer() {
-        const switchItems = [true, false, true, false, true, true, false]; // Example array of switch states
+*/
+
+    const SectionContainer = () => {
+        // get the sections available for the current template
+        const sectionArr = Object.entries(
+            resumeData.templateSections[templateToString[currentTemplate]]
+        ).map(([name, field]) => ({ name, show: field.show }));
+
+        console.log(sectionArr);
+
+        const buttonClick = (event, name, status) => {
+            console.log(resumeData);
+            // update the array with the section status switched
+            for (var i = 0; i < sectionArr.length; i++) {
+                if (sectionArr[i].name === name) {
+                    sectionArr[i].show = !status;
+                }
+            }
+
+            // change the button to the opposite color
+            status
+                ? (event.target.style.backgroundColor = "transparent")
+                : (event.target.style.backgroundColor = "rgb(0, 128,128)");
+
+            // update the json file to have the correct info
+            const updatedResumeData = { ...resumeData };
+            updatedResumeData.templateSections[
+                templateToString[currentTemplate]
+            ][name].show = !status;
+            setResumeData(updatedResumeData);
+        };
 
         return (
             <div className="section-selection-container">
-                {switchItems.map((item, index) => (
+                {sectionArr.map((item, index) => (
                     <div className="section-option">
-                        <Switch
-                            key={index}
-                            checked={item}
-                            onChange={() => {}}
-                            className="switch-item"
-                        />
-                        <p>hi</p>
+                        {item.show ? (
+                            <div
+                                className="section-checkbox-true"
+                                onClick={(event) =>
+                                    buttonClick(event, item.name, item.show)
+                                }
+                            ></div>
+                        ) : (
+                            <div
+                                className="section-checkbox-false"
+                                onClick={(event) =>
+                                    buttonClick(event, item.name, item.show)
+                                }
+                            ></div>
+                        )}
+                        <p>{item.name}</p>
                     </div>
                 ))}
             </div>
         );
-    }
-    const renderSectionSelector = () => {
-        switch (currentTemplate) {
-            case 0:
-                return <SectionContainer />;
-            default:
-                return <div>naur</div>;
-        }
     };
 
     const renderTemplate = () => {
@@ -360,6 +391,8 @@ function CreateResume() {
     );
 
     const toggleTemplates = () => {
+        // hide sections component so that it can be updated to match the new template when we open it again
+        setShowSectionsComponent(false);
         if (currentTemplate == 1) {
             setCurrentTemplate(0);
         } else if (currentTemplate == 0) {
@@ -367,45 +400,56 @@ function CreateResume() {
         }
     };
 
-    const createResumeSideBar = (
-        <div className="create-resume-buttons-container" id="side-bar">
-            <button
-                className="create-resume-button back-button"
-                onClick={handleBack}
-            >
-                <p>back</p>
-                <span className="back-icon icon"></span>
-            </button>
-            <button className="create-resume-button" onClick={toggleTemplates}>
-                <p>Template</p>
-                <span className="template-icon icon"></span>
-            </button>
-            <button className="create-resume-button">
-                <p>Sections</p>
-                <span className="sections-icon icon"></span>
-            </button>
-            <button onClick={exportPDF} className="create-resume-button">
-                <p>Export</p>
-                <span className="export-icon icon"></span>
-            </button>
-            {isLoadingState ? (
+    const CreateResumeSideBar = () => {
+        return (
+            <div className="create-resume-buttons-container" id="side-bar">
                 <button
-                    className="create-resume-button save-button"
-                    onClick={handleSave}
+                    className="create-resume-button back-button"
+                    onClick={handleBack}
                 >
-                    <Loader />
+                    <p>back</p>
+                    <span className="back-icon icon"></span>
                 </button>
-            ) : (
                 <button
-                    className="create-resume-button save-button"
-                    onClick={handleSave}
+                    className="create-resume-button"
+                    onClick={toggleTemplates}
                 >
-                    <p>Save</p>
-                    <span className="save-icon icon"></span>
+                    <p>Template</p>
+                    <span className="template-icon icon"></span>
                 </button>
-            )}
-        </div>
-    );
+                <button
+                    className="create-resume-button"
+                    onClick={() => {
+                        setShowSectionsComponent(!showSectionsComponent);
+                        console.log(showSectionsComponent);
+                    }}
+                >
+                    <p>Sections</p>
+                    <span className="sections-icon icon"></span>
+                </button>
+                <button onClick={exportPDF} className="create-resume-button">
+                    <p>Export</p>
+                    <span className="export-icon icon"></span>
+                </button>
+                {isLoadingState ? (
+                    <button
+                        className="create-resume-button save-button"
+                        onClick={handleSave}
+                    >
+                        <Loader />
+                    </button>
+                ) : (
+                    <button
+                        className="create-resume-button save-button"
+                        onClick={handleSave}
+                    >
+                        <p>Save</p>
+                        <span className="save-icon icon"></span>
+                    </button>
+                )}
+            </div>
+        );
+    };
 
     // if loading
     if (getResumeQuery.isLoading && getResumeQuery.fetchStatus !== "idle") {
@@ -432,48 +476,15 @@ function CreateResume() {
                             <ResumeSkeleton />
                         </div>
                     </div>
-                    {createResumeSideBar}
-                    {toggleSideBarButton}
+                    <CreateResumeSideBar />
                 </div>
             </div>
         );
     }
     // if error
-    if (getResumeQuery.status === "error") return <div>error</div>;
-    // if new resume
-    if (!!localStorage.getItem("resumeId") === false) {
-        return (
-            <div className="create-resume-page-container">
-                <div className="create-resume-edit-container">
-                    <div className="create-resume-page-right-section">
-                        <div className="create-resume-title-container">
-                            <input
-                                className="resume-title input"
-                                ref={titleRef}
-                                placeholder="Untitled"
-                                onChange={handleResumeTitleChange}
-                            ></input>
-                            <textarea
-                                className="resume-description input"
-                                ref={descriptionRef}
-                                placeholder="No description..."
-                                onChange={handleResumeDescriptionChange}
-                            ></textarea>
-                        </div>
-                        {renderSectionSelector()}
-                        {renderQuestion()}
-                        <div className="create-resume-template-container">
-                            {renderTemplate()}
-                        </div>
-                    </div>
-                    {createResumeSideBar}
-                    {toggleSideBarButton}
-                </div>
-            </div>
-        );
-    }
-    // if successful data fetch
-    if (!!localStorage.getItem("resumeId")) {
+    else if (getResumeQuery.status === "error") return <div>error</div>;
+    // if new resume or fetched resume
+    else {
         return (
             <div className="create-resume-page-container">
                 <div className="create-resume-edit-container">
@@ -494,13 +505,13 @@ function CreateResume() {
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
                         </div>
-                        {renderSectionSelector()}
+                        {showSectionsComponent && <SectionContainer />}
                         {renderQuestion()}
                         <div className="create-resume-template-container">
                             {renderTemplate()}
                         </div>
                     </div>
-                    {createResumeSideBar}
+                    <CreateResumeSideBar />
                     {toggleSideBarButton}
                 </div>
             </div>
