@@ -39,38 +39,6 @@ const CleanTemplate = ({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const exportPDF = () => {
-        const content = document.getElementById("clean-template");
-        savePDF(content, {
-            paperSize: "Letter",
-            margin: 0,
-            fileName: "resume.pdf",
-            landscape: false,
-            pdf: {
-                multiPage: false,
-                font: "Arial",
-                fontSize: 12,
-            },
-        });
-    };
-
-    function sectionMouseOver(e) {
-        if (isPreview === false) {
-            const resumeSection = e.target.closest(".clean-resume-section");
-            resumeSection.style.backgroundColor = "rgba(0, 128, 128, 0.5)";
-            resumeSection.style.cursor = "pointer";
-            //e.target.style.backgroundColor = "red";
-        }
-    }
-
-    function sectionMouseOut(e) {
-        if (isPreview === false) {
-            const resumeSection = e.target.closest(".clean-resume-section");
-            resumeSection.style.backgroundColor = "white";
-            //e.target.style.backgroundColor = "white";
-        }
-    }
-
     const contact = resumeData.contact;
     const label = resumeData.label;
     const summary = resumeData.summary;
@@ -99,97 +67,134 @@ const CleanTemplate = ({
         }
     };
 
-    const exportPDFButton = (
-        <button className="export-button" onClick={exportPDF}>
-            Download PDF
-        </button>
-    );
-    const summarySection = (
-        <div
-            className="summary-section clean-resume-section"
-            onClick={() => {
-                handleSectionChange(2);
-            }}
-        >
-            <hr />
-            <h3>Summary</h3>
-            <p>{summary}</p>
-        </div>
-    );
-    const skillsSection = (
-        <div
-            className="skills-section clean-resume-section"
-            onClick={checkoverflow}
-        >
-            <hr />
-            <h3>Skills</h3>
-            <ul className="horizontal-list">
-                {skills.map((skill) => (
-                    <li>{skill.name}</li>
+    const SummarySection = () => {
+        return (
+            <div
+                className="summary-section clean-resume-section"
+                onClick={() => {
+                    handleSectionChange(2);
+                }}
+            >
+                <hr />
+                <h3>Summary</h3>
+                <p>{summary}</p>
+            </div>
+        );
+    };
+    const SkillsSection = () => {
+        return (
+            <div
+                className="skills-section clean-resume-section"
+                onClick={checkoverflow}
+            >
+                <hr />
+                <h3>Skills</h3>
+                <ul className="horizontal-list">
+                    {skills.map((skill) => (
+                        <li>{skill.name}</li>
+                    ))}
+                </ul>
+            </div>
+        );
+    };
+    const ExperienceSection = () => {
+        return (
+            <div className="experience-section clean-resume-section">
+                <hr />
+                <h3>Experience</h3>
+                {work.map((job) => (
+                    <div className="job-container">
+                        <h3>{job.position + ", " + job.company}</h3>
+                        <p>
+                            {resumeData.templateSections.clean.experience
+                                .startDate && job.startDate + " - "}
+                            {job.endDate}
+                        </p>
+                        {resumeData.templateSections.clean.experience
+                            .summary && <p>{job.summary}</p>}
+                        {resumeData.templateSections.clean.experience
+                            .highlights && (
+                            <ul>
+                                {job.highlights.map((highlight) => (
+                                    <li>{highlight}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 ))}
-            </ul>
-        </div>
-    );
-    const experienceSection = (
-        <div className="experience-section clean-resume-section">
-            <hr />
-            <h3>Experience</h3>
-            {work.map((job) => (
-                <div className="job-container">
-                    <h3>{job.position + ", " + job.company}</h3>
-                    <p>{job.startDate + " - " + job.endDate}</p>
-                    <p>{job.summary}</p>
-                    <ul>
-                        {job.highlights.map((highlight) => (
-                            <li>{highlight}</li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
-        </div>
-    );
-    const educationSection = (
-        <div className="education-section clean-resume-section">
-            <hr />
-            <h3>Education</h3>
-            {education.map((school) => (
-                <div className="school-container">
-                    <h3>
-                        {school.area +
-                            " " +
-                            school.studyType +
-                            ", " +
-                            school.institution}
-                    </h3>
-                    <p>{school.startDate + " - " + school.endDate}</p>
-                    <p>{"GPA: " + school.gpa}</p>
-                    <p>Relevant Coursework:</p>
-                    <ul>
-                        {school.courses.map((course) => (
-                            <li>{course}</li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
-        </div>
-    );
-    const headerSection = (
-        <div
-            className="header-section"
-            onClick={() => {
-                handleSectionChange(1);
-            }}
-        >
-            <div className="header-name clean-resume-section">
-                <h3>{contact.name}</h3>
             </div>
-            <div className="header-contact-info clean-resume-section">
-                <p>{contact.email}</p>
-                <p>{contact.phone}</p>
-                <p>{contact.website}</p>
+        );
+    };
+    const EducationSection = () => {
+        return (
+            <div className="education-section clean-resume-section">
+                <hr />
+                <h3>Education</h3>
+                {education.map((school) => (
+                    <div className="school-container">
+                        <h3>
+                            {school.area +
+                                " " +
+                                school.studyType +
+                                ", " +
+                                school.institution}
+                        </h3>
+                        <p>
+                            {resumeData.templateSections.clean.education
+                                .startDate && school.startDate + " - "}
+                            {school.endDate}
+                        </p>
+                        {resumeData.templateSections.clean.education.gpa && (
+                            <p>{"GPA: " + school.gpa}</p>
+                        )}
+                        {resumeData.templateSections.clean.education
+                            .courses && <p>Relevant Coursework:</p>}
+                        {resumeData.templateSections.clean.education
+                            .courses && (
+                            <ul>
+                                {school.courses.map((course) => (
+                                    <li>{course}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                ))}
             </div>
-        </div>
-    );
+        );
+    };
+    const HeaderSection = () => {
+        return (
+            <div
+                className="header-section"
+                onClick={() => {
+                    handleSectionChange(1);
+                }}
+            >
+                <div className="header-name clean-resume-section">
+                    <div className="header-name-label clean-resume-section">
+                        <h3>{contact.name}</h3>
+                        {resumeData.templateSections.clean.label.show && (
+                            <h3>{label}</h3>
+                        )}
+                    </div>
+                </div>
+
+                {resumeData.templateSections.clean.contact.show && (
+                    <div className="header-contact-info clean-resume-section">
+                        {resumeData.templateSections.clean.contact.email && (
+                            <p>{contact.email}</p>
+                        )}
+                        {resumeData.templateSections.clean.contact.phone && (
+                            <p>{contact.phone}</p>
+                        )}
+                        {resumeData.templateSections.clean.contact.website && (
+                            <p>{contact.website}</p>
+                        )}
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     const hi = <div>hi</div>;
     return (
@@ -203,12 +208,19 @@ const CleanTemplate = ({
                     className="clean-template-content"
                     id="clean-template-content"
                 >
-                    {headerSection}
-                    {summarySection}
-                    {skillsSection}
-                    {experienceSection}
-                    {educationSection}
-                    {educationSection}
+                    <HeaderSection />
+                    {resumeData.templateSections.clean.summary.show && (
+                        <SummarySection />
+                    )}
+                    {resumeData.templateSections.clean.skills.show && (
+                        <SkillsSection />
+                    )}
+                    {resumeData.templateSections.clean.experience.show && (
+                        <ExperienceSection />
+                    )}
+                    {resumeData.templateSections.clean.education.show && (
+                        <EducationSection />
+                    )}
                 </div>
             </div>
         </div>

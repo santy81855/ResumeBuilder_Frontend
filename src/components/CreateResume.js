@@ -55,7 +55,6 @@ function CreateResume() {
         if (!!resumeId) {
             getResumeQuery.refetch();
         }
-
         // handle resize for the floating menu at the bottom of the page
         window.addEventListener("resize", handleResize);
         handleResize();
@@ -83,6 +82,27 @@ function CreateResume() {
         },
         enabled: false,
     });
+
+    const flashError = (title, description) => {
+        if (title.value === "" && description.value === "") {
+            title.style.border = "2px solid";
+            description.style.border = "2px solid";
+            title.classList.add("flash-animation");
+            description.classList.add("flash-animation");
+        } else if (title.value === "") {
+            title.style.border = "2px solid";
+            title.classList.add("flash-animation");
+        } else {
+            description.style.border = "2px solid";
+            description.classList.add("flash-animation");
+        }
+        setTimeout(function () {
+            title.classList.remove("flash-animation");
+            description.classList.remove("flash-animation");
+            title.style.border = "none";
+            description.style.border = "none";
+        }, 1500); // Adjust the duration based on the animation duration and number of repetitions
+    };
 
     const createResumeMutation = useMutation({
         mutationFn: createResume,
@@ -131,6 +151,15 @@ function CreateResume() {
     });
 
     function handleSave() {
+        // if there is no title or description we flash an error
+        if (
+            titleRef.current.value === "" ||
+            descriptionRef.current.value === ""
+        ) {
+            flashError(titleRef.current, descriptionRef.current);
+            return;
+        }
+
         const resumeId = localStorage.getItem("resumeId");
         setIsLoading(true);
         // if there is a resumeId we UPDATE
@@ -292,15 +321,10 @@ function CreateResume() {
         }
     };
 
-    const selectionChange = (event) => {
-        console.log(event);
-    };
-    /*
-
-*/
-
     const SectionContainer = () => {
+        console.log(getResumeQuery);
         // get the sections available for the current template
+
         const sectionArr = Object.entries(
             resumeData.templateSections[templateToString[currentTemplate]]
         ).map(([name, field]) => ({ name, show: field.show }));

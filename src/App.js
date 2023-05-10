@@ -9,27 +9,70 @@ import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
 import CleanTemplate from "./components/templates/CleanTemplate";
 
+import { Navigate } from "react-router-dom";
+
 import resumeData from "./resume-schema.json";
 
 import SantyAndAlaine from "./components/SantyAndAlaine";
 
 function App() {
     return (
-        <div>
+        <body>
             <Router>
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />{" "}
                     {/* add the new route for Home */}
-                    <Route path="/login" element={<LoginForm />} />
-                    <Route path="/create-account" element={<CreateAccount />} />
                     <Route
-                        path="/templates/clean"
-                        element={<CleanTemplate resumeData={resumeData} />}
+                        path="/login"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <Navigate to="/" replace={true} />
+                            ) : (
+                                <LoginForm />
+                            )
+                        }
                     />
-                    <Route path="/u/resumes" element={<ResumePage />} />
-                    <Route path="/u/create-resume" element={<CreateResume />} />
-                    <Route path="/u/edit-resume" element={<CreateResume />} />
+                    <Route
+                        path="/create-account"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <Navigate to="/" replace={true} />
+                            ) : (
+                                <CreateAccount />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/u/resumes"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <ResumePage />
+                            ) : (
+                                <Navigate to="/login" replace={true} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/u/create-resume"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <CreateResume />
+                            ) : (
+                                <Navigate to="/login" replace={true} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/u/edit-resume"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <CreateResume />
+                            ) : (
+                                <Navigate to="/login" replace={true} />
+                            )
+                        }
+                    />
                     <Route
                         path="santy-and-alaine"
                         element={<SantyAndAlaine />}
@@ -37,7 +80,7 @@ function App() {
                     {/* add other routes here */}
                 </Routes>
             </Router>
-        </div>
+        </body>
     );
 }
 

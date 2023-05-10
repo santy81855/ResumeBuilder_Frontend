@@ -160,6 +160,7 @@
     flex-direction: column;
     align-items: flex-start;
     align-self: flex-end;
+    margin-block-start: 1em;
 }
 
 .vertical-block-section .horizontal-line {
@@ -202,7 +203,7 @@
 }
 
 @media (pointer: fine) {
-    .modern-resume-section::after {
+    .modern-resume-section::before {
         content: "";
         position: absolute;
         z-index: 1;
@@ -214,13 +215,13 @@
         align-self: center;
     }
 
-    .modern-resume-section:hover::after {
+    .modern-resume-section:hover::before {
         background-color: rgba(0, 128, 128, 0.5);
         cursor: pointer;
     }
 
     @media (max-width: 480px) {
-        .modern-resume-section:hover::after {
+        .modern-resume-section:hover::before {
             background-color: rgba(0, 128, 128, 0.5);
             border-radius: 0px;
             cursor: pointer;

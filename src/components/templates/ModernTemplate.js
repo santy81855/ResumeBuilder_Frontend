@@ -13,7 +13,7 @@ const ModernTemplate = ({
 }) => {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
-    const TEMPLATE_NAME = "Clean";
+    const TEMPLATE_NAME = "Modern";
     useEffect(() => {
         console.log(resumeData.templateSections.modern.image);
         // handle the text scaling
@@ -40,23 +40,6 @@ const ModernTemplate = ({
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-
-    function sectionMouseOver(e) {
-        if (isPreview === false) {
-            const resumeSection = e.target.closest(".modern-resume-section");
-            resumeSection.style.backgroundColor = "rgba(0, 128, 128, 0.5)";
-            resumeSection.style.cursor = "pointer";
-            //e.target.style.backgroundColor = "red";
-        }
-    }
-
-    function sectionMouseOut(e) {
-        if (isPreview === false) {
-            const resumeSection = e.target.closest(".modern-resume-section");
-            resumeSection.style.backgroundColor = "white";
-            //e.target.style.backgroundColor = "white";
-        }
-    }
 
     const contact = resumeData.contact;
     const pictureURL = resumeData.picture.url;
@@ -92,6 +75,8 @@ const ModernTemplate = ({
         }
     };
 
+    const handle = <div className="handle">&#9776;</div>;
+
     const LanguagesSection = () => {
         return (
             <div
@@ -104,7 +89,11 @@ const ModernTemplate = ({
                 {horizontalLine}
                 <div className="container">
                     {languages.map((language) => (
-                        <p>{language.language + " - " + language.fluency}</p>
+                        <p>
+                            {language.language}{" "}
+                            {resumeData.templateSections.modern.languages
+                                .fluency && " - " + language.fluency}
+                        </p>
                     ))}
                 </div>
             </div>
@@ -141,10 +130,16 @@ const ModernTemplate = ({
                 {horizontalLine}
                 {education.map((school) => (
                     <div className="container">
-                        <p>{school.endDate}</p>
+                        <p>
+                            {resumeData.templateSections.modern.education
+                                .startDate && school.startDate + " - "}
+                            {school.endDate}
+                        </p>
                         <h4>{school.area + " " + school.studyType}</h4>
                         <h4>{school.institution}</h4>
-                        <p>{"GPA: " + school.gpa}</p>
+                        {resumeData.templateSections.modern.education.gpa && (
+                            <p>{"GPA: " + school.gpa}</p>
+                        )}
                     </div>
                 ))}
             </div>
@@ -160,18 +155,24 @@ const ModernTemplate = ({
                 <h2>Contact</h2>
                 {horizontalLine}
                 <div className="container">
-                    <div className="contact-info-entry">
-                        <h3>Email</h3>
-                        <p>{contact.email}</p>
-                    </div>
-                    <div className="contact-info-entry">
-                        <h3>Phone</h3>
-                        <p>{contact.phone}</p>
-                    </div>
-                    <div className="contact-info-entry">
-                        <h3>Website</h3>
-                        <p>{contact.website}</p>
-                    </div>
+                    {resumeData.templateSections.modern.contact.email && (
+                        <div className="contact-info-entry">
+                            <h3>Email</h3>
+                            <p>{contact.email}</p>
+                        </div>
+                    )}
+                    {resumeData.templateSections.modern.contact.phone && (
+                        <div className="contact-info-entry">
+                            <h3>Phone</h3>
+                            <p>{contact.phone}</p>
+                        </div>
+                    )}
+                    {resumeData.templateSections.modern.contact.website && (
+                        <div className="contact-info-entry">
+                            <h3>Website</h3>
+                            <p>{contact.website}</p>
+                        </div>
+                    )}
                 </div>
             </div>
         );
@@ -185,7 +186,9 @@ const ModernTemplate = ({
         return (
             <div className={sectionClass + " right-section header-section"}>
                 <h1>{contact.name}</h1>
-                <h2>{label}</h2>
+                {resumeData.templateSections.modern.label.show && (
+                    <h2>{label}</h2>
+                )}
             </div>
         );
     };
@@ -216,16 +219,25 @@ const ModernTemplate = ({
                                 <div className="line"></div>
                             </div>
                             <div className="job-container">
-                                <h3>{job.startDate + " - " + job.endDate}</h3>
+                                <h3>
+                                    {resumeData.templateSections.modern
+                                        .experience.startDate &&
+                                        job.startDate + " - "}
+                                    {job.endDate}
+                                </h3>
                                 <h4>{job.company}</h4>
                                 <h3>{job.position}</h3>
 
-                                <p>{job.summary}</p>
-                                <ul>
-                                    {job.highlights.map((highlight) => (
-                                        <li>{highlight}</li>
-                                    ))}
-                                </ul>
+                                {resumeData.templateSections.modern.experience
+                                    .summary && <p>{job.summary}</p>}
+                                {resumeData.templateSections.modern.experience
+                                    .highlights && (
+                                    <ul>
+                                        {job.highlights.map((highlight) => (
+                                            <li>{highlight}</li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -236,25 +248,20 @@ const ModernTemplate = ({
 
     const InterestsSection = () => {
         return (
-            resumeData.templateSections.modern.interests && (
-                <div
-                    className={
-                        sectionClass + " right-section interests-section"
-                    }
-                >
-                    <h2>Interests</h2>
-                    {horizontalLine}
-                    <div className="container">
-                        {interests.map((interest) => (
-                            <h4>{interest.name}</h4>
-                        ))}
-                    </div>
+            <div className={sectionClass + " right-section interests-section"}>
+                <h2>Interests</h2>
+                {horizontalLine}
+                <div className="container">
+                    {interests.map((interest) => (
+                        <h4>{interest.name}</h4>
+                    ))}
                 </div>
-            )
+            </div>
         );
     };
 
     const hi = <div>hi</div>;
+
     return (
         <div
             className="modern-template-container"

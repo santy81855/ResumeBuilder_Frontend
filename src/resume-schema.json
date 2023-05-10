@@ -7,6 +7,9 @@
                 "phone": true,
                 "website": true
             },
+            "label": {
+                "show": true
+            },
             "summary": {
                 "show": true
             },
@@ -15,13 +18,15 @@
             },
             "experience": {
                 "show": true,
+                "startDate": true,
                 "summary": true,
-                "hightlights": true
+                "highlights": true
             },
             "education": {
+                "show": true,
                 "startDate": true,
                 "gpa": true,
-                "courses": false
+                "courses": true
             },
             "interests": {
                 "show": false
@@ -32,6 +37,9 @@
         },
         "modern": {
             "image": {
+                "show": true
+            },
+            "label": {
                 "show": true
             },
             "contact": {
@@ -48,8 +56,9 @@
             },
             "experience": {
                 "show": true,
+                "startDate": true,
                 "summary": true,
-                "hightlights": true
+                "highlights": true
             },
             "education": {
                 "show": true,
@@ -61,7 +70,8 @@
                 "show": true
             },
             "languages": {
-                "show": true
+                "show": true,
+                "fluency": true
             }
         }
     },

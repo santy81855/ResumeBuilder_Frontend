@@ -329,19 +329,6 @@ function ResumePage() {
                 {createResumeTile}
                 {resumeArr}
             </div>
-            <div className="PageTitleContainer">
-                <div className="PageTitle">Cover Letters</div>
-                <div className="Button" onClick={createResume}>
-                    <p>+</p>
-                    <p>Create New</p>
-                </div>
-            </div>
-            <div className="ResumeTiles">
-                {createResumeTile}
-                {resumeArr}
-            </div>
-
-            <div className="CoverLetter"></div>
             {exportModal}
         </div>
     );
