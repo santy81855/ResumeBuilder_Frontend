@@ -2,6 +2,13 @@ import React from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
 
+import resume1 from "../images/home/resume-pic-1.png";
+import resume2 from "../images/home/resume-pic-2.png";
+
+import JSONResumeData from "../resume-schema.json";
+import CleanTemplate from "./templates/CleanTemplate";
+import ModernTemplate from "./templates/ModernTemplate";
+
 function Home() {
     const navigate = useNavigate();
     const createResume2 = async (resumeData) => {
@@ -61,6 +68,7 @@ function Home() {
             navigate("/login");
         }
     };
+    const doNothingFunction = () => {};
 
     return (
         <div className="home-container">
@@ -77,10 +85,32 @@ function Home() {
                         creating a professional resume fast and easy - Try it
                         now!
                     </p>
+
+                    <img src={resume1} className="resume-pic-bottom" />
+                    <img src={resume2} className="resume-pic-top" />
+
+                    <button className="call-button" onClick={CreateResume}>
+                        Create Resume
+                    </button>
                 </div>
-                <button className="call-button" onClick={CreateResume}>
-                    Create Resume
-                </button>
+            </div>
+            <div className="resume-images">
+                <div className="modern-template-container-2">
+                    <ModernTemplate
+                        resumeData={JSONResumeData}
+                        isPreview={true}
+                        handleSectionChange={doNothingFunction}
+                        isExport={false}
+                    />
+                </div>
+                <div className="clean-template-container-2">
+                    <CleanTemplate
+                        resumeData={JSONResumeData}
+                        isPreview={true}
+                        handleSectionChange={doNothingFunction}
+                        isExport={false}
+                    />
+                </div>
             </div>
         </div>
     );

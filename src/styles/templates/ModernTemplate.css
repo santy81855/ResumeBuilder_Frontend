@@ -124,6 +124,14 @@
     padding-block-start: 3em;
 }
 
+.modern-template-content .interests-section ul {
+    margin-block-start: 1em;
+}
+
+.modern-template-content .interests-section li {
+    margin-block-end: 0.5em;
+}
+
 .modern-template-content .header-section {
     padding-block-start: 4em;
 }

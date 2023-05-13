@@ -252,16 +252,6 @@ function ResumePage() {
 
         return (
             <div className="ResumeTile" key={_id}>
-                <div className="ResumeDetails">
-                    <h2>{resumeTitle}</h2>
-                    <div className="DateButtonContainer">
-                        <p>{formattedDate}</p>
-                        <button
-                            className="ResumeTileOptionsButton"
-                            onClick={(event) => handleResumeHover(event, _id)}
-                        ></button>
-                    </div>
-                </div>
                 <div
                     className="ResumePic"
                     id={_id}
@@ -289,15 +279,21 @@ function ResumePage() {
                         </button>
                     </div>
                 </div>
+                <div className="ResumeDetails">
+                    <h2>{resumeTitle}</h2>
+                    <div className="DateButtonContainer">
+                        <p>{formattedDate}</p>
+                        <button
+                            className="ResumeTileOptionsButton"
+                            onClick={(event) => handleResumeHover(event, _id)}
+                        ></button>
+                    </div>
+                </div>
             </div>
         );
     }
     const createResumeTile = (
         <div className="CreateResumeTile" onClick={createResume}>
-            <div className="ResumeDetails">
-                <h2>Untitled</h2>
-                <p>Create a new resume.</p>
-            </div>
             <div className="EmptyResumePic">
                 <div className="ResumePlusIcon"></div>
             </div>
@@ -306,7 +302,7 @@ function ResumePage() {
 
     return (
         <div className="PageContainer">
-            <div className="BackgroundImageResume">
+            <div className="BackgroundImageResume Section">
                 <div className="introContainer">
                     <h2>Welcome to your personal Resume Page!</h2>
                     <h4>
@@ -317,17 +313,18 @@ function ResumePage() {
                     </h4>
                 </div>
             </div>
-
-            <div className="PageTitleContainer">
-                <div className="PageTitle">Resumes</div>
-                <div className="Button" onClick={createResume}>
-                    <p>+</p>
-                    <p>Create New</p>
+            <div className="ResumeSection Section">
+                <div className="PageTitleContainer">
+                    <div className="PageTitle">Resumes</div>
+                    <div className="Button" onClick={createResume}>
+                        <p>+</p>
+                        <p>Create New</p>
+                    </div>
                 </div>
-            </div>
-            <div className="ResumeTiles">
-                {createResumeTile}
-                {resumeArr}
+                <div className="ResumeTiles">
+                    {createResumeTile}
+                    {resumeArr}
+                </div>
             </div>
             {exportModal}
         </div>

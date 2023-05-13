@@ -251,11 +251,13 @@ const ModernTemplate = ({
             <div className={sectionClass + " right-section interests-section"}>
                 <h2>Interests</h2>
                 {horizontalLine}
-                <div className="container">
+                <ul>
                     {interests.map((interest) => (
-                        <h4>{interest.name}</h4>
+                        <li>
+                            <h3>{interest.name}</h3>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
         );
     };

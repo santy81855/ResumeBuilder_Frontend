@@ -97,6 +97,25 @@ const CleanTemplate = ({
             </div>
         );
     };
+
+    const LanguagesSection = () => {
+        return (
+            <div className="languages-section clean-resume-section">
+                <hr />
+                <h3>Languages</h3>
+                <ul>
+                    {languages.map((language) => (
+                        <li>
+                            {language.language}
+                            {resumeData.templateSections.clean.languages
+                                .fluency && " - " + language.fluency}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    };
+
     const ExperienceSection = () => {
         return (
             <div className="experience-section clean-resume-section">
@@ -196,7 +215,6 @@ const CleanTemplate = ({
         );
     };
 
-    const hi = <div>hi</div>;
     return (
         <div className="clean-template-container" id="clean-template-container">
             <div
@@ -220,6 +238,9 @@ const CleanTemplate = ({
                     )}
                     {resumeData.templateSections.clean.education.show && (
                         <EducationSection />
+                    )}
+                    {resumeData.templateSections.clean.languages.show && (
+                        <LanguagesSection />
                     )}
                 </div>
             </div>

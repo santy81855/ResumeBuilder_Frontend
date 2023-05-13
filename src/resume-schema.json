@@ -32,7 +32,8 @@
                 "show": false
             },
             "languages": {
-                "show": false
+                "show": true,
+                "fluency": true
             }
         },
         "modern": {
@@ -126,6 +127,18 @@
             "startDate": "2016-01-01",
             "endDate": "2017-12-31",
             "summary": "Assisted senior developers with various web development tasks.",
+            "highlights": [
+                "Designed and developed landing pages for marketing campaigns.",
+                "Improved website load times by optimizing images and code."
+            ]
+        },
+        {
+            "company": "John & Doe, Inc.",
+            "position": "Mid-level Software Engineer",
+            "website": "https://JnD.com",
+            "startDate": "2018-01-01",
+            "endDate": "2020-12-31",
+            "summary": "Led group of junior software developers.",
             "highlights": [
                 "Designed and developed landing pages for marketing campaigns.",
                 "Improved website load times by optimizing images and code."
