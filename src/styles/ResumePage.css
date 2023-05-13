@@ -9,11 +9,11 @@
 .BackgroundImageResume {
     /*background-image: url("../images/editorBackground2.png");*/
     background-image: url("../images/background.png");
+    display: flex;
     background-size: cover;
     align-items: center;
     justify-content: center;
     background-position: center;
-
     border-radius: 0px;
     width: 100%;
     height: auto;
@@ -24,8 +24,9 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-
     text-align: center;
+    border-radius: 25px;
+    width: 100%;
 }
 
 .introContainer h4 {
@@ -325,7 +326,6 @@
     border-radius: 30px;
     max-width: 1200px;
     width: calc(100% - 6em);
-    margin-inline: 3em;
     padding-inline: 1.5em;
 }
 

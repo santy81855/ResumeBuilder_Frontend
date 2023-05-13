@@ -15,10 +15,11 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    width: 80%;
+    width: 60%;
     max-width: 800px;
     margin-inline: auto;
     padding-block-start: 1em;
+    margin-block-end: 3em;
 }
 
 .create-resume-title-container {
