@@ -217,7 +217,12 @@ const ModernTemplate = ({
 
     const ExperienceSection = () => {
         return (
-            <div className={sectionClass + " right-section experience-section"}>
+            <div
+                className={sectionClass + " right-section experience-section"}
+                onClick={() => {
+                    handleSectionChange(6);
+                }}
+            >
                 <h2>Experience</h2>
                 {horizontalLine}
 

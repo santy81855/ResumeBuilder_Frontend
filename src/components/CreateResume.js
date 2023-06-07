@@ -8,6 +8,7 @@ import Summary from "./questions/Summary";
 import ContactInfo from "./questions/ContactInfo";
 import TitleInfo from "./questions/TitleInfo";
 import SkillsInfo from "./questions/SkillsInfo";
+import ExperienceInfo from "./questions/ExperienceInfo";
 import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 
 import JSONResumeData from "../resume-schema.json";
@@ -360,6 +361,25 @@ function CreateResume() {
                         overlayClassName="overlay"
                     >
                         <SkillsInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
+                );
+            case 6:
+                return (
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <ExperienceInfo
                             resumeData={resumeData}
                             setResumeData={setResumeData}
                             handleSave={handleSave}

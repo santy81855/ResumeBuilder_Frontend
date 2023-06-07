@@ -126,7 +126,12 @@ const CleanTemplate = ({
 
     const ExperienceSection = () => {
         return (
-            <div className={sectionClass + " experience-section"}>
+            <div
+                className={sectionClass + " experience-section"}
+                onClick={() => {
+                    handleSectionChange(6);
+                }}
+            >
                 <hr />
                 <h3>Experience</h3>
                 {work.map((job) => (

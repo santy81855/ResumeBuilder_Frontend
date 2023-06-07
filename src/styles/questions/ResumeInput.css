@@ -159,3 +159,39 @@
 .skill-item button:hover {
     background-color: red;
 }
+
+.experience-history-container {
+    margin-block-start: 2em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1em;
+}
+
+.experience-item {
+    background-color: var(--accent-color);
+    width: 100%;
+    position: relative;
+}
+
+.experience-item h3,
+.experience-item p {
+    margin: 0;
+}
+
+.experience-item button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.input-container-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.job-summary {
+    width: 100%;
+}
