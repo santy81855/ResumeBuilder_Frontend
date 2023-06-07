@@ -106,7 +106,9 @@ const ModernTemplate = ({
                 className={
                     sectionClass + " vertical-block-section skills-section"
                 }
-                onClick={checkoverflow}
+                onClick={() => {
+                    handleSectionChange(5);
+                }}
             >
                 <h2>Skills</h2>
                 {horizontalLine}
@@ -151,6 +153,9 @@ const ModernTemplate = ({
                 className={
                     sectionClass + " vertical-block-section contact-section"
                 }
+                onClick={() => {
+                    handleSectionChange(3);
+                }}
             >
                 <h2>Contact</h2>
                 {horizontalLine}
@@ -184,7 +189,12 @@ const ModernTemplate = ({
 
     const HeaderSection = () => {
         return (
-            <div className={sectionClass + " right-section header-section"}>
+            <div
+                className={sectionClass + " right-section header-section"}
+                onClick={() => {
+                    handleSectionChange(4);
+                }}
+            >
                 <h1>{contact.name}</h1>
                 {resumeData.templateSections.modern.label.show && (
                     <h2>{label}</h2>

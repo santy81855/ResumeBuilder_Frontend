@@ -45,7 +45,7 @@
 
 .landing-page .call-button {
     font-size: large;
-    background-color: #008080;
+    background-color: var(--accent-color);
     color: white;
     border: none;
     border-radius: 50px;

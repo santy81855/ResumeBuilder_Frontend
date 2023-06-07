@@ -8,6 +8,7 @@ import {
 } from "../lib/TemplateKeys";
 import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
+import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 import JSONResumeData from "../resume-schema.json";
 import Modal from "react-modal";
 import { savePDF } from "@progress/kendo-react-pdf";
@@ -300,10 +301,19 @@ function ResumePage() {
         </div>
     );
 
-    return (
-        <div className="PageContainer">
-            <div className="BackgroundImageResume Section">
-                <div className="introContainer">
+    const skeletonResumeTile = (
+        <div className="ResumeTile" onClick={createResume}>
+            <div className="ResumePic">
+                <ResumeSkeleton />
+            </div>
+        </div>
+    );
+
+    // if loading
+    if (resumesQuery.isLoading && resumesQuery.fetchStatus !== "idle") {
+        return (
+            <div className="PageContainer">
+                <div className="introContainer Section">
                     <h2>Welcome to your personal Resume Page!</h2>
                     <h4>
                         Organize your job search with our Resume Page feature!
@@ -312,23 +322,63 @@ function ResumePage() {
                         easily access your resume history in one place.
                     </h4>
                 </div>
-            </div>
-            <div className="ResumeSection Section">
-                <div className="PageTitleContainer">
-                    <div className="PageTitle">Resumes</div>
-                    <div className="Button" onClick={createResume}>
-                        <p>+</p>
-                        <p>Create New</p>
+                <div className="wave"></div>
+                <div className="gradient"></div>
+                <div className="ResumeSection Section">
+                    <div className="PageTitleContainer">
+                        <div className="PageTitle">Resumes</div>
+                        <div className="Button" onClick={createResume}>
+                            <p>+</p>
+                            <p>Create New</p>
+                        </div>
+                    </div>
+                    <div className="ResumeTiles">
+                        {createResumeTile}
+                        {skeletonResumeTile}
+                        {skeletonResumeTile}
+                        {skeletonResumeTile}
+                        {skeletonResumeTile}
+                        {skeletonResumeTile}
+                        {skeletonResumeTile}
                     </div>
                 </div>
-                <div className="ResumeTiles">
-                    {createResumeTile}
-                    {resumeArr}
-                </div>
+                {exportModal}
             </div>
-            {exportModal}
-        </div>
-    );
+        );
+    }
+    // if error
+    else if (resumesQuery.status === "error") return <div>error</div>;
+    else {
+        return (
+            <div className="PageContainer">
+                <div className="introContainer Section">
+                    <h2>Welcome to your personal Resume Page!</h2>
+                    <h4>
+                        Organize your job search with our Resume Page feature!
+                        Keep track of all your resumes and tailor them to
+                        specific job applications. You'll be able to quickly and
+                        easily access your resume history in one place.
+                    </h4>
+                </div>
+                <div className="wave"></div>
+                <div className="gradient"></div>
+                <div className="ResumeSection Section">
+                    <div className="PageTitleContainer">
+                        <div className="PageTitle">Resumes</div>
+                        <div className="Button" onClick={createResume}>
+                            <p>+</p>
+                            <p>Create New</p>
+                        </div>
+                    </div>
+                    <div className="ResumeTiles">
+                        {createResumeTile}
+                        {resumeArr}
+                    </div>
+                </div>
+                {exportModal}
+            </div>
+        );
+    }
 }
 
 export default ResumePage;

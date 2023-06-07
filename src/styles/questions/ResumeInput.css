@@ -99,3 +99,63 @@
     align-items: center;
     justify-content: center;
 }
+
+.skill-input-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.skill-input-bar {
+    width: 200px;
+    padding-block: 10px;
+}
+
+.skill-input-container button {
+    width: 50px;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.skill-input-container button:hover {
+    background-color: white;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.skill-container {
+    margin-top: 2em;
+    display: flex;
+    align-self: center;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.skill-item {
+    display: flex;
+    background-color: var(--accent-color);
+}
+
+.skill-item p {
+    color: white;
+    padding-inline: 1em;
+}
+
+.skill-item button {
+    background-color: transparent;
+    color: white;
+    width: 30px;
+    cursor: pointer;
+    border: none;
+}
+
+.skill-item button:hover {
+    background-color: red;
+}

@@ -63,6 +63,12 @@
     z-index: 0;
 }
 
+.clean-resume-section-preview {
+    margin: 0px;
+    position: relative;
+    z-index: 0;
+}
+
 @media (pointer: fine) {
     .clean-resume-section::after {
         content: "";
@@ -72,7 +78,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 10px;
+        border-radius: 3px;
         align-self: center;
     }
 

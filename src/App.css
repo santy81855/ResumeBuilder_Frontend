@@ -7,6 +7,7 @@ body {
 :root {
     /*account for bottom border of the header*/
     --header-height: calc(80px + 1px);
+    --accent-color: rgb(0, 148, 148);
 }
 
 .App {

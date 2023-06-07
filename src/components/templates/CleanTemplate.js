@@ -48,6 +48,12 @@ const CleanTemplate = ({
     const languages = resumeData.languages;
     const interests = resumeData.interests;
 
+    const [name, setName] = useState(contact.name);
+
+    const sectionClass = isPreview
+        ? "clean-resume-section-preview"
+        : "clean-resume-section";
+
     const checkoverflow = () => {
         const contentHeight = document.getElementById(
             "clean-template-content"
@@ -70,7 +76,7 @@ const CleanTemplate = ({
     const SummarySection = () => {
         return (
             <div
-                className="summary-section clean-resume-section"
+                className={sectionClass + " summary-section"}
                 onClick={() => {
                     handleSectionChange(2);
                 }}
@@ -84,8 +90,10 @@ const CleanTemplate = ({
     const SkillsSection = () => {
         return (
             <div
-                className="skills-section clean-resume-section"
-                onClick={checkoverflow}
+                className={sectionClass + " skills-section"}
+                onClick={() => {
+                    handleSectionChange(5);
+                }}
             >
                 <hr />
                 <h3>Skills</h3>
@@ -100,7 +108,7 @@ const CleanTemplate = ({
 
     const LanguagesSection = () => {
         return (
-            <div className="languages-section clean-resume-section">
+            <div className={sectionClass + " languages-section"}>
                 <hr />
                 <h3>Languages</h3>
                 <ul>
@@ -118,7 +126,7 @@ const CleanTemplate = ({
 
     const ExperienceSection = () => {
         return (
-            <div className="experience-section clean-resume-section">
+            <div className={sectionClass + " experience-section"}>
                 <hr />
                 <h3>Experience</h3>
                 {work.map((job) => (
@@ -146,7 +154,7 @@ const CleanTemplate = ({
     };
     const EducationSection = () => {
         return (
-            <div className="education-section clean-resume-section">
+            <div className={sectionClass + " education-section"}>
                 <hr />
                 <h3>Education</h3>
                 {education.map((school) => (
@@ -183,14 +191,14 @@ const CleanTemplate = ({
     };
     const HeaderSection = () => {
         return (
-            <div
-                className="header-section"
-                onClick={() => {
-                    handleSectionChange(1);
-                }}
-            >
-                <div className="header-name clean-resume-section">
-                    <div className="header-name-label clean-resume-section">
+            <div className="header-section">
+                <div
+                    className={sectionClass + " header-name"}
+                    onClick={() => {
+                        handleSectionChange(4);
+                    }}
+                >
+                    <div className={sectionClass + " header-name-label"}>
                         <h3>{contact.name}</h3>
                         {resumeData.templateSections.clean.label.show && (
                             <h3>{label}</h3>
@@ -199,7 +207,12 @@ const CleanTemplate = ({
                 </div>
 
                 {resumeData.templateSections.clean.contact.show && (
-                    <div className="header-contact-info clean-resume-section">
+                    <div
+                        className={sectionClass + " header-contact-info"}
+                        onClick={() => {
+                            handleSectionChange(3);
+                        }}
+                    >
                         {resumeData.templateSections.clean.contact.email && (
                             <p>{contact.email}</p>
                         )}

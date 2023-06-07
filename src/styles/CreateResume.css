@@ -1,5 +1,9 @@
 .create-resume-page-container {
-    background-color: rgb(248, 248, 248);
+    /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
+    background-image: url("../images/background-pattern-7.png");
+    background-repeat: repeat;
+    background-size: 500px;
+    background-color: white;
 }
 
 .create-resume-edit-container {
@@ -18,7 +22,7 @@
     width: 60%;
     max-width: 800px;
     margin-inline: auto;
-    padding-block-start: 1em;
+    padding-block-start: 3em;
     margin-block-end: 3em;
 }
 
@@ -120,7 +124,7 @@
     caret-color: black;
     box-sizing: border-box;
     padding: 10px;
-    color: rgb(0, 128, 128);
+    color: var(--accent-color);
 }
 
 .create-resume-title-container .input:focus {
@@ -131,7 +135,7 @@
 }
 
 .create-resume-title-container .resume-title::placeholder {
-    color: rgb(0, 128, 128);
+    color: var(--accent-color);
 }
 
 .create-resume-title-container .resume-description {
@@ -230,6 +234,7 @@
     grid-template-columns: repeat(3, 1fr);
     border: 1px solid rgba(0, 128, 128, 0.2);
     box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+    background-color: white;
 }
 
 .section-option {
@@ -249,7 +254,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid rgb(0, 128, 128);
+    border: 1px solid var(--accent-color);
     margin-inline-end: 0.5em;
     cursor: pointer;
 }
@@ -258,8 +263,8 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid rgb(0, 128, 128);
-    background-color: rgb(0, 128, 128);
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
     margin-inline-end: 0.5em;
     cursor: pointer;
 }
@@ -286,7 +291,7 @@
         height: 50px;
         width: 50px;
         border-radius: 50%;
-        background-color: rgb(0, 128, 128);
+        background-color: var(--accent-color);
         border: none;
         transform: translateY(110%);
         justify-content: center;
@@ -375,6 +380,38 @@
     }
 }
 
+.modal {
+    position: absolute;
+    top: calc(var(--header-height) + 2em);
+    left: 2em;
+    right: 2em;
+
+    overflow: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 6vw;
+    padding-block: 4vw;
+
+    border: none;
+    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+}
+
+.overlay {
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
+    background-image: url("../images/background-pattern-7.png");
+    background-repeat: repeat;
+    background-size: 500px;
+    background-color: white;
+}
+
 @media (width < 480px) {
     .create-resume-title-container .resume-description {
         font-size: 8px;
@@ -385,41 +422,19 @@
         align-self: center;
         padding-inline: 0;
         padding-block-end: 2rem;
+        padding-block-start: 1em;
     }
 
     .section-selection-container {
         grid-template-columns: repeat(2, 1fr);
     }
-}
 
-.modal {
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    right: 10%;
-    bottom: 10%;
-    overflow: auto;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-inline: 6vw;
-    padding-block: 4vw;
-    border: 1px solid rgba(0, 64, 64, 0.2);
-    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: radial-gradient(
-        circle,
-        rgb(145, 145, 145),
-        rgb(255, 255, 255)
-    );
+    .modal {
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }
 
 @keyframes flash {
@@ -427,7 +442,7 @@
         border-color: transparent;
     }
     50% {
-        border-color: rgb(0, 128, 128);
+        border-color: var(--accent-color);
     }
     100% {
         border-color: transparent;

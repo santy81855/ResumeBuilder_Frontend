@@ -42,7 +42,6 @@ const Summary = ({
                     name="summary"
                     value={summary}
                     onChange={(event) => {
-                        setSummary(event.target.value);
                         handleSummaryChange(event);
                     }}
                     rows="10"
@@ -53,7 +52,7 @@ const Summary = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Close
+                    Back
                 </button>
 
                 <button
@@ -64,9 +63,6 @@ const Summary = ({
                     {isLoadingState ? <Loader /> : "apply"}
                 </button>
             </div>
-            <button className="close-modal-button" onClick={closeModal}>
-                x
-            </button>
         </div>
     );
 };

@@ -5,6 +5,9 @@ import "../styles/CreateResume.css";
 import Loader from "./ui/Loader";
 import BasicInfo from "./questions/BasicInfo";
 import Summary from "./questions/Summary";
+import ContactInfo from "./questions/ContactInfo";
+import TitleInfo from "./questions/TitleInfo";
+import SkillsInfo from "./questions/SkillsInfo";
 import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 
 import JSONResumeData from "../resume-schema.json";
@@ -37,7 +40,7 @@ function CreateResume() {
     const [showSectionsComponent, setShowSectionsComponent] = useState(false);
 
     const [resumeData, setResumeData] = useState(JSONResumeData); // lifted state
-    const [modalIsOpen, setIsOpen] = useState(false);
+    const [summanyModalOpen, setSummanyModalOpen] = useState(false);
     const [isLoadingState, setIsLoading] = useState(false);
 
     const [resumeTitle, setResumeTitle] = useState("");
@@ -217,13 +220,13 @@ function CreateResume() {
     };
 
     function openModal() {
-        setIsOpen(true);
+        setSummanyModalOpen(true);
     }
 
     function afterOpenModal() {}
 
     function closeModal() {
-        setIsOpen(false);
+        setSummanyModalOpen(false);
     }
 
     const handleSectionChange = (selectedSection) => {
@@ -293,7 +296,7 @@ function CreateResume() {
                 return (
                     <Modal
                         className="modal"
-                        isOpen={modalIsOpen}
+                        isOpen={summanyModalOpen}
                         onAfterOpen={afterOpenModal}
                         onRequestClose={closeModal}
                         contentLabel="summary-modal"
@@ -310,11 +313,60 @@ function CreateResume() {
                 );
             case 3:
                 return (
-                    <Summary
-                        resumeData={resumeData}
-                        currentlySelectedSection={currentlySelectedSection}
-                        onResumeDataChange={handleResumeDataChange} // passing down the callback function as props
-                    />
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <ContactInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
+                );
+            case 4:
+                return (
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <TitleInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
+                );
+            case 5:
+                return (
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <SkillsInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
                 );
             default:
                 return null;
