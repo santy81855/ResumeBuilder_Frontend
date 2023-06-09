@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    width: 60%;
+    width: 70%;
     max-width: 800px;
     margin-inline: auto;
     padding-block-start: 3em;
@@ -271,7 +271,12 @@
 
 @media screen and (width < 768px) {
     .create-resume-page-right-section {
-        row-gap: 0.5rem;
+        width: 95%;
+        align-self: center;
+        padding-inline: 0;
+        padding-block-end: 2rem;
+        padding-block-start: 1em;
+        row-gap: 0.5em;
     }
 
     .create-resume-title-container .resume-title {
@@ -385,14 +390,15 @@
     top: calc(var(--header-height) + 2em);
     left: 2em;
     right: 2em;
-
+    bottom: 2em;
     overflow: auto;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-inline: 6vw;
-    padding-block: 4vw;
+    justify-content: center;
+    padding-inline: 2em;
+    padding-block: 1vw;
 
     border: none;
     box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
@@ -415,14 +421,6 @@
 @media (width < 480px) {
     .create-resume-title-container .resume-description {
         font-size: 8px;
-    }
-
-    .create-resume-page-right-section {
-        width: 95%;
-        align-self: center;
-        padding-inline: 0;
-        padding-block-end: 2rem;
-        padding-block-start: 1em;
     }
 
     .section-selection-container {

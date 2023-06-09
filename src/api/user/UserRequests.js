@@ -4,7 +4,7 @@ const createUser = (data) => {
     console.log(data);
     return axios
         .post(
-            "http://myhost.com:3000/users",
+            "http://localhost:3000/users",
             {
                 first: data.first,
                 last: data.last,
@@ -25,7 +25,7 @@ const loginSubmit = (data) => {
     console.log(data);
     return axios
         .post(
-            "http://myhost.com:3000/auth/login",
+            "http://localhost:3000/auth/login",
             {
                 email: data.email,
                 password: data.password,
@@ -44,7 +44,7 @@ const loginSubmit = (data) => {
 
 const logoutUser = () => {
     return axios
-        .get("http://myhost.com:3000/auth/logout")
+        .get("http://localhosto:3000/auth/logout")
         .then((res) => res.data);
 };
 

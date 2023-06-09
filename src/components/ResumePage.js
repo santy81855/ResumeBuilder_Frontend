@@ -302,7 +302,7 @@ function ResumePage() {
     );
 
     const skeletonResumeTile = (
-        <div className="ResumeTile" onClick={createResume}>
+        <div className="ResumeTile">
             <div className="ResumePic">
                 <ResumeSkeleton />
             </div>

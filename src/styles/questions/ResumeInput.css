@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    max-width: 750px;
     height: 100%;
 }
 
@@ -83,6 +84,7 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    margin-bottom: 1em;
 }
 
 .question-container-apply-button {
@@ -98,6 +100,7 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1em;
 }
 
 .skill-input-container {
@@ -109,6 +112,12 @@
 
 .skill-input-bar {
     width: 200px;
+    padding-block: 10px;
+}
+
+.skill-input-bar-long {
+    width: 100%;
+    min-width: 200px;
     padding-block: 10px;
 }
 
@@ -165,15 +174,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 1em;
+    gap: 0.5em;
+    background-color: transparent;
 }
 
 .experience-item {
     background-color: var(--accent-color);
     width: 100%;
+    max-width: 750px;
     position: relative;
+    border-radius: 5px;
+    padding-inline: 0.2em;
 }
 
+.experience-item h4,
 .experience-item h3,
 .experience-item p {
     margin: 0;
@@ -181,17 +195,65 @@
 
 .experience-item button {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1px;
+    right: 1px;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
+.experience-item button:hover {
+    background-color: white;
+    color: var(--accent-color);
 }
 
 .input-container-horizontal {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
     gap: 1em;
+}
+
+.experience-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-block-start: 1em;
+    padding-inline: 0.4em;
+}
+
+.experience-button {
+    background-color: var(--accent-color);
+    border: none;
+    cursor: pointer;
+    padding-inline: 0.5em;
+    padding-block: 0.5em;
+    border-radius: 5px;
 }
 
 .job-summary {
     width: 100%;
+    max-width: 750px;
+    resize: none;
+}
+
+.add-highlight-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+.add-highlight-container button {
+    background-color: var(--accent-color);
+    width: 30px;
+    border: none;
+    margin-block: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-highlight-container .minus-button {
+    background-color: rgb(255, 62, 62);
 }

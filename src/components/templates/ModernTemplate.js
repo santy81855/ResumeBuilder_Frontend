@@ -83,7 +83,9 @@ const ModernTemplate = ({
                 className={
                     sectionClass + " vertical-block-section languages-section"
                 }
-                onClick={checkoverflow}
+                onClick={() => {
+                    handleSectionChange(8);
+                }}
             >
                 <h2>Languages</h2>
                 {horizontalLine}
@@ -127,6 +129,9 @@ const ModernTemplate = ({
                 className={
                     sectionClass + " vertical-block-section education-section"
                 }
+                onClick={() => {
+                    handleSectionChange(7);
+                }}
             >
                 <h2>Education</h2>
                 {horizontalLine}
@@ -263,7 +268,12 @@ const ModernTemplate = ({
 
     const InterestsSection = () => {
         return (
-            <div className={sectionClass + " right-section interests-section"}>
+            <div
+                className={sectionClass + " right-section interests-section"}
+                onClick={() => {
+                    handleSectionChange(9);
+                }}
+            >
                 <h2>Interests</h2>
                 {horizontalLine}
                 <ul>
@@ -276,8 +286,6 @@ const ModernTemplate = ({
             </div>
         );
     };
-
-    const hi = <div>hi</div>;
 
     return (
         <div

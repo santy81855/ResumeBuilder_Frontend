@@ -34,7 +34,6 @@
     text-align: center;
     margin-block-start: 1em;
     color: rgb(255, 255, 255);
-
     z-index: 1;
 }
 
@@ -183,6 +182,7 @@
     border: solid 1px var(--accent-color);
     margin-block-start: 1em;
     transition: background-color 0.5s ease;
+    background-color: white;
 }
 
 .PageTitleContainer .Button p {
@@ -436,7 +436,12 @@
     }
 
     .PageTitleContainer .Button:hover {
-        background-color: rgba(0, 128, 128, 0.1);
+        background-color: rgba(0, 128, 128, 0.5);
+        border: 1px solid white;
+    }
+
+    .PageTitleContainer .Button:hover p {
+        color: white;
     }
 }
 
@@ -466,6 +471,10 @@
         border-radius: 0px;
         padding-inline: 1.5em;
         width: calc(100% - 3em);
+    }
+
+    .ResumeSection {
+        margin-block-end: 0px;
     }
 
     .ResumeTiles {

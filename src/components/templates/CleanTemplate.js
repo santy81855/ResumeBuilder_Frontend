@@ -108,7 +108,12 @@ const CleanTemplate = ({
 
     const LanguagesSection = () => {
         return (
-            <div className={sectionClass + " languages-section"}>
+            <div
+                className={sectionClass + " languages-section"}
+                onClick={() => {
+                    handleSectionChange(8);
+                }}
+            >
                 <hr />
                 <h3>Languages</h3>
                 <ul>
@@ -159,7 +164,12 @@ const CleanTemplate = ({
     };
     const EducationSection = () => {
         return (
-            <div className={sectionClass + " education-section"}>
+            <div
+                className={sectionClass + " education-section"}
+                onClick={() => {
+                    handleSectionChange(7);
+                }}
+            >
                 <hr />
                 <h3>Education</h3>
                 {education.map((school) => (

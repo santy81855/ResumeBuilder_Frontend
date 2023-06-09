@@ -2,26 +2,29 @@ import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 
-const ExperienceInfo = ({
+const EducationInfo = ({
     resumeData,
     setResumeData,
     handleSave,
     closeModal,
     isLoadingState,
 }) => {
-    const [company, setCompany] = useState("");
-    const [position, setPosition] = useState("");
+    const [institution, setInstitution] = useState("");
+    const [degree, setDegree] = useState("");
+    const [degreeArea, setDegreeArea] = useState("");
+    const [gpa, setGpa] = useState("");
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [summary, setSummary] = useState("");
 
-    const [experienceList, setExperienceList] = useState(resumeData.work);
+    const [experienceList, setExperienceList] = useState(resumeData.education);
 
-    const companyRef = useRef();
-    const positionRef = useRef();
+    const institutionRef = useRef();
+    const degreeRef = useRef();
+    const degreeAreaRef = useRef();
+    const gpaRef = useRef();
     const startRef = useRef();
     const endRef = useRef();
-    const summaryRef = useRef();
 
     const [numHighlights, setNumHighlights] = useState(1);
 
@@ -33,19 +36,42 @@ const ExperienceInfo = ({
     const [highlight6, setHighlight6] = useState("");
     const [highlight7, setHighlight7] = useState("");
 
-    const addJob = () => {
+    /*
+    const addSkill = () => {
+        // temp arr to store the current skill arr and add new skill
+        var tempSkills = skillList;
+        tempSkills.push(skillBarRef.current.value);
+        // update useState var holding the arr
+        setSkillList(tempSkills);
+        //setSkillList((prevArray) => [...prevArray, skillBarRef.current.value]);
+        // create array to turn each skill into an object that can be stored in json
+        var arr = [];
+        tempSkills.forEach((skill) => {
+            arr.push({ name: skill, level: "", keywords: [] });
+        });
+        // update the resume data
+        setResumeData({
+            ...resumeData,
+            skills: arr,
+        });
+    };
+*/
+
+    const addSchool = () => {
         // get all necessary variables
-        // company
-        var comp = companyRef.current.value;
-        // position
-        var pos = positionRef.current.value;
+        // institution
+        var ins = institutionRef.current.value;
+        // degree type
+        var deg = degreeRef.current.value;
+        // degree area
+        var ar = degreeAreaRef.current.value;
+        // gpa
+        var gp = gpaRef.current.value;
         // start date
         var st = startRef.current.value;
         // end date
         var en = endRef.current.value;
-        // job summary
-        var sum = summaryRef.current.value;
-        // job highlights
+        // school highlights
         var hl = [];
         if (numHighlights >= 1) {
             hl.push(highlight1);
@@ -69,32 +95,34 @@ const ExperienceInfo = ({
             hl.push(highlight7);
         }
         // ensure all the necessary values are filled
-        if (comp === "" || pos === "" || st === "" || en === "" || sum === "") {
+        if (ins === "" || deg === "" || st === "" || en === "") {
             alert("Fill out all of the fields.");
             return;
         }
         // make an object of the vars
-        var job = {
-            company: comp,
-            position: pos,
+        var school = {
+            institution: ins,
+            studyType: deg,
+            area: ar,
             startDate: st,
             endDate: en,
-            summary: sum,
-            highlights: hl,
+            gpa: gp,
+            courses: hl,
         };
         // get the current list of job history
-        var tempHistory = resumeData.work;
-        tempHistory.push(job);
+        var tempEducation = resumeData.education;
+        tempEducation.push(school);
         setResumeData({
             ...resumeData,
-            work: tempHistory,
+            education: tempEducation,
         });
         // make the input fields blank again
-        setCompany("");
-        setPosition("");
+        setInstitution("");
+        setDegree("");
+        setDegreeArea("");
         setStart("");
         setEnd("");
-        setSummary("");
+        setGpa("");
         setHighlight1("");
         setHighlight2("");
         setHighlight3("");
@@ -106,7 +134,7 @@ const ExperienceInfo = ({
 
     const removeJob = (event) => {
         // get the json jobs list
-        var jsonWork = resumeData.work;
+        var jsonWork = resumeData.education;
         // get the job to remove
         var jobToDelete = experienceList[event.target.id];
         // remove it from the list
@@ -116,7 +144,7 @@ const ExperienceInfo = ({
         // update the resumeData
         setResumeData({
             ...resumeData,
-            work: updatedArr,
+            education: updatedArr,
         });
         // update the skillList
         var tempArr = experienceList;
@@ -137,33 +165,63 @@ const ExperienceInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Employment History</h2>
-            <p>Enter your work experience in this section.</p>
+            <h2>Education</h2>
+            <p>Enter your education history in this section.</p>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Company</p>
+                    <p>Institution</p>
                     <input
-                        id="company"
-                        ref={companyRef}
+                        id="institution"
+                        ref={institutionRef}
+                        placeholder="e.g. Oregon State University"
                         className="short-input"
                         type="text"
                         onChange={(event) => {
-                            setCompany(event.target.value);
+                            setInstitution(event.target.value);
                         }}
-                        value={company}
+                        value={institution}
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Position</p>
+                    <p>Degree Type</p>
                     <input
-                        id="position"
-                        ref={positionRef}
+                        id="degree"
+                        ref={degreeRef}
+                        placeholder="e.g. Bachelor's Degree"
                         className="short-input"
                         type="text"
                         onChange={(event) => {
-                            setPosition(event.target.value);
+                            setDegree(event.target.value);
                         }}
-                        value={position}
+                        value={degree}
+                    ></input>
+                </div>
+                <div className="input-item">
+                    <p>Degree Area</p>
+                    <input
+                        id="area"
+                        ref={degreeAreaRef}
+                        placeholder="e.g. Computer Science"
+                        className="short-input"
+                        type="text"
+                        onChange={(event) => {
+                            setDegreeArea(event.target.value);
+                        }}
+                        value={degreeArea}
+                    ></input>
+                </div>
+                <div className="input-item">
+                    <p>GPA</p>
+                    <input
+                        id="gpa"
+                        ref={gpaRef}
+                        placeholder="e.g. 3.5"
+                        className="short-input"
+                        type="text"
+                        onChange={(event) => {
+                            setGpa(event.target.value);
+                        }}
+                        value={gpa}
                     ></input>
                 </div>
                 <div className="input-item">
@@ -171,6 +229,7 @@ const ExperienceInfo = ({
                     <input
                         id="start"
                         ref={startRef}
+                        placeholder="e.g. 10-18-2014"
                         className="short-input"
                         type="text"
                         onChange={(event) => {
@@ -184,6 +243,7 @@ const ExperienceInfo = ({
                     <input
                         id="end"
                         ref={endRef}
+                        placeholder="e.g. 10-18-2016"
                         className="short-input"
                         type="text"
                         onChange={(event) => {
@@ -192,21 +252,6 @@ const ExperienceInfo = ({
                         value={end}
                     ></input>
                 </div>
-            </div>
-            <div className="job-summary">
-                <p>Job Summary</p>
-                <textarea
-                    ref={summaryRef}
-                    className="job-summary"
-                    placeholder="+ Write your summary here."
-                    type="text"
-                    name="summary"
-                    onChange={(event) => {
-                        setSummary(event.target.value);
-                    }}
-                    value={summary}
-                    rows="10"
-                />
             </div>
             <div className="job-summary">
                 <div className="add-highlight-container">
@@ -225,7 +270,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={0}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight1(event.target.value);
@@ -238,7 +283,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={1}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight2(event.target.value);
@@ -251,7 +296,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={2}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight3(event.target.value);
@@ -264,7 +309,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={3}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight4(event.target.value);
@@ -277,7 +322,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={4}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight5(event.target.value);
@@ -290,7 +335,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={5}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight6(event.target.value);
@@ -303,7 +348,7 @@ const ExperienceInfo = ({
                     <textarea
                         id={6}
                         className="job-summary"
-                        placeholder="+ Write your summary here."
+                        placeholder="e.g. Received Dean's List award 5 times."
                         type="text"
                         onChange={(event) => {
                             setHighlight7(event.target.value);
@@ -314,22 +359,24 @@ const ExperienceInfo = ({
                 )}
             </div>
             <div className="experience-button-container">
-                <button className="experience-button" onClick={addJob}>
-                    Add Job
+                <button className="experience-button" onClick={addSchool}>
+                    Add School
                 </button>
             </div>
             <div className="experience-history-container">
-                {experienceList.map((job, index) => (
+                {experienceList.map((school, index) => (
                     <div className="experience-item">
                         <h3>
-                            {job.position}, {job.company}
+                            {school.area} {school.studyType},{" "}
+                            {school.institution}
                         </h3>
                         <p>
-                            {job.startDate} - {job.endDate}
+                            {school.startDate} - {school.endDate}
                         </p>
-                        <p>{job.summary}</p>
+                        <p>GPA: {school.gpa}</p>
+                        {school.courses.length > 0 && <h4>Highlights:</h4>}
                         <ul>
-                            {job.highlights.map((highlight, index) => (
+                            {school.courses.map((highlight, index) => (
                                 <li>{highlight}</li>
                             ))}
                         </ul>
@@ -360,4 +407,4 @@ const ExperienceInfo = ({
     );
 };
 
-export default ExperienceInfo;
+export default EducationInfo;

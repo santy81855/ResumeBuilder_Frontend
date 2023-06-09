@@ -6,7 +6,7 @@ const createResume = (data) => {
     const token = localStorage.getItem("token");
     return axios
         .post(
-            "http://myhost.com:3000/resume/create",
+            "http://localhost:3000/resume/create",
             {
                 resumeTitle: data.resumeTitleParam,
                 resumeDescription: data.resumeDescriptionParam,
@@ -26,14 +26,14 @@ const createResume = (data) => {
 const getResumeById = () => {
     const resumeId = localStorage.getItem("resumeId");
     return axios
-        .get("http://myhost.com:3000/resume/" + resumeId)
+        .get("http://localhost:3000/resume/" + resumeId)
         .then((res) => res.data);
 };
 
 const deleteResumeById = (data) => {
     const resumeId = data.id;
     return axios
-        .delete("http://myhost.com:3000/resume/delete/" + resumeId)
+        .delete("http://localhost:3000/resume/delete/" + resumeId)
         .then((res) => res.data);
 };
 
@@ -41,7 +41,7 @@ const updateResumeById = (data) => {
     const d = new Date();
     const resumeId = localStorage.getItem("resumeId");
     return axios
-        .put("http://myhost.com:3000/resume/update/" + resumeId, {
+        .put("http://localhost:3000/resume/update/" + resumeId, {
             resumeTitle: data.resumeTitleParam,
             resumeDescription: data.resumeDescriptionParam,
             lastFetched: d.toDateString(),
@@ -54,7 +54,7 @@ const updateResumeById = (data) => {
 const getAllUserResumes = () => {
     const token = localStorage.getItem("token");
     return axios
-        .get("http://myhost.com:3000/resume/user/all", {
+        .get("http://localhost:3000/resume/user/all", {
             headers: {
                 Authorization: "Bearer " + token,
             },

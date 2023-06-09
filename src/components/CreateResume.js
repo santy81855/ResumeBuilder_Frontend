@@ -9,6 +9,9 @@ import ContactInfo from "./questions/ContactInfo";
 import TitleInfo from "./questions/TitleInfo";
 import SkillsInfo from "./questions/SkillsInfo";
 import ExperienceInfo from "./questions/ExperienceInfo";
+import EducationInfo from "./questions/EducationInfo";
+import LanguagesInfo from "./questions/LanguagesInfo";
+import InterestsInfo from "./questions/InterestsInfo";
 import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 
 import JSONResumeData from "../resume-schema.json";
@@ -380,6 +383,63 @@ function CreateResume() {
                         overlayClassName="overlay"
                     >
                         <ExperienceInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
+                );
+            case 7:
+                return (
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <EducationInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
+                );
+            case 8:
+                return (
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <LanguagesInfo
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            handleSave={handleSave}
+                            closeModal={closeModal}
+                            isLoadingState={isLoadingState}
+                        />
+                    </Modal>
+                );
+            case 9:
+                return (
+                    <Modal
+                        className="modal"
+                        isOpen={summanyModalOpen}
+                        onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        contentLabel="summary-modal"
+                        overlayClassName="overlay"
+                    >
+                        <InterestsInfo
                             resumeData={resumeData}
                             setResumeData={setResumeData}
                             handleSave={handleSave}
