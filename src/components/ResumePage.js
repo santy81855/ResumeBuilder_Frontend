@@ -23,6 +23,11 @@ import {
 function ResumePage() {
     const [resumeArr, setResumeArr] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [createModal, setCreateModal] = useState(false);
+    // variables needed for creating new resume
+    const [resumeTitle, setResumeTitle] = useState("");
+    const [resumeJob, setResumeJob] = useState("");
+    const [resumeDescription, setResumeDescription] = useState("");
     const navigate = useNavigate();
     const resumeToPrintRef = useRef();
 
@@ -86,11 +91,28 @@ function ResumePage() {
     //********************************************//
     // when they click on the create resume button
     const createResume = () => {
+        setCreateModal(true);
+        /*
         console.log("create-resume");
         // clear the current resume being stored in local storage
         localStorage.removeItem("resumeId");
         // ensure that there is no "current resume" stored in local storage so that this resume can be stored as a new resume
-        navigate("/u/create-resume");
+        navigate("/u/create-resume");*/
+    };
+
+    const navigateCreateResumePage = () => {
+        console.log("create-resume");
+        // clear the current resume being stored in local storage
+        localStorage.removeItem("resumeId");
+        // ensure that there is no "current resume" stored in local storage so that this resume can be stored as a new resume
+        console.log(resumeTitle);
+        navigate(
+            `/u/create-resume/${encodeURIComponent(
+                resumeTitle
+            )}/${encodeURIComponent(resumeJob)}/${encodeURIComponent(
+                resumeDescription
+            )}`
+        );
     };
     /*
     useEffect(() => {
@@ -159,6 +181,10 @@ function ResumePage() {
         setIsOpen(false);
     }
 
+    function closeCreateResumeModal() {
+        setCreateModal(false);
+    }
+
     function resumearrPrint() {
         return resumeArr[0].resumeTitle;
     }
@@ -201,6 +227,53 @@ function ResumePage() {
             ) : (
                 <div>getResumeQueryError</div>
             )}
+        </Modal>
+    );
+
+    const createResumeModal = (
+        <Modal
+            className="modal"
+            isOpen={createModal}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeCreateResumeModal}
+            contentLabel="export-modal"
+            overlayClassName="overlay"
+        >
+            <div className="create-resume-info-container">
+                <h2>Resume Information</h2>
+                <div className="horizontal-container">
+                    <h4>Title</h4>
+                    <input
+                        type="text"
+                        value={resumeTitle}
+                        onChange={(event) => {
+                            setResumeTitle(event.currentTarget.value);
+                        }}
+                    ></input>
+                </div>
+                <div className="horizontal-container">
+                    <h4>Job</h4>
+                    <input
+                        type="text"
+                        value={resumeJob}
+                        onChange={(event) => {
+                            setResumeJob(event.currentTarget.value);
+                        }}
+                    ></input>
+                </div>
+                <div className="horizontal-container">
+                    <h4>Description</h4>
+                    <textarea
+                        type="text"
+                        rows={3}
+                        value={resumeDescription}
+                        onChange={(event) => {
+                            setResumeDescription(event.currentTarget.value);
+                        }}
+                    ></textarea>
+                </div>
+                <button onClick={navigateCreateResumePage}>hey</button>
+            </div>
         </Modal>
     );
 
@@ -302,7 +375,7 @@ function ResumePage() {
     );
 
     const skeletonResumeTile = (
-        <div className="ResumeTile">
+        <div className="ResumeTile" onClick={createResume}>
             <div className="ResumePic">
                 <ResumeSkeleton />
             </div>
@@ -343,6 +416,7 @@ function ResumePage() {
                     </div>
                 </div>
                 {exportModal}
+                {createResumeModal}
             </div>
         );
     }
@@ -376,6 +450,7 @@ function ResumePage() {
                     </div>
                 </div>
                 {exportModal}
+                {createResumeModal}
             </div>
         );
     }

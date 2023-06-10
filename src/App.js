@@ -54,7 +54,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/u/create-resume"
+                        path="/u/create-resume/:routeResumeTitle/:routeResumeJob/:routeResumeDescription"
                         element={
                             localStorage.getItem("token") ? (
                                 <CreateResume />

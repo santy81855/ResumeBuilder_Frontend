@@ -9,6 +9,7 @@ const createResume = (data) => {
             "http://localhost:3000/resume/create",
             {
                 resumeTitle: data.resumeTitleParam,
+                jobTitle: data.jobTitleParam,
                 resumeDescription: data.resumeDescriptionParam,
                 lastFetched: d.toDateString(),
                 template: data.templateParam,
@@ -43,6 +44,7 @@ const updateResumeById = (data) => {
     return axios
         .put("http://localhost:3000/resume/update/" + resumeId, {
             resumeTitle: data.resumeTitleParam,
+            jobTitle: data.jobTitleParam,
             resumeDescription: data.resumeDescriptionParam,
             lastFetched: d.toDateString(),
             template: data.templateParam,

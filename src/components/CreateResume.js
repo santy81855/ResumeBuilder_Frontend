@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/CreateResume.css";
 
 import Loader from "./ui/Loader";
@@ -24,7 +24,6 @@ import {
 } from "../lib/TemplateKeys";
 
 import Modal from "react-modal";
-import Switch from "react-switch";
 
 import { savePDF } from "@progress/kendo-react-pdf";
 
@@ -37,6 +36,9 @@ import {
 } from "../api/resume/ResumeRequests";
 
 function CreateResume() {
+    // get the resume title and description and job from the route
+    const { routeResumeTitle, routeResumeJob, routeResumeDescription } =
+        useParams();
     const navigate = useNavigate();
     const [currentTemplate, setCurrentTemplate] = useState(0);
     const [currentlySelectedSection, setCurrentlySelectedSection] =
@@ -47,8 +49,10 @@ function CreateResume() {
     const [summanyModalOpen, setSummanyModalOpen] = useState(false);
     const [isLoadingState, setIsLoading] = useState(false);
 
-    const [resumeTitle, setResumeTitle] = useState("");
-    const [resumeDescription, setResumeDescription] = useState("");
+    const [resumeTitle, setResumeTitle] = useState(routeResumeTitle);
+    const [resumeDescription, setResumeDescription] = useState(
+        routeResumeDescription
+    );
 
     const titleRef = useRef();
     const descriptionRef = useRef();
@@ -173,6 +177,7 @@ function CreateResume() {
         if (resumeId) {
             updateResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
+                jobTitleParam: routeResumeJob,
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
                 templateParam: templateToString[currentTemplate],
                 jsonParam: resumeData,
@@ -181,6 +186,7 @@ function CreateResume() {
         } else {
             createResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
+                jobTitleParam: routeResumeJob,
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
                 templateParam: templateToString[currentTemplate],
                 jsonParam: resumeData,

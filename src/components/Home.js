@@ -70,6 +70,15 @@ function Home() {
     };
     const doNothingFunction = () => {};
 
+    const ResumeImages = () => {
+        return (
+            <div>
+                <img src={resume1} className="resume-pic-bottom" />
+                <img src={resume2} className="resume-pic-top" />
+            </div>
+        );
+    };
+
     return (
         <div className="home-container">
             <div className="landing-page">
@@ -86,30 +95,9 @@ function Home() {
                         now!
                     </p>
 
-                    <img src={resume1} className="resume-pic-bottom" />
-                    <img src={resume2} className="resume-pic-top" />
-
-                    <button className="call-button" onClick={CreateResume}>
-                        Create Resume
-                    </button>
-                </div>
-            </div>
-            <div className="resume-images">
-                <div className="modern-template-container-2">
-                    <ModernTemplate
-                        resumeData={JSONResumeData}
-                        isPreview={true}
-                        handleSectionChange={doNothingFunction}
-                        isExport={false}
-                    />
-                </div>
-                <div className="clean-template-container-2">
-                    <CleanTemplate
-                        resumeData={JSONResumeData}
-                        isPreview={true}
-                        handleSectionChange={doNothingFunction}
-                        isExport={false}
-                    />
+                    <div className="btn btn-one" onClick={CreateResume}>
+                        <span> Create Resume</span>
+                    </div>
                 </div>
             </div>
         </div>
