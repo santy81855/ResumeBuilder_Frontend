@@ -1,17 +1,12 @@
 .PageContainer {
     /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
-    background-image: url("../images/background-pattern-7.png");
-    background-repeat: repeat;
-    background-size: 500px;
-    background-color: white;
+
     display: flex;
     flex-direction: column;
-
     width: 100%;
     align-items: center;
     position: relative;
     z-index: 0;
-    overflow: hidden;
 }
 
 .BackgroundImageResume {

@@ -1,9 +1,6 @@
 .create-resume-page-container {
     /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
-    background-image: url("../images/background-pattern-7.png");
-    background-repeat: repeat;
-    background-size: 500px;
-    background-color: white;
+    background-color: transparent;
 }
 
 .create-resume-edit-container {
