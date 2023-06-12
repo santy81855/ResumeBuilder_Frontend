@@ -9,17 +9,8 @@ const SkillsInfo = ({
     closeModal,
     isLoadingState,
 }) => {
-    const [name, setName] = useState(resumeData.contact.name);
-    const [email, setEmail] = useState(resumeData.contact.email);
-    const [phone, setPhone] = useState(resumeData.contact.phone);
-    const [website, setWebsite] = useState(resumeData.contact.website);
-
     const [skillList, setSkillList] = useState([]);
-
-    const nameRef = useRef();
-    const emailRef = useRef();
-    const phoneRef = useRef();
-    const websiteRef = useRef();
+    const [skillInput, setSkillInput] = useState("");
 
     const skillBarRef = useRef();
 
@@ -32,57 +23,6 @@ const SkillsInfo = ({
         setSkillList(tempArr);
         console.log("tempArr");
     }, []);
-
-    // update resumeData useState variable everytime textbox is edited
-    const handleChange = (event) => {
-        switch (event.target.id) {
-            case "name":
-                var value = nameRef.current.value;
-                setName(value);
-                setResumeData({
-                    ...resumeData,
-                    contact: {
-                        ...resumeData.contact,
-                        name: value,
-                    },
-                });
-                return;
-            case "email":
-                var value = emailRef.current.value;
-                setEmail(value);
-                setResumeData({
-                    ...resumeData,
-                    contact: {
-                        ...resumeData.contact,
-                        email: value,
-                    },
-                });
-                return;
-            case "phone":
-                var value = phoneRef.current.value;
-                setPhone(value);
-                setResumeData({
-                    ...resumeData,
-                    contact: {
-                        ...resumeData.contact,
-                        phone: value,
-                    },
-                });
-                return;
-            case "website":
-                var value = websiteRef.current.value;
-                setWebsite(value);
-                setResumeData({
-                    ...resumeData,
-                    contact: {
-                        ...resumeData.contact,
-                        website: value,
-                    },
-                });
-            default:
-                return;
-        }
-    };
 
     const addSkill = () => {
         // temp arr to store the current skill arr and add new skill
@@ -101,6 +41,7 @@ const SkillsInfo = ({
             ...resumeData,
             skills: arr,
         });
+        setSkillInput("");
     };
 
     const removeSkill = (event) => {
@@ -139,6 +80,10 @@ const SkillsInfo = ({
             </p>
             <div className="skill-input-container">
                 <input
+                    value={skillInput}
+                    onChange={(event) => {
+                        setSkillInput(event.currentTarget.value);
+                    }}
                     ref={skillBarRef}
                     placeholder="e.g. Team Management"
                     className="skill-input-bar"

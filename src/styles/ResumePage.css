@@ -565,6 +565,17 @@
     color: var(--accent-color);
 }
 
+.modal .create-resume-info-container button {
+    border: none;
+    padding-block: 0.5em;
+    width: 70px;
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    margin-block: 0.5em;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
 .modal .create-resume-info-container .horizontal-container {
     display: flex;
     align-items: center;

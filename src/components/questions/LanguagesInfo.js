@@ -10,6 +10,7 @@ const LanguagesInfo = ({
     isLoadingState,
 }) => {
     const [languageList, setLanguageList] = useState([]);
+    const [languageInput, setLanguageInput] = useState("");
 
     const languageBarRef = useRef();
 
@@ -40,6 +41,7 @@ const LanguagesInfo = ({
             ...resumeData,
             languages: arr,
         });
+        setLanguageInput("");
     };
 
     const removeLanguage = (event) => {
@@ -77,6 +79,10 @@ const LanguagesInfo = ({
                     ref={languageBarRef}
                     placeholder="e.g. French"
                     className="skill-input-bar"
+                    value={languageInput}
+                    onChange={(event) => {
+                        setLanguageInput(event.currentTarget.value);
+                    }}
                 ></input>
                 <button onClick={addLanguage}>+</button>
             </div>

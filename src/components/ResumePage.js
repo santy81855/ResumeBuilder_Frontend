@@ -101,6 +101,15 @@ function ResumePage() {
     };
 
     const navigateCreateResumePage = () => {
+        // ensure title, description, and job are filled out
+        if (
+            resumeTitle === "" ||
+            resumeDescription === "" ||
+            resumeJob === ""
+        ) {
+            alert("Please fill out all of the fields.");
+            return;
+        }
         console.log("create-resume");
         // clear the current resume being stored in local storage
         localStorage.removeItem("resumeId");
@@ -246,6 +255,7 @@ function ResumePage() {
                     <input
                         type="text"
                         value={resumeTitle}
+                        placeholder="e.g. Google Junior Developer"
                         onChange={(event) => {
                             setResumeTitle(event.currentTarget.value);
                         }}
@@ -256,6 +266,7 @@ function ResumePage() {
                     <input
                         type="text"
                         value={resumeJob}
+                        placeholder="e.g. Junior Developer"
                         onChange={(event) => {
                             setResumeJob(event.currentTarget.value);
                         }}
@@ -267,12 +278,13 @@ function ResumePage() {
                         type="text"
                         rows={3}
                         value={resumeDescription}
+                        placeholder="e.g. Resume specialized to highlight full stack development experience."
                         onChange={(event) => {
                             setResumeDescription(event.currentTarget.value);
                         }}
                     ></textarea>
                 </div>
-                <button onClick={navigateCreateResumePage}>hey</button>
+                <button onClick={navigateCreateResumePage}>Next</button>
             </div>
         </Modal>
     );

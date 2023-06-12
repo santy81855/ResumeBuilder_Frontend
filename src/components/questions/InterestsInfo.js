@@ -10,6 +10,7 @@ const InterestsInfo = ({
     isLoadingState,
 }) => {
     const [interestList, setInterestList] = useState([]);
+    const [interestInput, setInterestInput] = useState("");
 
     const interestBarRef = useRef();
 
@@ -40,6 +41,7 @@ const InterestsInfo = ({
             ...resumeData,
             interests: arr,
         });
+        setInterestInput("");
     };
 
     const removeInterest = (event) => {
@@ -82,6 +84,10 @@ const InterestsInfo = ({
                     ref={interestBarRef}
                     placeholder="e.g. Volunteer Work"
                     className="skill-input-bar-long"
+                    value={interestInput}
+                    onChange={(event) => {
+                        setInterestInput(event.currentTarget.value);
+                    }}
                 ></input>
                 <button onClick={addInterest}>+</button>
             </div>

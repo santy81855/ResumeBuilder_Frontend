@@ -32,11 +32,12 @@
 .modern-vertical-block {
     display: flex;
     flex-direction: column;
-    margin-inline-start: 0rem;
     height: 100%;
     width: 30%;
     background-color: #323b4c;
     row-gap: 2em;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .modern-right-container {
@@ -168,7 +169,7 @@
     flex-direction: column;
     align-items: flex-start;
     align-self: flex-end;
-    margin-block-start: 1em;
+    margin-block-start: 0em;
 }
 
 .vertical-block-section .horizontal-line {
