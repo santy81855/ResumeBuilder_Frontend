@@ -64,7 +64,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/u/edit-resume"
+                        path="/u/edit-resume/"
                         element={
                             localStorage.getItem("token") ? (
                                 <CreateResume />

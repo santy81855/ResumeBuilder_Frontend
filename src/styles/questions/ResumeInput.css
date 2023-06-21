@@ -6,6 +6,7 @@
     width: 100%;
     max-width: 750px;
     height: 100%;
+    min-width: 300px;
 }
 
 .question-container h2 {
@@ -256,4 +257,31 @@
 
 .add-highlight-container .minus-button {
     background-color: rgb(255, 62, 62);
+}
+
+.prompt-buttons {
+    display: flex;
+    width: 100%;
+    margin-block-start: 0.5em;
+}
+
+.prompt-buttons button {
+    background-color: var(--accent-color);
+    border: none;
+    padding-block: 0.5em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.prompt-buttons .left {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.prompt-buttons .right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 0.5em;
 }

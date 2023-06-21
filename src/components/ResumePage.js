@@ -245,7 +245,7 @@ function ResumePage() {
             isOpen={createModal}
             onAfterOpen={afterOpenModal}
             onRequestClose={closeCreateResumeModal}
-            contentLabel="export-modal"
+            contentLabel="create-resume-modal"
             overlayClassName="overlay"
         >
             <div className="create-resume-info-container">
@@ -284,7 +284,10 @@ function ResumePage() {
                         }}
                     ></textarea>
                 </div>
-                <button onClick={navigateCreateResumePage}>Next</button>
+                <div className="button-container">
+                    <button onClick={closeCreateResumeModal}>Back</button>
+                    <button onClick={navigateCreateResumePage}>Next</button>
+                </div>
             </div>
         </Modal>
     );

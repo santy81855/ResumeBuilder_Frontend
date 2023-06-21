@@ -35,6 +35,8 @@ import {
     getResumeById,
 } from "../api/resume/ResumeRequests";
 
+import { sendChat } from "../api/ai/AIRequests";
+
 function CreateResume() {
     // get the resume title and description and job from the route
     const { routeResumeTitle, routeResumeJob, routeResumeDescription } =
@@ -53,6 +55,9 @@ function CreateResume() {
     const [resumeDescription, setResumeDescription] = useState(
         routeResumeDescription
     );
+    const [resumeJob, setResumeJob] = useState(routeResumeTitle);
+    const [prompt, setPrompt] = useState({ content: "" });
+    const [AIResponse, setAIResponse] = useState("");
 
     const titleRef = useRef();
     const descriptionRef = useRef();
@@ -72,6 +77,27 @@ function CreateResume() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    const getAIResponse = useQuery(
+        ["getAIResponse", prompt], // query key including variables
+        () => sendChat(prompt), // call sendChat with the variables
+        {
+            onSuccess: (data) => {
+                console.log(data.result.content);
+                setAIResponse(data.result.content);
+            },
+            onError: (error) => {
+                console.log("Error getting AI response. Error:", error);
+            },
+            enabled: false,
+        }
+    );
+
+    // Function to trigger the query
+    const fetchAIResponse = (newVariables) => {
+        setPrompt({ content: newVariables });
+        getAIResponse.refetch(prompt);
+    };
+
     const getResumeQuery = useQuery({
         queryKey: ["getResumeById"],
         queryFn: getResumeById,
@@ -81,6 +107,7 @@ function CreateResume() {
             );
             setResumeData(data.json);
             setResumeTitle(data.resumeTitle);
+            setResumeJob(data.jobTitle);
             setResumeDescription(data.resumeDescription);
             setCurrentTemplate(templateToInt[data.template]);
             console.log(data);
@@ -177,7 +204,7 @@ function CreateResume() {
         if (resumeId) {
             updateResumeMutation.mutate({
                 resumeTitleParam: titleRef.current.value.toString(),
-                jobTitleParam: routeResumeJob,
+                jobTitleParam: resumeTitle,
                 resumeDescriptionParam: descriptionRef.current.value.toString(),
                 templateParam: templateToString[currentTemplate],
                 jsonParam: resumeData,
@@ -314,10 +341,13 @@ function CreateResume() {
                     >
                         <Summary
                             resumeData={resumeData}
+                            jobTitle={resumeJob}
                             setResumeData={setResumeData}
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            fetchAIResponse={fetchAIResponse}
+                            AIResponse={AIResponse}
                         />
                     </Modal>
                 );
@@ -460,9 +490,7 @@ function CreateResume() {
     };
 
     const SectionContainer = () => {
-        console.log(getResumeQuery);
         // get the sections available for the current template
-
         const sectionArr = Object.entries(
             resumeData.templateSections[templateToString[currentTemplate]]
         ).map(([name, field]) => ({ name, show: field.show }));

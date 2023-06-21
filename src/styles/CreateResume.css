@@ -288,8 +288,8 @@
     .toggle-sidebar-button {
         display: flex;
         position: fixed;
-        right: 5%;
-        bottom: 10%;
+        right: 2em;
+        bottom: 6em;
         height: 50px;
         width: 50px;
         border-radius: 50%;
