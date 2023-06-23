@@ -104,21 +104,47 @@ function Home() {
                 <div className="circle-transition"></div>
             </div>
             <div className="feature-list">
-                <div className="feature-left">
-                    <div className="feature-text-section">
-                        <p className="header">Stuck?</p>
-                        <p className="body">
-                            Crafting a standout resume has never been easier.
-                            Leverage the power of artificial intelligence to
-                            streamline the resume creation process. Whether you
-                            need a resume from scratch or want to enhance your
-                            existing one, our intelligent AI algorithms analyze
-                            and optimize each section with precision.
-                        </p>
+                <div className="left-feature-wrapper">
+                    <div className="feature-left">
+                        <div className="feature-text-section">
+                            <p className="header">
+                                Can't find the right words?
+                            </p>
+                            <p className="body">
+                                Leverage the power of artificial intelligence to
+                                streamline the resume creation process. Whether
+                                you need a resume from scratch or want to
+                                enhance your existing one, our intelligent AI
+                                algorithms analyze and optimize each section
+                                with precision.
+                            </p>
+                        </div>
+                        <div className="feature-image-section">
+                            Picture here
+                        </div>
                     </div>
                 </div>
-                <div className="feature-right">hi</div>
-                <div className="feature-left">hi</div>
+
+                <div className="right-feature-wrapper">
+                    <div className="feature-right">
+                        <div className="feature-image-section">
+                            Picture here
+                        </div>
+                        <div className="feature-text-section">
+                            <p className="header">
+                                Can't find the right words?
+                            </p>
+                            <p className="body">
+                                Leverage the power of artificial intelligence to
+                                streamline the resume creation process. Whether
+                                you need a resume from scratch or want to
+                                enhance your existing one, our intelligent AI
+                                algorithms analyze and optimize each section
+                                with precision.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

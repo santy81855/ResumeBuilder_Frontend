@@ -45,11 +45,11 @@
 
 .landing-page-background .content-container h1 span {
     color: white;
-    -webkit-text-stroke: 1px var(--accent-color); /* for Safari/WebKit */
-    -moz-text-stroke: 1px var(--accent-color); /* for older versions of Firefox */
-    -ms-text-stroke: 1px var(--accent-color); /* for Internet Explorer */
-    -o-text-stroke: 1px var(--accent-color); /* for Opera */
-    text-stroke: 1px var(--accent-color); /* standard syntax */
+    -webkit-text-stroke: 1px var(--accent-color-2); /* for Safari/WebKit */
+    -moz-text-stroke: 1px var(--accent-color-2); /* for older versions of Firefox */
+    -ms-text-stroke: 1px var(--accent-color-2); /* for Internet Explorer */
+    -o-text-stroke: 1px var(--accent-color-2); /* for Opera */
+    text-stroke: 1px var(--accent-color-2); /* standard syntax */
 }
 
 .landing-page-background .content-container h4 {
@@ -89,29 +89,42 @@
     flex-direction: column;
     width: 100%;
     height: fit-content;
-    background-color: var(--accent-color-2);
     align-items: center;
     /*border-top: 1px solid white;*/
+}
+
+.feature-list .left-feature-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--accent-color-2);
+}
+
+.feature-list .right-feature-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: white;
 }
 
 .landing-page .feature-list .feature-left {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     max-width: var(--max-width-medium);
     padding-block: var(--gap-large);
     color: white;
-    background-color: red;
 }
 
 .landing-page .feature-list .feature-right {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     max-width: var(--max-width-medium);
     padding-block: var(--gap-large);
     color: red;
-    background-color: transparent;
 }
 
 .feature-list .feature-text-section {
@@ -119,6 +132,10 @@
     flex-direction: column;
     margin-inline: var(--gap-xlarge);
     gap: var(--gap-medium);
+}
+
+.feature-list .feature-image-section {
+    margin-inline: var(--gap-xlarge);
 }
 
 .feature-list p {
@@ -202,20 +219,20 @@ div[class*="box"] {
         line-height: 50px;
         height: 50px;
         text-align: center;
-        width: 250px;
+        width: 90%;
         cursor: pointer;
         font-weight: 700;
     }
 
     .btn-one {
         color: var(--accent-color-2);
-        transition: all 0.3s;
+        transition: all 0.5s;
         position: relative;
         font-size: var(--font-medium);
         margin-block-start: var(--gap-medium);
     }
     .btn-one span {
-        transition: all 0.3s;
+        transition: all 0.5s;
     }
     .btn-one::before {
         content: "";
@@ -226,7 +243,7 @@ div[class*="box"] {
         height: 100%;
         z-index: 1;
         opacity: 0;
-        transition: all 0.3s;
+        transition: all 0.5s;
         border-top-width: 1px;
         border-bottom-width: 1px;
         border-top-style: solid;
@@ -250,7 +267,7 @@ div[class*="box"] {
         width: 100%;
         height: 100%;
         z-index: 1;
-        transition: all 0.3s;
+        transition: all 0.5s;
         border: 1px solid var(--accent-color-2-light);
     }
     .btn-one:hover::after {
