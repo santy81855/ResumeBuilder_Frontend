@@ -37,6 +37,7 @@ body {
     --border-radius-small: 5px;
     --border-radius-medium: 10px;
     --border-radius-large: 15px;
+    --max-width-xsmall: 300px;
     --max-width-small: 500px;
     --max-width-medium: 800px;
     --max-width-large: 1000px;
