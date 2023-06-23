@@ -104,7 +104,9 @@ function Home() {
                 <div className="circle-transition"></div>
             </div>
             <div className="feature-list">
-                <div className="feature-left">hi</div>
+                <div className="feature-left">
+                    <div className="feature-text-section">text area</div>
+                </div>
                 <div className="feature-right">hi</div>
                 <div className="feature-left">hi</div>
             </div>
