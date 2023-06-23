@@ -8,6 +8,7 @@ const SkillsInfo = ({
     handleSave,
     closeModal,
     isLoadingState,
+    jobTitle,
 }) => {
     const [skillList, setSkillList] = useState([]);
     const [skillInput, setSkillInput] = useState("");

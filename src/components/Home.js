@@ -80,13 +80,15 @@ function Home() {
     };
 
     return (
-        <div className="home-container">
-            <div className="landing-page">
+        <div className="landing-page">
+            <div className="landing-page-background">
                 <div className="content-container">
-                    <h4>Artificial Intelligence Resume Builder</h4>
+                    <p>
+                        <span>Artificial Intelligence Resume Builder</span>
+                    </p>
                     <h1>
-                        Create your perfect resume in minutes with the help of
-                        AI.
+                        Create your perfect resume in <span>minutes</span> with
+                        the help of <span>AI.</span>
                     </h1>
                     <p>
                         Say goodbye to endless hours spent perfecting your
@@ -99,6 +101,12 @@ function Home() {
                         <span> Create Resume</span>
                     </div>
                 </div>
+                <div className="circle-transition"></div>
+            </div>
+            <div className="feature-list">
+                <div className="feature-left">hi</div>
+                <div className="feature-right">hi</div>
+                <div className="feature-left">hi</div>
             </div>
         </div>
     );

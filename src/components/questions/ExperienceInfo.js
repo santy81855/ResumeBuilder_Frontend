@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { sendChat } from "../../api/ai/AIRequests";
 
 const ExperienceInfo = ({
     resumeData,
@@ -8,6 +10,7 @@ const ExperienceInfo = ({
     handleSave,
     closeModal,
     isLoadingState,
+    jobTitle,
 }) => {
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
@@ -32,6 +35,88 @@ const ExperienceInfo = ({
     const [highlight5, setHighlight5] = useState("");
     const [highlight6, setHighlight6] = useState("");
     const [highlight7, setHighlight7] = useState("");
+
+    var prompt = { content: "" };
+
+    const getAIResponse = useQuery(
+        ["getAIResponse", prompt], // query key including variables
+        () => sendChat(prompt), // call sendChat with the variables
+        {
+            onSuccess: (data) => {
+                console.log(data.result.content);
+                setSummary(data.result.content);
+            },
+            onError: (error) => {
+                console.log("Error getting AI response. Error:", error);
+            },
+            enabled: false,
+        }
+    );
+
+    // Function to trigger the query
+    const fetchAIResponse = (newVariables) => {
+        prompt = { content: newVariables };
+        getAIResponse.refetch();
+    };
+
+    const clear = () => {
+        setSummary("");
+    };
+
+    const enhance = () => {
+        if (
+            companyRef.current.value === "" &&
+            positionRef.current.value === ""
+        ) {
+            alert(
+                "Please fill out the company name and your position in that company."
+            );
+            return;
+        } else if (positionRef.current.value === "") {
+            alert("Please fill out the position for this job.");
+            return;
+        } else if (companyRef.current.value === "") {
+            alert("Please fill out the company name.");
+            return;
+        }
+        if (summary !== "") {
+            var userPrompt =
+                "enhance the following job summary for a " +
+                positionRef.current.value +
+                " job to make it more professional and to make it better for applying to be a " +
+                jobTitle +
+                ": " +
+                summary;
+            fetchAIResponse(userPrompt);
+        }
+    };
+
+    const generate = () => {
+        if (
+            companyRef.current.value === "" &&
+            positionRef.current.value === ""
+        ) {
+            alert(
+                "Please fill out the company name and your position in that company."
+            );
+            return;
+        } else if (positionRef.current.value === "") {
+            alert("Please fill out the position for this job.");
+            return;
+        } else if (companyRef.current.value === "") {
+            alert("Please fill out the company name.");
+            return;
+        }
+        console.log(jobTitle);
+        setSummary("");
+        var userPrompt =
+            "write a 40 words or less job summary for when I was a " +
+            positionRef.current.value +
+            " that is professional and engaging for applying to be a " +
+            jobTitle;
+        console.log(userPrompt);
+        fetchAIResponse(userPrompt);
+    };
 
     const addJob = () => {
         // get all necessary variables
@@ -207,111 +292,133 @@ const ExperienceInfo = ({
                     value={summary}
                     rows="10"
                 />
+                <div className="prompt-buttons">
+                    <div className="left">
+                        <button className="enhance-button" onClick={clear}>
+                            Clear
+                        </button>
+                    </div>
+                    <div className="right">
+                        <button className="enhance-button" onClick={enhance}>
+                            enhance
+                        </button>
+                        <button className="enhance-button" onClick={generate}>
+                            generate
+                        </button>
+                    </div>
+                </div>
             </div>
             <div className="job-summary">
                 <div className="add-highlight-container">
                     <p>Highlights</p>
-                    <button
-                        className="minus-button"
-                        onClick={removeHighlightInput}
-                    >
-                        -
-                    </button>
-                    <button className="plus-button" onClick={addHighlightInput}>
-                        +
-                    </button>
+                    <div className="highlight-button-container">
+                        <button
+                            className="plus-button"
+                            onClick={addHighlightInput}
+                        >
+                            +
+                        </button>
+                        <button
+                            className="minus-button"
+                            onClick={removeHighlightInput}
+                        >
+                            -
+                        </button>
+                    </div>
                 </div>
-                {numHighlights >= 1 && (
-                    <textarea
-                        id={0}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight1(event.target.value);
-                        }}
-                        value={highlight1}
-                        rows="3"
-                    />
-                )}
-                {numHighlights >= 2 && (
-                    <textarea
-                        id={1}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight2(event.target.value);
-                        }}
-                        value={highlight2}
-                        rows="3"
-                    />
-                )}
-                {numHighlights >= 3 && (
-                    <textarea
-                        id={2}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight3(event.target.value);
-                        }}
-                        value={highlight3}
-                        rows="3"
-                    />
-                )}
-                {numHighlights >= 4 && (
-                    <textarea
-                        id={3}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight4(event.target.value);
-                        }}
-                        value={highlight4}
-                        rows="3"
-                    />
-                )}
-                {numHighlights >= 5 && (
-                    <textarea
-                        id={4}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight5(event.target.value);
-                        }}
-                        value={highlight5}
-                        rows="3"
-                    />
-                )}
-                {numHighlights >= 6 && (
-                    <textarea
-                        id={5}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight6(event.target.value);
-                        }}
-                        value={highlight6}
-                        rows="3"
-                    />
-                )}
-                {numHighlights >= 7 && (
-                    <textarea
-                        id={6}
-                        className="job-summary"
-                        placeholder="+ Write your summary here."
-                        type="text"
-                        onChange={(event) => {
-                            setHighlight7(event.target.value);
-                        }}
-                        value={highlight7}
-                        rows="3"
-                    />
-                )}
+                <div className="highlight-text-container">
+                    {numHighlights >= 1 && (
+                        <textarea
+                            id={0}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight1(event.target.value);
+                            }}
+                            value={highlight1}
+                            rows="3"
+                        />
+                    )}
+                    {numHighlights >= 2 && (
+                        <textarea
+                            id={1}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight2(event.target.value);
+                            }}
+                            value={highlight2}
+                            rows="3"
+                        />
+                    )}
+                    {numHighlights >= 3 && (
+                        <textarea
+                            id={2}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight3(event.target.value);
+                            }}
+                            value={highlight3}
+                            rows="3"
+                        />
+                    )}
+                    {numHighlights >= 4 && (
+                        <textarea
+                            id={3}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight4(event.target.value);
+                            }}
+                            value={highlight4}
+                            rows="3"
+                        />
+                    )}
+                    {numHighlights >= 5 && (
+                        <textarea
+                            id={4}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight5(event.target.value);
+                            }}
+                            value={highlight5}
+                            rows="3"
+                        />
+                    )}
+                    {numHighlights >= 6 && (
+                        <textarea
+                            id={5}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight6(event.target.value);
+                            }}
+                            value={highlight6}
+                            rows="3"
+                        />
+                    )}
+                    {numHighlights >= 7 && (
+                        <textarea
+                            id={6}
+                            className="job-summary"
+                            placeholder="+ Write your summary here."
+                            type="text"
+                            onChange={(event) => {
+                                setHighlight7(event.target.value);
+                            }}
+                            value={highlight7}
+                            rows="3"
+                        />
+                    )}
+                </div>
             </div>
             <div className="experience-button-container">
                 <button className="experience-button" onClick={addJob}>

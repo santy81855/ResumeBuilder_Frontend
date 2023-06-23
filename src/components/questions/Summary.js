@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { sendChat } from "../../api/ai/AIRequests";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 
@@ -8,15 +10,46 @@ const Summary = ({
     handleSave,
     closeModal,
     isLoadingState,
-    fetchAIResponse,
-    AIResponse,
     jobTitle,
 }) => {
     const [summary, setSummary] = useState(resumeData.summary);
     const summaryRef = useRef();
 
+    const enhancePrompt =
+        "enhance the following resume summary for a " +
+        jobTitle +
+        " job to make it more professional and better: ";
+    const generatePrompt =
+        "write a 80 words or less resume summary that is professional and engaging for a ";
+    var prompt = { content: "" };
+
+    const getAIResponse = useQuery(
+        ["getAIResponse", prompt], // query key including variables
+        () => sendChat(prompt), // call sendChat with the variables
+        {
+            onSuccess: (data) => {
+                console.log(data.result.content);
+                setSummary(data.result.content);
+                setResumeData({
+                    ...resumeData,
+                    summary: data.result.content,
+                });
+            },
+            onError: (error) => {
+                console.log("Error getting AI response. Error:", error);
+            },
+            enabled: false,
+        }
+    );
+
+    // Function to trigger the query
+    const fetchAIResponse = (newVariables) => {
+        prompt = { content: newVariables };
+        getAIResponse.refetch();
+    };
+
     // update resumeData useState variable everytime textbox is edited
-    const handleSummaryChange = (event) => {
+    const handleSummaryChange = () => {
         const value = summaryRef.current.value;
         setSummary(value);
         setResumeData({
@@ -32,25 +65,17 @@ const Summary = ({
 
     const enhance = () => {
         if (summary !== "") {
-            var userPrompt =
-                "enhance the following resume summary for a junior software engineer job to make it more professional and better: " +
-                summary;
+            var userPrompt = enhancePrompt + summary;
             fetchAIResponse(userPrompt);
-            setSummary(AIResponse);
-            console.log(AIResponse);
         }
     };
 
     const generate = () => {
         console.log(jobTitle);
-        var userPrompt =
-            "write a 100 words or less resume summary for a " +
-            jobTitle +
-            " job that is professional and engaging.";
+        setSummary("");
+        var userPrompt = generatePrompt + jobTitle;
         console.log(userPrompt);
         fetchAIResponse(userPrompt);
-        setSummary(AIResponse);
-        console.log(AIResponse);
     };
 
     return (
@@ -73,8 +98,8 @@ const Summary = ({
                     type="text"
                     name="summary"
                     value={summary}
-                    onChange={(event) => {
-                        handleSummaryChange(event);
+                    onChange={() => {
+                        handleSummaryChange();
                     }}
                     rows="10"
                 />

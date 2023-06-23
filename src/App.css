@@ -16,6 +16,30 @@ body {
     /*account for bottom border of the header*/
     --header-height: calc(80px + 1px);
     --accent-color: rgb(0, 148, 148);
+    --accent-color-xlight: rgb(0, 148, 148, 0.2);
+    --accent-color-light: rgb(0, 148, 148, 0.5);
+    --accent-color-dark: rgb(0, 148, 148, 0.8);
+    --accent-color-2: rgb(18, 18, 59);
+    --accent-color-2-xlight: rgb(18, 18, 59, 0.2);
+    --accent-color-2-light: rgb(18, 18, 59, 0.5);
+    --accent-color-2-dark: rgb(18, 18, 59, 0.8);
+    --text-max-width: 600px;
+    --gap-small: 0.5em;
+    --gap-medium: 1em;
+    --gap-large: 1.5em;
+    --gap-xlarge: 2em;
+    --gap-x2large: 4em;
+    --gap-x3large: 6em;
+    --font-small: 1em;
+    --font-medium: 1.2em;
+    --font-large: 1.4em;
+    --font-heading: 2em;
+    --border-radius-small: 5px;
+    --border-radius-medium: 10px;
+    --border-radius-large: 15px;
+    --max-width-small: 500px;
+    --max-width-medium: 800px;
+    --max-width-large: 1000px;
 }
 
 .App {

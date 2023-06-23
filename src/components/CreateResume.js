@@ -35,8 +35,6 @@ import {
     getResumeById,
 } from "../api/resume/ResumeRequests";
 
-import { sendChat } from "../api/ai/AIRequests";
-
 function CreateResume() {
     // get the resume title and description and job from the route
     const { routeResumeTitle, routeResumeJob, routeResumeDescription } =
@@ -55,9 +53,7 @@ function CreateResume() {
     const [resumeDescription, setResumeDescription] = useState(
         routeResumeDescription
     );
-    const [resumeJob, setResumeJob] = useState(routeResumeTitle);
-    const [prompt, setPrompt] = useState({ content: "" });
-    const [AIResponse, setAIResponse] = useState("");
+    const [resumeJob, setResumeJob] = useState(routeResumeJob);
 
     const titleRef = useRef();
     const descriptionRef = useRef();
@@ -76,27 +72,6 @@ function CreateResume() {
         handleResize();
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-
-    const getAIResponse = useQuery(
-        ["getAIResponse", prompt], // query key including variables
-        () => sendChat(prompt), // call sendChat with the variables
-        {
-            onSuccess: (data) => {
-                console.log(data.result.content);
-                setAIResponse(data.result.content);
-            },
-            onError: (error) => {
-                console.log("Error getting AI response. Error:", error);
-            },
-            enabled: false,
-        }
-    );
-
-    // Function to trigger the query
-    const fetchAIResponse = (newVariables) => {
-        setPrompt({ content: newVariables });
-        getAIResponse.refetch(prompt);
-    };
 
     const getResumeQuery = useQuery({
         queryKey: ["getResumeById"],
@@ -341,13 +316,11 @@ function CreateResume() {
                     >
                         <Summary
                             resumeData={resumeData}
-                            jobTitle={resumeJob}
                             setResumeData={setResumeData}
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
-                            fetchAIResponse={fetchAIResponse}
-                            AIResponse={AIResponse}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -367,6 +340,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -386,6 +360,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -405,6 +380,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -424,6 +400,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -443,6 +420,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -462,6 +440,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
@@ -481,6 +460,7 @@ function CreateResume() {
                             handleSave={handleSave}
                             closeModal={closeModal}
                             isLoadingState={isLoadingState}
+                            jobTitle={resumeJob}
                         />
                     </Modal>
                 );
