@@ -366,6 +366,13 @@ const EducationInfo = ({
             <div className="experience-history-container">
                 {experienceList.map((school, index) => (
                     <div className="experience-item">
+                        <button
+                            className="delete-experience-item-button"
+                            id={index}
+                            onClick={removeJob}
+                        >
+                            Delete
+                        </button>
                         <h3>
                             {school.area} {school.studyType},{" "}
                             {school.institution}
@@ -380,9 +387,6 @@ const EducationInfo = ({
                                 <li>{highlight}</li>
                             ))}
                         </ul>
-                        <button id={index} onClick={removeJob}>
-                            x
-                        </button>
                     </div>
                 ))}
             </div>

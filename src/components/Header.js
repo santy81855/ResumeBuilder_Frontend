@@ -111,8 +111,6 @@ const Header = observer(() => {
                     {isDropdownClicked && (
                         <div className="Header-account-dropdown">
                             <a href="/account">Account</a>
-                            <a href="/u/resumes">Resumes</a>
-                            <a href="/settings">Settings</a>
                             <a onClick={handleUserLogout}>Logout</a>
                         </div>
                     )}
@@ -147,13 +145,24 @@ const Header = observer(() => {
             </div>
             <div className="Header-right">
                 <a href="/">Home</a>
-                <a href="/about">About</a>
+                {localStorage.getItem("token") && (
+                    <a href="/u/resumes">Dashboard</a>
+                )}
                 {renderAuthButton()}
             </div>
             <div className="Header-right-vertical">
-                {renderAuthButton()}
                 <a href="/">Home</a>
-                <a href="/about">About</a>
+                {localStorage.getItem("token") && (
+                    <a href="/account">Account</a>
+                )}
+                {localStorage.getItem("token") && (
+                    <a href="/u/resumes">Dashboard</a>
+                )}
+                {localStorage.getItem("token") && (
+                    <a style={{ cursor: "pointer" }} onClick={handleUserLogout}>
+                        Logout
+                    </a>
+                )}
             </div>
         </div>
     );

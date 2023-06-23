@@ -44,7 +44,7 @@ const loginSubmit = (data) => {
 
 const logoutUser = () => {
     return axios
-        .get("http://localhosto:3000/auth/logout")
+        .get("http://localhost:3000/auth/logout")
         .then((res) => res.data);
 };
 

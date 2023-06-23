@@ -82,6 +82,7 @@
 
 .Header-account-dropdown a {
     padding: 5px;
+    cursor: pointer;
 }
 
 .Header-account-dropdown button {

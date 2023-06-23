@@ -90,6 +90,7 @@
     width: 100%;
     height: fit-content;
     align-items: center;
+    background-color: white;
     /*border-top: 1px solid white;*/
 }
 
@@ -98,13 +99,13 @@
     width: 100%;
     justify-content: center;
     background-color: var(--accent-color-2);
+    border-bottom-right-radius: 50%;
 }
 
 .feature-list .right-feature-wrapper {
     display: flex;
     width: 100%;
     justify-content: center;
-    background-color: white;
 }
 
 .landing-page .feature-list .feature-left {
@@ -163,8 +164,8 @@
 
 @media screen and (max-width: 480px) {
     .landing-page-background .content-container {
-        width: 100%;
-        height: 100%;
+        width: 90%;
+        margin-block-start: var(--gap-medium);
     }
 
     .landing-page-background .content-container h1 {
@@ -200,14 +201,14 @@ div[class*="box"] {
 @media (pointer: coarse) {
     .landing-page-background .btn {
         font-size: var(--font-medium);
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 50px;
+        font-weight: 700;
+        border: 1px solid var(--accent-color-2);
+        background-color: transparent;
+        color: var(--accent-color-2);
         cursor: pointer;
         height: 60px;
-        width: 220px;
-
+        width: 90%;
+        margin-block-start: var(--gap-xlarge);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -283,14 +284,10 @@ div[class*="box"] {
 }
 
 .resume-pic-bottom {
-    position: absolute;
     aspect-ratio: 8.5/11;
-    transform: rotate(-5deg);
-    width: 200px;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    display: block;
+    width: 400px;
+    margin-block: -50px;
+    transform: rotate(270deg);
 }
 
 .resume-pic-top {

@@ -10,7 +10,7 @@
 }
 
 .question-container h2 {
-    color: rgb(0, 128, 128);
+    color: var(--accent-color-2);
 }
 
 .question-container h3 {
@@ -62,7 +62,7 @@
     border: none;
     height: 25px;
     width: 40px;
-    background-color: #008080;
+    background-color: var(--accent-color-2);
     color: white;
     cursor: pointer;
 }
@@ -77,8 +77,8 @@
 
 .question-container-close-button {
     background-color: white;
-    color: #008080;
-    border: 2px solid #008080;
+    color: var(--accent-color-2);
+    border: 2px solid var(--accent-color-2);
     border-radius: 30px;
     height: 3rem;
     width: 6rem;
@@ -90,9 +90,9 @@
 
 .question-container-apply-button {
     display: flex;
-    background-color: #008080;
+    background-color: var(--accent-color-2);
     color: white;
-    border: 2px solid #008080;
+    border: 2px solid var(--accent-color-2);
     border-radius: 30px;
     height: 3rem;
     width: 6rem;
@@ -125,7 +125,7 @@
 .skill-input-container button {
     min-width: 50px;
     cursor: pointer;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-2);
     border: none;
     border-radius: 5px;
     color: white;
@@ -133,8 +133,8 @@
 
 .skill-input-container button:hover {
     background-color: white;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    color: var(--accent-color-2);
+    border: 1px solid var(--accent-color-2);
 }
 
 .skill-container {
@@ -150,7 +150,7 @@
 
 .skill-item {
     display: flex;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-2);
 }
 
 .skill-item p {
@@ -180,12 +180,14 @@
 }
 
 .experience-item {
-    background-color: var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
     width: 100%;
     max-width: 750px;
-    position: relative;
     border-radius: 5px;
     padding-inline: 0.2em;
+    border: solid 1px var(--accent-color-2-light);
 }
 
 .experience-item h4,
@@ -194,19 +196,17 @@
     margin: 0;
 }
 
-.experience-item button {
-    position: absolute;
-    top: 1px;
-    right: 1px;
+.delete-experience-item-button {
     cursor: pointer;
     background-color: transparent;
     border: none;
-    color: white;
-    border-radius: 3px;
+    color: var(--accent-color-2);
+    align-self: flex-end;
+    margin-block-start: 2px;
 }
 .experience-item button:hover {
     background-color: white;
-    color: var(--accent-color);
+    color: var(--accent-color-2);
 }
 
 .input-container-horizontal {
@@ -225,9 +225,9 @@
 }
 
 .experience-button {
-    color: var(--accent-color);
+    color: var(--accent-color-2);
     background-color: white;
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent-color-2);
     cursor: pointer;
     padding-inline: 0em;
     padding-block: 1em;
@@ -236,7 +236,7 @@
 }
 
 .experience-button:hover {
-    background-color: rgba(0, 128, 128, 0.3);
+    background-color: var(--accent-color-2-xlight);
     font-weight: 600;
 }
 
@@ -271,7 +271,8 @@
 }
 
 .add-highlight-container button {
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-2);
+    color: white;
     min-width: 30px;
     border: none;
     margin-block: 1em;
@@ -290,11 +291,12 @@
 }
 
 .prompt-buttons button {
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-2);
     border: none;
     padding-block: 0.5em;
     cursor: pointer;
     border-radius: 5px;
+    color: white;
 }
 
 .prompt-buttons .left {

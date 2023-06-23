@@ -397,21 +397,27 @@ function ResumePage() {
         </div>
     );
 
+    const headerSection = (
+        <div>
+            <div className="introContainer">
+                <h1>Welcome to your personal Resume Page!</h1>
+                <p>
+                    Organize your job search with our Resume Page feature! Keep
+                    track of all your resumes and tailor them to specific job
+                    applications. You'll be able to quickly and easily access
+                    your resume history in one place.
+                </p>
+            </div>
+            <div className="wave"></div>
+            <div className="gradient"></div>
+        </div>
+    );
+
     // if loading
     if (resumesQuery.isLoading && resumesQuery.fetchStatus !== "idle") {
         return (
             <div className="PageContainer">
-                <div className="introContainer Section">
-                    <h2>Welcome to your personal Resume Page!</h2>
-                    <h4>
-                        Organize your job search with our Resume Page feature!
-                        Keep track of all your resumes and tailor them to
-                        specific job applications. You'll be able to quickly and
-                        easily access your resume history in one place.
-                    </h4>
-                </div>
-                <div className="wave"></div>
-                <div className="gradient"></div>
+                {headerSection}
                 <div className="ResumeSection Section">
                     <div className="PageTitleContainer">
                         <div className="PageTitle">Resumes</div>
@@ -440,17 +446,7 @@ function ResumePage() {
     else {
         return (
             <div className="PageContainer">
-                <div className="introContainer Section">
-                    <h2>Welcome to your personal Resume Page!</h2>
-                    <h4>
-                        Organize your job search with our Resume Page feature!
-                        Keep track of all your resumes and tailor them to
-                        specific job applications. You'll be able to quickly and
-                        easily access your resume history in one place.
-                    </h4>
-                </div>
-                <div className="wave"></div>
-                <div className="gradient"></div>
+                {headerSection}
                 <div className="ResumeSection Section">
                     <div className="PageTitleContainer">
                         <div className="PageTitle">Resumes</div>

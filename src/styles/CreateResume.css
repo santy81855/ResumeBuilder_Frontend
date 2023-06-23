@@ -29,15 +29,15 @@
     align-items: flex-start;
     row-gap: 0em;
     width: 100%;
-    border: 1px solid rgba(0, 128, 128, 0.2);
-    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+    border: 1px solid var(--accent-color-2-xlight);
+    box-shadow: 0px 5px 15px var(--accent-color-2-light);
 }
 
 .create-resume-template-container {
     width: 100%;
     aspect-ratio: 8.5/11;
-    border: 1px solid rgba(0, 128, 128, 0.2);
-    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+    border: 1px solid var(--accent-color-2-xlight);
+    box-shadow: 0px 5px 15px var(--accent-color-2-light);
 }
 
 .create-resume-buttons-container {
@@ -46,14 +46,10 @@
     align-items: center;
     width: 80px;
     min-height: calc(100vh - var(--header-height) - 1px);
-    background-color: rgba(
-        0,
-        128,
-        128,
-        0.8
+    background-color: var(
+        --accent-color-2-dark
     ); /* Your accent color with some transparency */
     backdrop-filter: blur(3px); /* The amount of blur you want */
-
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* A subtle box shadow to add depth */
 }
 
@@ -121,7 +117,7 @@
     caret-color: black;
     box-sizing: border-box;
     padding: 10px;
-    color: var(--accent-color);
+    color: var(--accent-color-2);
 }
 
 .create-resume-title-container .input:focus {
@@ -132,7 +128,7 @@
 }
 
 .create-resume-title-container .resume-title::placeholder {
-    color: var(--accent-color);
+    color: var(--accent-color-2);
 }
 
 .create-resume-title-container .resume-description {
@@ -229,8 +225,8 @@
     display: grid;
     column-gap: 0.5em;
     grid-template-columns: repeat(3, 1fr);
-    border: 1px solid rgba(0, 128, 128, 0.2);
-    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+    border: 1px solid var(--accent-color-2-xlight);
+    box-shadow: 0px 5px 15px var(--accent-color-2-light);
     background-color: white;
 }
 
@@ -251,7 +247,7 @@
     max-width: 20px;
     max-height: 20px;
     border-radius: 50%;
-    border: 1px solid var(--accent-color);
+    border: 1px solid var(--accent-color-2);
     margin-inline-end: 0.5em;
     cursor: pointer;
 }
@@ -260,8 +256,8 @@
     max-width: 20px;
     max-height: 20px;
     border-radius: 50%;
-    border: 1px solid var(--accent-color);
-    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color-2);
+    background-color: var(--accent-color-2);
     margin-inline-end: 0.5em;
     cursor: pointer;
 }
@@ -293,7 +289,7 @@
         height: 50px;
         width: 50px;
         border-radius: 50%;
-        background-color: var(--accent-color);
+        background-color: var(--accent-color-2);
         border: none;
         transform: translateY(110%);
         justify-content: center;
@@ -318,11 +314,8 @@
         min-height: 0;
         border-radius: 20px;
         transform: translateY(100%);
-        background-color: rgba(
-            0,
-            128,
-            128,
-            0.8
+        background-color: var(
+            --accent-color-2-dark
         ); /* Your accent color with some transparency */
         backdrop-filter: blur(3px); /* The amount of blur you want */
 
@@ -397,7 +390,7 @@
     justify-content: center;
     padding-inline: 2em;
     padding-block: 1em;
-
+    border-radius: var(--border-radius-large);
     border: none;
     box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
 }
@@ -409,13 +402,54 @@
     left: 0;
     right: 0;
     bottom: 0;
-    /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
+
     background-image: url("../images/background-pattern-7.png");
     background-repeat: repeat;
     background-size: 500px;
     background-color: white;
 }
 
+/*
+.modal {
+    position: absolute;
+    top: calc(var(--header-height) + 2em);
+    left: 2em;
+    right: 2em;
+    bottom: 2em;
+
+    overflow: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 2em;
+    padding-block: 1em;
+
+    border: none;
+    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 var(--accent-color-2-light);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    border-radius: var(--border-radius-medium);
+}
+
+.overlay {
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    background-image: url("../images/background-pattern-7.png");
+    background-repeat: repeat;
+    background-size: 500px;
+    background-color: white;
+}
+*/
 @media (width < 480px) {
     .create-resume-title-container .resume-description {
         font-size: 8px;
@@ -438,7 +472,7 @@
         border-color: transparent;
     }
     50% {
-        border-color: var(--accent-color);
+        border-color: var(--accent-color-2);
     }
     100% {
         border-color: transparent;

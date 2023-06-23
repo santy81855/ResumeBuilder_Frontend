@@ -83,14 +83,14 @@
     }
 
     .clean-resume-section:hover::after {
-        background-color: rgba(0, 128, 128, 0.5);
+        background-color: var(--accent-color-2-light);
         transform: scaleX(1.05);
         cursor: pointer;
     }
 
     @media (max-width: 480px) {
         .clean-resume-section:hover::after {
-            background-color: rgba(0, 128, 128, 0.5);
+            background-color: var(--accent-color-2-light);
             transform: scaleX(1.05);
             border-radius: 0px;
             cursor: pointer;

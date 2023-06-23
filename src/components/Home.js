@@ -33,31 +33,6 @@ function Home() {
         }
     };
 
-    const newResume = {
-        resumeTitle: "First Resume",
-        name: "John Doe",
-        email: "johndoe@example.com",
-        phone: "555-555-5555",
-        summary: "I am a software engineer with 5 years of experience.",
-        experience: [
-            {
-                title: "Software Engineer",
-                company: "Acme Corporation",
-                startDate: "01/01/2018",
-                endDate: "01/01/2021",
-                description:
-                    "Worked on the development of a web-based project management tool using React and Node.js.",
-            },
-        ],
-        education: [
-            {
-                school: "University of Example",
-                degree: "Bachelor of Science in Computer Science",
-                graduationDate: "05/01/2017",
-            },
-        ],
-    };
-
     // when they press create resume button they will be either redirected to the login page or to the first question
     const CreateResume = () => {
         const token = localStorage.getItem("token");
@@ -69,15 +44,6 @@ function Home() {
         }
     };
     const doNothingFunction = () => {};
-
-    const ResumeImages = () => {
-        return (
-            <div>
-                <img src={resume1} className="resume-pic-bottom" />
-                <img src={resume2} className="resume-pic-top" />
-            </div>
-        );
-    };
 
     return (
         <div className="landing-page">

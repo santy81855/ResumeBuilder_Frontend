@@ -225,13 +225,13 @@
     }
 
     .modern-resume-section:hover::before {
-        background-color: rgba(0, 128, 128, 0.5);
+        background-color: var(--accent-color-2-light);
         cursor: pointer;
     }
 
     @media (max-width: 480px) {
         .modern-resume-section:hover::before {
-            background-color: rgba(0, 128, 128, 0.5);
+            background-color: var(--accent-color-2-light);
             border-radius: 0px;
             cursor: pointer;
         }

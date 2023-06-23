@@ -428,6 +428,13 @@ const ExperienceInfo = ({
             <div className="experience-history-container">
                 {experienceList.map((job, index) => (
                     <div className="experience-item">
+                        <button
+                            className="delete-experience-item-button"
+                            id={index}
+                            onClick={removeJob}
+                        >
+                            Delete
+                        </button>
                         <h3>
                             {job.position}, {job.company}
                         </h3>
@@ -440,9 +447,6 @@ const ExperienceInfo = ({
                                 <li>{highlight}</li>
                             ))}
                         </ul>
-                        <button id={index} onClick={removeJob}>
-                            x
-                        </button>
                     </div>
                 ))}
             </div>
