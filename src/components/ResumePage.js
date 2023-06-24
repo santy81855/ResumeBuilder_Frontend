@@ -400,12 +400,11 @@ function ResumePage() {
     const headerSection = (
         <div>
             <div className="introContainer">
-                <h1>Welcome to your personal Resume Page!</h1>
+                <h1>Welcome to your personal Dashboard.</h1>
                 <p>
-                    Organize your job search with our Resume Page feature! Keep
-                    track of all your resumes and tailor them to specific job
-                    applications. You'll be able to quickly and easily access
-                    your resume history in one place.
+                    Keep track of all your resumes and tailor them to specific
+                    job applications. You'll be able to quickly and easily
+                    access your resume history in one place.
                 </p>
             </div>
             <div className="wave"></div>

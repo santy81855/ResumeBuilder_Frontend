@@ -486,9 +486,6 @@
         margin-inline: 0em;
     }
 
-    .ResumeTiles {
-        grid-template-columns: repeat(2, minmax(100px, 1fr));
-    }
     .VerticalLine {
         display: none;
     }
