@@ -27,6 +27,7 @@ function ResumePage() {
     const [searchArr, setSearchArr] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [createModal, setCreateModal] = useState(false);
+    const [showCreateResumeTile, setShowCreateResumeTile] = useState(true);
     // variables needed for creating new resume
     const [resumeTitle, setResumeTitle] = useState("");
     const [resumeJob, setResumeJob] = useState("");
@@ -55,6 +56,28 @@ function ResumePage() {
             setSearchArr(filteredArr);
         }
     }, [resumeSearch]);
+
+    useEffect(() => {
+        // whether to show or hide the create resume tile
+        function handleResize() {
+            const width = window.innerWidth;
+            if (width <= 600) {
+                setShowCreateResumeTile(false);
+            } else {
+                setShowCreateResumeTile(true);
+            }
+        }
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        // code for checking if the user already has a Clean entry in their json and if not then adding it
+
+        // loop through their templates array, and if "Clean" is not in the array then add it
+        // if the name is not there we add it
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     //********************************************//
     const getResumeQuery = useQuery({
@@ -450,7 +473,11 @@ function ResumePage() {
         );
     }
     const createResumeTile = (
-        <div className="CreateResumeTile" onClick={createResume}>
+        <div
+            className="CreateResumeTile"
+            id="CreateResumeTile"
+            onClick={createResume}
+        >
             <div className="EmptyResumePic">
                 <div className="ResumePlusIcon"></div>
             </div>
@@ -472,7 +499,7 @@ function ResumePage() {
                     <span>Welcome back, </span>
                     {userName}!
                 </h1>
-                <p>
+                <p className="HeaderDescription">
                     Keep track of all your resumes and tailor them to specific
                     job applications. You'll be able to quickly and easily
                     access your resume history in one place.
@@ -538,7 +565,7 @@ function ResumePage() {
                         ></input>
                     </div>
                     <div className="ResumeTiles">
-                        {createResumeTile}
+                        {showCreateResumeTile && createResumeTile}
                         {searchArr}
                     </div>
                 </div>

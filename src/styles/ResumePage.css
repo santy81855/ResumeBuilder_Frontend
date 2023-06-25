@@ -4,19 +4,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - var(--header-height) - 1px);
+    min-height: calc(100vh - var(--header-height) - 1px);
+    height: fit-content;
     align-items: center;
     position: relative;
     z-index: 0;
     overflow-x: hidden;
-    background: linear-gradient(
-        180deg,
-        var(--accent-color-2) 0%,
-        var(--accent-color-2) 50%,
-        var(--accent-color-2) 65%,
-        white 90%,
-        white 100%
-    );
+
+    background-color: var(--accent-color-2);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center top;
 }
 
 .BackgroundImageResume {
@@ -188,13 +186,6 @@
     padding-block-start: 1rem;
 }
 
-.VerticalLine {
-    margin-top: 60px;
-    height: 100px;
-    width: 2px;
-    background-color: lightgray;
-}
-
 /* .ResumeTile {
     display: flex;
     flex-direction: column;
@@ -222,6 +213,7 @@
     align-items: center;
     justify-content: center;
     border: 2px dashed var(--accent-color-2);
+    border-radius: var(--border-radius-large);
 }
 
 .ResumePic {
@@ -280,6 +272,8 @@
     background-color: white;
     border-top: solid 1px lightgray;
     padding-inline: var(--gap-medium);
+    border-bottom-left-radius: var(--border-radius-large);
+    border-bottom-right-radius: var(--border-radius-large);
 }
 
 .ResumeDetails h2 {
@@ -365,7 +359,6 @@
 
 @media (pointer: coarse) {
     .CreateResumeTile {
-        display: none;
     }
 }
 
@@ -443,32 +436,26 @@
 }
 
 @media (max-width: 768px) {
-    .introContainer {
-        margin-block-start: 0;
-    }
-
-    .ResumeSection {
-        margin-block-end: 0px;
+    .PageContainer .Section {
+        width: calc(100% - var(--gap-medium));
     }
 
     .ResumeTiles {
         grid-template-columns: repeat(2, minmax(100px, 1fr));
-        margin-inline: 0em;
-    }
-
-    .VerticalLine {
-        display: none;
     }
 }
 
 @media (max-width: 600px) {
     .PageContainer .Section {
-        box-sizing: border-box;
-        width: calc(100% - var(--gap-large));
+    }
+
+    .PageContainer .Section .HeaderDescription {
+        display: none;
     }
 
     .introContainer {
         margin-block-start: var(--gap-large);
+        padding-block-end: var(--gap-xlarge);
     }
 
     .ResumeSection {
@@ -491,6 +478,23 @@
         background-repeat: no-repeat;
         background-position: center;
     }
+
+    .ResumeTiles {
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-auto-flow: column;
+        overflow-x: auto;
+        padding-block: var(--gap-medium);
+    }
+
+    .ResumeTile {
+        box-shadow: none;
+        width: 300px;
+    }
+
+    .CreateResumeTile {
+        width: 300px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -507,10 +511,6 @@
         width: 90%;
     }
 
-    .ResumeTiles {
-        grid-template-columns: repeat(1, minmax(100px, 1fr));
-    }
-
     .PageTitleContainer {
         flex-direction: column;
     }
@@ -521,12 +521,13 @@
         margin-top: var(--gap-medium);
     }
 
-    .VerticalLine {
-        display: none;
+    .ResumeTile {
+        box-shadow: none;
+        width: 240px;
     }
 
     .CreateResumeTile {
-        display: none;
+        width: 240px;
     }
 }
 
@@ -603,7 +604,8 @@
 }
 
 .modal .create-resume-info-container {
-    width: 100%;
+    box-sizing: border-box;
+    width: calc(100% - var(--gap-large));
     height: 100%;
     display: flex;
     flex-direction: column;
