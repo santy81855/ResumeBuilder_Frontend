@@ -97,53 +97,51 @@ function LoginForm() {
 
     return (
         <div className="login-background">
-            <div className="login-container">
-                <div className="login-form">
-                    <form onSubmit={handleLoginSubmit}>
-                        <h2>Login</h2>
-                        <label>
-                            Email:
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Password:
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </label>
-                        <button className="login-btn" type="submit">
-                            Login
-                        </button>
-                    </form>
-                    <div className="login-options">
-                        <div
-                            className="google-login-btn"
-                            onClick={handleGoogleLogin}
+            <div className="login-form">
+                <form onSubmit={handleLoginSubmit}>
+                    <h2>Login</h2>
+                    <label>
+                        <p>Email:</p>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        <p>Password:</p>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </label>
+                    <button className="login-btn" type="submit">
+                        Login
+                    </button>
+                </form>
+                <div className="login-options">
+                    <div
+                        className="google-login-btn"
+                        onClick={handleGoogleLogin}
+                    >
+                        <img
+                            src={googleLogo}
+                            className="google-logo"
+                            alt="logo"
+                        />
+                        Login with Google
+                    </div>
+                    <div className="create-account-div">
+                        <p className="make-account-message">
+                            Don't have an account?
+                        </p>
+                        <a
+                            className="create-account-btn"
+                            href="/create-account"
                         >
-                            <img
-                                src={googleLogo}
-                                className="google-logo"
-                                alt="logo"
-                            />
-                            Login with Google
-                        </div>
-                        <div className="create-account-div">
-                            <p className="make-account-message">
-                                Don't have an account?
-                            </p>
-                            <a
-                                className="create-account-btn"
-                                href="/create-account"
-                            >
-                                (Create account)
-                            </a>
-                        </div>
+                            (Create account)
+                        </a>
                     </div>
                 </div>
             </div>

@@ -1,48 +1,79 @@
 /* createAccount.css */
 .create-account-background {
-    background-image: url("../images/LoginBackground.png");
+    width: 100%;
+    background-image: url("../images/editorBackground.png");
     background-size: cover;
-    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-position: center;
+    overflow-y: auto;
+    height: calc(100vh - var(--header-height) - 1px);
 }
 
 .create-account-form {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 50px 50px 50px 50px;
-    height: 80%;
+    box-sizing: border-box;
+    max-height: 95%;
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(9px);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(190, 190, 190, 0.2);
+    border-radius: var(--border-radius-large);
+    padding-inline: var(--gap-large);
+    padding-top: var(--gap-small);
+    min-width: 270px;
+    width: 80%;
+    max-width: var(--max-width-small);
+    margin-inline-start: var(--gap-large);
+    margin-inline-end: var(--gap-large);
 }
 
 .create-account-form h2 {
     text-align: center;
+    color: var(--accent-color-2);
 }
 
 .create-account-form label {
-    display: block;
-    margin-bottom: 10px;
     text-align: left;
+    display: block;
+}
+
+.create-account label p {
+    margin: 0;
+    padding: 0;
 }
 
 .create-account-form input {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
+    padding: var(--gap-medium);
+    border-radius: var(--border-radius-small);
+    margin-block-start: 0;
+    margin-block-end: var(--gap-large);
     border: none;
-    margin-bottom: 20px;
     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(95, 95, 95, 0.3);
+}
+
+.create-account-form input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .create-account-form .submit-btn {
-    background-color: #008080;
+    background-color: var(--accent-color-2);
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius-small);
     cursor: pointer;
+    height: 50px;
+    font-size: var(--font-small);
+    margin-block-start: var(--gap-medium);
+    margin-block-end: var(--gap-large);
 }
 
 .create-account-form .cancel-btn {
@@ -60,20 +91,25 @@
     margin-top: 20px;
 }
 
-.create-account-form .form-options button {
-    width: 48%;
+.create-account-form .input-field-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--gap-medium);
 }
 
-.create-account-form .form-options button:first-child {
-    background-color: #008080;
+.create-account-form .input-field-container label {
+    flex-grow: 1;
 }
 
-.create-account-form .form-options button:last-child {
-    background-color: #db4437;
+.create-account-form .user-input {
+    display: flex;
+    flex-direction: column;
 }
 
-.create-account-form .password-match-error {
-    color: red;
-    margin-top: 10px;
-    text-align: center;
+@media screen and (max-width: 400px) {
+    .create-account-form .input-field-container {
+        flex-direction: column;
+        gap: 0;
+    }
 }

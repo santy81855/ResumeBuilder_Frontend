@@ -1,66 +1,73 @@
-/* LoginForm.css */
 .login-background {
-    background-image: url("../images/LoginBackgroundBlur.png");
-    background-size: cover;
-    height: 100vh;
-    background-position: center;
-    filter: blur(0px);
-}
-
-.login-container {
-    background-color: rgba(255, 255, 255, 0.2);
     width: 100%;
-    height: 100%;
+    background-image: url("../images/editorBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    overflow-y: auto;
+    height: calc(100vh - var(--header-height) - 1px);
 }
 
 .login-form {
-    border-radius: 10px;
-    padding-top: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
-    min-width: 200px;
-    max-width: 300px;
-    border-color: rgb(255, 255, 255);
-    border-style: solid;
+    padding-top: var(--gap-small);
+    padding-inline: var(--gap-large);
+    width: 270px;
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.7);
-    margin-top: -80px;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(9px);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(190, 190, 190, 0.2);
+    border-radius: var(--border-radius-large);
+    margin-block: auto;
 }
 
 .login-form h2 {
     text-align: center;
+    color: var(--accent-color-2);
 }
 
 .login-form label {
     display: block;
-    margin-bottom: 10px;
     text-align: left;
+}
+
+.login-form label p {
+    margin: 0;
+    padding: 0;
 }
 
 .login-form input {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
+    padding: var(--gap-medium);
+    border-radius: var(--border-radius-small);
+    margin-block-start: var(--gap-small);
+    margin-block-end: var(--gap-large);
     border: none;
-    margin-bottom: 15px;
     box-sizing: border-box;
-    background-color: rgb(202, 247, 255);
-    border: 1px solid rgba(167, 219, 228, 0.4);
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(95, 95, 95, 0.3);
+}
+
+.login-form input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .login-form .login-btn {
-    background-color: #008080;
+    background-color: var(--accent-color-2);
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius-small);
     cursor: pointer;
     height: 50px;
-    font-size: 15px;
+    font-size: var(--font-small);
+    margin-block-start: var(--gap-small);
+    margin-block-end: 0;
 }
 
 .google-login-btn {
@@ -74,8 +81,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
-    margin-top: 0px;
+    font-size: var(--font-small);
 }
 
 .google-logo {
@@ -95,11 +101,12 @@ button[type="submit"] {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-block-end: var(--gap-large);
 }
 
 .make-account-message {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: var(--font-xsmall);
     font-style: italic;
 }
 
@@ -113,7 +120,12 @@ button[type="submit"] {
 
 .login-form .login-options {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    height: 150px;
+    justify-content: center;
+    gap: var(--gap-small);
+    margin-block-start: var(--gap-small);
+}
+
+.login-form .login-options p {
+    margin: 0;
 }

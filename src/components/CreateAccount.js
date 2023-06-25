@@ -32,7 +32,16 @@ function CreateAccount() {
 
     const handleCreateAccount = (event) => {
         event.preventDefault();
-        if (password !== confirmPassword) {
+        if (
+            first === "" ||
+            last === "" ||
+            username === "" ||
+            email === "" ||
+            password === "" ||
+            confirmPassword === ""
+        ) {
+            alert("Please fill out all fields");
+        } else if (password !== confirmPassword) {
             alert("Passwords do not match");
         } else {
             createUserQuery.mutate({
@@ -91,54 +100,60 @@ function CreateAccount() {
             <div className="create-account-form">
                 <form onSubmit={handleCreateAccount}>
                     <h2>Create an Account</h2>
-                    <label>
-                        Name:
-                        <input
-                            type="text"
-                            value={first}
-                            onChange={(e) => setFirst(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Last Name:
-                        <input
-                            type="text"
-                            value={last}
-                            onChange={(e) => setLast(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Username:
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Email:
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Password:
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Confirm Password:
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                    </label>
+                    <div className="user-input">
+                        <div className="input-field-container">
+                            <label>
+                                <p>First Name:</p>
+                                <input
+                                    type="text"
+                                    value={first}
+                                    onChange={(e) => setFirst(e.target.value)}
+                                />
+                            </label>
+                            <label>
+                                <p>Last Name:</p>
+                                <input
+                                    type="text"
+                                    value={last}
+                                    onChange={(e) => setLast(e.target.value)}
+                                />
+                            </label>
+                        </div>
+                        <label>
+                            <p>Username:</p>
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            <p>Email:</p>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            <p>Password:</p>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            <p>Confirm Password:</p>
+                            <input
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                }
+                            />
+                        </label>
+                    </div>
                     <button className="submit-btn" type="submit">
                         Create Account
                     </button>

@@ -116,8 +116,6 @@ const Header = observer(() => {
                     )}
                 </a>
             );
-        } else {
-            return <a href="/login">Log In</a>;
         }
     };
 
@@ -145,8 +143,10 @@ const Header = observer(() => {
             </div>
             <div className="Header-right">
                 <a href="/">Home</a>
-                {localStorage.getItem("token") && (
+                {localStorage.getItem("token") ? (
                     <a href="/u/resumes">Dashboard</a>
+                ) : (
+                    <a href="/login">Login</a>
                 )}
                 {renderAuthButton()}
             </div>
@@ -155,8 +155,10 @@ const Header = observer(() => {
                 {localStorage.getItem("token") && (
                     <a href="/account">Account</a>
                 )}
-                {localStorage.getItem("token") && (
+                {localStorage.getItem("token") ? (
                     <a href="/u/resumes">Dashboard</a>
+                ) : (
+                    <a href="/login">Login</a>
                 )}
                 {localStorage.getItem("token") && (
                     <a style={{ cursor: "pointer" }} onClick={handleUserLogout}>

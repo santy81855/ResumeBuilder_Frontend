@@ -439,7 +439,7 @@ function ResumePage() {
 
     const headerSection = (
         <div className="HeaderSection">
-            <div className="introContainer">
+            <div className="introContainer Section">
                 <h1>Welcome to your personal Dashboard.</h1>
                 <p>
                     Keep track of all your resumes and tailor them to specific
@@ -485,6 +485,7 @@ function ResumePage() {
         return (
             <div className="PageContainer">
                 {headerSection}
+                <div className="diffusion"></div>
                 <div className="ResumeSection Section">
                     <div className="PageTitleContainer">
                         <div className="PageTitle">Resumes</div>
