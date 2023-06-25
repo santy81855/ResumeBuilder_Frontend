@@ -1,12 +1,66 @@
 .question-container {
+    box-sizing: border-box;
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: var(--gap-large);
     align-items: flex-start;
     width: 100%;
-    max-width: 750px;
-    height: 100%;
+    padding-inline: var(--gap-large);
+    max-width: var(--max-width-medium);
     min-width: 300px;
+    height: 100%;
+}
+
+.question-container .header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding-inline: var(--gap-medium);
+    background-color: var(--accent-color-2);
+    padding-block: var(--gap-xlarge);
+    position: relative;
+    z-index: 0;
+}
+
+.question-container .header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -100px;
+    width: 150%;
+    height: 100%;
+    background-color: var(--accent-color-2);
+    z-index: -1;
+}
+
+.question-container .header h2 {
+    margin-block-start: var(--gap-small);
+    color: white;
+}
+
+.question-container .header h3 {
+    margin-block: var(--gap-small);
+    color: white;
+}
+
+.question-container .header p {
+    margin-block-start: var(--gap-small);
+    color: white;
+}
+
+.question-container textarea {
+    border: 1px solid var(--accent-color-2);
+    padding-inline: var(--gap-small);
+    box-sizing: border-box;
+}
+.question-container input {
+    border: 1px solid var(--accent-color-2);
+    padding-inline: var(--gap-small);
+    box-sizing: border-box;
 }
 
 .question-container h2 {
@@ -45,8 +99,15 @@
     text-align: left;
 }
 
+.question-container .input-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+}
+
 .short-input {
-    padding-block: 10px;
+    padding-block: var(--gap-small);
+    min-width: 300px;
 }
 
 .long-input {
@@ -171,15 +232,16 @@
 }
 
 .experience-history-container {
-    margin-block-start: 2em;
+    margin-block-start: var(--gap-xlarge);
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.5em;
+    gap: var(--gap-small);
     background-color: transparent;
 }
 
 .experience-item {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: transparent;
@@ -212,16 +274,16 @@
 .input-container-horizontal {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 1em;
+    justify-content: space-between;
+    gap: var(--gap-medium);
+    width: 100%;
 }
 
 .experience-button-container {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-block-start: 1em;
-    padding-inline: 0em;
+    margin-block-start: var(--gap-medium);
 }
 
 .experience-button {
@@ -229,9 +291,7 @@
     background-color: white;
     border: 2px solid var(--accent-color-2);
     cursor: pointer;
-    padding-inline: 0em;
-    padding-block: 1em;
-    border-radius: 5px;
+    padding-block: var(--gap-medium);
     width: 100%;
 }
 
@@ -240,10 +300,13 @@
     font-weight: 600;
 }
 
-.job-summary {
+.job-summary-container {
     width: 100%;
-    max-width: 750px;
+}
+
+.job-summary {
     resize: none;
+    width: 100%;
 }
 
 .job-summary .highlight-text-container {
@@ -262,12 +325,12 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    gap: 1em;
+    gap: var(--gap-medium);
 }
 
 .add-highlight-container .highlight-button-container {
     display: flex;
-    gap: 0.5em;
+    gap: var(--gap-small);
 }
 
 .add-highlight-container button {
@@ -295,7 +358,7 @@
     border: none;
     padding-block: 0.5em;
     cursor: pointer;
-    border-radius: 5px;
+
     color: white;
 }
 
@@ -310,4 +373,20 @@
     justify-content: flex-end;
     width: 100%;
     gap: 0.5em;
+}
+
+/*media query for when screen gets smaller than 545 px*/
+@media screen and (max-width: 680px) {
+    .question-container .input-item {
+        width: 100%;
+    }
+
+    .question-container .input-item p {
+        align-self: center;
+    }
+
+    .short-input {
+        flex-grow: 1;
+        padding-block: var(--gap-medium);
+    }
 }

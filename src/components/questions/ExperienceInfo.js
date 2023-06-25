@@ -222,8 +222,10 @@ const ExperienceInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Employment History</h2>
-            <p>Enter your work experience in this section.</p>
+            <div className="header">
+                <h2>Employment History</h2>
+                <p>Enter your previous work experience in this section.</p>
+            </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
                     <p>Company</p>
@@ -278,7 +280,7 @@ const ExperienceInfo = ({
                     ></input>
                 </div>
             </div>
-            <div className="job-summary">
+            <div className="job-summary-container">
                 <p>Job Summary</p>
                 <textarea
                     ref={summaryRef}
@@ -308,7 +310,7 @@ const ExperienceInfo = ({
                     </div>
                 </div>
             </div>
-            <div className="job-summary">
+            <div className="job-summary-container">
                 <div className="add-highlight-container">
                     <p>Highlights</p>
                     <div className="highlight-button-container">

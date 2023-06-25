@@ -69,16 +69,19 @@ const SkillsInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Skills</h2>
-            <h3>Write any relevant skills.</h3>
-            <p>
-                Be specific and relevant: Instead of listing generic skills, try
-                to be specific and tailor your skills to the job or industry
-                you're applying for. Consider including skills that directly
-                align with the job requirements or skills that demonstrate your
-                expertise in a particular area. This will help employers quickly
-                identify your relevant skills and qualifications.
-            </p>
+            <div className="header">
+                <h2>Skills</h2>
+                <h3>Write any relevant skills.</h3>
+                <p>
+                    Be specific and relevant: Instead of listing generic skills,
+                    try to be specific and tailor your skills to the job or
+                    industry you're applying for. Consider including skills that
+                    directly align with the job requirements or skills that
+                    demonstrate your expertise in a particular area. This will
+                    help employers quickly identify your relevant skills and
+                    qualifications.
+                </p>
+            </div>
             <div className="skill-input-container">
                 <input
                     value={skillInput}

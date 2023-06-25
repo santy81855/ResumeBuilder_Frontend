@@ -80,17 +80,20 @@ const Summary = ({
 
     return (
         <div className="question-container">
-            <h2>Summary</h2>
-            <h3>
-                Describe your work experience, skills, and achievements in a
-                concise and informative manner in this section.
-            </h3>
+            <div className="header">
+                <h2>Summary</h2>
+                <h3>
+                    Describe your work experience, skills, and achievements in a
+                    concise and informative manner in this section.
+                </h3>
 
-            <p>
-                This section should highlight your unique value proposition as a
-                candidate and grab the attention of the hiring manager.
-            </p>
+                <p>
+                    This section should highlight your unique value proposition
+                    as a candidate and grab the attention of the hiring manager.
+                </p>
+            </div>
             <div className="long-input-container">
+                <p>Summary</p>
                 <textarea
                     ref={summaryRef}
                     className="long-input summary"

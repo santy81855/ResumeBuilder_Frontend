@@ -68,17 +68,19 @@ const InterestsInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Interests</h2>
-            <h3>Include any of your interests.</h3>
-            <p>
-                Including interests can help portray you as a well-rounded
-                individual with diverse passions and hobbies outside of work. It
-                provides employers with a glimpse into your personality and can
-                help establish a connection beyond your professional
-                qualifications. Sharing interests can make you more relatable
-                and memorable, potentially setting you apart from other
-                candidates.
-            </p>
+            <div className="header">
+                <h2>Interests</h2>
+                <h3>Include any of your interests.</h3>
+                <p>
+                    Including interests can help portray you as a well-rounded
+                    individual with diverse passions and hobbies outside of
+                    work. It provides employers with a glimpse into your
+                    personality and can help establish a connection beyond your
+                    professional qualifications. Sharing interests can make you
+                    more relatable and memorable, potentially setting you apart
+                    from other candidates.
+                </p>
+            </div>
             <div className="skill-input-container">
                 <input
                     ref={interestBarRef}

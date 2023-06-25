@@ -3,6 +3,8 @@ import axios from "axios";
 const createResume = (data) => {
     console.log(data);
     const d = new Date();
+    console.log("date:");
+    console.log(d);
     const token = localStorage.getItem("token");
     return axios
         .post(
@@ -11,7 +13,8 @@ const createResume = (data) => {
                 resumeTitle: data.resumeTitleParam,
                 jobTitle: data.jobTitleParam,
                 resumeDescription: data.resumeDescriptionParam,
-                lastFetched: d.toDateString(),
+                lastFetched: d,
+                //lastFetched: d.toDateString(),
                 template: data.templateParam,
                 json: data.jsonParam,
             },
@@ -46,7 +49,8 @@ const updateResumeById = (data) => {
             resumeTitle: data.resumeTitleParam,
             jobTitle: data.jobTitleParam,
             resumeDescription: data.resumeDescriptionParam,
-            lastFetched: d.toDateString(),
+            lastFetched: d,
+            //lastFetched: d.toDateString(),
             template: data.templateParam,
             json: data.jsonParam,
         })

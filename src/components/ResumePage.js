@@ -6,10 +6,7 @@ import {
     getTemplateComponent,
     templateNameToExport,
 } from "../lib/TemplateKeys";
-import CleanTemplate from "./templates/CleanTemplate";
-import ModernTemplate from "./templates/ModernTemplate";
 import ResumeSkeleton from "./skeletons/ResumeSkeleton";
-import JSONResumeData from "../resume-schema.json";
 import Modal from "react-modal";
 import { savePDF } from "@progress/kendo-react-pdf";
 
@@ -22,14 +19,32 @@ import {
 
 function ResumePage() {
     const [resumeArr, setResumeArr] = useState([]);
+    const [searchArr, setSearchArr] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [createModal, setCreateModal] = useState(false);
     // variables needed for creating new resume
     const [resumeTitle, setResumeTitle] = useState("");
     const [resumeJob, setResumeJob] = useState("");
     const [resumeDescription, setResumeDescription] = useState("");
+    const [resumeSearch, setResumeSearch] = useState("");
     const navigate = useNavigate();
     const resumeToPrintRef = useRef();
+
+    // create a useEffect that is called whenever the 'resumeSearch' variable is changed
+    useEffect(() => {
+        // if the search bar is empty, then set the searchArr to the resumeArr
+        if (resumeSearch === "") {
+            setSearchArr(resumeArr);
+        } else {
+            // otherwise, filter the resumeArr to only include the resumes that match the search
+            const filteredArr = resumeArr.filter((item) => {
+                return item.key
+                    .toLowerCase()
+                    .includes(resumeSearch.toLowerCase());
+            });
+            setSearchArr(filteredArr);
+        }
+    }, [resumeSearch]);
 
     //********************************************//
     const getResumeQuery = useQuery({
@@ -54,12 +69,26 @@ function ResumePage() {
         queryKey: ["getAllUserResumes"],
         queryFn: getAllUserResumes,
         onSuccess: (data, variables, context) => {
+            // order the data items by date
+            const sortedByDate = [];
+            data.forEach((element) => {
+                var temp = element;
+                var tempDate = new Date(temp.lastFetched);
+                temp.lastFetched = tempDate;
+                sortedByDate.push(temp);
+            });
+            sortedByDate.sort((a, b) => {
+                return b.lastFetched - a.lastFetched;
+            });
+
             if (resumeArr.length === 0) {
                 const tempArr = [];
-                data.reverse().forEach((element) => {
+                sortedByDate.forEach((element) => {
                     tempArr.push(makeResumeTile(element));
                 });
                 setResumeArr(tempArr);
+                setSearchArr(tempArr);
+                console.log(tempArr);
             }
         },
         onError: (error, variables, context) => {
@@ -320,7 +349,15 @@ function ResumePage() {
     };
 
     function makeResumeTile(resumeData) {
-        const { resumeTitle, _id, lastFetched, template, json } = resumeData;
+        const {
+            resumeTitle,
+            _id,
+            lastFetched,
+            template,
+            json,
+            jobTitle,
+            resumeDescription,
+        } = resumeData;
         console.log(_id);
         const dateString = lastFetched;
         const date = new Date(dateString);
@@ -330,7 +367,7 @@ function ResumePage() {
             day: "2-digit",
             year: "numeric",
         });
-
+        const keyString = resumeTitle + jobTitle + resumeDescription;
         // determine the correct template
         const templateToShow = getTemplateComponent({
             json: json,
@@ -340,7 +377,7 @@ function ResumePage() {
         });
 
         return (
-            <div className="ResumeTile" key={_id}>
+            <div className="ResumeTile" key={keyString}>
                 <div
                     className="ResumePic"
                     id={_id}
@@ -397,8 +434,11 @@ function ResumePage() {
         </div>
     );
 
+    const wave = <div className="wave"></div>;
+    const gradient = <div className="gradient"></div>;
+
     const headerSection = (
-        <div>
+        <div className="HeaderSection">
             <div className="introContainer">
                 <h1>Welcome to your personal Dashboard.</h1>
                 <p>
@@ -407,8 +447,6 @@ function ResumePage() {
                     access your resume history in one place.
                 </p>
             </div>
-            <div className="wave"></div>
-            <div className="gradient"></div>
         </div>
     );
 
@@ -441,7 +479,8 @@ function ResumePage() {
         );
     }
     // if error
-    else if (resumesQuery.status === "error") return <div>error</div>;
+    else if (resumesQuery.status === "error")
+        return <div>{resumesQuery.error}</div>;
     else {
         return (
             <div className="PageContainer">
@@ -454,9 +493,21 @@ function ResumePage() {
                             <p>Create New</p>
                         </div>
                     </div>
+                    <div className="SearchBarContainer">
+                        <h4>Search:</h4>
+                        <input
+                            className="SearchBar"
+                            type="text"
+                            placeholder="search by name, job, or description"
+                            value={resumeSearch}
+                            onChange={(event) => {
+                                setResumeSearch(event.currentTarget.value);
+                            }}
+                        ></input>
+                    </div>
                     <div className="ResumeTiles">
                         {createResumeTile}
-                        {resumeArr}
+                        {searchArr}
                     </div>
                 </div>
                 {exportModal}

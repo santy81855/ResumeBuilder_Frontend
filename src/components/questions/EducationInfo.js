@@ -165,8 +165,10 @@ const EducationInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Education</h2>
-            <p>Enter your education history in this section.</p>
+            <div className="header">
+                <h2>Education</h2>
+                <p>Enter your education history in this section.</p>
+            </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
                     <p>Institution</p>

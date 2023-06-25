@@ -68,12 +68,14 @@ const LanguagesInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Languages</h2>
-            <h3>Include any languages that you are proficient in.</h3>
-            <p>
-                Including languages in a resume can provide several benefits and
-                can be seen as a valuable asset by employers
-            </p>
+            <div className="header">
+                <h2>Languages</h2>
+                <h3>Include any languages that you are proficient in.</h3>
+                <p>
+                    Including languages in a resume can provide several benefits
+                    and can be seen as a valuable asset by employers
+                </p>
+            </div>
             <div className="skill-input-container">
                 <input
                     ref={languageBarRef}
@@ -86,6 +88,7 @@ const LanguagesInfo = ({
                 ></input>
                 <button onClick={addLanguage}>+</button>
             </div>
+
             <div className="skill-container">
                 {languageList.map((skill, index) => (
                     <div id={index} className="skill-item">

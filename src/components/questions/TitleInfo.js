@@ -43,36 +43,33 @@ const TitleInfo = ({
 
     return (
         <div className="question-container">
-            <h2>Contact Information</h2>
-            <h3>
-                Describe your work experience, skills, and achievements in a
-                concise and informative manner in this section.
-            </h3>
-            <p>
-                This section should highlight your unique value proposition as a
-                candidate and grab the attention of the hiring manager.
-            </p>
-            <div>
-                <p>Name</p>
-                <input
-                    id="name"
-                    ref={nameRef}
-                    className="short-input"
-                    type="text"
-                    onChange={handleChange}
-                    value={name}
-                ></input>
+            <div className="header">
+                <h2>Header Information</h2>
             </div>
-            <p>Label</p>
-            <input
-                id="label"
-                ref={labelRef}
-                className="short-input"
-                type="text"
-                onChange={handleChange}
-                value={label}
-            ></input>
-
+            <div className="input-container-horizontal">
+                <div className="input-item">
+                    <p>Name</p>
+                    <input
+                        id="name"
+                        ref={nameRef}
+                        className="short-input"
+                        type="text"
+                        onChange={handleChange}
+                        value={name}
+                    ></input>
+                </div>
+                <div className="input-item">
+                    <p>Label</p>
+                    <input
+                        id="label"
+                        ref={labelRef}
+                        className="short-input"
+                        type="text"
+                        onChange={handleChange}
+                        value={label}
+                    ></input>
+                </div>
+            </div>
             <div className="question-container-button-container">
                 <button
                     className="question-container-close-button"

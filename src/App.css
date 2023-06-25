@@ -23,6 +23,7 @@ body {
     --accent-color-2-xlight: rgb(18, 18, 59, 0.2);
     --accent-color-2-light: rgb(18, 18, 59, 0.5);
     --accent-color-2-dark: rgb(18, 18, 59, 0.8);
+    --red-color: rgb(206, 90, 90);
     --text-max-width: 600px;
     --gap-small: 0.5em;
     --gap-medium: 1em;
@@ -37,6 +38,7 @@ body {
     --border-radius-small: 5px;
     --border-radius-medium: 10px;
     --border-radius-large: 15px;
+    --border-radius-xlarge: 30px;
     --max-width-xsmall: 300px;
     --max-width-small: 500px;
     --max-width-medium: 800px;
