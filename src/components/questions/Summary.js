@@ -30,6 +30,7 @@ const Summary = ({
             onSuccess: (data) => {
                 console.log(data.result.content);
                 setSummary(data.result.content);
+
                 setResumeData({
                     ...resumeData,
                     summary: data.result.content,
@@ -96,6 +97,7 @@ const Summary = ({
                 <p>Summary</p>
                 <textarea
                     ref={summaryRef}
+                    id="summary"
                     className="long-input summary"
                     placeholder="+ Write your summary here."
                     type="text"
@@ -106,22 +108,23 @@ const Summary = ({
                     }}
                     rows="10"
                 />
-            </div>
-            <div className="prompt-buttons">
-                <div className="left">
-                    <button className="enhance-button" onClick={clear}>
-                        Clear
-                    </button>
+                <div className="prompt-buttons">
+                    <div className="left">
+                        <button className="enhance-button" onClick={clear}>
+                            Clear
+                        </button>
+                    </div>
+                    <div className="right">
+                        <button className="enhance-button" onClick={enhance}>
+                            enhance
+                        </button>
+                        <button className="enhance-button" onClick={generate}>
+                            generate
+                        </button>
+                    </div>
                 </div>
-                <div className="right">
-                    <button className="enhance-button" onClick={enhance}>
-                        enhance
-                    </button>
-                    <button className="enhance-button" onClick={generate}>
-                        generate
-                    </button>
-                </div>
             </div>
+
             <div className="question-container-button-container">
                 <button
                     className="question-container-close-button"

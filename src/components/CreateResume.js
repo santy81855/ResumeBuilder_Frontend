@@ -209,15 +209,23 @@ function CreateResume() {
     };
     // handle resize for when the floating menu should or should not be toggleable
     function handleResize() {
-        if (window.innerWidth > TOGGLE_SIDEBAR_SIZE) {
+        if (window.innerWidth < TOGGLE_SIDEBAR_SIZE) {
             const sideBar = document.getElementById("side-bar");
             const button = document.getElementById("side-bar-toggle-button");
 
             if (!!sideBar && !!button) {
+                console.log("here");
                 sideBar.style.transform = "translateY(0%)";
                 sideBar.style.left = "2.5%";
                 sideBar.style.bottom = "0.5em";
                 button.style.display = "none";
+            }
+        } else {
+            const sideBar = document.getElementById("side-bar");
+            const button = document.getElementById("side-bar-toggle-button");
+            if (!!sideBar && !!button) {
+                sideBar.style.left = "0";
+                sideBar.style.bottom = "0";
             }
         }
         document.addEventListener("click", (event) =>

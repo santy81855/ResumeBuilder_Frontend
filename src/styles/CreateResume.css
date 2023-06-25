@@ -45,12 +45,12 @@
     flex-direction: column;
     align-items: center;
     width: 80px;
-    min-height: calc(100vh - var(--header-height) - 1px);
-    background-color: var(
-        --accent-color-2-dark
-    ); /* Your accent color with some transparency */
-    backdrop-filter: blur(3px); /* The amount of blur you want */
+    height: calc(100vh - var(--header-height) - 1px);
+    background-color: var(--accent-color-2-dark);
+    backdrop-filter: blur(5px); /* The amount of blur you want */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* A subtle box shadow to add depth */
+    position: fixed;
+    left: 0;
 }
 
 .create-resume-button {
