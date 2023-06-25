@@ -17,7 +17,12 @@ import {
     getResumeById,
 } from "../api/resume/ResumeRequests";
 
+import { getUser } from "../api/user/UserRequests";
+
 function ResumePage() {
+    const [userName, setUserName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [resumeArr, setResumeArr] = useState([]);
     const [searchArr, setSearchArr] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -29,6 +34,11 @@ function ResumePage() {
     const [resumeSearch, setResumeSearch] = useState("");
     const navigate = useNavigate();
     const resumeToPrintRef = useRef();
+
+    // useEffect to fetch user data on load
+    useEffect(() => {
+        getUserQuery.refetch();
+    }, []);
 
     // create a useEffect that is called whenever the 'resumeSearch' variable is changed
     useEffect(() => {
@@ -115,6 +125,25 @@ function ResumePage() {
         onMutate: (variables) => {
             return { hello: "goodbye" };
         },
+    });
+
+    const getUserQuery = useQuery({
+        queryKey: ["getUserByToken"],
+        queryFn: getUser,
+        onSuccess: (data, variables, context) => {
+            console.log(
+                "Just fetched user data in CreateResume component. Data: "
+            );
+            console.log(data);
+            setUserName(data.user.username);
+            setFirstName(data.user.first);
+            setLastName(data.user.last);
+        },
+        onError: (error, variables, context) => {
+            console.log("Error Fetching User in ResumePage component. Error: ");
+            console.log(error);
+        },
+        enabled: false,
     });
 
     //********************************************//
@@ -278,7 +307,9 @@ function ResumePage() {
             overlayClassName="overlay"
         >
             <div className="create-resume-info-container">
-                <h2>Resume Information</h2>
+                <div className="header">
+                    <h2>Resume Information</h2>
+                </div>
                 <div className="horizontal-container">
                     <h4>Title</h4>
                     <input
@@ -434,13 +465,13 @@ function ResumePage() {
         </div>
     );
 
-    const wave = <div className="wave"></div>;
-    const gradient = <div className="gradient"></div>;
-
     const headerSection = (
         <div className="HeaderSection">
             <div className="introContainer Section">
-                <h1>Welcome to your personal Dashboard.</h1>
+                <h1>
+                    <span>Welcome back, </span>
+                    {userName}!
+                </h1>
                 <p>
                     Keep track of all your resumes and tailor them to specific
                     job applications. You'll be able to quickly and easily

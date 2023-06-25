@@ -389,7 +389,8 @@
     left: 50%;
     transform: translate(-50%, 0%);
     max-width: var(--max-width-medium);
-    width: 100%;
+    width: calc(100% - var(--gap-x2large));
+
     height: calc(100vh var(--header-height) - 4em);
     overflow-y: auto;
     overflow-x: hidden;
@@ -480,6 +481,7 @@
         bottom: 0;
         border-radius: 0;
         transform: translate(0%, 0%);
+        width: 100%;
     }
 }
 

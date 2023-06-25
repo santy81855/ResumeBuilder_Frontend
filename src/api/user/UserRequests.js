@@ -1,5 +1,12 @@
 import axios from "axios";
 
+const getUser = () => {
+    const token = localStorage.getItem("token");
+    return axios
+        .get("http://localhost:3000/users/" + token)
+        .then((res) => res.data);
+};
+
 const createUser = (data) => {
     console.log(data);
     return axios
@@ -48,4 +55,4 @@ const logoutUser = () => {
         .then((res) => res.data);
 };
 
-export { loginSubmit, createUser, logoutUser };
+export { loginSubmit, createUser, logoutUser, getUser };
