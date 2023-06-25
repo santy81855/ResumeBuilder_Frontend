@@ -248,7 +248,7 @@ const CleanTemplate = ({
             <div
                 className="clean-template"
                 ref={templateRef}
-                id={isExport ? "template-to-print" : "modern-template"}
+                id={isExport ? "template-to-print" : "clean-template"}
             >
                 <div
                     className="clean-template-content"

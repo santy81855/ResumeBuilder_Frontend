@@ -252,7 +252,7 @@ function CreateResume() {
         );
         console.log(templateNameToExport[currentTemplate]);
         savePDF(content, {
-            // paperSize: "auto",
+            //paperSize: "auto",
             paperSize: "Letter",
             margin: 0,
             fileName: titleRef.current.value,

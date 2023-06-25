@@ -62,12 +62,14 @@ const ContactInfo = ({
             <div className="header">
                 <h2>Contact Information</h2>
                 <h3>
-                    Describe your work experience, skills, and achievements in a
-                    concise and informative manner in this section.
+                    Write the contact information you want to show on your
+                    resume.
                 </h3>
                 <p>
-                    This section should highlight your unique value proposition
-                    as a candidate and grab the attention of the hiring manager.
+                    A well-presented and comprehensive contact information
+                    section on a resume enhances your chances of being contacted
+                    for job interviews or further discussions about potential
+                    employment
                 </p>
             </div>
             <div className="input-container-horizontal">

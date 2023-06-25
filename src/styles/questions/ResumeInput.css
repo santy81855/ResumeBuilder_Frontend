@@ -17,7 +17,7 @@
     flex-direction: column;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     box-sizing: border-box;
     padding-inline: var(--gap-medium);
     background-color: var(--accent-color-2);
@@ -45,6 +45,7 @@
 .question-container .header h3 {
     margin-block: var(--gap-small);
     color: white;
+    text-align: left;
 }
 
 .question-container .header p {
