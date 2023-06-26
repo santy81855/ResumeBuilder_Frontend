@@ -177,12 +177,14 @@ function Home() {
                 <div className="right-feature-wrapper">
                     <div className="feature-right">
                         <div className="feature-image-section">
-                            Picture Here
+                            Create Resume Picture Here (Full Resume) then zoom
+                            into the summary with a pointer cursor on the
+                            enhance and generate button. On the second picture
+                            it will be an animation of clicking the enhance
+                            button and then the resume will be enhanced.
                         </div>
                         <div className="feature-text-section">
-                            <p className="header">
-                                Can't find the right words?
-                            </p>
+                            <p className="header"></p>
                             <p className="body">
                                 Leverage the power of artificial intelligence to
                                 streamline the resume creation process. Whether

@@ -121,7 +121,6 @@ function ResumePage() {
                 });
                 setResumeArr(tempArr);
                 setSearchArr(tempArr);
-                console.log(tempArr);
             }
         },
         onError: (error, variables, context) => {
@@ -217,6 +216,7 @@ function ResumePage() {
         const content = document.getElementById("template-to-print");
         savePDF(content, {
             paperSize: "Letter",
+
             margin: 0,
             fileName: "resume.pdf",
             landscape: false,
@@ -228,28 +228,47 @@ function ResumePage() {
     };
 
     const exportModal = (
-        <Modal
-            className="export-modal"
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            contentLabel="export-modal"
-            overlayClassName="export-overlay"
-        >
-            <button onClick={exportPDF}>hi</button>
-            {getResumeQuery.isSuccess ? (
-                // determine the correct template
-                getTemplateComponent({
-                    json: getResumeQuery.data.json,
-                    isPreview: true,
-                    handleSectionChange: doNothingFunction,
-                    template: getResumeQuery.data.template,
-                    isExport: true,
-                })
-            ) : (
-                <div>getResumeQueryError</div>
-            )}
-        </Modal>
+        <div>
+            <Modal
+                className="export-modal"
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                contentLabel="export-modal"
+                overlayClassName="export-overlay"
+            >
+                {getResumeQuery.isSuccess ? (
+                    // determine the correct template
+                    getTemplateComponent({
+                        json: getResumeQuery.data.json,
+                        isPreview: true,
+                        handleSectionChange: doNothingFunction,
+                        template: getResumeQuery.data.template,
+                        isExport: false,
+                    })
+                ) : (
+                    <div>getResumeQueryError</div>
+                )}
+                <div className="export-modal-buttons">
+                    <button onClick={closeModal}>Close</button>
+                    <button onClick={exportPDF}>Export Resume</button>
+                </div>
+            </Modal>
+            <div className="hidden-template">
+                {getResumeQuery.isSuccess ? (
+                    // determine the correct template
+                    getTemplateComponent({
+                        json: getResumeQuery.data.json,
+                        isPreview: true,
+                        handleSectionChange: doNothingFunction,
+                        template: getResumeQuery.data.template,
+                        isExport: true,
+                    })
+                ) : (
+                    <div>getResumeQueryError</div>
+                )}
+            </div>
+        </div>
     );
 
     const handleEditClick = (event, id) => {

@@ -19,6 +19,7 @@
     width: 70%;
     max-width: 800px;
     margin-inline: auto;
+    padding-inline-start: 80px;
     padding-block-start: 3em;
     margin-block-end: 3em;
 }
