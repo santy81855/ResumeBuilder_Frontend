@@ -3,6 +3,8 @@ import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { sendChat } from "../../api/ai/AIRequests";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ExperienceInfo = ({
     resumeData,
@@ -64,30 +66,71 @@ const ExperienceInfo = ({
     };
 
     const enhance = () => {
-        if (
-            companyRef.current.value === "" &&
-            positionRef.current.value === ""
-        ) {
-            alert(
-                "Please fill out the company name and your position in that company."
-            );
-            return;
-        } else if (positionRef.current.value === "") {
-            alert("Please fill out the position for this job.");
-            return;
-        } else if (companyRef.current.value === "") {
-            alert("Please fill out the company name.");
-            return;
-        }
-        if (summary !== "") {
-            var userPrompt =
-                "enhance the following job summary for a " +
-                positionRef.current.value +
-                " job to make it more professional and to make it better for applying to be a " +
-                jobTitle +
-                ": " +
-                summary;
-            fetchAIResponse(userPrompt);
+        if (summary === "") {
+            toast.info("There is nothing to enhance.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } else {
+            if (
+                companyRef.current.value === "" &&
+                positionRef.current.value === ""
+            ) {
+                toast.info(
+                    "Please fill out the company name and your position in that company.",
+                    {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    }
+                );
+                return;
+            } else if (positionRef.current.value === "") {
+                toast.info("Please fill out the position for this job.", {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            } else if (companyRef.current.value === "") {
+                toast.info("Please fill out the company name.", {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            }
+            if (summary !== "") {
+                var userPrompt =
+                    "enhance the following job summary for a " +
+                    positionRef.current.value +
+                    " job to make it more professional and to make it better for applying to be a " +
+                    jobTitle +
+                    ": " +
+                    summary;
+                fetchAIResponse(userPrompt);
+            }
         }
     };
 
@@ -96,15 +139,43 @@ const ExperienceInfo = ({
             companyRef.current.value === "" &&
             positionRef.current.value === ""
         ) {
-            alert(
-                "Please fill out the company name and your position in that company."
+            toast.info(
+                "Please fill out the company name and your position in that company.",
+                {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                }
             );
             return;
         } else if (positionRef.current.value === "") {
-            alert("Please fill out the position for this job.");
+            toast.info("Please fill out the position for this job.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         } else if (companyRef.current.value === "") {
-            alert("Please fill out the company name.");
+            toast.info("Please fill out the company name.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
         console.log(jobTitle);
@@ -155,7 +226,17 @@ const ExperienceInfo = ({
         }
         // ensure all the necessary values are filled
         if (comp === "" || pos === "" || st === "" || en === "" || sum === "") {
-            alert("Fill out all of the fields.");
+            toast.info("Please fill out all of the fields.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
             return;
         }
         // make an object of the vars

@@ -10,6 +10,8 @@ import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 import CreateResumeModal from "./CreateResumeModal";
 import Modal from "react-modal";
 import { savePDF } from "@progress/kendo-react-pdf";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
@@ -126,6 +128,16 @@ function ResumePage() {
         onError: (error, variables, context) => {
             console.log("Error Fetching resumes");
             console.log(error);
+            toast.error(error, {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         },
     });
 
@@ -216,7 +228,6 @@ function ResumePage() {
         const content = document.getElementById("template-to-print");
         savePDF(content, {
             paperSize: "Letter",
-
             margin: 0,
             fileName: "resume.pdf",
             landscape: false,
@@ -436,9 +447,23 @@ function ResumePage() {
         );
     }
     // if error
-    else if (resumesQuery.status === "error")
-        return <div>{resumesQuery.error}</div>;
-    else {
+    else if (resumesQuery.status === "error") {
+        toast.error(resumesQuery.error.message, {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        return (
+            <div>
+                <ToastContainer />
+            </div>
+        );
+    } else {
         return (
             <div className="PageContainer">
                 {headerSection}
@@ -469,6 +494,7 @@ function ResumePage() {
                     </div>
                 </div>
                 {exportModal}
+                <ToastContainer />
                 <CreateResumeModal
                     createModal={createModal}
                     setCreateModal={setCreateModal}

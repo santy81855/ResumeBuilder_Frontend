@@ -54,42 +54,7 @@ function LoginForm() {
     useEffect(() => {
         checkLoginStatus();
     }, [navigate]);
-    /*
-    const handleLoginSubmit = (event) => {
-        event.preventDefault();
-        fetch("http://myhost.com:3000/auth/login", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data.status);
-                console.log(data.message);
-                console.log(data.user);
-                // handle login response (success or fail)
-                if (data.status == 200) {
-                    // successful login
-                    login(data.user, data.token);
-                    // clear input fields
-                    setEmail("");
-                    setPassword("");
-                    // redirect to home
-                    window.location.href = data.redirect;
-                } else if (data.status == 401) {
-                    alert(data.message);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-                console.log("fail");
-                // Handle login error
-            });
-    };
-*/
+
     const handleGoogleLogin = () => {
         // handle Google login functionality
         console.log("clicked google login");

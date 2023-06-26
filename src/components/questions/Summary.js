@@ -3,6 +3,8 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { sendChat } from "../../api/ai/AIRequests";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Summary = ({
     resumeData,
@@ -65,10 +67,21 @@ const Summary = ({
     };
 
     const enhance = () => {
-        if (summary !== "") {
-            var userPrompt = enhancePrompt + summary;
-            fetchAIResponse(userPrompt);
+        if (summary === "") {
+            toast.info("There is no summary to enhance.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
         }
+        var userPrompt = enhancePrompt + summary;
+        fetchAIResponse(userPrompt);
     };
 
     const generate = () => {

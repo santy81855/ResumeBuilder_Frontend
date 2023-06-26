@@ -3,6 +3,8 @@ import "../styles/CreateAccount.css";
 import { login } from "../store";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { createUser } from "../api/user/UserRequests";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateAccount() {
     const [first, setFirst] = useState("");
@@ -12,7 +14,6 @@ function CreateAccount() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    //--------------------------------------//
     const createUserQuery = useMutation({
         queryKey: ["createUser"],
         mutationFn: createUser,
@@ -40,9 +41,27 @@ function CreateAccount() {
             password === "" ||
             confirmPassword === ""
         ) {
-            alert("Please fill out all fields");
+            toast.info("Please fill out all of the fields.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } else if (password !== confirmPassword) {
-            alert("Passwords do not match");
+            toast.info("Passwords do not match.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } else {
             createUserQuery.mutate({
                 first: first,
@@ -53,48 +72,7 @@ function CreateAccount() {
             });
         }
     };
-    //--------------------------------------//
-    /*
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-        } else {
-            // Handle creating the account with the form data
-            const user = {
-                first,
-                last,
-                username,
-                email,
-                password,
-            };
-            console.log(user);
-            fetch("http://myhost.com:3000/users", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data.status);
-                    console.log(data.message);
-                    // handle login response (success or fail)
-                    // success creation
-                    if (data.status == 201) {
-                        login(data.user, data.token);
-                        window.location.href = data.redirect;
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                    console.log("fail");
-                    // Handle login error
-                });
-        }
-    };
-*/
+
     return (
         <div className="create-account-background">
             <div className="create-account-form">
@@ -159,6 +137,7 @@ function CreateAccount() {
                     </button>
                 </form>
             </div>
+            <ToastContainer />
         </div>
     );
 }

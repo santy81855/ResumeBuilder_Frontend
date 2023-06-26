@@ -34,6 +34,8 @@ import {
     updateResumeById,
     getResumeById,
 } from "../api/resume/ResumeRequests";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateResume() {
     // get the resume title and description and job from the route
@@ -170,6 +172,16 @@ function CreateResume() {
             descriptionRef.current.value === ""
         ) {
             flashError(titleRef.current, descriptionRef.current);
+            toast.info("Please fill out a resume title and description.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
@@ -690,6 +702,7 @@ function CreateResume() {
                         </div>
                     </div>
                     <CreateResumeSideBar />
+                    <ToastContainer />
                     {toggleSideBarButton}
                 </div>
             </div>

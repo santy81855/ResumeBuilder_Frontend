@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateResumeModal = ({ createModal, setCreateModal }) => {
     const navigate = useNavigate();
@@ -16,7 +18,17 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
             resumeDescription === "" ||
             resumeJob === ""
         ) {
-            alert("Please fill out all of the fields.");
+            toast.info("Please fill out all of the fields.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
             return;
         }
         console.log("create-resume");
@@ -91,6 +103,7 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
                     <button onClick={navigateCreateResumePage}>Next</button>
                 </div>
             </div>
+            <ToastContainer />
         </Modal>
     );
 };
