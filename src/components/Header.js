@@ -14,7 +14,7 @@ const Header = observer(() => {
     const handleDropdownClick = () => {
         setIsDropdownClicked(!isDropdownClicked);
     };
-    const HAMBURGER_WIDTH = 450;
+    const HAMBURGER_WIDTH = 480;
 
     /*
     const handleLogout = () => {
@@ -68,7 +68,6 @@ const Header = observer(() => {
         };
     }, []);
 
-    //********************************************//
     const logoutQuery = useQuery({
         queryKey: ["logoutUser"],
         queryFn: logoutUser,
@@ -87,7 +86,6 @@ const Header = observer(() => {
     const handleUserLogout = () => {
         logoutQuery.refetch({});
     };
-    //********************************************//
 
     const hideElement = (element) => {
         element.style.display = "none";
@@ -101,20 +99,19 @@ const Header = observer(() => {
         const token = localStorage.getItem("token");
         if (token) {
             return (
-                <a>
-                    <img
-                        className="Header-account"
-                        src={accountIcon}
-                        alt="account"
-                        onClick={handleDropdownClick}
-                    />
+                <button
+                    className="Account-button"
+                    onClick={handleDropdownClick}
+                    alt="account-button"
+                >
+                    <img className="Header-account" src={accountIcon} />
                     {isDropdownClicked && (
                         <div className="Header-account-dropdown">
                             <a href="/account">Account</a>
-                            <a onClick={handleUserLogout}>Logout</a>
+                            <button onClick={handleUserLogout}>Logout</button>
                         </div>
                     )}
-                </a>
+                </button>
             );
         }
     };
@@ -133,23 +130,29 @@ const Header = observer(() => {
     };
 
     return (
-        <div className="Header">
+        <header className="Header">
             <div className="Header-left">
                 <img src={logo} className="Header-logo" alt="logo" />
                 <span className="Header-app-name">Ai Resume</span>
             </div>
-            <div className="Header-hamburger" onClick={handleMenuClick}>
+            <button className="Header-hamburger" onClick={handleMenuClick}>
                 &#9776;
-            </div>
-            <div className="Header-right">
-                <a href="/">Home</a>
+            </button>
+            <nav className="Header-right">
+                <a className="Nav-link" href="/">
+                    Home
+                </a>
                 {localStorage.getItem("token") ? (
-                    <a href="/u/resumes">Dashboard</a>
+                    <a className="Nav-link" href="/u/resumes">
+                        Dashboard
+                    </a>
                 ) : (
-                    <a href="/login">Login</a>
+                    <a className="Nav-link" href="/login">
+                        Login
+                    </a>
                 )}
                 {renderAuthButton()}
-            </div>
+            </nav>
             <div className="Header-right-vertical">
                 <a href="/">Home</a>
                 {localStorage.getItem("token") && (
@@ -161,12 +164,10 @@ const Header = observer(() => {
                     <a href="/login">Login</a>
                 )}
                 {localStorage.getItem("token") && (
-                    <a style={{ cursor: "pointer" }} onClick={handleUserLogout}>
-                        Logout
-                    </a>
+                    <button onClick={handleUserLogout}>Logout</button>
                 )}
             </div>
-        </div>
+        </header>
     );
 });
 

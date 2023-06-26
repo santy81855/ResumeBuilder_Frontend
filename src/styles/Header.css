@@ -15,9 +15,11 @@
 
 .Header-hamburger {
     display: none;
-    font-size: 25px;
+    font-size: var(--font-large);
     margin-left: 1rem;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .Header-left {
@@ -40,6 +42,12 @@
     padding-inline: 10px;
 }
 
+.Header-right .Account-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .Header-right-vertical {
     display: none;
     flex-direction: column;
@@ -53,9 +61,19 @@
 }
 
 .Header-right-vertical a {
-    margin: 0.5rem 1rem;
-    font-size: large;
+    padding: var(--gap-small);
+    font-size: var(--font-medium);
     text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+.Header-right-vertical button {
+    padding: var(--gap-small);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-medium);
 }
 
 .Header-account {
@@ -81,12 +99,19 @@
 }
 
 .Header-account-dropdown a {
-    padding: 5px;
+    padding: var(--gap-small);
     cursor: pointer;
+    font-size: var(--font-medium);
+    text-decoration: none;
+    color: black;
 }
 
 .Header-account-dropdown button {
-    padding: 5px;
+    padding: var(--gap-small);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-medium);
 }
 
 @media screen and (max-width: 450px) {
@@ -118,7 +143,7 @@
     font-size: medium;
 }
 
-.Header-right a {
+.Header-right .Nav-link {
     margin-inline: 0.5rem;
     text-decoration: none;
     color: #333;

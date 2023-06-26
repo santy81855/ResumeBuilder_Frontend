@@ -112,6 +112,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     max-width: var(--max-width-medium);
     padding-block: var(--gap-large);
@@ -137,6 +138,62 @@
 
 .feature-list .feature-image-section {
     margin-inline: var(--gap-xlarge);
+    background-color: transparent;
+}
+
+.feature-list .feature-image-section .step-one-image {
+    width: 400px;
+    height: 250px;
+
+    box-shadow: 0 8px 32px 0 rgba(163, 163, 163, 0.6);
+    border-radius: var(--border-radius-large);
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.feature-image-section .step-one-image .step-one-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    font-size: var(--font-medium);
+    padding-block: var(--gap-medium);
+    border-top-right-radius: var(--border-radius-large);
+    border-top-left-radius: var(--border-radius-large);
+    background-color: var(--accent-color-2);
+}
+
+.feature-image-section .step-one-image .step-one-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-small);
+    color: var(--accent-color-2);
+    gap: var(--gap-large);
+    margin-block-start: var(--gap-large);
+}
+
+.step-one-image .step-one-body .step-one-element {
+    display: flex;
+    width: 75%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.step-one-body .step-one-element input {
+    height: 20px;
+    outline: none;
+}
+
+.step-one-body .step-one-element input:focus {
+    outline: none;
+}
+
+.feature-list .feature-image-section img {
+    width: 400px;
+    background-color: none;
 }
 
 .feature-list p {
@@ -153,16 +210,52 @@
     max-width: var(--max-width-xsmall);
 }
 
+@media screen and (max-width: 780px) {
+    .landing-page .feature-list .feature-left {
+        flex-direction: column;
+        gap: var(--gap-xlarge);
+    }
+
+    .feature-left .feature-text-section {
+        align-self: flex-start;
+        width: 100%;
+    }
+    .feature-left .feature-text-section .body {
+        max-width: 90%;
+    }
+
+    .feature-left .feature-image-section {
+        align-self: flex-end;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .landing-page-background .circle-transition {
         width: 120%;
         height: 100px;
-
         border-radius: 50% 50% 0 0;
     }
 }
 
 @media screen and (max-width: 480px) {
+    .feature-list .feature-image-section .step-one-image {
+        width: 320px;
+        height: 200px;
+    }
+
+    .feature-left .feature-image-section {
+        align-self: center;
+    }
+
+    .feature-image-section .step-one-image .step-one-body {
+        gap: var(--gap-small);
+        margin-block-start: var(--gap-medium);
+    }
+
+    .step-one-image .step-one-body .step-one-element {
+        width: 90%;
+    }
+
     .landing-page-background .content-container {
         width: 90%;
         margin-block-start: var(--gap-medium);
@@ -223,6 +316,8 @@ div[class*="box"] {
         width: 90%;
         cursor: pointer;
         font-weight: 700;
+        background-color: transparent;
+        border: none;
     }
 
     .btn-one {

@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
+import CreateResumeModal from "./CreateResumeModal";
+import Modal from "react-modal";
 
 import resume1 from "../images/home/resume-pic-1.png";
 import resume2 from "../images/home/resume-pic-2.png";
+
+import step1 from "../images/home/step1.png";
 
 import JSONResumeData from "../resume-schema.json";
 import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
 
 function Home() {
+    const [createModal, setCreateModal] = useState(false);
     const navigate = useNavigate();
     const createResume2 = async (resumeData) => {
         const token = localStorage.getItem("token");
@@ -63,9 +68,14 @@ function Home() {
                         now!
                     </p>
 
-                    <div className="btn btn-one" onClick={CreateResume}>
-                        <span> Create Resume</span>
-                    </div>
+                    <button
+                        className="btn btn-one"
+                        onClick={() => {
+                            setCreateModal(true);
+                        }}
+                    >
+                        <span> Create Your Resume</span>
+                    </button>
                 </div>
                 <div className="circle-transition"></div>
             </div>
@@ -73,20 +83,50 @@ function Home() {
                 <div className="left-feature-wrapper">
                     <div className="feature-left">
                         <div className="feature-text-section">
-                            <p className="header">
-                                Can't find the right words?
-                            </p>
+                            <p className="header">Make a lasting impression</p>
                             <p className="body">
-                                Leverage the power of artificial intelligence to
-                                streamline the resume creation process. Whether
-                                you need a resume from scratch or want to
-                                enhance your existing one, our intelligent AI
-                                algorithms analyze and optimize each section
-                                with precision.
+                                Our user-friendly interface allows you to
+                                effortlessly craft unique resumes that perfectly
+                                match the requirements of each opportunity. It's
+                                as simple as filling in the essential details -
+                                title, description, and job - to create a
+                                standout resume that showcases your skills and
+                                experience
                             </p>
                         </div>
+
                         <div className="feature-image-section">
-                            Picture here
+                            <div className="step-one-image">
+                                <div className="step-one-header">
+                                    Resume Information
+                                </div>
+                                <div className="step-one-body">
+                                    <div className="step-one-element">
+                                        <p>Title</p>
+                                        <input
+                                            id="sample-title"
+                                            type="text"
+                                            readOnly
+                                        ></input>
+                                    </div>
+                                    <div className="step-one-element">
+                                        <p>Description</p>
+                                        <input
+                                            id="sample-description"
+                                            type="text"
+                                            readOnly
+                                        ></input>
+                                    </div>
+                                    <div className="step-one-element">
+                                        <p>Job</p>
+                                        <input
+                                            id="sample-job"
+                                            type="text"
+                                            readOnly
+                                        ></input>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +134,7 @@ function Home() {
                 <div className="right-feature-wrapper">
                     <div className="feature-right">
                         <div className="feature-image-section">
-                            Picture here
+                            Picture Here
                         </div>
                         <div className="feature-text-section">
                             <p className="header">
@@ -112,6 +152,10 @@ function Home() {
                     </div>
                 </div>
             </div>
+            <CreateResumeModal
+                createModal={createModal}
+                setCreateModal={setCreateModal}
+            />
         </div>
     );
 }

@@ -59,7 +59,7 @@
     padding-inline: var(--gap-large);
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(150, 150, 150, 0.2);
     border-radius: var(--border-radius-large);
 }
@@ -184,6 +184,7 @@
     column-gap: var(--gap-medium);
     row-gap: 2em;
     padding-block-start: 1rem;
+    border-radius: var(--border-radius-large);
 }
 
 /* .ResumeTile {
@@ -617,6 +618,7 @@
     display: flex;
     gap: var(--gap-medium);
     justify-content: space-between;
+    margin-block: var(--gap-large);
 }
 
 .modal .create-resume-info-container button {
@@ -647,10 +649,12 @@
     height: 30px;
     max-width: 250px;
     flex-grow: 1;
+    border: 1px solid var(--accent-color-2);
 }
 
 .modal .create-resume-info-container .horizontal-container textarea {
     resize: none;
     max-width: 250px;
     flex-grow: 1;
+    border: 1px solid var(--accent-color-2);
 }
