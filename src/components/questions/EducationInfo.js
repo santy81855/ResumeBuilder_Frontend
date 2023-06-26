@@ -139,7 +139,7 @@ const EducationInfo = ({
         var jobToDelete = experienceList[event.target.id];
         // remove it from the list
         var updatedArr = jsonWork.filter(
-            (item) => item.summary !== jobToDelete.summary
+            (item) => item.startDate !== jobToDelete.startDate
         );
         // update the resumeData
         setResumeData({

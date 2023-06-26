@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
+import { TypeAnimation } from "react-type-animation";
 import CreateResumeModal from "./CreateResumeModal";
 import Modal from "react-modal";
 
@@ -83,7 +84,7 @@ function Home() {
                 <div className="left-feature-wrapper">
                     <div className="feature-left">
                         <div className="feature-text-section">
-                            <p className="header">Make a lasting impression</p>
+                            <p className="header">Tailor each resume</p>
                             <p className="body">
                                 Our user-friendly interface allows you to
                                 effortlessly craft unique resumes that perfectly
@@ -103,27 +104,69 @@ function Home() {
                                 <div className="step-one-body">
                                     <div className="step-one-element">
                                         <p>Title</p>
-                                        <input
-                                            id="sample-title"
-                                            type="text"
-                                            readOnly
-                                        ></input>
+                                        <div className="type-input-wrapper">
+                                            <TypeAnimation
+                                                className="type-input"
+                                                sequence={[
+                                                    // Same substring at the start will only be typed out once, initially
+                                                    "Microsoft Resume",
+                                                    1000,
+                                                    "Google Resume",
+                                                    1000,
+                                                    "Apple Resume",
+                                                    1000,
+                                                    "Meta Resume",
+                                                    1000,
+                                                ]}
+                                                wrapper="span"
+                                                speed={50}
+                                                repeat={Infinity}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="step-one-element">
                                         <p>Description</p>
-                                        <input
-                                            id="sample-description"
-                                            type="text"
-                                            readOnly
-                                        ></input>
+                                        <div className="type-input-wrapper">
+                                            <TypeAnimation
+                                                className="type-input"
+                                                sequence={[
+                                                    // Same substring at the start will only be typed out once, initially
+                                                    "Highlight Backend Experience",
+                                                    1000,
+                                                    "Highlight Frontend Experience",
+                                                    1000,
+                                                    "Highlight Fullstack Experience",
+                                                    1000,
+                                                    "Highlight Data Science Experience",
+                                                    1000,
+                                                ]}
+                                                wrapper="span"
+                                                speed={50}
+                                                repeat={Infinity}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="step-one-element">
                                         <p>Job</p>
-                                        <input
-                                            id="sample-job"
-                                            type="text"
-                                            readOnly
-                                        ></input>
+                                        <div className="type-input-wrapper">
+                                            <TypeAnimation
+                                                className="type-input"
+                                                sequence={[
+                                                    // Same substring at the start will only be typed out once, initially
+                                                    "Junior Software Engineer",
+                                                    1000,
+                                                    "Senior Python Developer",
+                                                    1000,
+                                                    "Mechanical Engineer",
+                                                    1000,
+                                                    "Data Scientist",
+                                                    1000,
+                                                ]}
+                                                wrapper="span"
+                                                speed={50}
+                                                repeat={Infinity}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

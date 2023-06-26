@@ -177,14 +177,23 @@
 
 .step-one-image .step-one-body .step-one-element {
     display: flex;
-    width: 75%;
+    width: 90%;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.step-one-body .step-one-element input {
+.step-one-body .step-one-element .type-input-wrapper {
     height: 20px;
-    outline: none;
+    width: 70%;
+    border: 1px solid var(--accent-color-2);
+    padding-inline: var(--gap-small);
+    font-size: var(--font-xsmall);
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.step-one-body .step-one-element .type-input {
+    border: none;
 }
 
 .step-one-body .step-one-element input:focus {
@@ -218,7 +227,7 @@
 
     .feature-left .feature-text-section {
         align-self: flex-start;
-        width: 100%;
+        width: calc(100% - var(--gap-xlarge));
     }
     .feature-left .feature-text-section .body {
         max-width: 90%;
@@ -239,8 +248,8 @@
 
 @media screen and (max-width: 480px) {
     .feature-list .feature-image-section .step-one-image {
-        width: 320px;
-        height: 200px;
+        padding-block-end: var(--gap-medium);
+        width: 300px;
     }
 
     .feature-left .feature-image-section {
@@ -249,10 +258,18 @@
 
     .feature-image-section .step-one-image .step-one-body {
         gap: var(--gap-small);
-        margin-block-start: var(--gap-medium);
+        margin-block-start: var(--gap-small);
     }
 
     .step-one-image .step-one-body .step-one-element {
+        width: 95%;
+        gap: var(--gap-small);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .step-one-body .step-one-element .type-input-wrapper {
         width: 90%;
     }
 
