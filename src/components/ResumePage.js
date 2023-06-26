@@ -248,21 +248,23 @@ function ResumePage() {
                 contentLabel="export-modal"
                 overlayClassName="export-overlay"
             >
-                {getResumeQuery.isSuccess ? (
-                    // determine the correct template
-                    getTemplateComponent({
-                        json: getResumeQuery.data.json,
-                        isPreview: true,
-                        handleSectionChange: doNothingFunction,
-                        template: getResumeQuery.data.template,
-                        isExport: false,
-                    })
-                ) : (
-                    <div>getResumeQueryError</div>
-                )}
-                <div className="export-modal-buttons">
-                    <button onClick={closeModal}>Close</button>
-                    <button onClick={exportPDF}>Export Resume</button>
+                <div className="export-container">
+                    {getResumeQuery.isSuccess ? (
+                        // determine the correct template
+                        getTemplateComponent({
+                            json: getResumeQuery.data.json,
+                            isPreview: true,
+                            handleSectionChange: doNothingFunction,
+                            template: getResumeQuery.data.template,
+                            isExport: false,
+                        })
+                    ) : (
+                        <div>getResumeQueryError</div>
+                    )}
+                    <div className="export-modal-buttons">
+                        <button onClick={closeModal}>Close</button>
+                        <button onClick={exportPDF}>Export Resume</button>
+                    </div>
                 </div>
             </Modal>
             <div className="hidden-template">

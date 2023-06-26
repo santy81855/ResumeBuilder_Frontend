@@ -51,6 +51,15 @@ function Home() {
     };
     const doNothingFunction = () => {};
 
+    const createResumeHomeClick = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setCreateModal(true);
+        } else {
+            navigate("/login");
+        }
+    };
+
     return (
         <div className="landing-page">
             <div className="landing-page-background">
@@ -72,7 +81,7 @@ function Home() {
                     <button
                         className="btn btn-one"
                         onClick={() => {
-                            setCreateModal(true);
+                            createResumeHomeClick();
                         }}
                     >
                         <span> Create Your Resume</span>

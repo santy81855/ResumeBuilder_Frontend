@@ -30,28 +30,6 @@
     height: auto;
 }
 
-.introContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-block-start: var(--gap-xlarge);
-    padding-block-start: var(--gap-xlarge);
-    color: var(--accent-color-2);
-    z-index: 1;
-    gap: var(--gap-large);
-}
-
-.ResumeSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-block-start: -250px;
-    margin-block-end: var(--gap-medium);
-    padding-block-start: var(--gap-large);
-    padding-block-end: var(--gap-x2large);
-    z-index: 1;
-}
-
 .PageContainer .Section {
     box-sizing: border-box;
     max-width: var(--max-width-large);
@@ -62,6 +40,26 @@
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(150, 150, 150, 0.2);
     border-radius: var(--border-radius-large);
+}
+
+.ResumeSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block-start: -250px;
+    margin-block-end: var(--gap-medium);
+    padding-block-start: var(--gap-large);
+    padding-block-end: var(--gap-x2large);
+}
+
+.introContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block-start: var(--gap-xlarge);
+    padding-block-start: var(--gap-xlarge);
+    color: var(--accent-color-2);
+    gap: var(--gap-large);
 }
 
 .PageContainer .diffusion {
@@ -534,12 +532,15 @@
     position: absolute;
     top: calc(var(--header-height) + var(--gap-xlarge));
     left: 50%;
+    bottom: auto;
     transform: translate(-50%, 0%);
     width: calc(100% - var(--gap-large));
     max-width: 610px;
-    aspect-ratio: 8.5/11;
-    background-color: var(--accent-color-2);
 
+    background-color: var(--accent-color-2);
+    max-height: calc(100vh - var(--header-height) - var(--gap-large));
+
+    overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -552,10 +553,18 @@
     padding-block: var(--gap-medium);
 }
 
+.export-modal .export-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
 .export-modal .export-modal-buttons {
     width: 100%;
     display: flex;
-    margin-block-start: var(--gap-large);
+    margin-block: var(--gap-medium);
     gap: var(--gap-small);
 }
 

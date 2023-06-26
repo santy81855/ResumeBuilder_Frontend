@@ -308,11 +308,11 @@ const ModernTemplate = ({
                         {resumeData.templateSections.modern.contact.show && (
                             <ContactSection />
                         )}
-                        {resumeData.templateSections.modern.skills.show && (
-                            <SkillsSection />
-                        )}
                         {resumeData.templateSections.modern.education.show && (
                             <EducationSection />
+                        )}
+                        {resumeData.templateSections.modern.skills.show && (
+                            <SkillsSection />
                         )}
                         {resumeData.templateSections.modern.languages.show && (
                             <LanguagesSection />
