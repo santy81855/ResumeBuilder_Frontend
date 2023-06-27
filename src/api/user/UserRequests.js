@@ -32,7 +32,7 @@ const loginSubmit = (data) => {
     console.log(data);
     return axios
         .post(
-            "http://ec2-18-116-8-136.us-east-2.compute.amazonaws.com:3000/auth/login",
+            "http://localhost:3000/auth/login",
             {
                 email: data.email,
                 password: data.password,
