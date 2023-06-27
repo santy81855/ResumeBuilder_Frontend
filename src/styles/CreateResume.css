@@ -415,14 +415,14 @@
     */
     position: absolute;
     top: calc(var(--header-height) + 2em);
-    bottom: 2em;
+    bottom: auto;
     left: 50%;
     transform: translate(-50%, 0%);
     max-width: var(--max-width-medium);
     width: calc(100% - var(--gap-x2large));
 
     /*height: calc(100vh var(--header-height) - 4em);*/
-    height: max-content;
+
     max-height: calc(100vh - var(--header-height) - 4em);
     overflow-y: hidden;
     overflow-x: hidden;
