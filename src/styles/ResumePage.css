@@ -183,7 +183,8 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     align-self: center;
-
+    overflow-y: visible;
+    max-height: min-content;
     min-width: 200px;
     border-radius: 0px;
     column-gap: var(--gap-medium);
