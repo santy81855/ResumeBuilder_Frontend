@@ -1,5 +1,10 @@
 import axios from "axios";
 
+const URL =
+    process.env.NODE_ENV === "production"
+        ? "http://ec2-18-116-8-136.us-east-2.compute.amazonaws.com:3000"
+        : "http://localhost:3000";
+
 const createResume = (data) => {
     console.log(data);
     const d = new Date();
@@ -8,7 +13,7 @@ const createResume = (data) => {
     const token = localStorage.getItem("token");
     return axios
         .post(
-            "http://localhost:3000/resume/create",
+            URL + "/resume/create",
             {
                 resumeTitle: data.resumeTitleParam,
                 jobTitle: data.jobTitleParam,
@@ -29,15 +34,13 @@ const createResume = (data) => {
 
 const getResumeById = () => {
     const resumeId = localStorage.getItem("resumeId");
-    return axios
-        .get("http://localhost:3000/resume/" + resumeId)
-        .then((res) => res.data);
+    return axios.get(URL + "/resume/" + resumeId).then((res) => res.data);
 };
 
 const deleteResumeById = (data) => {
     const resumeId = data.id;
     return axios
-        .delete("http://localhost:3000/resume/delete/" + resumeId)
+        .delete(URL + "/resume/delete/" + resumeId)
         .then((res) => res.data);
 };
 
@@ -45,7 +48,7 @@ const updateResumeById = (data) => {
     const d = new Date();
     const resumeId = localStorage.getItem("resumeId");
     return axios
-        .put("http://localhost:3000/resume/update/" + resumeId, {
+        .put(URL + "/resume/update/" + resumeId, {
             resumeTitle: data.resumeTitleParam,
             jobTitle: data.jobTitleParam,
             resumeDescription: data.resumeDescriptionParam,
@@ -60,7 +63,7 @@ const updateResumeById = (data) => {
 const getAllUserResumes = () => {
     const token = localStorage.getItem("token");
     return axios
-        .get("http://localhost:3000/resume/user/all", {
+        .get(URL + "/resume/user/all", {
             headers: {
                 Authorization: "Bearer " + token,
             },
