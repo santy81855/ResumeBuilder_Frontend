@@ -380,6 +380,30 @@
         transform: rotate(270deg);
     }
 }
+/*
+    position: absolute;
+    top: calc(var(--header-height) + var(--gap-xlarge));
+    left: 50%;
+    bottom: auto;
+    transform: translate(-50%, 0%);
+    width: calc(100% - var(--gap-large));
+    max-width: 610px;
+
+    background-color: var(--accent-color-2);
+    max-height: calc(100vh - var(--header-height) - var(--gap-large));
+
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    border: 1px solid var(--accent-color-2);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0px 5px 15px rgba(3, 44, 44, 0.5);
+    box-sizing: border-box;
+    padding-inline: var(--gap-medium);
+    padding-block: var(--gap-medium);
+*/
 
 .modal {
     /*
@@ -389,7 +413,7 @@
     right: 2em;
     bottom: 2em;
     */
-    position: fixed;
+    position: absolute;
     top: calc(var(--header-height) + 2em);
     bottom: 2em;
     left: 50%;
