@@ -59,6 +59,10 @@ function LoginForm() {
         // handle Google login functionality
         console.log("clicked google login");
     };
+    <div className="google-login-btn" onClick={handleGoogleLogin}>
+        <img src={googleLogo} className="google-logo" alt="logo" />
+        Login with Google
+    </div>;
 
     return (
         <div className="login-background">
@@ -86,17 +90,6 @@ function LoginForm() {
                     </button>
                 </form>
                 <div className="login-options">
-                    <div
-                        className="google-login-btn"
-                        onClick={handleGoogleLogin}
-                    >
-                        <img
-                            src={googleLogo}
-                            className="google-logo"
-                            alt="logo"
-                        />
-                        Login with Google
-                    </div>
                     <div className="create-account-div">
                         <p className="make-account-message">
                             Don't have an account?
