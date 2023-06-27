@@ -1,10 +1,15 @@
 import axios from "axios";
 
+// fetch(`${apiEndpoint}/api/data`)
+
+const URL =
+    process.env.NODE_ENV === "production"
+        ? "http://ec2-18-116-8-136.us-east-2.compute.amazonaws.com:3000"
+        : "http://localhost:3000";
+
 const getUser = () => {
     const token = localStorage.getItem("token");
-    return axios
-        .get("http://localhost:3000/users/" + token)
-        .then((res) => res.data);
+    return axios.get(URL + "/users/" + token).then((res) => res.data);
 };
 
 const createUser = (data) => {
@@ -32,7 +37,7 @@ const loginSubmit = (data) => {
     console.log(data);
     return axios
         .post(
-            "http://localhost:3000/auth/login",
+            URL + "/auth/login",
             {
                 email: data.email,
                 password: data.password,
