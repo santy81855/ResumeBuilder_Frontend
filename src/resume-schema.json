@@ -37,9 +37,6 @@
             }
         },
         "modern": {
-            "image": {
-                "show": true
-            },
             "label": {
                 "show": true
             },
@@ -78,7 +75,7 @@
     },
     "template": "",
     "picture": {
-        "url": "link-to-image"
+        "url": ""
     },
     "label": "Web Developer",
     "summary": "Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications.",
@@ -152,7 +149,7 @@
             "studyType": "Bachelor's Degree",
             "startDate": "2014-01-01",
             "endDate": "2018-12-31",
-            "gpa": "3.5",
+            "gpa": "",
             "courses": ["Data Structures", "Algorithms", "Web Development"]
         }
     ],

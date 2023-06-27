@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EducationInfo = ({
     resumeData,
@@ -96,7 +98,16 @@ const EducationInfo = ({
         }
         // ensure all the necessary values are filled
         if (ins === "" || deg === "" || st === "" || en === "") {
-            alert("Fill out all of the fields.");
+            toast.info("Please fill out all of the fields.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
         // make an object of the vars
@@ -382,7 +393,7 @@ const EducationInfo = ({
                         <p>
                             {school.startDate} - {school.endDate}
                         </p>
-                        <p>GPA: {school.gpa}</p>
+                        {school.gpa && <p>GPA: {school.gpa}</p>}
                         {school.courses.length > 0 && <h4>Highlights:</h4>}
                         <ul>
                             {school.courses.map((highlight, index) => (

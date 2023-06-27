@@ -107,7 +107,6 @@ const Header = observer(() => {
                     <img className="Header-account" src={accountIcon} />
                     {isDropdownClicked && (
                         <div className="Header-account-dropdown">
-                            <a href="/account">Account</a>
                             <button onClick={handleUserLogout}>Logout</button>
                         </div>
                     )}
@@ -155,9 +154,6 @@ const Header = observer(() => {
             </nav>
             <div className="Header-right-vertical">
                 <a href="/">Home</a>
-                {localStorage.getItem("token") && (
-                    <a href="/account">Account</a>
-                )}
                 {localStorage.getItem("token") ? (
                     <a href="/u/resumes">Dashboard</a>
                 ) : (

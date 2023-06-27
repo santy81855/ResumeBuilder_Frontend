@@ -87,7 +87,6 @@ function CreateResume() {
             setResumeJob(data.jobTitle);
             setResumeDescription(data.resumeDescription);
             setCurrentTemplate(templateToInt[data.template]);
-            console.log(data);
         },
         onError: (error, variables, context) => {
             console.log(
@@ -270,7 +269,16 @@ function CreateResume() {
         const content = document.getElementById(
             templateNameToExport[currentTemplate]
         );
-        console.log(templateNameToExport[currentTemplate]);
+        /*
+        var page1 = document.getElementsByClassName("clean-template")[0];
+        var page2 = document.getElementsByClassName("clean-template")[1];
+        // Create a new parent element
+        var combinedElement = document.createElement("div");
+
+        // Append page1 and page2 as children to the combined element
+        combinedElement.appendChild(page1.cloneNode(true));
+        combinedElement.appendChild(page2.cloneNode(true));
+        */
         savePDF(content, {
             //paperSize: "auto",
             paperSize: "Letter",
@@ -495,10 +503,7 @@ function CreateResume() {
             resumeData.templateSections[templateToString[currentTemplate]]
         ).map(([name, field]) => ({ name, show: field.show }));
 
-        console.log(sectionArr);
-
         const buttonClick = (event, name, status) => {
-            console.log(resumeData);
             // update the array with the section status switched
             for (var i = 0; i < sectionArr.length; i++) {
                 if (sectionArr[i].name === name) {

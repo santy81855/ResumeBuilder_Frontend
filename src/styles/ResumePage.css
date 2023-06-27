@@ -12,6 +12,13 @@
     overflow-x: hidden;
 
     background-color: var(--accent-color-2);
+    background: linear-gradient(
+        180deg,
+        var(--accent-color-2) 0%,
+        var(--accent-color-2) 50%,
+        white 65%,
+        white 100%
+    );
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center top;

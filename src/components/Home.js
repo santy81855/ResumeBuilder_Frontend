@@ -9,6 +9,7 @@ import resume1 from "../images/home/resume-pic-1.png";
 import resume2 from "../images/home/resume-pic-2.png";
 
 import step1 from "../images/home/step1.png";
+import step2 from "../images/home/step2screen.png";
 
 import JSONResumeData from "../resume-schema.json";
 import CleanTemplate from "./templates/CleanTemplate";
@@ -16,6 +17,9 @@ import ModernTemplate from "./templates/ModernTemplate";
 
 function Home() {
     const [createModal, setCreateModal] = useState(false);
+    const [enhanceText, setEnhanceText] = useState(
+        "Hard working person who works well in teams and learns fast."
+    );
     const navigate = useNavigate();
     const createResume2 = async (resumeData) => {
         const token = localStorage.getItem("token");
@@ -104,7 +108,6 @@ function Home() {
                                 experience
                             </p>
                         </div>
-
                         <div className="feature-image-section">
                             <div className="step-one-image">
                                 <div className="step-one-header">
@@ -185,23 +188,68 @@ function Home() {
 
                 <div className="right-feature-wrapper">
                     <div className="feature-right">
-                        <div className="feature-image-section">
-                            Create Resume Picture Here (Full Resume) then zoom
-                            into the summary with a pointer cursor on the
-                            enhance and generate button. On the second picture
-                            it will be an animation of clicking the enhance
-                            button and then the resume will be enhanced.
-                        </div>
                         <div className="feature-text-section">
-                            <p className="header"></p>
-                            <p className="body">
-                                Leverage the power of artificial intelligence to
-                                streamline the resume creation process. Whether
-                                you need a resume from scratch or want to
-                                enhance your existing one, our intelligent AI
-                                algorithms analyze and optimize each section
-                                with precision.
+                            <p className="header">
+                                See your resume as you build it
                             </p>
+                            <div className="feature-image-section">
+                                <div className="step2"></div>
+                            </div>
+                            <p className="body">
+                                See your resume come to life as you make
+                                changes, ensuring that every modification
+                                reflects instantly. No more guesswork or
+                                surprises. With our live preview feature, you
+                                have full control and visibility of your
+                                resume's appearance, allowing you to craft the
+                                perfect document that truly represents your
+                                skills and achievements.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="right-feature-wrapper-last">
+                    <div className="feature-right-last">
+                        <div className="feature-text-section-last">
+                            <p className="header">Don't overthink it</p>
+                            <p className="body">
+                                Our powerful 'Enhance' feature analyzes your
+                                resume content and optimizes it to make it more
+                                professional and tailored to the job you're
+                                applying for. With just a click, watch as your
+                                skills, experience, and achievements are
+                                highlighted in a way that captures the attention
+                                of employers. Impress potential employers with a
+                                resume that stands out from the crowd and
+                                increases your chances of landing your dream
+                                job.
+                            </p>
+                            <p className="body">Try it out below!</p>
+                            <div className="feature-image-section-last">
+                                <div className="step3">
+                                    <div className="step3-box">
+                                        <p>{enhanceText}</p>
+                                    </div>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            setTimeout(function () {
+                                                setEnhanceText(
+                                                    "Result-driven professional with a strong work ethic and a proven ability to thrive in a team-oriented environment. Committed to continuous learning and development, with a track record of quickly adapting to new processes, technologies, and systems."
+                                                );
+                                                setTimeout(function () {
+                                                    setEnhanceText(
+                                                        "Hard working person who works well in teams and learns fast."
+                                                    );
+                                                }, 5000);
+                                            }, 1000);
+                                        }}
+                                    >
+                                        Enhance
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

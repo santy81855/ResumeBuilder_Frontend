@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { savePDF } from "@progress/kendo-react-pdf";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/ModernTemplate.css";
-import pictureURLTest from "../../images/account-pics/option1.png";
+import userImage from "../../images/account-pics/option1.png";
 
 const ModernTemplate = ({
     resumeData,
@@ -14,6 +14,7 @@ const ModernTemplate = ({
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Modern";
+
     useEffect(() => {
         console.log(resumeData.templateSections.modern.image);
         // handle the text scaling
@@ -42,7 +43,10 @@ const ModernTemplate = ({
     }, []);
 
     const contact = resumeData.contact;
-    const pictureURL = resumeData.picture.url;
+    const pictureURL =
+        resumeData.picture.url !== ""
+            ? resumeData.picture.url
+            : "url('../../images/account-pics/option1.png')";
     const label = resumeData.label;
     const summary = resumeData.summary;
     const work = resumeData.work;
@@ -56,26 +60,33 @@ const ModernTemplate = ({
         ? "modern-resume-section-preview"
         : "modern-resume-section";
 
-    const checkoverflow = () => {
-        const contentHeight = document.getElementById(
-            "modern-template-content"
-        ).clientHeight;
-        const container = document.getElementById("modern-template");
+    useEffect(() => {
+        console.log(education);
+    }, []);
 
-        const containerHeightWithoutPadding =
-            container.clientHeight -
-            parseFloat(getComputedStyle(container).paddingTop) -
-            parseFloat(getComputedStyle(container).paddingBottom);
-        console.log(contentHeight);
-        console.log(containerHeightWithoutPadding);
-        if (contentHeight > containerHeightWithoutPadding) {
-            console.log("overflow");
+    const checkoverflow = () => {
+        const content = document.getElementById("modern-template-content");
+        // check if it is overflowing by more than like 2 pixels
+        if (content.scrollHeight - content.clientHeight > 2) {
+            console.log(content.scrollHeight);
+            console.log(content.clientHeight);
+
+            const bigRect = content.getBoundingClientRect();
+
+            const children = content.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const childRect = child.getBoundingClientRect();
+
+                if (childRect.bottom > bigRect.bottom) {
+                    console.log("overflow in child: ");
+                    console.log(child);
+                }
+            }
         } else {
             console.log("no overflow");
         }
     };
-
-    const handle = <div className="handle">&#9776;</div>;
 
     const LanguagesSection = () => {
         return (
@@ -144,9 +155,7 @@ const ModernTemplate = ({
                         </p>
                         <h4>{school.area + " " + school.studyType}</h4>
                         <h4>{school.institution}</h4>
-                        {resumeData.templateSections.modern.education.gpa && (
-                            <p>{"GPA: " + school.gpa}</p>
-                        )}
+                        {school.gpa && <p>{"GPA: " + school.gpa}</p>}
                     </div>
                 ))}
             </div>
@@ -188,8 +197,30 @@ const ModernTemplate = ({
         );
     };
 
+    /*
+            element.style.backgroundImage =
+            "url('./images/account-pics/option1.png')";
+        element.style.backgroundSize = "80%";
+        element.style.backgroundPosition = "center";
+        element.style.width = "100%";
+        element.style.height = "15em";
+    */
+
     const ImageSection = () => {
-        return <div className="modern-image-container"></div>;
+        return (
+            <div
+                style={{
+                    backgroundImage: `url(${userImage})`,
+                    backgroundSize: "80%",
+                    backgroundPosition: "center",
+                    width: "100%",
+                    height: "15em",
+                    backgroundRepeat: "no-repeat",
+                }}
+                id="user-image"
+                className="modern-image-container"
+            ></div>
+        );
     };
 
     const HeaderSection = () => {
@@ -302,9 +333,6 @@ const ModernTemplate = ({
                     id="modern-template-content"
                 >
                     <div className="modern-vertical-block">
-                        {resumeData.templateSections.modern.image.show && (
-                            <ImageSection />
-                        )}
                         {resumeData.templateSections.modern.contact.show && (
                             <ContactSection />
                         )}

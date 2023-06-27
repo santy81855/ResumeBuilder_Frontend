@@ -26,6 +26,7 @@ const CleanTemplate = ({
                 let size = 11 * (width / 610);
                 template.style.fontSize = size + "px";
             }
+            checkoverflow();
         }
 
         window.addEventListener("resize", handleResize);
@@ -55,19 +56,24 @@ const CleanTemplate = ({
         : "clean-resume-section";
 
     const checkoverflow = () => {
-        const contentHeight = document.getElementById(
-            "clean-template-content"
-        ).clientHeight;
-        const container = document.getElementById("clean-template");
+        const content = document.getElementById("clean-template-content");
+        // check if it is overflowing by more than like 2 pixels
+        if (content.scrollHeight - content.clientHeight > 2) {
+            console.log(content.scrollHeight);
+            console.log(content.clientHeight);
 
-        const containerHeightWithoutPadding =
-            container.clientHeight -
-            parseFloat(getComputedStyle(container).paddingTop) -
-            parseFloat(getComputedStyle(container).paddingBottom);
-        console.log(contentHeight);
-        console.log(containerHeightWithoutPadding);
-        if (contentHeight > containerHeightWithoutPadding) {
-            console.log("overflow");
+            const bigRect = content.getBoundingClientRect();
+
+            const children = content.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const childRect = child.getBoundingClientRect();
+
+                if (childRect.bottom > bigRect.bottom) {
+                    console.log("overflow in child: ");
+                    console.log(child);
+                }
+            }
         } else {
             console.log("no overflow");
         }
