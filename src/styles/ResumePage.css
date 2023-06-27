@@ -12,13 +12,13 @@
     overflow-x: hidden;
 
     background-color: var(--accent-color-2);
-    background: linear-gradient(
+    /*background: linear-gradient(
         180deg,
         var(--accent-color-2) 0%,
         var(--accent-color-2) 50%,
         white 65%,
         white 100%
-    );
+    );*/
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center top;
@@ -42,7 +42,7 @@
     max-width: var(--max-width-large);
     width: 100%;
     padding-inline: var(--gap-large);
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(150, 150, 150, 0.2);
@@ -183,8 +183,6 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     align-self: center;
-    overflow-y: visible;
-    max-height: min-content;
     min-width: 200px;
     border-radius: 0px;
     column-gap: var(--gap-medium);
@@ -207,7 +205,7 @@
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    box-shadow: 0px 0px 20px var(--accent-color-2-xlight);
+    box-shadow: 0px 0px 15px var(--accent-color-2-xlight);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -491,6 +489,7 @@
         grid-template-rows: auto;
         grid-auto-flow: column;
         overflow-x: auto;
+        overflow-y: hidden;
         padding-block: var(--gap-medium);
     }
 
