@@ -1,11 +1,6 @@
 import axios from "axios";
 
-// fetch(`${apiEndpoint}/api/data`)
-
-const URL =
-    process.env.NODE_ENV === "production"
-        ? "http://ec2-3-135-220-37.us-east-2.compute.amazonaws.com:3000"
-        : "http://localhost:3000";
+const URL = process.env.HOST;
 
 const getUser = () => {
     const token = localStorage.getItem("token");

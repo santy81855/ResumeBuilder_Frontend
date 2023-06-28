@@ -78,6 +78,9 @@ typings/
 # Next.js build output
 .next
 
+#environment variables
+.env
+
 # Nuxt.js build / generate output
 .nuxt
 dist
