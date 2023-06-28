@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const URL = process.env.HOST;
+console.log(URL);
 
 const getUser = () => {
     const token = localStorage.getItem("token");
@@ -30,6 +31,7 @@ const createUser = (data) => {
 
 const loginSubmit = (data) => {
     console.log(data);
+    console.log(URL);
     return axios
         .post(
             URL + "/auth/login",
