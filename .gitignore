@@ -105,3 +105,6 @@ dist
 
 # tinymce
 /public/tinymce/
+
+# build folder
+build/
