@@ -80,6 +80,8 @@ typings/
 
 #environment variables
 .env
+.env.development
+.env.production
 
 # Nuxt.js build / generate output
 .nuxt
