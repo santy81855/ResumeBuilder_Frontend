@@ -1,5 +1,7 @@
 # AI Resume Builder Frontend
 
+[Link to try it!](http://ec2-3-135-220-37.us-east-2.compute.amazonaws.com:3000/)
+
 This is the frontend code for AI Powered resume builder App. It is still in development.
 ![landing page](https://github.com/santy81855/ResumeBuilder_Frontend/blob/main/github_images/home.png?raw=true)
 ![login page](https://github.com/santy81855/ResumeBuilder_Frontend/blob/main/github_images/login.png?raw=true)
