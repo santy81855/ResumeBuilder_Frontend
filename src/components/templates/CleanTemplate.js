@@ -193,7 +193,9 @@ const CleanTemplate = ({
                             {school.endDate}
                         </p>
                         {resumeData.templateSections.clean.education.gpa && (
-                            <p>{"GPA: " + school.gpa}</p>
+                            <div>
+                                {school.gpa && <p>{"GPA: " + school.gpa}</p>}
+                            </div>
                         )}
                         {resumeData.templateSections.clean.education
                             .courses && <p>Relevant Coursework:</p>}

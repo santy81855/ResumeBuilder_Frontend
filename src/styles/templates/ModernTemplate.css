@@ -52,6 +52,10 @@
     padding-inline: 2em;
 }
 
+.modern-template .summary-section {
+    min-height: 3em;
+}
+
 .modern-template .job-progress-bar-container {
     display: flex;
     align-items: stretch;

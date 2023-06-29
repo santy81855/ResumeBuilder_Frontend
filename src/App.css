@@ -49,3 +49,17 @@ body {
 .App {
     text-align: center;
 }
+
+.hidden-template {
+    position: absolute;
+    top: 0px;
+    left: -9999px;
+    width: 610px;
+    aspect-ratio: 8.5/11;
+    overflow: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}

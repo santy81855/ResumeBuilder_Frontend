@@ -177,9 +177,15 @@
     gap: 1em;
 }
 
+.input-and-prompt-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .skill-input-bar {
-    width: 200px;
     padding-block: 10px;
+    flex-grow: 1;
 }
 
 .skill-input-bar-long {
@@ -200,7 +206,7 @@
 .skill-input-container button:hover {
     background-color: white;
     color: var(--accent-color-2);
-    border: 1px solid var(--accent-color-2);
+    outline: 1px solid var(--accent-color);
 }
 
 .skill-container {
@@ -216,7 +222,9 @@
 
 .skill-item {
     display: flex;
+    justify-content: space-between;
     background-color: var(--accent-color-2);
+    flex-grow: 1;
 }
 
 .skill-item p {

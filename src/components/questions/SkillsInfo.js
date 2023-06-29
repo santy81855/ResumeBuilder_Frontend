@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { sendChat } from "../../api/ai/AIRequests";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SkillsInfo = ({
     resumeData,
@@ -24,6 +28,64 @@ const SkillsInfo = ({
         setSkillList(tempArr);
         console.log("tempArr");
     }, []);
+
+    var prompt = { content: "" };
+
+    const getAIResponse = useQuery(
+        ["getAIResponse", prompt], // query key including variables
+        () => sendChat(prompt), // call sendChat with the variables
+        {
+            onSuccess: (data) => {
+                console.log(data.result.content);
+                setSkillInput(data.result.content);
+            },
+            onError: (error) => {
+                console.log("Error getting AI response. Error:", error);
+            },
+            enabled: false,
+        }
+    );
+
+    // Function to trigger the query
+    const fetchAIResponse = (newVariables) => {
+        prompt = { content: newVariables };
+        getAIResponse.refetch();
+    };
+
+    const clear = () => {
+        setSkillInput("");
+    };
+
+    const enhance = () => {
+        if (skillInput === "") {
+            toast.info("There is nothing to enhance.", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } else {
+            var userPrompt =
+                "enhance the following resume skill to make it more professional and to make it better for applying to be a " +
+                jobTitle +
+                ", but keep it under 15 words: " +
+                skillInput;
+            fetchAIResponse(userPrompt);
+        }
+    };
+
+    const generate = () => {
+        setSkillInput("");
+        var userPrompt =
+            "write a 15 words or less resume skill that is useful and professional for applying to be a " +
+            jobTitle;
+        console.log(userPrompt);
+        fetchAIResponse(userPrompt);
+    };
 
     const addSkill = () => {
         // temp arr to store the current skill arr and add new skill
@@ -83,17 +145,41 @@ const SkillsInfo = ({
                 </p>
             </div>
             <div className="skill-input-container">
-                <input
-                    value={skillInput}
-                    onChange={(event) => {
-                        setSkillInput(event.currentTarget.value);
-                    }}
-                    ref={skillBarRef}
-                    placeholder="e.g. Team Management"
-                    className="skill-input-bar"
-                ></input>
-                <button onClick={addSkill}>+</button>
+                <div className="input-and-prompt-container">
+                    <input
+                        value={skillInput}
+                        onChange={(event) => {
+                            setSkillInput(event.currentTarget.value);
+                        }}
+                        ref={skillBarRef}
+                        placeholder="e.g. Team Management"
+                        className="skill-input-bar"
+                    ></input>
+                    <div className="prompt-buttons">
+                        <div className="left">
+                            <button className="enhance-button" onClick={clear}>
+                                Clear
+                            </button>
+                        </div>
+                        <div className="right">
+                            <button
+                                className="enhance-button"
+                                onClick={enhance}
+                            >
+                                enhance
+                            </button>
+                            <button
+                                className="enhance-button"
+                                onClick={generate}
+                            >
+                                generate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button onClick={addSkill}>Add</button>
             </div>
+
             <div className="skill-container">
                 {skillList.map((skill, index) => (
                     <div id={index} className="skill-item">
@@ -104,7 +190,6 @@ const SkillsInfo = ({
                     </div>
                 ))}
             </div>
-
             <div className="question-container-button-container">
                 <button
                     className="question-container-close-button"

@@ -521,20 +521,6 @@
     }
 }
 
-.hidden-template {
-    position: fixed;
-    top: -9999px;
-    left: -9999px;
-    width: 610px;
-    aspect-ratio: 8.5/11;
-    overflow: auto;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-}
-
 .export-modal {
     position: absolute;
     top: calc(var(--header-height) + var(--gap-xlarge));

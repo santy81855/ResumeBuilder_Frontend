@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/CreateResume.css";
-
 import Loader from "./ui/Loader";
 import BasicInfo from "./questions/BasicInfo";
 import Summary from "./questions/Summary";
@@ -19,16 +18,12 @@ import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
 import {
     templateToString,
-    templateNameToExport,
     templateToInt,
+    getTemplateComponent,
 } from "../lib/TemplateKeys";
-
+import { exportToPDF } from "../lib/ExportToPDF";
 import Modal from "react-modal";
-
-import { savePDF } from "@progress/kendo-react-pdf";
-
 import { useQuery, useMutation } from "@tanstack/react-query";
-
 import {
     createResume,
     updateResumeById,
@@ -68,6 +63,9 @@ function CreateResume() {
         // if this is not a new resume
         if (!!resumeId) {
             getResumeQuery.refetch();
+        } else {
+            // if it is a new resume then save it to the database
+            handleSave();
         }
         // handle resize for the floating menu at the bottom of the page
         window.addEventListener("resize", handleResize);
@@ -263,33 +261,6 @@ function CreateResume() {
     const handleSectionChange = (selectedSection) => {
         openModal(true);
         setCurrentlySelectedSection(selectedSection);
-    };
-
-    const exportPDF = () => {
-        const content = document.getElementById(
-            templateNameToExport[currentTemplate]
-        );
-        /*
-        var page1 = document.getElementsByClassName("clean-template")[0];
-        var page2 = document.getElementsByClassName("clean-template")[1];
-        // Create a new parent element
-        var combinedElement = document.createElement("div");
-
-        // Append page1 and page2 as children to the combined element
-        combinedElement.appendChild(page1.cloneNode(true));
-        combinedElement.appendChild(page2.cloneNode(true));
-        */
-        savePDF(content, {
-            //paperSize: "auto",
-            paperSize: "Letter",
-            margin: 0,
-            fileName: titleRef.current.value,
-            landscape: false,
-            pdf: {
-                multiPage: false,
-                font: "Arial",
-            },
-        });
     };
 
     const handleBack = () => {
@@ -622,7 +593,16 @@ function CreateResume() {
                     <p>Sections</p>
                     <span className="sections-icon icon"></span>
                 </button>
-                <button onClick={exportPDF} className="create-resume-button">
+                <button
+                    onClick={() => {
+                        exportToPDF({
+                            content:
+                                document.getElementById("template-to-print"),
+                            fileName: resumeTitle,
+                        });
+                    }}
+                    className="create-resume-button"
+                >
                     <p>Export</p>
                     <span className="export-icon icon"></span>
                 </button>
@@ -709,6 +689,21 @@ function CreateResume() {
                     <CreateResumeSideBar />
                     <ToastContainer />
                     {toggleSideBarButton}
+                </div>
+
+                <div className="hidden-template">
+                    {getResumeQuery.isSuccess ? (
+                        // determine the correct template
+                        getTemplateComponent({
+                            json: resumeData,
+                            isPreview: true,
+                            handleSectionChange: {},
+                            template: templateToString[currentTemplate],
+                            isExport: true,
+                        })
+                    ) : (
+                        <div>getResumeQueryError</div>
+                    )}
                 </div>
             </div>
         );

@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/ResumePage.css";
 import { useNavigate } from "react-router-dom";
-import {
-    templateToString,
-    getTemplateComponent,
-    templateNameToExport,
-} from "../lib/TemplateKeys";
+import { getTemplateComponent } from "../lib/TemplateKeys";
 import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 import CreateResumeModal from "./CreateResumeModal";
 import Modal from "react-modal";
-import { savePDF } from "@progress/kendo-react-pdf";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,8 +14,8 @@ import {
     getAllUserResumes,
     getResumeById,
 } from "../api/resume/ResumeRequests";
-
 import { getUser } from "../api/user/UserRequests";
+import { exportToPDF } from "../lib/ExportToPDF";
 
 function ResumePage() {
     const [userName, setUserName] = useState("");
@@ -31,13 +26,8 @@ function ResumePage() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [createModal, setCreateModal] = useState(false);
     const [showCreateResumeTile, setShowCreateResumeTile] = useState(true);
-    // variables needed for creating new resume
-    const [resumeTitle, setResumeTitle] = useState("");
-    const [resumeJob, setResumeJob] = useState("");
-    const [resumeDescription, setResumeDescription] = useState("");
     const [resumeSearch, setResumeSearch] = useState("");
     const navigate = useNavigate();
-    const resumeToPrintRef = useRef();
 
     // useEffect to fetch user data on load
     useEffect(() => {
@@ -222,22 +212,6 @@ function ResumePage() {
         return resumeArr[0].resumeTitle;
     }
 
-    const doNothingFunction = () => {};
-
-    const exportPDF = () => {
-        const content = document.getElementById("template-to-print");
-        savePDF(content, {
-            paperSize: "Letter",
-            margin: 0,
-            fileName: "resume.pdf",
-            landscape: false,
-            pdf: {
-                multiPage: false,
-                font: "Arial",
-            },
-        });
-    };
-
     const exportModal = (
         <div>
             <Modal
@@ -254,7 +228,7 @@ function ResumePage() {
                         getTemplateComponent({
                             json: getResumeQuery.data.json,
                             isPreview: true,
-                            handleSectionChange: doNothingFunction,
+                            handleSectionChange: {},
                             template: getResumeQuery.data.template,
                             isExport: false,
                         })
@@ -263,7 +237,19 @@ function ResumePage() {
                     )}
                     <div className="export-modal-buttons">
                         <button onClick={closeModal}>Close</button>
-                        <button onClick={exportPDF}>Export Resume</button>
+                        <button
+                            onClick={() => {
+                                exportToPDF({
+                                    content:
+                                        document.getElementById(
+                                            "template-to-print"
+                                        ),
+                                    fileName: getResumeQuery.data.resumeTitle,
+                                });
+                            }}
+                        >
+                            Export Resume
+                        </button>
                     </div>
                 </div>
             </Modal>
@@ -273,7 +259,7 @@ function ResumePage() {
                     getTemplateComponent({
                         json: getResumeQuery.data.json,
                         isPreview: true,
-                        handleSectionChange: doNothingFunction,
+                        handleSectionChange: {},
                         template: getResumeQuery.data.template,
                         isExport: true,
                     })
@@ -335,7 +321,7 @@ function ResumePage() {
         const templateToShow = getTemplateComponent({
             json: json,
             isPreview: true,
-            handleSectionChange: doNothingFunction,
+            handleSectionChange: {},
             template: template,
         });
 

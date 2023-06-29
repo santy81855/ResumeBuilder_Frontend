@@ -414,7 +414,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={0}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight1(event.target.value);
@@ -427,7 +427,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={1}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight2(event.target.value);
@@ -440,7 +440,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={2}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight3(event.target.value);
@@ -453,7 +453,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={3}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight4(event.target.value);
@@ -466,7 +466,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={4}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight5(event.target.value);
@@ -479,7 +479,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={5}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight6(event.target.value);
@@ -492,7 +492,7 @@ const ExperienceInfo = ({
                         <textarea
                             id={6}
                             className="job-summary"
-                            placeholder="+ Write your summary here."
+                            placeholder="+ Write your highlight here."
                             type="text"
                             onChange={(event) => {
                                 setHighlight7(event.target.value);

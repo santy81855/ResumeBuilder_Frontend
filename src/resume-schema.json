@@ -77,13 +77,13 @@
     "picture": {
         "url": ""
     },
-    "label": "Web Developer",
-    "summary": "Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications. Experienced web developer with a passion for creating efficient and user-friendly applications.",
+    "label": "Job Title",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla, tellus eget pellentesque rutrum, enim nunc sodales lectus, nec facilisis arcu diam at ligula. Fusce ut lectus vel nisi bibendum lobortis. Mauris rhoncus velit non velit euismod, non posuere odio cursus. Etiam ultrices est nec sem sagittis, non egestas purus eleifend. Curabitur in mi ac est auctor iaculis. Aenean condimentum eros sit amet nisi maximus, sed gravida arcu congue.",
     "contact": {
-        "name": "John Doe",
-        "email": "johndoe@gmail.com",
+        "name": "Your Name",
+        "email": "Your-Name@example.com",
         "phone": "(123) 456-7890",
-        "website": "https://johndoe.com",
+        "website": "https://your-website.com",
         "location": {
             "address": "123 Main St",
             "postalCode": "12345",
@@ -94,39 +94,39 @@
         "profiles": [
             {
                 "network": "LinkedIn",
-                "username": "johndoe",
+                "username": "yourname",
                 "url": "https://www.linkedin.com/in/johndoe"
             },
             {
                 "network": "GitHub",
-                "username": "johndoe",
-                "url": "https://github.com/johndoe"
+                "username": "yourname",
+                "url": "https://github.com/yourname"
             }
         ]
     },
     "work": [
         {
             "company": "ABC Company",
-            "position": "Web Developer",
+            "position": "Job Title",
             "website": "https://abc.com",
             "startDate": "2018-01-01",
             "endDate": "current",
-            "summary": "Developed and maintained web applications for clients using HTML, CSS, and JavaScript.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus velit non velit euismod.",
             "highlights": [
-                "Implemented responsive design to improve user experience on mobile devices.",
-                "Developed custom WordPress themes to match client specifications."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
             ]
         },
         {
             "company": "XYZ Inc.",
-            "position": "Junior Web Developer",
+            "position": "Job Title",
             "website": "https://xyz.com",
             "startDate": "2016-01-01",
             "endDate": "2017-12-31",
-            "summary": "Assisted senior developers with various web development tasks.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus velit non velit euismod.",
             "highlights": [
-                "Designed and developed landing pages for marketing campaigns.",
-                "Improved website load times by optimizing images and code."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
             ]
         },
         {
@@ -135,59 +135,59 @@
             "website": "https://JnD.com",
             "startDate": "2018-01-01",
             "endDate": "2020-12-31",
-            "summary": "Led group of junior software developers.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus velit non velit euismod.",
             "highlights": [
-                "Designed and developed landing pages for marketing campaigns.",
-                "Improved website load times by optimizing images and code."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
             ]
         }
     ],
     "education": [
         {
             "institution": "University of XYZ",
-            "area": "Computer Science",
+            "area": "General Studies",
             "studyType": "Bachelor's Degree",
             "startDate": "2014-01-01",
             "endDate": "2018-12-31",
             "gpa": "",
-            "courses": ["Data Structures", "Algorithms", "Web Development"]
+            "courses": ["Highlight1", "Highlight2", "Highlight3"]
         }
     ],
     "skills": [
         {
-            "name": "JavaScript",
+            "name": "Skill 1",
             "level": "Advanced",
-            "keywords": ["React", "Angular", "Vue"]
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
         },
         {
-            "name": "HTML",
-            "level": "Intermediate",
-            "keywords": []
+            "name": "Skill 2",
+            "level": "Advanced",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
         },
         {
-            "name": "CSS",
-            "level": "Intermediate",
-            "keywords": ["SASS", "Bootstrap"]
+            "name": "Skill 3",
+            "level": "Advanced",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
         }
     ],
     "languages": [
         {
-            "language": "English",
+            "language": "Language 1",
             "fluency": "Native"
         },
         {
-            "language": "Spanish",
+            "language": "Language 2",
             "fluency": "Intermediate"
         }
     ],
     "interests": [
         {
-            "name": "Music",
-            "keywords": ["Guitar", "Piano", "Drums"]
+            "name": "Interest 1",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
         },
         {
-            "name": "Sports",
-            "keywords": ["Basketball", "Soccer", "Tennis"]
+            "name": "Interest 2",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
         }
     ],
     "custom": []
