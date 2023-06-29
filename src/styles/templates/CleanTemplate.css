@@ -49,7 +49,7 @@
 
 .clean-template .header-label h3 {
     margin: 0;
-    font-size: 110%;
+    font-size: 100%;
 }
 
 .clean-template .header-contact-info {
@@ -91,15 +91,18 @@
 
 .clean-template .section h4 {
     margin-block: 0;
+    font-size: 100%;
 }
 
 .clean-template .section h3 {
     margin-block-start: 0;
     margin-block-end: 0.5em;
+    font-size: 100%;
 }
 
 .clean-template .section p {
     margin-block: 0;
+    font-size: 100%;
 }
 
 .clean-template .section .job-container {
@@ -111,6 +114,7 @@
 
 .clean-template .section .job-container p {
     margin-block-start: 0.5em;
+    font-size: 100%;
 }
 
 .clean-template .section .bullet-list-container {
@@ -160,20 +164,6 @@
     font-size: 95%;
 }
 */
-.clean-template .section ul {
-    margin-block-end: 0;
-    margin-block-start: 0.2em;
-    padding-left: 3em;
-}
-
-.clean-template .section li {
-    color: black;
-}
-
-.clean-template .horizontal-list li {
-    display: inline-block;
-    margin-right: 1em;
-}
 
 @media (pointer: fine) {
     .clean-resume-section::after {
