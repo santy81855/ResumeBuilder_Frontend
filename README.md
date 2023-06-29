@@ -1,4 +1,4 @@
-# AI Resume Builder Frontend
+# [AI Resume Builder Frontend](http://ec2-3-135-220-37.us-east-2.compute.amazonaws.com:3000/)
 
 [Link to try it!](http://ec2-3-135-220-37.us-east-2.compute.amazonaws.com:3000/)
 
