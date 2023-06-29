@@ -171,31 +171,28 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Experience</h3>
-                <div className="job-container">
-                    {work.map((job) => (
-                        <div>
-                            <h4>
-                                {resumeData.templateSections.clean.experience
-                                    .startDate &&
-                                    getDate(job.startDate) + " - "}
-                                {getDate(job.endDate)}
-
-                                <p>{job.position + ", " + job.company}</p>
-                            </h4>
-
+                {work.map((job) => (
+                    <div className="job-container">
+                        <h4>
                             {resumeData.templateSections.clean.experience
-                                .summary && <p>{job.summary}</p>}
-                            {resumeData.templateSections.clean.experience
-                                .highlights && (
-                                <ul>
-                                    {job.highlights.map((highlight) => (
-                                        <li>{highlight}</li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    ))}
-                </div>
+                                .startDate && getDate(job.startDate) + " - "}
+                            {getDate(job.endDate)}
+
+                            <p>{job.position + ", " + job.company}</p>
+                        </h4>
+
+                        {resumeData.templateSections.clean.experience
+                            .summary && <p>{job.summary}</p>}
+                        {resumeData.templateSections.clean.experience
+                            .highlights && (
+                            <ul>
+                                {job.highlights.map((highlight) => (
+                                    <li>{highlight}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                ))}
             </div>
         );
     };
@@ -224,12 +221,9 @@ const CleanTemplate = ({
                                 .startDate && getDate(school.startDate) + " - "}
                             {getDate(school.endDate)}
                         </p>
-                        {resumeData.templateSections.clean.education.gpa && (
-                            <div>
-                                {school.gpa && <p>{"GPA: " + school.gpa}</p>}
-                            </div>
-                        )}
 
+                        {resumeData.templateSections.clean.education.gpa &&
+                            school.gpa && <p>{"GPA: " + school.gpa}</p>}
                         {resumeData.templateSections.clean.education
                             .courses && (
                             <ul>

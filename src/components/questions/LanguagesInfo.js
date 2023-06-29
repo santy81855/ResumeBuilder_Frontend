@@ -54,7 +54,6 @@ const LanguagesInfo = ({
         const index = jsonLangs.findIndex(
             (item) => item.language === nameToDelete
         );
-
         if (index > -1) {
             jsonLangs.splice(index, 1);
         }
