@@ -79,6 +79,13 @@ const CleanTemplate = ({
         }
     };
 
+    const getDate = (date) => {
+        const d = new Date(date);
+        const options = { year: "numeric", month: "short" };
+        const res = d.toLocaleDateString("en-us", options);
+        return res === "Invalid Date" ? "Current" : res;
+    };
+
     const SummarySection = () => {
         return (
             <div
@@ -103,9 +110,28 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Skills</h3>
-                <ul className="horizontal-list">
+                <ul>
                     {skills.map((skill) => (
                         <li>{skill.name}</li>
+                    ))}
+                </ul>
+            </div>
+        );
+    };
+
+    const InterestsSection = () => {
+        return (
+            <div
+                className={sectionClass + " skills-section"}
+                onClick={() => {
+                    handleSectionChange(9);
+                }}
+            >
+                <hr />
+                <h3>Interests</h3>
+                <ul>
+                    {interests.map((interest) => (
+                        <li>{interest.name}</li>
                     ))}
                 </ul>
             </div>
@@ -147,12 +173,14 @@ const CleanTemplate = ({
                 <h3>Experience</h3>
                 {work.map((job) => (
                     <div className="job-container">
-                        <h3>{job.position + ", " + job.company}</h3>
-                        <p>
+                        <h4>
                             {resumeData.templateSections.clean.experience
-                                .startDate && job.startDate + " - "}
-                            {job.endDate}
-                        </p>
+                                .startDate && getDate(job.startDate) + " - "}
+                            {getDate(job.endDate)}
+
+                            <p>{job.position + ", " + job.company}</p>
+                        </h4>
+
                         {resumeData.templateSections.clean.experience
                             .summary && <p>{job.summary}</p>}
                         {resumeData.templateSections.clean.experience
@@ -168,6 +196,7 @@ const CleanTemplate = ({
             </div>
         );
     };
+
     const EducationSection = () => {
         return (
             <div
@@ -180,23 +209,21 @@ const CleanTemplate = ({
                 <h3>Education</h3>
                 {education.map((school) => (
                     <div className="school-container">
-                        <h3>
+                        <h4>
                             {school.area +
                                 " " +
                                 school.studyType +
                                 ", " +
                                 school.institution}
-                        </h3>
+                        </h4>
                         <p>
                             {resumeData.templateSections.clean.education
-                                .startDate && school.startDate + " - "}
-                            {school.endDate}
+                                .startDate && getDate(school.startDate) + " - "}
+                            {getDate(school.endDate)}
                         </p>
-                        {resumeData.templateSections.clean.education.gpa && (
-                            <p>{"GPA: " + school.gpa}</p>
-                        )}
-                        {resumeData.templateSections.clean.education
-                            .courses && <p>Relevant Coursework:</p>}
+
+                        {resumeData.templateSections.clean.education.gpa &&
+                            school.gpa && <p>{"GPA: " + school.gpa}</p>}
                         {resumeData.templateSections.clean.education
                             .courses && (
                             <ul>
@@ -264,17 +291,20 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.summary.show && (
                         <SummarySection />
                     )}
-                    {resumeData.templateSections.clean.skills.show && (
-                        <SkillsSection />
+                    {resumeData.templateSections.clean.education.show && (
+                        <EducationSection />
                     )}
                     {resumeData.templateSections.clean.experience.show && (
                         <ExperienceSection />
                     )}
-                    {resumeData.templateSections.clean.education.show && (
-                        <EducationSection />
+                    {resumeData.templateSections.clean.skills.show && (
+                        <SkillsSection />
                     )}
                     {resumeData.templateSections.clean.languages.show && (
                         <LanguagesSection />
+                    )}
+                    {resumeData.templateSections.clean.interests.show && (
+                        <InterestsSection />
                     )}
                 </div>
             </div>
