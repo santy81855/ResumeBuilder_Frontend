@@ -110,11 +110,14 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Skills</h3>
-                <ul>
+                <div className="bullet-list-container">
                     {skills.map((skill) => (
-                        <li>{skill.name}</li>
+                        <div className="bullet-item">
+                            <div className="bullet"></div>
+                            {skill.name}
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         );
     };
@@ -129,11 +132,14 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Interests</h3>
-                <ul>
+                <div className="bullet-list-container">
                     {interests.map((interest) => (
-                        <li>{interest.name}</li>
+                        <div className="bullet-item">
+                            <div className="bullet"></div>
+                            {interest.name}
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         );
     };
@@ -148,15 +154,16 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Languages</h3>
-                <ul className="horizontal-list">
+                <div className="bullet-list-container">
                     {languages.map((language) => (
-                        <li>
+                        <div className="bullet-item">
+                            <div className="bullet"></div>
                             {language.language}
                             {resumeData.templateSections.clean.languages
                                 .fluency && " - " + language.fluency}
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         );
     };
@@ -185,11 +192,14 @@ const CleanTemplate = ({
                                 .summary && <p>{job.summary}</p>}
                             {resumeData.templateSections.clean.experience
                                 .highlights && (
-                                <ul>
+                                <div className="bullet-list-container">
                                     {job.highlights.map((highlight) => (
-                                        <li>{highlight}</li>
+                                        <div className="bullet-item">
+                                            <div className="bullet"></div>
+                                            {highlight}
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             )}
                         </div>
                     ))}
@@ -227,11 +237,14 @@ const CleanTemplate = ({
                             school.gpa && <p>{"GPA: " + school.gpa}</p>}
                         {resumeData.templateSections.clean.education
                             .courses && (
-                            <ul>
+                            <div className="bullet-list-container">
                                 {school.courses.map((course) => (
-                                    <li>{course}</li>
+                                    <div className="bullet-item">
+                                        <div className="bullet"></div>
+                                        {course}
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
                         )}
                     </div>
                 ))}

@@ -61,7 +61,7 @@
 
 .clean-template .header-contact-info p {
     margin: 0;
-    font-size: 90%;
+    font-size: 100%;
 }
 
 .clean-resume-section {
@@ -111,6 +111,34 @@
 
 .clean-template .section .job-container p {
     margin-block-start: 0.5em;
+}
+
+.clean-template .section .bullet-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-block-start: 0.5em;
+    margin-inline-start: 2em;
+    width: 100%;
+    row-gap: 0.1em;
+}
+
+.clean-template .section .bullet-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    row-gap: 0.5em;
+}
+
+.clean-template .section .bullet {
+    background-image: url("../../images/lib/bullet-point.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1em;
+    height: 1em;
 }
 /*
 .clean-template h3 {
