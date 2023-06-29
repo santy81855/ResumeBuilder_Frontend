@@ -27,6 +27,8 @@
     max-height: 100%;
     min-height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .clean-template-content .header-section {
@@ -34,13 +36,20 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    height: fit-content;
 }
 
-.clean-template .header-name-label {
+.clean-template .header-label {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-end;
     row-gap: 0.5em;
+}
+
+.clean-template .header-label h3 {
+    margin: 0;
+    font-size: 110%;
 }
 
 .clean-template .header-contact-info {
@@ -51,8 +60,8 @@
 }
 
 .clean-template .header-contact-info p {
-    margin-bottom: 0px;
-    margin-top: 0em;
+    margin: 0;
+    font-size: 90%;
 }
 
 .clean-resume-section {
@@ -65,6 +74,77 @@
     margin: 0px;
     position: relative;
     z-index: 0;
+}
+
+.clean-template .section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-block-start: 0.5em;
+}
+
+.clean-template .section hr {
+    width: 100%;
+    margin-block-start: 0em;
+    margin-block-end: 0.5em;
+}
+
+.clean-template .section h4 {
+    margin-block: 0;
+}
+
+.clean-template .section h3 {
+    margin-block-start: 0;
+    margin-block-end: 0.5em;
+}
+
+.clean-template .section p {
+    margin-block: 0;
+}
+
+.clean-template .section .job-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 1em;
+}
+
+.clean-template .section .job-container p {
+    margin-block-start: 0.5em;
+}
+/*
+.clean-template h3 {
+    color: black;
+    margin-block-end: 0.5em;
+    font-size: 110%;
+}
+
+.clean-template h4 {
+    color: black;
+    margin-block-end: 0.5em;
+    margin-block-start: 0;
+    font-size: 100%;
+}
+
+.clean-template p {
+    color: black;
+    margin-block: 0;
+    font-size: 95%;
+}
+*/
+.clean-template .section ul {
+    margin-block-end: 0;
+    margin-block-start: 0.2em;
+    padding-left: 3em;
+}
+
+.clean-template .section li {
+    color: black;
+}
+
+.clean-template .horizontal-list li {
+    display: inline-block;
+    margin-right: 1em;
 }
 
 @media (pointer: fine) {
@@ -94,55 +174,4 @@
             cursor: pointer;
         }
     }
-}
-
-.clean-template .job-container {
-    margin-block: 1em;
-}
-
-.clean-template h3 {
-    color: black;
-    margin-block-end: 0.5em;
-    font-size: 110%;
-}
-
-.clean-template .header-name h3 {
-    margin-bottom: 0px;
-    margin-top: 0em;
-    font-size: 110%;
-}
-
-.clean-template h4 {
-    color: black;
-    margin-block-end: 0.5em;
-    margin-block-start: 0;
-    font-size: 100%;
-}
-
-.clean-template p {
-    color: black;
-    margin-block: 0;
-    font-size: 95%;
-}
-
-.clean-template ul {
-    margin-block-end: 0;
-    margin-block-start: 0.2em;
-    padding-left: 3em;
-}
-
-.clean-template li {
-    color: black;
-    font-size: 95%;
-}
-
-.clean-template .horizontal-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.clean-template .horizontal-list li {
-    display: inline-block;
-    margin-right: 1em;
 }

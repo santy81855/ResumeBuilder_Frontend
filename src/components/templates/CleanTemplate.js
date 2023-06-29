@@ -89,7 +89,7 @@ const CleanTemplate = ({
     const SummarySection = () => {
         return (
             <div
-                className={sectionClass + " summary-section"}
+                className={sectionClass + " section"}
                 onClick={() => {
                     handleSectionChange(2);
                 }}
@@ -103,7 +103,7 @@ const CleanTemplate = ({
     const SkillsSection = () => {
         return (
             <div
-                className={sectionClass + " skills-section"}
+                className={sectionClass + " section"}
                 onClick={() => {
                     handleSectionChange(5);
                 }}
@@ -122,7 +122,7 @@ const CleanTemplate = ({
     const InterestsSection = () => {
         return (
             <div
-                className={sectionClass + " skills-section"}
+                className={sectionClass + " section"}
                 onClick={() => {
                     handleSectionChange(9);
                 }}
@@ -141,14 +141,14 @@ const CleanTemplate = ({
     const LanguagesSection = () => {
         return (
             <div
-                className={sectionClass + " languages-section"}
+                className={sectionClass + " section"}
                 onClick={() => {
                     handleSectionChange(8);
                 }}
             >
                 <hr />
                 <h3>Languages</h3>
-                <ul>
+                <ul className="horizontal-list">
                     {languages.map((language) => (
                         <li>
                             {language.language}
@@ -164,35 +164,36 @@ const CleanTemplate = ({
     const ExperienceSection = () => {
         return (
             <div
-                className={sectionClass + " experience-section"}
+                className={sectionClass + " section"}
                 onClick={() => {
                     handleSectionChange(6);
                 }}
             >
                 <hr />
                 <h3>Experience</h3>
-                {work.map((job) => (
-                    <div className="job-container">
-                        <h4>
+                <div className="job-container">
+                    {work.map((job) => (
+                        <div className="job-item">
+                            <h4>
+                                {resumeData.templateSections.clean.experience
+                                    .startDate &&
+                                    getDate(job.startDate) + " - "}
+                                {getDate(job.endDate)}
+                            </h4>
+                            <h4>{job.position + ", " + job.company}</h4>
                             {resumeData.templateSections.clean.experience
-                                .startDate && getDate(job.startDate) + " - "}
-                            {getDate(job.endDate)}
-
-                            <p>{job.position + ", " + job.company}</p>
-                        </h4>
-
-                        {resumeData.templateSections.clean.experience
-                            .summary && <p>{job.summary}</p>}
-                        {resumeData.templateSections.clean.experience
-                            .highlights && (
-                            <ul>
-                                {job.highlights.map((highlight) => (
-                                    <li>{highlight}</li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                ))}
+                                .summary && <p>{job.summary}</p>}
+                            {resumeData.templateSections.clean.experience
+                                .highlights && (
+                                <ul>
+                                    {job.highlights.map((highlight) => (
+                                        <li>{highlight}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     };
@@ -200,7 +201,7 @@ const CleanTemplate = ({
     const EducationSection = () => {
         return (
             <div
-                className={sectionClass + " education-section"}
+                className={sectionClass + " section"}
                 onClick={() => {
                     handleSectionChange(7);
                 }}
@@ -208,7 +209,7 @@ const CleanTemplate = ({
                 <hr />
                 <h3>Education</h3>
                 {education.map((school) => (
-                    <div className="school-container">
+                    <div>
                         <h4>
                             {school.area +
                                 " " +
@@ -216,11 +217,11 @@ const CleanTemplate = ({
                                 ", " +
                                 school.institution}
                         </h4>
-                        <p>
+                        <h4>
                             {resumeData.templateSections.clean.education
                                 .startDate && getDate(school.startDate) + " - "}
                             {getDate(school.endDate)}
-                        </p>
+                        </h4>
 
                         {resumeData.templateSections.clean.education.gpa &&
                             school.gpa && <p>{"GPA: " + school.gpa}</p>}
@@ -241,17 +242,15 @@ const CleanTemplate = ({
         return (
             <div className="header-section">
                 <div
-                    className={sectionClass + " header-name"}
+                    className={sectionClass + " header-label"}
                     onClick={() => {
                         handleSectionChange(4);
                     }}
                 >
-                    <div className={sectionClass + " header-name-label"}>
-                        <h3>{contact.name}</h3>
-                        {resumeData.templateSections.clean.label.show && (
-                            <h3>{label}</h3>
-                        )}
-                    </div>
+                    <h3>{contact.name}</h3>
+                    {resumeData.templateSections.clean.label.show && (
+                        <h3>{label}</h3>
+                    )}
                 </div>
 
                 {resumeData.templateSections.clean.contact.show && (
