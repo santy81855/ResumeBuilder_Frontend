@@ -82,7 +82,9 @@ const SkillsInfo = ({
         setSkillInput("");
         var userPrompt =
             "write a 15 words or less resume skill that is useful and professional for applying to be a " +
-            jobTitle;
+            jobTitle +
+            " and it should be something different from the following: " +
+            skillList.toString();
         console.log(userPrompt);
         fetchAIResponse(userPrompt);
     };
@@ -114,13 +116,16 @@ const SkillsInfo = ({
         var nameToDelete = skillList[event.target.id];
         console.log(skillList[event.target.id]);
         // remove it from the list
-        var updatedArr = jsonSkills.filter(
-            (item) => item.name !== nameToDelete
+        const index = jsonSkills.findIndex(
+            (item) => item.name === nameToDelete
         );
+        if (index > -1) {
+            jsonSkills.splice(index, 1);
+        }
         // update the resumeData
         setResumeData({
             ...resumeData,
-            skills: updatedArr,
+            skills: jsonSkills,
         });
         // update the skillList
         var tempArr = skillList;

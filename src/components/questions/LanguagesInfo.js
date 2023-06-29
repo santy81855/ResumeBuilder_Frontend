@@ -51,13 +51,18 @@ const LanguagesInfo = ({
         var nameToDelete = languageList[event.target.id];
         console.log(languageList[event.target.id]);
         // remove it from the list
-        var updatedArr = jsonLangs.filter(
-            (item) => item.language !== nameToDelete
+        const index = jsonLangs.findIndex(
+            (item) => item.language === nameToDelete
         );
+
+        if (index > -1) {
+            jsonLangs.splice(index, 1);
+        }
+
         // update the resumeData
         setResumeData({
             ...resumeData,
-            languages: updatedArr,
+            languages: jsonLangs,
         });
         // update the languageList
         var tempArr = languageList;

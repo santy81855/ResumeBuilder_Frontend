@@ -37,16 +37,103 @@ const ExperienceInfo = ({
     const [highlight5, setHighlight5] = useState("");
     const [highlight6, setHighlight6] = useState("");
     const [highlight7, setHighlight7] = useState("");
+    const highlightArray = [
+        highlight1,
+        highlight2,
+        highlight3,
+        highlight4,
+        highlight5,
+        highlight6,
+        highlight7,
+    ];
+    const setHighlightArray = [
+        setHighlight1,
+        setHighlight2,
+        setHighlight3,
+        setHighlight4,
+        setHighlight5,
+        setHighlight6,
+        setHighlight7,
+    ];
+
+    const noEnhanceToast = () =>
+        toast.info("There is nothing to enhance.", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    const fillOutCompanyAndPositionToast = () => {
+        toast.info(
+            "Please fill out the company name and your position in that company.",
+            {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }
+        );
+    };
+    const fillOutPositionToast = () => {
+        toast.info("Please fill out the position for this job.", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
+    const fillOutCompanyToast = () => {
+        toast.info("Please fill out the company name.", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
+    const fillOutAllFieldsToast = () => {
+        toast.info("Please fill out all of the fields.", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
 
     var prompt = { content: "" };
+    var queryType = -1;
 
     const getAIResponse = useQuery(
-        ["getAIResponse", prompt], // query key including variables
+        ["getAIResponse", prompt, queryType], // query key including variables
         () => sendChat(prompt), // call sendChat with the variables
         {
             onSuccess: (data) => {
+                console.log(queryType);
                 console.log(data.result.content);
-                setSummary(data.result.content);
+                if (queryType === -1) {
+                    setSummary(data.result.content);
+                } else {
+                    setHighlightArray[queryType](data.result.content);
+                }
             },
             onError: (error) => {
                 console.log("Error getting AI response. Error:", error);
@@ -56,9 +143,68 @@ const ExperienceInfo = ({
     );
 
     // Function to trigger the query
-    const fetchAIResponse = (newVariables) => {
-        prompt = { content: newVariables };
+    const fetchAIResponse = (userPrompt, qType) => {
+        queryType = qType;
+        prompt = { content: userPrompt };
         getAIResponse.refetch();
+    };
+
+    const generateHighlight = (index) => {
+        if (
+            companyRef.current.value === "" &&
+            positionRef.current.value === ""
+        ) {
+            fillOutCompanyAndPositionToast();
+            return;
+        } else if (positionRef.current.value === "") {
+            fillOutPositionToast();
+            return;
+        } else if (companyRef.current.value === "") {
+            fillOutCompanyToast();
+            return;
+        }
+
+        var userPrompt =
+            "in 20 words or less, write a job highlight for when I worked as a " +
+            positionRef.current.value +
+            " that is professional and better for a resume for applying to be a " +
+            jobTitle;
+        console.log(userPrompt);
+        fetchAIResponse(userPrompt, index);
+    };
+
+    const enhanceHighlight = (index) => {
+        if (highlightArray[index] === "") {
+            noEnhanceToast();
+        } else {
+            if (
+                companyRef.current.value === "" &&
+                positionRef.current.value === ""
+            ) {
+                fillOutCompanyAndPositionToast();
+                return;
+            } else if (positionRef.current.value === "") {
+                fillOutPositionToast();
+                return;
+            } else if (companyRef.current.value === "") {
+                fillOutCompanyToast();
+                return;
+            }
+
+            var userPrompt =
+                "in 20 words or less, enhance the following job highlight for when I worked as a " +
+                positionRef.current.value +
+                " to make it better for a resume and to make it better for applying to be a " +
+                jobTitle +
+                ": " +
+                highlightArray[index];
+            fetchAIResponse(userPrompt, index);
+        }
+    };
+
+    const clearHighlight = (index) => {
+        setHighlightArray[index]("");
+        console.log(highlightArray);
     };
 
     const clear = () => {
@@ -67,69 +213,30 @@ const ExperienceInfo = ({
 
     const enhance = () => {
         if (summary === "") {
-            toast.info("There is nothing to enhance.", {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            noEnhanceToast();
         } else {
             if (
                 companyRef.current.value === "" &&
                 positionRef.current.value === ""
             ) {
-                toast.info(
-                    "Please fill out the company name and your position in that company.",
-                    {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    }
-                );
+                fillOutCompanyAndPositionToast();
                 return;
             } else if (positionRef.current.value === "") {
-                toast.info("Please fill out the position for this job.", {
-                    position: "bottom-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                fillOutPositionToast();
                 return;
             } else if (companyRef.current.value === "") {
-                toast.info("Please fill out the company name.", {
-                    position: "bottom-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                fillOutCompanyToast();
                 return;
             }
             if (summary !== "") {
                 var userPrompt =
-                    "enhance the following job summary for a " +
+                    "in 40 words or less, enhance the following job summary for a " +
                     positionRef.current.value +
                     " job to make it more professional and to make it better for applying to be a " +
                     jobTitle +
                     ": " +
                     summary;
-                fetchAIResponse(userPrompt);
+                fetchAIResponse(userPrompt, -1);
             }
         }
     };
@@ -139,43 +246,13 @@ const ExperienceInfo = ({
             companyRef.current.value === "" &&
             positionRef.current.value === ""
         ) {
-            toast.info(
-                "Please fill out the company name and your position in that company.",
-                {
-                    position: "bottom-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                }
-            );
+            fillOutCompanyAndPositionToast();
             return;
         } else if (positionRef.current.value === "") {
-            toast.info("Please fill out the position for this job.", {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            fillOutPositionToast();
             return;
         } else if (companyRef.current.value === "") {
-            toast.info("Please fill out the company name.", {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            fillOutCompanyToast();
             return;
         }
         console.log(jobTitle);
@@ -186,7 +263,7 @@ const ExperienceInfo = ({
             " that is professional and engaging for applying to be a " +
             jobTitle;
         console.log(userPrompt);
-        fetchAIResponse(userPrompt);
+        fetchAIResponse(userPrompt, -1);
     };
 
     const addJob = () => {
@@ -203,39 +280,16 @@ const ExperienceInfo = ({
         var sum = summaryRef.current.value;
         // job highlights
         var hl = [];
-        if (numHighlights >= 1) {
-            hl.push(highlight1);
+
+        for (var i = 0; i < numHighlights; i++) {
+            if (highlightArray[i] !== "") {
+                hl.push(highlightArray[i]);
+            }
         }
-        if (numHighlights >= 2) {
-            hl.push(highlight2);
-        }
-        if (numHighlights >= 3) {
-            hl.push(highlight3);
-        }
-        if (numHighlights >= 4) {
-            hl.push(highlight4);
-        }
-        if (numHighlights >= 5) {
-            hl.push(highlight5);
-        }
-        if (numHighlights >= 6) {
-            hl.push(highlight6);
-        }
-        if (numHighlights >= 7) {
-            hl.push(highlight7);
-        }
+
         // ensure all the necessary values are filled
         if (comp === "" || pos === "" || st === "" || en === "" || sum === "") {
-            toast.info("Please fill out all of the fields.", {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            fillOutAllFieldsToast();
 
             return;
         }
@@ -255,19 +309,19 @@ const ExperienceInfo = ({
             ...resumeData,
             work: tempHistory,
         });
+        // update the experienceList use state
+        setExperienceList(tempHistory);
         // make the input fields blank again
         setCompany("");
         setPosition("");
         setStart("");
         setEnd("");
         setSummary("");
-        setHighlight1("");
-        setHighlight2("");
-        setHighlight3("");
-        setHighlight4("");
-        setHighlight5("");
-        setHighlight6("");
-        setHighlight7("");
+
+        setHighlightArray.forEach((highlight) => {
+            highlight("");
+        });
+        setNumHighlights(1);
     };
 
     const removeJob = (event) => {
@@ -411,95 +465,319 @@ const ExperienceInfo = ({
                 </div>
                 <div className="highlight-text-container">
                     {numHighlights >= 1 && (
-                        <textarea
-                            id={0}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight1(event.target.value);
-                            }}
-                            value={highlight1}
-                            rows="3"
-                        />
+                        <div>
+                            <textarea
+                                id={0}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight1(event.target.value);
+                                }}
+                                value={highlight1}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(0);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(0);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(0);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {numHighlights >= 2 && (
-                        <textarea
-                            id={1}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight2(event.target.value);
-                            }}
-                            value={highlight2}
-                            rows="3"
-                        />
+                        <div style={{ marginTop: "2em" }}>
+                            <textarea
+                                id={1}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight2(event.target.value);
+                                }}
+                                value={highlight2}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(1);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(1);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(1);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {numHighlights >= 3 && (
-                        <textarea
-                            id={2}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight3(event.target.value);
-                            }}
-                            value={highlight3}
-                            rows="3"
-                        />
+                        <div style={{ marginTop: "2em" }}>
+                            <textarea
+                                id={2}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight3(event.target.value);
+                                }}
+                                value={highlight3}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(2);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(2);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(2);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {numHighlights >= 4 && (
-                        <textarea
-                            id={3}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight4(event.target.value);
-                            }}
-                            value={highlight4}
-                            rows="3"
-                        />
+                        <div style={{ marginTop: "2em" }}>
+                            <textarea
+                                id={3}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight4(event.target.value);
+                                }}
+                                value={highlight4}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(3);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(3);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(3);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {numHighlights >= 5 && (
-                        <textarea
-                            id={4}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight5(event.target.value);
-                            }}
-                            value={highlight5}
-                            rows="3"
-                        />
+                        <div style={{ marginTop: "2em" }}>
+                            <textarea
+                                id={4}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight5(event.target.value);
+                                }}
+                                value={highlight5}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(4);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(4);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(4);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {numHighlights >= 6 && (
-                        <textarea
-                            id={5}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight6(event.target.value);
-                            }}
-                            value={highlight6}
-                            rows="3"
-                        />
+                        <div style={{ marginTop: "2em" }}>
+                            <textarea
+                                id={5}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight6(event.target.value);
+                                }}
+                                value={highlight6}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(5);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(5);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(5);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                     {numHighlights >= 7 && (
-                        <textarea
-                            id={6}
-                            className="job-summary"
-                            placeholder="+ Write your highlight here."
-                            type="text"
-                            onChange={(event) => {
-                                setHighlight7(event.target.value);
-                            }}
-                            value={highlight7}
-                            rows="3"
-                        />
+                        <div style={{ marginTop: "2em" }}>
+                            <textarea
+                                id={6}
+                                className="job-summary"
+                                placeholder="+ Write your highlight here."
+                                type="text"
+                                onChange={(event) => {
+                                    setHighlight7(event.target.value);
+                                }}
+                                value={highlight7}
+                                rows="3"
+                            />
+                            <div className="prompt-buttons">
+                                <div className="left">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            clearHighlight(6);
+                                        }}
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                                <div className="right">
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            enhanceHighlight(6);
+                                        }}
+                                    >
+                                        enhance
+                                    </button>
+                                    <button
+                                        className="enhance-button"
+                                        onClick={() => {
+                                            generateHighlight(6);
+                                        }}
+                                    >
+                                        generate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     )}
                 </div>
             </div>

@@ -88,6 +88,14 @@ const ModernTemplate = ({
         }
     };
 
+    const getDate = (date) => {
+        const d = new Date(date);
+        const options = { year: "numeric", month: "short" };
+
+        const res = d.toLocaleDateString("en-us", options);
+        return res === "Invalid Date" ? "Current" : res;
+    };
+
     const LanguagesSection = () => {
         return (
             <div
@@ -150,8 +158,8 @@ const ModernTemplate = ({
                     <div className="container">
                         <p>
                             {resumeData.templateSections.modern.education
-                                .startDate && school.startDate + " - "}
-                            {school.endDate}
+                                .startDate && getDate(school.startDate) + " - "}
+                            {getDate(school.endDate)}
                         </p>
                         <h4>{school.area + " " + school.studyType}</h4>
                         <h4>{school.institution}</h4>
@@ -273,8 +281,8 @@ const ModernTemplate = ({
                                 <h3>
                                     {resumeData.templateSections.modern
                                         .experience.startDate &&
-                                        job.startDate + " - "}
-                                    {job.endDate}
+                                        getDate(job.startDate) + " - "}
+                                    {getDate(job.endDate)}
                                 </h3>
                                 <h4>{job.company}</h4>
                                 <h3>{job.position}</h3>

@@ -51,13 +51,16 @@ const InterestsInfo = ({
         var nameToDelete = interestList[event.target.id];
         console.log(interestList[event.target.id]);
         // remove it from the list
-        var updatedArr = jsonInterests.filter(
-            (item) => item.name !== nameToDelete
+        const index = jsonInterests.findIndex(
+            (item) => item.name === nameToDelete
         );
+        if (index > -1) {
+            jsonInterests.splice(index, 1);
+        }
         // update the resumeData
         setResumeData({
             ...resumeData,
-            interests: updatedArr,
+            interests: jsonInterests,
         });
         // update the interestList
         var tempArr = interestList;
