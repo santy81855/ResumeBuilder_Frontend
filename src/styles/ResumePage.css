@@ -580,11 +580,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-
-    background-image: url("../images/background-pattern-7.png");
-    background-repeat: repeat;
-    background-size: 500px;
-    background-color: white;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
 }
 
 .modal .header {
