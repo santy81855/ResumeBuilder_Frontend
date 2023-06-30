@@ -84,8 +84,11 @@ Clone the frontend and backend repositories:
     OPENAI_API_KEY="your-openai-api-key"
     MONGODB_URI="your-mongodb-uri"
     BUILD_PATH="path-to-react-build-folder"
-    CORS_OPTIONS=["cors-option1", "cors-option2", etc]
-    PORT=your-server-port#
+    CORS_OPTIONS=["cors-option1", "cors-option2", etc] (optional if you want to develop using npm start)
+    PORT=your-server-port# (default is 3000, for http use 80, for https use 443)
+    SSL_CERT_PATH="your-optional-ssl-cert-path"
+    SSL_KEY_PATH="your-optional-ssl-key-path"
+
     ```
   - Install PM2 to run the server: `npm install pm2 -g`.
 
