@@ -7,13 +7,7 @@ import CreateAccount from "./components/CreateAccount";
 import Home from "./components/Home"; // import the Home component
 import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
-import CleanTemplate from "./components/templates/CleanTemplate";
-
 import { Navigate } from "react-router-dom";
-
-import resumeData from "./resume-schema.json";
-
-import SantyAndAlaine from "./components/SantyAndAlaine";
 
 function App() {
     return (
@@ -72,10 +66,6 @@ function App() {
                                 <Navigate to="/login" replace={true} />
                             )
                         }
-                    />
-                    <Route
-                        path="santy-and-alaine"
-                        element={<SantyAndAlaine />}
                     />
                     {/* add other routes here */}
                 </Routes>
