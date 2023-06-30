@@ -38,27 +38,6 @@ const EducationInfo = ({
     const [highlight6, setHighlight6] = useState("");
     const [highlight7, setHighlight7] = useState("");
 
-    /*
-    const addSkill = () => {
-        // temp arr to store the current skill arr and add new skill
-        var tempSkills = skillList;
-        tempSkills.push(skillBarRef.current.value);
-        // update useState var holding the arr
-        setSkillList(tempSkills);
-        //setSkillList((prevArray) => [...prevArray, skillBarRef.current.value]);
-        // create array to turn each skill into an object that can be stored in json
-        var arr = [];
-        tempSkills.forEach((skill) => {
-            arr.push({ name: skill, level: "", keywords: [] });
-        });
-        // update the resume data
-        setResumeData({
-            ...resumeData,
-            skills: arr,
-        });
-    };
-*/
-
     const addSchool = () => {
         // get all necessary variables
         // institution
@@ -378,10 +357,10 @@ const EducationInfo = ({
             </div>
             <div className="experience-history-container">
                 {experienceList.map((school, index) => (
-                    <div className="experience-item">
+                    <div key={index} className="experience-item">
                         <button
                             className="delete-experience-item-button"
-                            id={index}
+                            key={index}
                             onClick={removeJob}
                         >
                             Delete
@@ -397,7 +376,7 @@ const EducationInfo = ({
                         {school.courses.length > 0 && <h4>Highlights:</h4>}
                         <ul>
                             {school.courses.map((highlight, index) => (
-                                <li>{highlight}</li>
+                                <li key={index}>{highlight}</li>
                             ))}
                         </ul>
                     </div>

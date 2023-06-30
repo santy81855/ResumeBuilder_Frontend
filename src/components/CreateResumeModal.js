@@ -31,11 +31,9 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
 
             return;
         }
-        console.log("create-resume");
         // clear the current resume being stored in local storage
         localStorage.removeItem("resumeId");
         // ensure that there is no "current resume" stored in local storage so that this resume can be stored as a new resume
-        console.log(resumeTitle);
         navigate(
             `/u/create-resume/${encodeURIComponent(
                 resumeTitle

@@ -16,14 +16,11 @@ const ModernTemplate = ({
     const TEMPLATE_NAME = "Modern";
 
     useEffect(() => {
-        console.log(resumeData.templateSections.modern.image);
         // handle the text scaling
         function handleResize() {
             const { width, height } =
                 templateRef.current.getBoundingClientRect();
             setDivSize({ width, height });
-            console.log(width + " " + height);
-
             const template = templateRef.current;
             if (template) {
                 let size = 11 * (width / 610);
@@ -60,31 +57,20 @@ const ModernTemplate = ({
         ? "modern-resume-section-preview"
         : "modern-resume-section";
 
-    useEffect(() => {
-        console.log(education);
-    }, []);
-
     const checkoverflow = () => {
         const content = document.getElementById("modern-template-content");
         // check if it is overflowing by more than like 2 pixels
         if (content.scrollHeight - content.clientHeight > 2) {
-            console.log(content.scrollHeight);
-            console.log(content.clientHeight);
-
             const bigRect = content.getBoundingClientRect();
-
             const children = content.children;
             for (let i = 0; i < children.length; i++) {
                 const child = children[i];
                 const childRect = child.getBoundingClientRect();
-
                 if (childRect.bottom > bigRect.bottom) {
                     console.log("overflow in child: ");
                     console.log(child);
                 }
             }
-        } else {
-            console.log("no overflow");
         }
     };
 
@@ -109,8 +95,8 @@ const ModernTemplate = ({
                 <h2>Languages</h2>
                 {horizontalLine}
                 <div className="container">
-                    {languages.map((language) => (
-                        <p>
+                    {languages.map((language, index) => (
+                        <p key={index}>
                             {language.language}{" "}
                             {resumeData.templateSections.modern.languages
                                 .fluency && " - " + language.fluency}
@@ -134,8 +120,8 @@ const ModernTemplate = ({
                 <h2>Skills</h2>
                 {horizontalLine}
                 <div className="container">
-                    {skills.map((skill) => (
-                        <p>{skill.name}</p>
+                    {skills.map((skill, index) => (
+                        <p key={index}>{skill.name}</p>
                     ))}
                 </div>
             </div>
@@ -154,8 +140,8 @@ const ModernTemplate = ({
             >
                 <h2>Education</h2>
                 {horizontalLine}
-                {education.map((school) => (
-                    <div className="container">
+                {education.map((school, index) => (
+                    <div key={index} className="container">
                         <p>
                             {resumeData.templateSections.modern.education
                                 .startDate && getDate(school.startDate) + " - "}
@@ -271,8 +257,8 @@ const ModernTemplate = ({
                 {horizontalLine}
 
                 <div className="container">
-                    {work.map((job) => (
-                        <div className="job-progress-bar-container">
+                    {work.map((job, index) => (
+                        <div key={index} className="job-progress-bar-container">
                             <div className="job-progress-bar">
                                 <div className="circle"></div>
                                 <div className="line"></div>
@@ -292,9 +278,11 @@ const ModernTemplate = ({
                                 {resumeData.templateSections.modern.experience
                                     .highlights && (
                                     <ul>
-                                        {job.highlights.map((highlight) => (
-                                            <li>{highlight}</li>
-                                        ))}
+                                        {job.highlights.map(
+                                            (highlight, index) => (
+                                                <li key={index}>{highlight}</li>
+                                            )
+                                        )}
                                     </ul>
                                 )}
                             </div>
@@ -316,8 +304,8 @@ const ModernTemplate = ({
                 <h2>Interests</h2>
                 {horizontalLine}
                 <ul>
-                    {interests.map((interest) => (
-                        <li>
+                    {interests.map((interest, index) => (
+                        <li key={index}>
                             <h3>{interest.name}</h3>
                         </li>
                     ))}

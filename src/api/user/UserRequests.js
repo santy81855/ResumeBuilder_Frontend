@@ -8,7 +8,6 @@ const getUser = () => {
 };
 
 const createUser = (data) => {
-    console.log(data);
     return axios
         .post(
             URL + "/users",
@@ -29,7 +28,6 @@ const createUser = (data) => {
 };
 
 const loginSubmit = (data) => {
-    console.log(data);
     return axios
         .post(
             URL + "/auth/login",

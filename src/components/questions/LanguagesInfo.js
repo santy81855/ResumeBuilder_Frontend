@@ -21,7 +21,6 @@ const LanguagesInfo = ({
             tempArr.push(element.language);
         });
         setLanguageList(tempArr);
-        console.log("tempArr");
     }, []);
 
     const addLanguage = () => {
@@ -49,7 +48,6 @@ const LanguagesInfo = ({
         var jsonLangs = resumeData.languages;
         // get the skill "name" to remove
         var nameToDelete = languageList[event.target.id];
-        console.log(languageList[event.target.id]);
         // remove it from the list
         const index = jsonLangs.findIndex(
             (item) => item.language === nameToDelete
@@ -95,9 +93,9 @@ const LanguagesInfo = ({
 
             <div className="skill-container">
                 {languageList.map((skill, index) => (
-                    <div id={index} className="skill-item">
+                    <div key={index} className="skill-item">
                         <p>{skill}</p>
-                        <button id={index} onClick={removeLanguage}>
+                        <button key={index} onClick={removeLanguage}>
                             x
                         </button>
                     </div>

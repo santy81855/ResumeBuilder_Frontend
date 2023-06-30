@@ -27,9 +27,6 @@ function LoginForm() {
             window.location.href = data.redirect;
         },
         onError: (error, variables, context) => {
-            console.log("Error logging in");
-            console.log(error);
-            console.log(variables);
             alert(error.message);
         },
         enabled: false,
@@ -57,8 +54,8 @@ function LoginForm() {
 
     const handleGoogleLogin = () => {
         // handle Google login functionality
-        console.log("clicked google login");
     };
+
     <div className="google-login-btn" onClick={handleGoogleLogin}>
         <img src={googleLogo} className="google-logo" alt="logo" />
         Login with Google

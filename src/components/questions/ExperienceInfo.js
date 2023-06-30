@@ -127,8 +127,6 @@ const ExperienceInfo = ({
         () => sendChat(prompt), // call sendChat with the variables
         {
             onSuccess: (data) => {
-                console.log(queryType);
-                console.log(data.result.content);
                 if (queryType === -1) {
                     setSummary(data.result.content);
                 } else {
@@ -136,7 +134,7 @@ const ExperienceInfo = ({
                 }
             },
             onError: (error) => {
-                console.log("Error getting AI response. Error:", error);
+                console.log(error);
             },
             enabled: false,
         }
@@ -169,7 +167,6 @@ const ExperienceInfo = ({
             positionRef.current.value +
             " that is professional and better for a resume for applying to be a " +
             jobTitle;
-        console.log(userPrompt);
         fetchAIResponse(userPrompt, index);
     };
 
@@ -204,7 +201,6 @@ const ExperienceInfo = ({
 
     const clearHighlight = (index) => {
         setHighlightArray[index]("");
-        console.log(highlightArray);
     };
 
     const clear = () => {
@@ -255,14 +251,12 @@ const ExperienceInfo = ({
             fillOutCompanyToast();
             return;
         }
-        console.log(jobTitle);
         setSummary("");
         var userPrompt =
             "write a 40 words or less job summary for when I was a " +
             positionRef.current.value +
             " that is professional and engaging for applying to be a " +
             jobTitle;
-        console.log(userPrompt);
         fetchAIResponse(userPrompt, -1);
     };
 
@@ -788,10 +782,10 @@ const ExperienceInfo = ({
             </div>
             <div className="experience-history-container">
                 {experienceList.map((job, index) => (
-                    <div className="experience-item">
+                    <div key={index} className="experience-item">
                         <button
                             className="delete-experience-item-button"
-                            id={index}
+                            key={index}
                             onClick={removeJob}
                         >
                             Delete

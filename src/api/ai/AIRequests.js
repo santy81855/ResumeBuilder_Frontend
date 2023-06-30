@@ -3,7 +3,6 @@ import axios from "axios";
 const URL = process.env.REACT_APP_API_URL;
 
 const sendChat = (data) => {
-    console.log(data);
     return axios
         .post(
             URL + "/api/chatbot",

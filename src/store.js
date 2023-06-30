@@ -6,8 +6,6 @@ const store = observable({
 
     initialize() {
         const token = localStorage.getItem("token");
-        console.log(token);
-        console.log("user: " + this.user);
         if (token && !this.user) {
             this.isLoggedIn = true;
             // fetch user information using token and set it to user
@@ -22,9 +20,6 @@ const store = observable({
                     // The user is indeed logged in
                     if (data.status === 200) {
                         this.setUser(data.user);
-                        console.log(data.user);
-                    } else {
-                        console.log("hey");
                     }
                 })
                 .catch((error) => {

@@ -14,10 +14,7 @@ export const loginRequest = async (email, password) => {
         .then((data) => {
             // handle login response (success or fail)
             if (data.status == 200) {
-                // redirect to home
-                //window.location.href = data.redirect;
                 // return the data
-                console.log("herebuddy");
                 return data;
             } else if (data.status == 401) {
                 alert(data.message);
@@ -25,7 +22,5 @@ export const loginRequest = async (email, password) => {
         })
         .catch((error) => {
             console.log(error);
-            console.log("fail");
-            // Handle login error
         });
 };

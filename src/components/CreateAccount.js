@@ -23,9 +23,6 @@ function CreateAccount() {
             window.location.href = data.redirect;
         },
         onError: (error, variables, context) => {
-            console.log("Error creating account");
-            console.log(error);
-            console.log(variables);
             alert(error.message);
         },
         enabled: false,

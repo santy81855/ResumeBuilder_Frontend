@@ -75,16 +75,8 @@ function ResumePage() {
     const getResumeQuery = useQuery({
         queryKey: ["getResumeById"],
         queryFn: getResumeById,
-        onSuccess: (data, variables, context) => {
-            console.log(
-                "Just fetched resume data in CreateResume component. Data: "
-            );
-            console.log(data);
-        },
+        onSuccess: (data, variables, context) => {},
         onError: (error, variables, context) => {
-            console.log(
-                "Error Fetching resumes in CreateResume component. Error: "
-            );
             console.log(error);
         },
         enabled: false,
@@ -116,8 +108,6 @@ function ResumePage() {
             }
         },
         onError: (error, variables, context) => {
-            console.log("Error Fetching resumes");
-            console.log(error);
             toast.error(error, {
                 position: "bottom-center",
                 autoClose: 3000,
@@ -134,16 +124,16 @@ function ResumePage() {
     const deleteResumeMutation = useMutation({
         mutationFn: deleteResumeById,
         onSuccess: (data, variables, context) => {
-            console.log("Resume Deleted Successfully");
             // remove the resume from the resume arr in order to remove it from the screen
-            const id = variables.id;
+            const key = variables.key;
             const updatedResumeArr = resumeArr.filter(
-                (item) => item.key !== id
+                (item) => item.key !== key
             );
+
+            setSearchArr(updatedResumeArr);
             setResumeArr(updatedResumeArr);
         },
         onError: (error, variables, context) => {
-            console.log("Problem Deleting Resume");
             console.log(error);
         },
         onMutate: (variables) => {
@@ -155,16 +145,11 @@ function ResumePage() {
         queryKey: ["getUserByToken"],
         queryFn: getUser,
         onSuccess: (data, variables, context) => {
-            console.log(
-                "Just fetched user data in CreateResume component. Data: "
-            );
-            console.log(data);
             setUserName(data.user.username);
             setFirstName(data.user.first);
             setLastName(data.user.last);
         },
         onError: (error, variables, context) => {
-            console.log("Error Fetching User in ResumePage component. Error: ");
             console.log(error);
         },
         enabled: false,
@@ -190,7 +175,6 @@ function ResumePage() {
         // get the ResumePic element
         //const div = event.currentTarget;
         const div = document.getElementById(id);
-        console.log(div);
         // get the Template component
         const child = div.children;
         // hide the template component
@@ -271,27 +255,20 @@ function ResumePage() {
     );
 
     const handleEditClick = (event, id) => {
-        console.log(event);
-        console.log("edit-resume");
         // add the resumeid to the local storage
         localStorage.setItem("resumeId", id);
         // go to edit resume page
         navigate("/u/edit-resume");
     };
 
-    const handleDeleteClick = (event, id) => {
-        console.log(event);
-        const div = event.currentTarget;
-
-        console.log("we need to delete a resume");
+    const handleDeleteClick = (event, id, key) => {
         deleteResumeMutation.mutate({
             id: id,
+            key: key,
         });
     };
 
     const handleExportClick = (event, id) => {
-        const div = event.currentTarget;
-        console.log(typeof id);
         localStorage.setItem("resumeId", id);
         getResumeQuery.refetch();
         openModal();
@@ -307,7 +284,6 @@ function ResumePage() {
             jobTitle,
             resumeDescription,
         } = resumeData;
-        console.log(_id);
         const dateString = lastFetched;
         const date = new Date(dateString);
         const formattedDate = date.toLocaleString("en-US", {
@@ -348,7 +324,9 @@ function ResumePage() {
                         </button>
                         <button
                             className="DeleteResume"
-                            onClick={(event) => handleDeleteClick(event, _id)}
+                            onClick={(event) =>
+                                handleDeleteClick(event, _id, keyString)
+                            }
                         >
                             Delete
                         </button>

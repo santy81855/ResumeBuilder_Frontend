@@ -30,7 +30,6 @@ const Summary = ({
         () => sendChat(prompt), // call sendChat with the variables
         {
             onSuccess: (data) => {
-                console.log(data.result.content);
                 setSummary(data.result.content);
 
                 setResumeData({
@@ -39,7 +38,7 @@ const Summary = ({
                 });
             },
             onError: (error) => {
-                console.log("Error getting AI response. Error:", error);
+                console.log(error);
             },
             enabled: false,
         }
@@ -63,7 +62,6 @@ const Summary = ({
 
     const clear = () => {
         setSummary("");
-        console.log(jobTitle);
     };
 
     const enhance = () => {
@@ -85,10 +83,8 @@ const Summary = ({
     };
 
     const generate = () => {
-        console.log(jobTitle);
         setSummary("");
         var userPrompt = generatePrompt + jobTitle;
-        console.log(userPrompt);
         fetchAIResponse(userPrompt);
     };
 

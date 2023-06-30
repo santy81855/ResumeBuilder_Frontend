@@ -21,7 +21,6 @@ const InterestsInfo = ({
             tempArr.push(element.name);
         });
         setInterestList(tempArr);
-        console.log("tempArr");
     }, []);
 
     const addInterest = () => {
@@ -49,7 +48,6 @@ const InterestsInfo = ({
         var jsonInterests = resumeData.interests;
         // get the skill "name" to remove
         var nameToDelete = interestList[event.target.id];
-        console.log(interestList[event.target.id]);
         // remove it from the list
         const index = jsonInterests.findIndex(
             (item) => item.name === nameToDelete
@@ -98,9 +96,9 @@ const InterestsInfo = ({
             </div>
             <div className="skill-container">
                 {interestList.map((skill, index) => (
-                    <div id={index} className="skill-item">
+                    <div key={index} className="skill-item">
                         <p>{skill}</p>
-                        <button id={index} onClick={removeInterest}>
+                        <button key={index} onClick={removeInterest}>
                             x
                         </button>
                     </div>

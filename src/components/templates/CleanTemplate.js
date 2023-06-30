@@ -19,8 +19,6 @@ const CleanTemplate = ({
             const { width, height } =
                 templateRef.current.getBoundingClientRect();
             setDivSize({ width, height });
-            console.log(width + " " + height);
-
             const template = templateRef.current;
             if (template) {
                 let size = 11 * (width / 610);
@@ -59,9 +57,6 @@ const CleanTemplate = ({
         const content = document.getElementById("clean-template-content");
         // check if it is overflowing by more than like 2 pixels
         if (content.scrollHeight - content.clientHeight > 2) {
-            console.log(content.scrollHeight);
-            console.log(content.clientHeight);
-
             const bigRect = content.getBoundingClientRect();
 
             const children = content.children;
@@ -74,8 +69,6 @@ const CleanTemplate = ({
                     console.log(child);
                 }
             }
-        } else {
-            console.log("no overflow");
         }
     };
 
@@ -111,8 +104,8 @@ const CleanTemplate = ({
                 <hr />
                 <h3>Skills</h3>
                 <div className="bullet-list-container">
-                    {skills.map((skill) => (
-                        <div className="bullet-item">
+                    {skills.map((skill, index) => (
+                        <div key={index} className="bullet-item">
                             <div className="bullet"></div>
                             {skill.name}
                         </div>
@@ -133,8 +126,8 @@ const CleanTemplate = ({
                 <hr />
                 <h3>Interests</h3>
                 <div className="bullet-list-container">
-                    {interests.map((interest) => (
-                        <div className="bullet-item">
+                    {interests.map((interest, index) => (
+                        <div key={index} className="bullet-item">
                             <div className="bullet"></div>
                             {interest.name}
                         </div>
@@ -155,8 +148,8 @@ const CleanTemplate = ({
                 <hr />
                 <h3>Languages</h3>
                 <div className="bullet-list-container">
-                    {languages.map((language) => (
-                        <div className="bullet-item">
+                    {languages.map((language, index) => (
+                        <div key={index} className="bullet-item">
                             <div className="bullet"></div>
                             {language.language}
                             {resumeData.templateSections.clean.languages
@@ -179,8 +172,8 @@ const CleanTemplate = ({
                 <hr />
                 <h3>Experience</h3>
                 <div className="job-container">
-                    {work.map((job) => (
-                        <div className="job-item">
+                    {work.map((job, index) => (
+                        <div key={index} className="job-item">
                             <h4>
                                 {resumeData.templateSections.clean.experience
                                     .startDate &&
@@ -193,8 +186,11 @@ const CleanTemplate = ({
                             {resumeData.templateSections.clean.experience
                                 .highlights && (
                                 <div className="bullet-list-container">
-                                    {job.highlights.map((highlight) => (
-                                        <div className="bullet-item">
+                                    {job.highlights.map((highlight, index) => (
+                                        <div
+                                            key={index}
+                                            className="bullet-item"
+                                        >
                                             <div className="bullet"></div>
                                             {highlight}
                                         </div>
@@ -218,8 +214,8 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Education</h3>
-                {education.map((school) => (
-                    <div>
+                {education.map((school, index) => (
+                    <div key={index}>
                         <h4>
                             {school.area +
                                 " " +
@@ -238,8 +234,8 @@ const CleanTemplate = ({
                         {resumeData.templateSections.clean.education
                             .courses && (
                             <div className="bullet-list-container">
-                                {school.courses.map((course) => (
-                                    <div className="bullet-item">
+                                {school.courses.map((course, index) => (
+                                    <div key={index} className="bullet-item">
                                         <div className="bullet"></div>
                                         {course}
                                     </div>

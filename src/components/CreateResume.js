@@ -63,9 +63,6 @@ function CreateResume() {
         // if this is not a new resume
         if (!!resumeId) {
             getResumeQuery.refetch();
-        } else {
-            // if it is a new resume then save it to the database
-            handleSave();
         }
         // handle resize for the floating menu at the bottom of the page
         window.addEventListener("resize", handleResize);
@@ -77,9 +74,6 @@ function CreateResume() {
         queryKey: ["getResumeById"],
         queryFn: getResumeById,
         onSuccess: (data, variables, context) => {
-            console.log(
-                "Just fetched resume data in CreateResume component. Data: "
-            );
             setResumeData(data.json);
             setResumeTitle(data.resumeTitle);
             setResumeJob(data.jobTitle);
@@ -87,9 +81,6 @@ function CreateResume() {
             setCurrentTemplate(templateToInt[data.template]);
         },
         onError: (error, variables, context) => {
-            console.log(
-                "Error Fetching resumes in CreateResume component. Error: "
-            );
             console.log(error);
         },
         enabled: false,
@@ -121,9 +112,6 @@ function CreateResume() {
         onSuccess: (data, variables, context) => {
             // add resumeId to local storage
             localStorage.setItem("resumeId", data._id);
-            console.log(
-                "Resume Created Successfully in CreateResume component."
-            );
             // wait LOADING_TIME so user has feedback about the process
             setTimeout(function () {
                 setIsLoading(false);
@@ -131,9 +119,6 @@ function CreateResume() {
             }, LOADING_TIME);
         },
         onError: (error, variables, context) => {
-            console.log(
-                "Problem Creating Resume in CreateResume component. Error: "
-            );
             console.log(error);
             setIsLoading(false);
         },
@@ -143,20 +128,12 @@ function CreateResume() {
     const updateResumeMutation = useMutation({
         mutationFn: updateResumeById,
         onSuccess: (data, variables, context) => {
-            console.log(
-                "Resume Updated Successfully in CreateResume component."
-            );
             // wait LOADING_TIME so user has feedback about the process
             setTimeout(function () {
                 setIsLoading(false);
             }, LOADING_TIME);
-            //console.log(context);
-            //console.log(variables);
         },
         onError: (error, variables, context) => {
-            console.log(
-                "Problem Updating Resume in CreateResume component. Error: "
-            );
             console.log(error);
             setIsLoading(false);
         },
@@ -223,7 +200,6 @@ function CreateResume() {
             const button = document.getElementById("side-bar-toggle-button");
 
             if (!!sideBar && !!button) {
-                console.log("here");
                 sideBar.style.transform = "translateY(0%)";
                 sideBar.style.left = "2.5%";
                 sideBar.style.bottom = "0.5em";
@@ -498,7 +474,7 @@ function CreateResume() {
         return (
             <div className="section-selection-container">
                 {sectionArr.map((item, index) => (
-                    <div className="section-option">
+                    <div key={index} className="section-option">
                         {item.show ? (
                             <div
                                 className="section-checkbox-true"
@@ -587,7 +563,6 @@ function CreateResume() {
                     className="create-resume-button"
                     onClick={() => {
                         setShowSectionsComponent(!showSectionsComponent);
-                        console.log(showSectionsComponent);
                     }}
                 >
                     <p>Sections</p>

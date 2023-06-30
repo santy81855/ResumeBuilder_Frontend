@@ -16,23 +16,6 @@ const Header = observer(() => {
     };
     const HAMBURGER_WIDTH = 480;
 
-    /*
-    const handleLogout = () => {
-        // fetch user information using token and set it to user
-        fetch("http://myhost.com:3000/auth/logout")
-            .then((response) => {
-                if (response.ok) {
-                    console.log("Logged out successfully");
-                    alert("hey");
-                } else {
-                    throw new Error("Failed to log out");
-                }
-            })
-            .catch((error) => console.error(error));
-        window.location.href = "/login";
-        logout();
-    };
-*/
     useEffect(() => {
         function handleResize() {
             const horMenu = document.getElementsByClassName("Header-right")[0];
@@ -72,12 +55,10 @@ const Header = observer(() => {
         queryKey: ["logoutUser"],
         queryFn: logoutUser,
         onSuccess: (data, variables, context) => {
-            console.log("Logged out successfully");
             window.location.href = "/login";
             logout();
         },
         onError: (error, variables, context) => {
-            console.log("Error logging out");
             console.log(error);
         },
         enabled: false,

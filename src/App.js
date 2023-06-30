@@ -17,7 +17,7 @@ import SantyAndAlaine from "./components/SantyAndAlaine";
 
 function App() {
     return (
-        <body>
+        <div>
             <Router>
                 <Header />
                 <Routes>
@@ -80,7 +80,7 @@ function App() {
                     {/* add other routes here */}
                 </Routes>
             </Router>
-        </body>
+        </div>
     );
 }
 

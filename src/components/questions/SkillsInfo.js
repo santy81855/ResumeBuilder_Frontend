@@ -26,7 +26,6 @@ const SkillsInfo = ({
             tempArr.push(element.name);
         });
         setSkillList(tempArr);
-        console.log("tempArr");
     }, []);
 
     var prompt = { content: "" };
@@ -36,11 +35,10 @@ const SkillsInfo = ({
         () => sendChat(prompt), // call sendChat with the variables
         {
             onSuccess: (data) => {
-                console.log(data.result.content);
                 setSkillInput(data.result.content);
             },
             onError: (error) => {
-                console.log("Error getting AI response. Error:", error);
+                console.log(error);
             },
             enabled: false,
         }
@@ -85,7 +83,6 @@ const SkillsInfo = ({
             jobTitle +
             " and it should be something different from the following: " +
             skillList.toString();
-        console.log(userPrompt);
         fetchAIResponse(userPrompt);
     };
 
@@ -114,7 +111,6 @@ const SkillsInfo = ({
         var jsonSkills = resumeData.skills;
         // get the skill "name" to remove
         var nameToDelete = skillList[event.target.id];
-        console.log(skillList[event.target.id]);
         // remove it from the list
         const index = jsonSkills.findIndex(
             (item) => item.name === nameToDelete
@@ -187,9 +183,9 @@ const SkillsInfo = ({
 
             <div className="skill-container">
                 {skillList.map((skill, index) => (
-                    <div id={index} className="skill-item">
+                    <div key={index} className="skill-item">
                         <p>{skill}</p>
-                        <button id={index} onClick={removeSkill}>
+                        <button key={index} onClick={removeSkill}>
                             x
                         </button>
                     </div>

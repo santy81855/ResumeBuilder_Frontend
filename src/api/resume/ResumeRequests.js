@@ -3,10 +3,7 @@ import axios from "axios";
 const URL = process.env.REACT_APP_API_URL;
 
 const createResume = (data) => {
-    console.log(data);
     const d = new Date();
-    console.log("date:");
-    console.log(d);
     const token = localStorage.getItem("token");
     return axios
         .post(
