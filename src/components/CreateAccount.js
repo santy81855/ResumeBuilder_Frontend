@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { createUser } from "../api/user/UserRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 function CreateAccount() {
     const [first, setFirst] = useState("");
@@ -72,6 +73,13 @@ function CreateAccount() {
 
     return (
         <div className="create-account-background">
+            <Helmet>
+                <title>Create Account - AI Resume</title>
+                <meta
+                    name="description"
+                    content="Create a new account on AI Resume - An Artificial Intelligence Resume Builder"
+                />
+            </Helmet>
             <div className="create-account-form">
                 <form onSubmit={handleCreateAccount}>
                     <h2>Create an Account</h2>

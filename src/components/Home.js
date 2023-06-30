@@ -3,17 +3,7 @@ import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
 import { TypeAnimation } from "react-type-animation";
 import CreateResumeModal from "./CreateResumeModal";
-import Modal from "react-modal";
-
-import resume1 from "../images/home/resume-pic-1.png";
-import resume2 from "../images/home/resume-pic-2.png";
-
-import step1 from "../images/home/step1.png";
-import step2 from "../images/home/step2screen.png";
-
-import JSONResumeData from "../resume-schema.json";
-import CleanTemplate from "./templates/CleanTemplate";
-import ModernTemplate from "./templates/ModernTemplate";
+import { Helmet } from "react-helmet";
 
 function Home() {
     const [createModal, setCreateModal] = useState(false);
@@ -65,6 +55,15 @@ function Home() {
 
     return (
         <div className="landing-page">
+            <Helmet>
+                <title>
+                    AI Resume - An Artificial Intelligence Resume Builder
+                </title>
+                <meta
+                    name="description"
+                    content="Create your perfect resume in minutes with the help of AI."
+                />
+            </Helmet>
             <div className="landing-page-background">
                 <div className="content-container">
                     <p>

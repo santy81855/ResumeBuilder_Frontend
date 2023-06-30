@@ -6,6 +6,7 @@ import { login, getLoginStatus } from "../store";
 import googleLogo from "../images/googleLogo.png";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { loginSubmit } from "../api/user/UserRequests";
+import { Helmet } from "react-helmet";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
@@ -63,6 +64,13 @@ function LoginForm() {
 
     return (
         <div className="login-background">
+            <Helmet>
+                <title>Login - AI Resume</title>
+                <meta
+                    name="description"
+                    content="Login to AI Resume - An Artificial Intelligence Resume Builder"
+                />
+            </Helmet>
             <div className="login-form">
                 <form onSubmit={handleLoginSubmit}>
                     <h2>Login</h2>
