@@ -67,7 +67,6 @@ function App() {
                             )
                         }
                     />
-                    {/* add other routes here */}
                 </Routes>
             </Router>
         </div>
