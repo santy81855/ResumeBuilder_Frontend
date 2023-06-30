@@ -35,6 +35,9 @@
         "web-vitals": "^2.1.4",
         "xml-js": "^1.6.11"
     },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^x.x.x"
+    },
     "scripts": {
         "start": "PORT=3001 react-scripts start",
         "build": "react-scripts build",
