@@ -1,6 +1,6 @@
-# [AI Resume Builder Frontend](http://ec2-3-135-220-37.us-east-2.compute.amazonaws.com:3000/)
+# [AI Resume Builder Frontend](https://myairesumes.com)
 
-[Link to try it!](http://ec2-3-135-220-37.us-east-2.compute.amazonaws.com:3000/)
+[Link to try it!](https://myairesumes.com)
 
 This is the frontend code for the Ai Resume App.
 ![landing page](https://github.com/santy81855/ResumeBuilder_Frontend/blob/main/github_images/home.png?raw=true)
