@@ -102,6 +102,14 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Skills</h3>
+                <div className="bullet-list-container">
+                    {skills.map((skill, index) => (
+                        <div key={index} className="bullet-item">
+                            <div className="bullet"></div>
+                            {skill.name}
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     };
@@ -293,12 +301,13 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.education.show && (
                         <EducationSection />
                     )}
-                    {resumeData.templateSections.clean.experience.show && (
-                        <ExperienceSection />
-                    )}
                     {resumeData.templateSections.clean.skills.show && (
                         <SkillsSection />
                     )}
+                    {resumeData.templateSections.clean.experience.show && (
+                        <ExperienceSection />
+                    )}
+
                     {resumeData.templateSections.clean.languages.show && (
                         <LanguagesSection />
                     )}
