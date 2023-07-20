@@ -13,7 +13,18 @@ const CleanTemplate = ({
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Clean";
+
+    const [a, seta] = useState("");
+
     useEffect(() => {
+        const element = document.getElementById("template-to-print");
+        if (element) {
+            seta(
+                document
+                    .getElementById("template-to-print")
+                    .getBoundingClientRect().height
+            );
+        }
         // handle the text scaling
         function handleResize() {
             const { width, height } =
@@ -102,6 +113,7 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Skills</h3>
+                <p>{a}</p>
                 <div className="bullet-list-container">
                     {skills.map((skill, index) => (
                         <div key={index} className="bullet-item">
@@ -301,13 +313,12 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.education.show && (
                         <EducationSection />
                     )}
-                    {resumeData.templateSections.clean.skills.show && (
-                        <SkillsSection />
-                    )}
                     {resumeData.templateSections.clean.experience.show && (
                         <ExperienceSection />
                     )}
-
+                    {resumeData.templateSections.clean.skills.show && (
+                        <SkillsSection />
+                    )}
                     {resumeData.templateSections.clean.languages.show && (
                         <LanguagesSection />
                     )}
