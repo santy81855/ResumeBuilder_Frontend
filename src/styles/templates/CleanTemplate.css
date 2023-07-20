@@ -125,6 +125,7 @@
     margin-inline-start: 2em;
     width: 100%;
     row-gap: 0.1em;
+    background-color: red;
 }
 
 .clean-template .section .bullet-item {
@@ -134,15 +135,19 @@
     justify-content: flex-start;
     width: 100%;
     row-gap: 0.5em;
+    background-color: blue;
 }
 
 .clean-template .section .bullet {
     background-image: url("../../images/lib/bullet-point.png");
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 1em;
     height: 1em;
+    padding: 0;
+    margin: 0;
+    background-color: green;
 }
 
 @media (pointer: fine) {
