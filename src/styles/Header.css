@@ -8,9 +8,10 @@
     padding-right: 2rem;
     background-color: white;
     z-index: 1;
-    border-bottom: 1px solid rgba(103, 103, 103, 0.4);
+
     /*account for the border width*/
     height: var(--header-height);
+    width: 100%;
 }
 
 .Header-hamburger {

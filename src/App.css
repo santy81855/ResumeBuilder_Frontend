@@ -1,20 +1,27 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 html,
 body {
-    min-width: 320px; /* Set the minimum width to 320 pixels */
+    max-width: 100vw;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
-    /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
-    background-image: url("./images/background-pattern-7.png");
-    background-repeat: repeat;
-    background-size: 500px;
-    background-color: white;
+}
+
+body {
+    color: rgb(var(--text-color-rgb));
+    background-color: rgb(var(--background-color-rgb));
+    position: relative;
 }
 
 :root {
+    --max-width: 1200px;
     /*account for bottom border of the header*/
-    --header-height: calc(80px + 1px);
+    --header-height: 80px;
     --accent-color: rgb(0, 148, 148);
     --accent-color-xlight: rgb(0, 148, 148, 0.2);
     --accent-color-light: rgb(0, 148, 148, 0.5);
