@@ -57,7 +57,7 @@ function Home() {
         <div className="landing-page">
             <Helmet>
                 <title>
-                    AI Resume - An Artificial Intelligence Resume Builder
+                    AI Resume - An Artificial Intelligence Resume Builder.
                 </title>
                 <meta
                     name="description"
