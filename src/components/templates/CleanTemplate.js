@@ -14,17 +14,7 @@ const CleanTemplate = ({
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Clean";
 
-    const [a, seta] = useState("");
-
     useEffect(() => {
-        const element = document.getElementById("template-to-print");
-        if (element) {
-            seta(
-                document
-                    .getElementById("template-to-print")
-                    .getBoundingClientRect().height
-            );
-        }
         // handle the text scaling
         function handleResize() {
             const { width, height } =
@@ -113,7 +103,6 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Skills</h3>
-                <p>{a}</p>
                 <div className="bullet-list-container">
                     {skills.map((skill, index) => (
                         <div key={index} className="bullet-item">
