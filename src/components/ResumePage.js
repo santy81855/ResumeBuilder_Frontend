@@ -212,7 +212,7 @@ function ResumePage() {
                         getTemplateComponent({
                             json: getResumeQuery.data.json,
                             isPreview: true,
-                            handleSectionChange: {},
+                            handleSectionChange: () => {},
                             template: getResumeQuery.data.template,
                             isExport: false,
                         })
@@ -243,7 +243,7 @@ function ResumePage() {
                     getTemplateComponent({
                         json: getResumeQuery.data.json,
                         isPreview: true,
-                        handleSectionChange: {},
+                        handleSectionChange: () => {},
                         template: getResumeQuery.data.template,
                         isExport: true,
                     })
@@ -297,7 +297,7 @@ function ResumePage() {
         const templateToShow = getTemplateComponent({
             json: json,
             isPreview: true,
-            handleSectionChange: {},
+            handleSectionChange: () => {},
             template: template,
         });
 
@@ -434,29 +434,31 @@ function ResumePage() {
             <div className="PageContainer">
                 {headerSection}
                 <div className="diffusion"></div>
-                <div className="ResumeSection Section">
-                    <div className="PageTitleContainer">
-                        <div className="PageTitle">Resumes</div>
-                        <div className="Button" onClick={createResume}>
-                            <p>+</p>
-                            <p>Create New</p>
+                <div className="ResumeSectionContainer">
+                    <div className="ResumeSection Section">
+                        <div className="PageTitleContainer">
+                            <div className="PageTitle">Resumes</div>
+                            <div className="Button" onClick={createResume}>
+                                <p>+</p>
+                                <p>Create New</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="SearchBarContainer">
-                        <h4>Search:</h4>
-                        <input
-                            className="SearchBar"
-                            type="text"
-                            placeholder="search by name, job, or description"
-                            value={resumeSearch}
-                            onChange={(event) => {
-                                setResumeSearch(event.currentTarget.value);
-                            }}
-                        ></input>
-                    </div>
-                    <div className="ResumeTiles">
-                        {showCreateResumeTile && createResumeTile}
-                        {searchArr}
+                        <div className="SearchBarContainer">
+                            <h4>Search:</h4>
+                            <input
+                                className="SearchBar"
+                                type="text"
+                                placeholder="search by name, job, or description"
+                                value={resumeSearch}
+                                onChange={(event) => {
+                                    setResumeSearch(event.currentTarget.value);
+                                }}
+                            ></input>
+                        </div>
+                        <div className="ResumeTiles">
+                            {showCreateResumeTile && createResumeTile}
+                            {searchArr}
+                        </div>
                     </div>
                 </div>
                 {exportModal}

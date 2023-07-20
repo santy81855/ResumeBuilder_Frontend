@@ -1,31 +1,13 @@
 .PageContainer {
-    /*https://www.toptal.com/designers/subtlepatterns/page/2/*/
-
     display: flex;
     flex-direction: column;
-    width: 100%;
-    min-height: calc(100vh - var(--header-height) - 1px);
-    height: fit-content;
+    max-height: calc(100vh - var(--header-height));
     align-items: center;
     position: relative;
     z-index: 0;
-    overflow-x: hidden;
-
-    background-color: var(--accent-color-2);
-    /*background: linear-gradient(
-        180deg,
-        var(--accent-color-2) 0%,
-        var(--accent-color-2) 50%,
-        white 65%,
-        white 100%
-    );*/
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: center top;
 }
 
 .BackgroundImageResume {
-    /*background-image: url("../images/editorBackground2.png");*/
     background-color: rgba(240, 240, 240, 0.1);
     display: flex;
     background-size: cover;
@@ -37,15 +19,38 @@
     height: auto;
 }
 
+.HeaderSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-block-end: 15rem;
+
+    background-image: url("../images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    padding-inline: var(--padding-inline-large);
+}
+
+.ResumeSectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    padding-inline: var(--padding-inline-large);
+}
+
 .PageContainer .Section {
     box-sizing: border-box;
-    max-width: var(--max-width-large);
+    max-width: var(--max-width);
     width: 100%;
     padding-inline: var(--gap-large);
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(150, 150, 150, 0.2);
+    background-color: rgba(179, 179, 179, 0.4);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px 0 rgba(62, 62, 62, 0.4);
+    border: 1px solid rgba(150, 150, 150, 0);
     border-radius: var(--border-radius-large);
 }
 
@@ -53,10 +58,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-block-start: -250px;
-    margin-block-end: var(--gap-medium);
+    margin-block-start: -10rem;
+    margin-block-end: var(--gap-x2large);
     padding-block-start: var(--gap-large);
-    padding-block-end: var(--gap-x2large);
+    padding-block-end: var(--gap-xlarge);
+    flex-grow: 1;
 }
 
 .introContainer {
@@ -105,22 +111,8 @@
     text-align: center;
     font-size: var(--font-medium);
     max-width: var(--max-width-large);
-
     margin-block-start: 0;
     margin-block-end: var(--gap-xlarge);
-}
-
-.HeaderSection {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-block-end: 400px;
-
-    background-image: url("../images/background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    align-items: center;
 }
 
 .PageTitleContainer {
@@ -160,83 +152,47 @@
     padding-right: 10px;
 }
 
-/*
-.ResumeTiles {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: auto;
-    justify-content: flex-start;
-    align-self: center;
-    align-items: center;
-    width: calc(100% - 2rem);
-    min-width: 200px;
-    border-radius: 0px;
-    column-gap: 30px;
-    padding-block: 1rem;
-}
-
-*/
-
 .ResumeTiles {
     box-sizing: border-box;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     align-self: center;
-    min-width: 200px;
     border-radius: 0px;
     column-gap: var(--gap-medium);
     row-gap: 2em;
-    padding-block-start: 1rem;
+    margin-block-start: var(--padding-block-large);
+    padding-block: var(--padding-block-medium);
     border-radius: var(--border-radius-large);
+    padding-inline: var(--padding-inline-large);
 }
-
-/* .ResumeTile {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 170px;
-    padding: 10px;
-} 
-*/
 
 .ResumeTile {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    box-shadow: 0px 0px 15px var(--accent-color-2-xlight);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(62, 62, 62, 0.5);
 }
 
 .CreateResumeTile {
     display: flex;
     flex-direction: column;
-    /*min-width: 290px;*/
     cursor: pointer;
     align-items: center;
     justify-content: center;
     border: 2px dashed var(--accent-color-2);
-    border-radius: var(--border-radius-large);
 }
 
 .ResumePic {
     width: 100%;
     aspect-ratio: 8.5/11;
-    /*max-width: 160px;
-    min-width: 160px;
-    height: 220px;*/
-    border-style: solid;
-    border-width: 0px;
     border-color: rgba(240, 248, 255, 0.5);
     background-color: white;
     display: flex;
     flex-direction: column;
     padding: 0px;
     overflow: hidden;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     transition: transform 0.15s ease-in-out;
 }
 
@@ -269,16 +225,14 @@
 .ResumeDetails {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: flex-start;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     background-color: white;
     border-top: solid 1px lightgray;
-    padding-inline: var(--gap-medium);
-    border-bottom-left-radius: var(--border-radius-large);
-    border-bottom-right-radius: var(--border-radius-large);
+    padding-inline: var(--gap-small);
 }
 
 .ResumeDetails h2 {
@@ -307,7 +261,7 @@
 
 .ResumeTileOptionsButton {
     border: none;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: transparent;
     background-image: url("../images/options-icon.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -315,6 +269,7 @@
     height: 25px;
     width: 35px;
     border-radius: 5px;
+    margin-block-end: var(--padding-block-small);
 }
 
 .ResumeOptionsMenu {
@@ -362,22 +317,9 @@
     background-color: white;
 }
 
-@media (pointer: coarse) {
-    .CreateResumeTile {
-    }
-}
-
 @media (pointer: fine) {
     .CreateResumeTile:hover .ResumePlusIcon {
         transform: scale(1.7);
-    }
-    .EmptyResumePic:hover {
-        transform: scale(1);
-    }
-    .ResumePic:hover {
-        transform: scale(1);
-        /*transform: rotate(3deg);
-        animation: scale 0.5s ease-in-out;*/
     }
     .ResumeTileOptionsButton:hover {
         background-color: var(--accent-color-2-xlight);
@@ -409,9 +351,9 @@
 
 .SearchBar {
     flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: var(--border-radius-xlarge);
-    border: 1px solid var(--accent-color-2-xlight);
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid var(--accent-color-1);
     height: 40px;
     padding-inline: var(--gap-small);
 }
@@ -419,15 +361,11 @@
 /*edit the SearchBar when it is selected*/
 .SearchBar:focus {
     outline: none;
-    background-color: rgb(255, 255, 255, 0.4);
-    border: 1px solid rgb(255, 255, 255, 0.4);
+    background-color: rgb(255, 255, 255, 0.8);
+    border: 1px solid rgb(255, 255, 255, 0.8);
 }
 
 @media (max-width: 1200px) {
-    .PageContainer .Section {
-        width: calc(100% - var(--gap-x3large));
-    }
-
     .ResumeTiles {
         grid-template-columns: repeat(3, minmax(100px, 1fr));
     }
@@ -436,24 +374,16 @@
 @media (max-width: 935px) {
     .ResumeTiles {
         grid-template-columns: repeat(2, minmax(100px, 1fr));
-        margin-inline: 0em;
     }
 }
 
 @media (max-width: 768px) {
-    .PageContainer .Section {
-        width: calc(100% - var(--gap-medium));
-    }
-
     .ResumeTiles {
         grid-template-columns: repeat(2, minmax(100px, 1fr));
     }
 }
 
 @media (max-width: 600px) {
-    .PageContainer .Section {
-    }
-
     .PageContainer .Section .HeaderDescription {
         display: none;
     }
@@ -694,6 +624,22 @@
         width: 100%;
         height: 50px;
         margin-top: var(--gap-medium);
+    }
+
+    .ResumeSectionContainer {
+        padding-inline: 0;
+    }
+
+    .HeaderSection {
+        padding-inline: 0;
+    }
+
+    .introContainer {
+        margin-block-start: 0;
+    }
+
+    .PageContainer .Section {
+        border-radius: 0;
     }
 
     .ResumeTile {

@@ -111,38 +111,40 @@ const Header = observer(() => {
 
     return (
         <header className="Header">
-            <div className="Header-left">
-                <img src={logo} className="Header-logo" alt="logo" />
-                <span className="Header-app-name">Ai Resume</span>
-            </div>
-            <button className="Header-hamburger" onClick={handleMenuClick}>
-                &#9776;
-            </button>
-            <nav className="Header-right">
-                <a className="Nav-link" href="/">
-                    Home
-                </a>
-                {localStorage.getItem("token") ? (
-                    <a className="Nav-link" href="/u/resumes">
-                        Dashboard
+            <div className="navbar">
+                <div className="Header-left">
+                    <img src={logo} className="Header-logo" alt="logo" />
+                    <span className="Header-app-name">Ai Resume</span>
+                </div>
+                <button className="Header-hamburger" onClick={handleMenuClick}>
+                    &#9776;
+                </button>
+                <nav className="Header-right">
+                    <a className="Nav-link" href="/">
+                        Home
                     </a>
-                ) : (
-                    <a className="Nav-link" href="/login">
-                        Login
-                    </a>
-                )}
-                {renderAuthButton()}
-            </nav>
-            <div className="Header-right-vertical">
-                <a href="/">Home</a>
-                {localStorage.getItem("token") ? (
-                    <a href="/u/resumes">Dashboard</a>
-                ) : (
-                    <a href="/login">Login</a>
-                )}
-                {localStorage.getItem("token") && (
-                    <button onClick={handleUserLogout}>Logout</button>
-                )}
+                    {localStorage.getItem("token") ? (
+                        <a className="Nav-link" href="/u/resumes">
+                            Dashboard
+                        </a>
+                    ) : (
+                        <a className="Nav-link" href="/login">
+                            Login
+                        </a>
+                    )}
+                    {renderAuthButton()}
+                </nav>
+                <div className="Header-right-vertical">
+                    <a href="/">Home</a>
+                    {localStorage.getItem("token") ? (
+                        <a href="/u/resumes">Dashboard</a>
+                    ) : (
+                        <a href="/login">Login</a>
+                    )}
+                    {localStorage.getItem("token") && (
+                        <button onClick={handleUserLogout}>Logout</button>
+                    )}
+                </div>
             </div>
         </header>
     );
