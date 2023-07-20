@@ -24,7 +24,6 @@ const CleanTemplate = ({
                 let size = 11 * (width / 610);
                 template.style.fontSize = size + "px";
             }
-            checkoverflow();
         }
 
         window.addEventListener("resize", handleResize);
@@ -103,14 +102,6 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Skills</h3>
-                <div className="bullet-list-container">
-                    {skills.map((skill, index) => (
-                        <div key={index} className="bullet-item">
-                            <div className="bullet"></div>
-                            {skill.name}
-                        </div>
-                    ))}
-                </div>
             </div>
         );
     };
