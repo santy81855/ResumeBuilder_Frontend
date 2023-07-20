@@ -24,7 +24,6 @@
 .Header-hamburger {
     display: none;
     font-size: var(--font-large);
-    margin-left: 1rem;
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -33,12 +32,12 @@
 .Header-left {
     display: flex;
     align-items: center;
+    gap: var(--gap-medium);
 }
 
 .Header-app-name {
     font-family: "Montserrat", sans-serif; /* replace with your desired font */
     font-size: 18px;
-    margin-left: 0.5rem;
 }
 
 .Header-right {
@@ -47,7 +46,7 @@
     justify-content: flex-end;
     /*background-color: lightgray;*/
     border-radius: 25px;
-    padding-inline: 10px;
+    gap: var(--gap-medium);
 }
 
 .Header-right .Account-button {
@@ -152,7 +151,6 @@
 }
 
 .Header-right .Nav-link {
-    margin-inline: 0.5rem;
     text-decoration: none;
     color: #333;
     font-size: large;

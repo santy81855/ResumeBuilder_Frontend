@@ -49,11 +49,8 @@
 
 .landing-page-background .content-container h1 span {
     color: rgb(245, 245, 245);
-    -webkit-text-stroke: 1px var(--accent-color-2);
-    -moz-text-stroke: 1px var(--accent-color-2);
-    -ms-text-stroke: 1px var(--accent-color-2);
-    -o-text-stroke: 1px var(--accent-color-2);
-    text-stroke: 1px var(--accent-color-2);
+    text-shadow: -1px 0 var(--accent-color-2), 0 1px var(--accent-color-2),
+        1px 0 var(--accent-color-2), 0 -1px var(--accent-color-2);
 }
 
 .landing-page-background .content-container h4 {
