@@ -305,11 +305,11 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.summary.show && (
                         <SummarySection />
                     )}
-                    {resumeData.templateSections.clean.education.show && (
-                        <EducationSection />
-                    )}
                     {resumeData.templateSections.clean.experience.show && (
                         <ExperienceSection />
+                    )}
+                    {resumeData.templateSections.clean.education.show && (
+                        <EducationSection />
                     )}
                     {resumeData.templateSections.clean.skills.show && (
                         <SkillsSection />
