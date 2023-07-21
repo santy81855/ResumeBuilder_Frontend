@@ -311,11 +311,14 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.languages.show && (
                         <LanguagesSection />
                     )}
+                    {resumeData.templateSections.clean.languages.show && (
+                        <LanguagesSection />
+                    )}
                     {resumeData.templateSections.clean.interests.show && (
                         <InterestsSection />
                     )}
-                    {resumeData.templateSections.clean.education.show && (
-                        <EducationSection />
+                    {resumeData.templateSections.clean.interests.show && (
+                        <InterestsSection />
                     )}
                 </div>
             </div>

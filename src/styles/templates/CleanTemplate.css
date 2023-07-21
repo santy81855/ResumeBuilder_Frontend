@@ -11,7 +11,6 @@
     line-height: 1.2;
     color: #333;
     box-sizing: border-box;
-    /*font-size: 2.5px;*/
     top: 0;
     left: 0;
     width: 100%;
@@ -19,14 +18,14 @@
     overflow: hidden;
     position: absolute;
     margin: 0em;
-    padding: 0em; /*was 1.5 em*/
+    padding: 1.5em;
 }
 
 .clean-template-content {
     display: flex;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     flex-direction: column;
     background-color: white;
 }
