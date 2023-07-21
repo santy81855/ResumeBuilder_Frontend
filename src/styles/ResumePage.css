@@ -1,7 +1,8 @@
 .PageContainer {
     display: flex;
     flex-direction: column;
-    max-height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
     align-items: center;
     position: relative;
     z-index: 0;

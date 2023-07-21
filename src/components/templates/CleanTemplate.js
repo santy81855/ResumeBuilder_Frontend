@@ -16,7 +16,6 @@ const CleanTemplate = ({
     useEffect(() => {
         const { width, height } = templateRef.current.getBoundingClientRect();
         setDivSize({ width, height });
-        console.log(...resumeData.work);
         const template = templateRef.current;
         if (template) {
             let size = 11 * (width / 610);

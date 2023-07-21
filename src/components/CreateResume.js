@@ -666,7 +666,7 @@ function CreateResume() {
                     {toggleSideBarButton}
                 </div>
 
-                <div className="hidden-template" style={{ fontSize: "11px" }}>
+                <div className="hidden-template">
                     {getResumeQuery.isSuccess ? (
                         // determine the correct template
                         getTemplateComponent({

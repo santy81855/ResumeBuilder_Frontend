@@ -1,6 +1,8 @@
 .landing-page {
     display: flex;
     flex-direction: column;
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
 }
 
 .landing-page-background {
