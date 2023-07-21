@@ -163,18 +163,6 @@ const CleanTemplate = ({
     };
 
     /*
-                                <h4>
-                                {resumeData.templateSections.clean.experience
-                                    .startDate &&
-                                    getDate(job.startDate) + " - "}
-                                {getDate(job.endDate)}
-                            </h4>
-                            <h4>{job.position + ", " + job.company}</h4>
-                            {resumeData.templateSections.clean.experience
-                                .summary && <p>{job.summary}</p>}
-    */
-
-    const ExperienceSection = () => {
         return (
             <div
                 className={sectionClass + " clean-section"}
@@ -184,24 +172,73 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Experience</h3>
+                <div className="clean-job-container">
+                    {work.map((job, index) => (
+                        <div key={index}>
+                            <h4>
+                                {resumeData.templateSections.clean.experience
+                                    .startDate &&
+                                    getDate(job.startDate) + " - "}
+                                {getDate(job.endDate)}
+                            </h4>
+                            <h4>{job.position + ", " + job.company}</h4>
+                            {resumeData.templateSections.clean.experience
+                                .summary && <p>{job.summary}</p>}
+                            {resumeData.templateSections.clean.experience
+                                .highlights && (
+                                <div className="bullet-list-container">
+                                    {job.highlights.map((highlight, index) => (
+                                        <div
+                                            key={index}
+                                            className="bullet-item"
+                                        >
+                                            <div className="bullet"></div>
+                                            {highlight}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    */
 
-                {work.map((job, index) => (
+    const ExperienceSection = () => {
+        return (
+            <div
+                className={sectionClass + " clean-section"}
+                onClick={() => {
+                    handleSectionChange(7);
+                }}
+            >
+                <hr />
+                <h3>Education</h3>
+                {education.map((school, index) => (
                     <div key={index}>
                         <h4>
-                            {resumeData.templateSections.clean.experience
-                                .startDate && getDate(job.startDate) + " - "}
-                            {getDate(job.endDate)}
+                            {school.area +
+                                " " +
+                                school.studyType +
+                                ", " +
+                                school.institution}
                         </h4>
-                        <h4>{job.position + ", " + job.company}</h4>
-                        {resumeData.templateSections.clean.experience
-                            .summary && <p>{job.summary}</p>}
-                        {resumeData.templateSections.clean.experience
-                            .highlights && (
+                        <h4>
+                            {resumeData.templateSections.clean.education
+                                .startDate && getDate(school.startDate) + " - "}
+                            {getDate(school.endDate)}
+                        </h4>
+
+                        {resumeData.templateSections.clean.education.gpa &&
+                            school.gpa && <p>{"GPA: " + school.gpa}</p>}
+                        {resumeData.templateSections.clean.education
+                            .courses && (
                             <div className="bullet-list-container">
-                                {job.highlights.map((highlight, index) => (
+                                {school.courses.map((course, index) => (
                                     <div key={index} className="bullet-item">
                                         <div className="bullet"></div>
-                                        {highlight}
+                                        {course}
                                     </div>
                                 ))}
                             </div>
