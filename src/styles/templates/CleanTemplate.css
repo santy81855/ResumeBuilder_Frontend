@@ -96,15 +96,15 @@
     font-size: 100%;
 }
 
+.clean-template .section p {
+    margin-block: 0;
+    font-size: 95%;
+}
+
 .clean-template .section h3 {
     margin-block-start: 0;
     margin-block-end: 0.5em;
     font-size: 105%;
-}
-
-.clean-template .section p {
-    margin-block: 0;
-    font-size: 95%;
 }
 
 .clean-template .section .job-container {
@@ -114,9 +114,8 @@
     row-gap: 1em;
 }
 
-.clean-template .section .job-container p {
+.clean-template .section .job-item p {
     margin-block-start: 0.5em;
-    font-size: 100%;
 }
 
 .clean-template .section .bullet-list-container {
