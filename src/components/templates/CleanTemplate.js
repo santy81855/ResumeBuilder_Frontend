@@ -178,13 +178,11 @@ const CleanTemplate = ({
                 <h3>Experience</h3>
                 <div className="clean-job-container">
                     {work.map((job, index) => (
-                        <div key={index} className="job-item">
-                            <h4>
-                                {resumeData.templateSections.clean.experience
-                                    .startDate &&
-                                    getDate(job.startDate) + " - "}
-                                {getDate(job.endDate)}
-                            </h4>
+                        <div key={index}>
+                            {resumeData.templateSections.clean.experience
+                                .startDate && getDate(job.startDate) + " - "}
+                            {getDate(job.endDate)}
+
                             <h4>{job.position + ", " + job.company}</h4>
                             {resumeData.templateSections.clean.experience
                                 .summary && <p>{job.summary}</p>}
@@ -220,7 +218,7 @@ const CleanTemplate = ({
                 <hr />
                 <h3>Education</h3>
                 {education.map((school, index) => (
-                    <div key={index} className="job-item">
+                    <div key={index}>
                         <h4>
                             {school.area +
                                 " " +
