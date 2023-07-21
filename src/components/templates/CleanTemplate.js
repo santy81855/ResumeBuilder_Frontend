@@ -90,7 +90,7 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Summary</h3>
-                {summary}
+                <p>{summary}</p>
             </div>
         );
     };
@@ -176,6 +176,7 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Experience</h3>
+                <p>hi</p>
                 <div className="clean-job-container">
                     {work.map((job, index) => (
                         <div key={index} className="job-item">
@@ -233,7 +234,7 @@ const CleanTemplate = ({
                                 .startDate && getDate(school.startDate) + " - "}
                             {getDate(school.endDate)}
                         </h4>
-
+                        <p>hi</p>
                         {resumeData.templateSections.clean.education.gpa &&
                             school.gpa && <p>{"GPA: " + school.gpa}</p>}
                         {resumeData.templateSections.clean.education
