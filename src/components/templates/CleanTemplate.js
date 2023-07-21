@@ -30,11 +30,6 @@ const CleanTemplate = ({
         window.addEventListener("resize", handleResize);
         handleResize();
 
-        // code for checking if the user already has a Clean entry in their json and if not then adding it
-
-        // loop through their templates array, and if "Clean" is not in the array then add it
-        // if the name is not there we add it
-
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
@@ -307,6 +302,9 @@ const CleanTemplate = ({
                     )}
                     {resumeData.templateSections.clean.skills.show && (
                         <SkillsSection />
+                    )}
+                    {resumeData.templateSections.clean.languages.show && (
+                        <LanguagesSection />
                     )}
                     {resumeData.templateSections.clean.languages.show && (
                         <LanguagesSection />
