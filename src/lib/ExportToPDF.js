@@ -14,8 +14,7 @@ const exportToPDF = (data) => {
         fileName: data.fileName,
         landscape: false,
         pdf: {
-            multiPage: false,
-            font: "Arial",
+            multiPage: true,
         },
     });
 };
