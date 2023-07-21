@@ -62,7 +62,7 @@
 
 .clean-template .header-contact-info p {
     margin: 0;
-    font-size: 95%;
+    /*font-size: 95%;*/
 }
 
 .clean-resume-section {
@@ -93,12 +93,12 @@
 
 .clean-template .section h4 {
     margin-block: 0;
-    font-size: 100%;
+    /*font-size: 100%;*/
 }
 
 .clean-template .section p {
     margin-block: 0;
-    font-size: 95%;
+    /*font-size: 95%;*/
 }
 
 .clean-template .section h3 {
@@ -116,7 +116,7 @@
 
 .clean-template .section .job-item p {
     margin-block-start: 0.5em;
-    font-size: 100%;
+    /*font-size: 100%; */
 }
 
 .clean-template .section .bullet-list-container {
