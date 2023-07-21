@@ -162,6 +162,18 @@ const CleanTemplate = ({
         );
     };
 
+    /*
+                                <h4>
+                                {resumeData.templateSections.clean.experience
+                                    .startDate &&
+                                    getDate(job.startDate) + " - "}
+                                {getDate(job.endDate)}
+                            </h4>
+                            <h4>{job.position + ", " + job.company}</h4>
+                            {resumeData.templateSections.clean.experience
+                                .summary && <p>{job.summary}</p>}
+    */
+
     const ExperienceSection = () => {
         return (
             <div
@@ -175,15 +187,6 @@ const CleanTemplate = ({
                 <div className="job-container">
                     {work.map((job, index) => (
                         <div key={index} className="job-item">
-                            <h4>
-                                {resumeData.templateSections.clean.experience
-                                    .startDate &&
-                                    getDate(job.startDate) + " - "}
-                                {getDate(job.endDate)}
-                            </h4>
-                            <h4>{job.position + ", " + job.company}</h4>
-                            {resumeData.templateSections.clean.experience
-                                .summary && <p>{job.summary}</p>}
                             {resumeData.templateSections.clean.experience
                                 .highlights && (
                                 <div className="bullet-list-container">
@@ -314,9 +317,6 @@ const CleanTemplate = ({
                     )}
                     {resumeData.templateSections.clean.interests.show && (
                         <InterestsSection />
-                    )}
-                    {resumeData.templateSections.clean.languages.show && (
-                        <LanguagesSection />
                     )}
                 </div>
             </div>
