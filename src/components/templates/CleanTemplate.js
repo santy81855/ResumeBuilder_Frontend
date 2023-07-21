@@ -90,7 +90,7 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Summary</h3>
-                <p>{summary}</p>
+                {summary}
             </div>
         );
     };
