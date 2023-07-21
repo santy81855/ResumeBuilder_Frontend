@@ -16,6 +16,7 @@ const CleanTemplate = ({
     useEffect(() => {
         const { width, height } = templateRef.current.getBoundingClientRect();
         setDivSize({ width, height });
+        console.log(...resumeData.work);
         const template = templateRef.current;
         if (template) {
             let size = 11 * (width / 610);
@@ -221,7 +222,6 @@ const CleanTemplate = ({
                 <h3>Education</h3>
                 {education.map((school, index) => (
                     <div key={index}>
-                        <h4>{work[0].summary}</h4>
                         <h4>
                             {school.area +
                                 " " +
