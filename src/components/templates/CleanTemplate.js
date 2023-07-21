@@ -83,7 +83,7 @@ const CleanTemplate = ({
     const SummarySection = () => {
         return (
             <div
-                className={sectionClass + " section"}
+                className={sectionClass + " clean-section"}
                 onClick={() => {
                     handleSectionChange(2);
                 }}
@@ -97,7 +97,7 @@ const CleanTemplate = ({
     const SkillsSection = () => {
         return (
             <div
-                className={sectionClass + " section"}
+                className={sectionClass + " clean-section"}
                 onClick={() => {
                     handleSectionChange(5);
                 }}
@@ -119,7 +119,7 @@ const CleanTemplate = ({
     const InterestsSection = () => {
         return (
             <div
-                className={sectionClass + " section"}
+                className={sectionClass + " clean-section"}
                 onClick={() => {
                     handleSectionChange(9);
                 }}
@@ -141,7 +141,7 @@ const CleanTemplate = ({
     const LanguagesSection = () => {
         return (
             <div
-                className={sectionClass + " section"}
+                className={sectionClass + " clean-section"}
                 onClick={() => {
                     handleSectionChange(8);
                 }}
@@ -165,7 +165,7 @@ const CleanTemplate = ({
     const ExperienceSection = () => {
         return (
             <div
-                className={sectionClass + " section"}
+                className={sectionClass + " clean-section"}
                 onClick={() => {
                     handleSectionChange(6);
                 }}
@@ -208,7 +208,7 @@ const CleanTemplate = ({
     const EducationSection = () => {
         return (
             <div
-                className={sectionClass + " section"}
+                className={sectionClass + " clean-section"}
                 onClick={() => {
                     handleSectionChange(7);
                 }}
