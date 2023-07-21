@@ -73,7 +73,7 @@ a {
 .hidden-template {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: -9999px;
     width: 610px;
     height: 789px;
 }
