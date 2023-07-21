@@ -2,8 +2,8 @@ import { savePDF } from "@progress/kendo-react-pdf";
 
 const exportToPDF = (data) => {
     savePDF(data.content, {
-        //paperSize: "auto",
-        paperSize: "Letter",
+        paperSize: "auto",
+        //paperSize: "Letter",
         margin: 0,
         fileName: data.fileName,
         landscape: false,
