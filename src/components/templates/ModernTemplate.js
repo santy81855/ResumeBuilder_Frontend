@@ -15,17 +15,7 @@ const ModernTemplate = ({
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Modern";
 
-    const [a, seta] = useState("");
-
     useEffect(() => {
-        const element = document.getElementById("template-to-print");
-        if (element) {
-            seta(
-                document
-                    .getElementById("template-to-print")
-                    .getBoundingClientRect().height
-            );
-        }
         // handle the text scaling
         function handleResize() {
             const { width, height } =
@@ -128,7 +118,6 @@ const ModernTemplate = ({
                 }}
             >
                 <h2>Skills</h2>
-                <p>{a}</p>
                 {horizontalLine}
                 <div className="container">
                     {skills.map((skill, index) => (

@@ -382,33 +382,7 @@
 
 @media (max-width: 600px) {
     .PageContainer .Section .HeaderDescription {
-        display: none;
-    }
-
-    .introContainer {
-        margin-block-start: var(--gap-large);
-        padding-block-end: var(--gap-xlarge);
-    }
-
-    .ResumeSection {
-        margin-block-start: var(--gap-x2large);
-        margin-block-end: var(--gap-x2large);
-        padding-block-end: var(--gap-large);
-    }
-
-    .HeaderSection {
-        padding-block-end: 0;
-        background-image: none;
-    }
-    .PageContainer .diffusion {
-        display: none;
-    }
-
-    .PageContainer {
-        background-image: url("../images/background.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+        font-size: var(--font-small);
     }
 
     .ResumeTiles {
@@ -622,11 +596,11 @@
         height: 50px;
         margin-top: var(--gap-medium);
     }
-
+    /*
     .ResumeSectionContainer {
         padding-inline: 0;
     }
-
+    
     .HeaderSection {
         padding-inline: 0;
     }
@@ -638,7 +612,7 @@
     .PageContainer .Section {
         border-radius: 0;
     }
-
+*/
     .ResumeTile {
         box-shadow: none;
         width: 240px;

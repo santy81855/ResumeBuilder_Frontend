@@ -7,6 +7,8 @@ import googleLogo from "../images/googleLogo.png";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { loginSubmit } from "../api/user/UserRequests";
 import { Helmet } from "react-helmet";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginForm() {
     const [email, setEmail] = useState("");
@@ -28,7 +30,16 @@ function LoginForm() {
             window.location.href = data.redirect;
         },
         onError: (error, variables, context) => {
-            alert(error.message);
+            toast.info(error.message, {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         },
         enabled: false,
     });
@@ -71,6 +82,7 @@ function LoginForm() {
                     content="Login to AI Resume - An Artificial Intelligence Resume Builder"
                 />
             </Helmet>
+            <ToastContainer />
             <div className="login-form">
                 <form onSubmit={handleLoginSubmit}>
                     <h2>Login</h2>
