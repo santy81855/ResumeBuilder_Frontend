@@ -669,13 +669,13 @@ function CreateResume() {
                 <div className="hidden-template">
                     {getResumeQuery.isSuccess ? (
                         // determine the correct template
-                        getTemplateComponent({
-                            json: resumeData,
-                            isPreview: false,
-                            handleSectionChange: () => {},
-                            template: templateToString[currentTemplate],
-                            isExport: true,
-                        })
+                        <CleanTemplate
+                            resumeData={resumeData}
+                            handleSectionChange={handleSectionChange}
+                            isPreview={false}
+                            setResumeData={setResumeData}
+                            isExport={true}
+                        />
                     ) : (
                         <div>getResumeQueryError</div>
                     )}
