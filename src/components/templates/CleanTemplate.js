@@ -184,9 +184,9 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Experience</h3>
-                <div className="job-container">
+                <div className="clean-job-container">
                     {work.map((job, index) => (
-                        <div key={index} className="job-item">
+                        <div key={index}>
                             <h4>
                                 {resumeData.templateSections.clean.experience
                                     .startDate &&

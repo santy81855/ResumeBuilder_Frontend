@@ -107,15 +107,11 @@
     font-size: 105%;
 }
 
-.clean-template .clean-section .job-container {
+.clean-template .clean-section .clean-job-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     row-gap: 1em;
-}
-
-.clean-template .clean-section .job-item p {
-    margin-block-start: 0.5em;
 }
 
 .clean-template .clean-section .bullet-list-container {
