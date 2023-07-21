@@ -73,14 +73,7 @@ a {
 .hidden-template {
     position: absolute;
     top: 0px;
-    left: -9999px;
+    left: 0px;
     width: 610px;
-    aspect-ratio: 8.5/11;
-    overflow: auto;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    background-color: red;
+    height: 789px;
 }

@@ -571,7 +571,8 @@ function CreateResume() {
                 <button
                     onClick={() => {
                         exportToPDF({
-                            content: document.getElementById("clean-template"),
+                            content:
+                                document.getElementById("template-to-print"),
                             fileName: resumeTitle,
                         });
                     }}
