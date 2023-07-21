@@ -174,7 +174,7 @@ const CleanTemplate = ({
                 <h3>Experience</h3>
                 <div className="job-container">
                     {work.map((job, index) => (
-                        <div key={index}>
+                        <div key={index} className="job-item">
                             <h4>
                                 {resumeData.templateSections.clean.experience
                                     .startDate &&
@@ -183,7 +183,7 @@ const CleanTemplate = ({
                             </h4>
                             <h4>{job.position + ", " + job.company}</h4>
                             {resumeData.templateSections.clean.experience
-                                .summary && job.summary}
+                                .summary && <p>{job.summary}</p>}
                             {resumeData.templateSections.clean.experience
                                 .highlights && (
                                 <div className="bullet-list-container">

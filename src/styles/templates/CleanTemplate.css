@@ -62,7 +62,7 @@
 
 .clean-template .header-contact-info p {
     margin: 0;
-    /*font-size: 95%;*/
+    font-size: 95%;
 }
 
 .clean-resume-section {
@@ -91,14 +91,14 @@
     margin-block-end: 0.5em;
 }
 
-.clean-template .clean-section h4 {
+.clean-template h4 {
     margin-block: 0;
-    /*font-size: 100%;*/
+    font-size: 100%;
 }
 
-.clean-template .clean-section p {
+.clean-template p {
     margin-block: 0;
-    /*font-size: 95%;*/
+    font-size: 95%;
 }
 
 .clean-template .clean-section h3 {
@@ -116,7 +116,6 @@
 
 .clean-template .clean-section .job-item p {
     margin-block-start: 0.5em;
-    /*font-size: 100%; */
 }
 
 .clean-template .clean-section .bullet-list-container {
