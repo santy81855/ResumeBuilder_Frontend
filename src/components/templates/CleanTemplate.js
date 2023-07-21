@@ -317,9 +317,6 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.education.show && (
                         <EducationSection />
                     )}
-                    {resumeData.templateSections.clean.education.show && (
-                        <EducationSection />
-                    )}
                 </div>
             </div>
         </div>
