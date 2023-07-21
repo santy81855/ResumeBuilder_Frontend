@@ -23,7 +23,7 @@ a {
 }
 
 :root {
-    --max-width: 1100px;
+    --max-width: 900px;
     /*account for bottom border of the header*/
     --header-height: 80px;
     --accent-color: rgb(0, 148, 148);
