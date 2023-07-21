@@ -185,15 +185,6 @@ const ModernTemplate = ({
         );
     };
 
-    /*
-            element.style.backgroundImage =
-            "url('./images/account-pics/option1.png')";
-        element.style.backgroundSize = "80%";
-        element.style.backgroundPosition = "center";
-        element.style.width = "100%";
-        element.style.height = "15em";
-    */
-
     const ImageSection = () => {
         return (
             <div

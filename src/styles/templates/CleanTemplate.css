@@ -18,7 +18,7 @@
     overflow: hidden;
     position: absolute;
     margin: 0em;
-    padding: 1.5em;
+    padding: 0em;
 }
 
 .clean-template-content {
@@ -36,6 +36,8 @@
     justify-content: space-between;
     align-items: flex-end;
     height: fit-content;
+    padding-inline: 1.5em;
+    padding-block-start: 1.5em;
 }
 
 .clean-template .header-label {
@@ -80,6 +82,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin-block-start: 0.5em;
+    padding-inline: 1.5em;
 }
 
 .clean-template .section hr {
