@@ -176,8 +176,40 @@ const CleanTemplate = ({
             >
                 <hr />
                 <h3>Experience</h3>
-                <p>hi</p>
                 <div className="clean-job-container">
+                    {education.map((school, index) => (
+                        <div key={index}>
+                            <h4>
+                                {school.area +
+                                    " " +
+                                    school.studyType +
+                                    ", " +
+                                    school.institution}
+                            </h4>
+                            <h4>
+                                {resumeData.templateSections.clean.education
+                                    .startDate &&
+                                    getDate(school.startDate) + " - "}
+                                {getDate(school.endDate)}
+                            </h4>
+                            {resumeData.templateSections.clean.education.gpa &&
+                                school.gpa && <p>{"GPA: " + school.gpa}</p>}
+                            {resumeData.templateSections.clean.education
+                                .courses && (
+                                <div className="bullet-list-container">
+                                    {school.courses.map((course, index) => (
+                                        <div
+                                            key={index}
+                                            className="bullet-item"
+                                        >
+                                            <div className="bullet"></div>
+                                            {course}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
                     {work.map((job, index) => (
                         <div key={index} className="job-item">
                             <h4>
@@ -234,7 +266,6 @@ const CleanTemplate = ({
                                 .startDate && getDate(school.startDate) + " - "}
                             {getDate(school.endDate)}
                         </h4>
-                        <p>hi</p>
                         {resumeData.templateSections.clean.education.gpa &&
                             school.gpa && <p>{"GPA: " + school.gpa}</p>}
                         {resumeData.templateSections.clean.education
