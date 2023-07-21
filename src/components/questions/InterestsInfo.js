@@ -45,25 +45,21 @@ const InterestsInfo = ({
 
     const removeInterest = (event) => {
         // get the json skills list
-        var jsonInterests = resumeData.interests;
-        // get the skill "name" to remove
-        var nameToDelete = interestList[event.target.id];
-        // remove it from the list
-        const index = jsonInterests.findIndex(
-            (item) => item.name === nameToDelete
-        );
-        if (index > -1) {
-            jsonInterests.splice(index, 1);
-        }
+        var jsonInterests = [];
+        interestList.forEach((interest) => {
+            jsonInterests.push({ name: interest, keywords: [] });
+        });
+        jsonInterests.splice(event.target.id, 1);
         // update the resumeData
         setResumeData({
             ...resumeData,
             interests: jsonInterests,
         });
         // update the interestList
-        var tempArr = interestList;
-        // remove the skill based on its index
-        tempArr.splice(event.target.id, 1);
+        var tempArr = [];
+        jsonInterests.forEach((element) => {
+            tempArr.push(element.name);
+        });
         setInterestList(tempArr);
     };
 
@@ -98,7 +94,7 @@ const InterestsInfo = ({
                 {interestList.map((skill, index) => (
                     <div key={index} className="skill-item">
                         <p>{skill}</p>
-                        <button key={index} onClick={removeInterest}>
+                        <button key={index} id={index} onClick={removeInterest}>
                             x
                         </button>
                     </div>

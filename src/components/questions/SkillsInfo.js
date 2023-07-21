@@ -108,25 +108,20 @@ const SkillsInfo = ({
 
     const removeSkill = (event) => {
         // get the json skills list
-        var jsonSkills = resumeData.skills;
-        // get the skill "name" to remove
-        var nameToDelete = skillList[event.target.id];
-        // remove it from the list
-        const index = jsonSkills.findIndex(
-            (item) => item.name === nameToDelete
-        );
-        if (index > -1) {
-            jsonSkills.splice(index, 1);
-        }
+        var jsonSkills = [];
+        skillList.forEach((skill) => {
+            jsonSkills.push({ name: skill, level: "", keywords: [] });
+        });
+        jsonSkills.splice(event.target.id, 1);
         // update the resumeData
         setResumeData({
             ...resumeData,
             skills: jsonSkills,
         });
-        // update the skillList
-        var tempArr = skillList;
-        // remove the skill based on its index
-        tempArr.splice(event.target.id, 1);
+        var tempArr = [];
+        jsonSkills.forEach((element) => {
+            tempArr.push(element.name);
+        });
         setSkillList(tempArr);
     };
 
@@ -185,7 +180,7 @@ const SkillsInfo = ({
                 {skillList.map((skill, index) => (
                     <div key={index} className="skill-item">
                         <p>{skill}</p>
-                        <button key={index} onClick={removeSkill}>
+                        <button key={index} id={index} onClick={removeSkill}>
                             x
                         </button>
                     </div>

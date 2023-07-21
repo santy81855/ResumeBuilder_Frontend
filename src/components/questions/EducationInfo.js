@@ -123,23 +123,15 @@ const EducationInfo = ({
     };
 
     const removeJob = (event) => {
-        // get the json jobs list
-        var jsonWork = resumeData.education;
-        // get the job to remove
-        var jobToDelete = experienceList[event.target.id];
-        // remove it from the list
-        var updatedArr = jsonWork.filter(
-            (item) => item.startDate !== jobToDelete.startDate
-        );
-        // update the resumeData
-        setResumeData({
-            ...resumeData,
-            education: updatedArr,
-        });
         // update the skillList
         var tempArr = experienceList;
         // remove the skill based on its index
         tempArr.splice(event.target.id, 1);
+        // update the resumeData
+        setResumeData({
+            ...resumeData,
+            education: tempArr,
+        });
         setExperienceList(tempArr);
     };
 
@@ -360,6 +352,7 @@ const EducationInfo = ({
                     <div key={index} className="experience-item">
                         <button
                             className="delete-experience-item-button"
+                            id={index}
                             key={index}
                             onClick={removeJob}
                         >

@@ -45,26 +45,21 @@ const LanguagesInfo = ({
 
     const removeLanguage = (event) => {
         // get the json skills list
-        var jsonLangs = resumeData.languages;
-        // get the skill "name" to remove
-        var nameToDelete = languageList[event.target.id];
-        // remove it from the list
-        const index = jsonLangs.findIndex(
-            (item) => item.language === nameToDelete
-        );
-        if (index > -1) {
-            jsonLangs.splice(index, 1);
-        }
-
+        var jsonLangs = [];
+        languageList.forEach((lang) => {
+            jsonLangs.push({ language: lang, fluency: "Advanced" });
+        });
+        jsonLangs.splice(event.target.id, 1);
         // update the resumeData
         setResumeData({
             ...resumeData,
             languages: jsonLangs,
         });
         // update the languageList
-        var tempArr = languageList;
-        // remove the skill based on its index
-        tempArr.splice(event.target.id, 1);
+        var tempArr = [];
+        jsonLangs.forEach((element) => {
+            tempArr.push(element.language);
+        });
         setLanguageList(tempArr);
     };
 
@@ -95,7 +90,7 @@ const LanguagesInfo = ({
                 {languageList.map((skill, index) => (
                     <div key={index} className="skill-item">
                         <p>{skill}</p>
-                        <button key={index} onClick={removeLanguage}>
+                        <button key={index} id={index} onClick={removeLanguage}>
                             x
                         </button>
                     </div>

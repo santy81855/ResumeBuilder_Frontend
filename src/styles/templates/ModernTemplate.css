@@ -8,6 +8,7 @@
 
 .modern-template {
     font-family: Arial, sans-serif;
+    line-height: 1.2;
     color: #333;
     box-sizing: border-box;
     top: 0;
@@ -19,7 +20,6 @@
     margin: 0em;
     padding-inline: 0em;
     padding-block: 0em;
-    line-height: 1.2;
 }
 
 .modern-template-content {
