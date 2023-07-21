@@ -666,16 +666,16 @@ function CreateResume() {
                     {toggleSideBarButton}
                 </div>
 
-                <div className="hidden-template">
+                <div className="hidden-template" style={{ fontSize: "11px" }}>
                     {getResumeQuery.isSuccess ? (
                         // determine the correct template
-                        <CleanTemplate
-                            resumeData={resumeData}
-                            handleSectionChange={handleSectionChange}
-                            isPreview={false}
-                            setResumeData={setResumeData}
-                            isExport={true}
-                        />
+                        getTemplateComponent({
+                            json: resumeData,
+                            isPreview: false,
+                            handleSectionChange: () => {},
+                            template: templateToString[currentTemplate],
+                            isExport: true,
+                        })
                     ) : (
                         <div>getResumeQueryError</div>
                     )}
