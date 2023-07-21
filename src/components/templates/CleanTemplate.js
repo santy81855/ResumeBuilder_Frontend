@@ -14,6 +14,13 @@ const CleanTemplate = ({
     const TEMPLATE_NAME = "Clean";
 
     useEffect(() => {
+        const { width, height } = templateRef.current.getBoundingClientRect();
+        setDivSize({ width, height });
+        const template = templateRef.current;
+        if (template) {
+            let size = 11 * (width / 610);
+            template.style.fontSize = size + "px";
+        }
         // handle the text scaling
         function handleResize() {
             const { width, height } =
