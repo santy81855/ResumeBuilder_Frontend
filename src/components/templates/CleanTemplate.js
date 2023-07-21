@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { savePDF } from "@progress/kendo-react-pdf";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/CleanTemplate.css";
 
@@ -279,32 +278,6 @@ const CleanTemplate = ({
         );
     };
 
-    const temp = <div>hi</div>;
-    /*
-    <HeaderSection />;
-    {
-        resumeData.templateSections.clean.summary.show && <SummarySection />;
-    }
-    {
-        resumeData.templateSections.clean.education.show && (
-            <EducationSection />
-        );
-    }
-    {
-        resumeData.templateSections.clean.experience.show && (
-            <ExperienceSection />
-        );
-    }
-    {
-        resumeData.templateSections.clean.skills.show && <SkillsSection />;
-    }
-    {
-        resumeData.templateSections.clean.languages.show && (
-            <LanguagesSection />
-        );
-    }
-    */
-
     return (
         <div className="clean-template-container" id="clean-template-container">
             <div
@@ -316,62 +289,25 @@ const CleanTemplate = ({
                     className="clean-template-content"
                     id="clean-template-content"
                 >
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
-                    {temp}
+                    <HeaderSection />
+                    {resumeData.templateSections.clean.summary.show && (
+                        <SummarySection />
+                    )}
+                    {resumeData.templateSections.clean.education.show && (
+                        <EducationSection />
+                    )}
+                    {resumeData.templateSections.clean.experience.show && (
+                        <ExperienceSection />
+                    )}
+                    {resumeData.templateSections.clean.skills.show && (
+                        <SkillsSection />
+                    )}
+                    {resumeData.templateSections.clean.languages.show && (
+                        <LanguagesSection />
+                    )}
+                    {resumeData.templateSections.clean.interests.show && (
+                        <InterestsSection />
+                    )}
                 </div>
             </div>
         </div>

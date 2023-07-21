@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { savePDF } from "@progress/kendo-react-pdf";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/ModernTemplate.css";
 import userImage from "../../images/account-pics/option1.png";
