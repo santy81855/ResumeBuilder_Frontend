@@ -116,6 +116,7 @@
 
 .clean-template .section .job-item p {
     margin-block-start: 0.5em;
+    font-size: 100%;
 }
 
 .clean-template .section .bullet-list-container {

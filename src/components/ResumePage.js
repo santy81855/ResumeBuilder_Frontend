@@ -242,7 +242,7 @@ function ResumePage() {
                     // determine the correct template
                     getTemplateComponent({
                         json: getResumeQuery.data.json,
-                        isPreview: true,
+                        isPreview: false,
                         handleSectionChange: () => {},
                         template: getResumeQuery.data.template,
                         isExport: true,

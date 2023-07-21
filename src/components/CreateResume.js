@@ -671,8 +671,8 @@ function CreateResume() {
                         // determine the correct template
                         getTemplateComponent({
                             json: resumeData,
-                            isPreview: true,
-                            handleSectionChange: {},
+                            isPreview: false,
+                            handleSectionChange: () => {},
                             template: templateToString[currentTemplate],
                             isExport: true,
                         })
