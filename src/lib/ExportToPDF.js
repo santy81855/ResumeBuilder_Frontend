@@ -8,7 +8,8 @@ const exportToPDF = (data) => {
         element.style.fontSize = size + "px";
     }
     savePDF(data.content, {
-        paperSize: "Letter",
+        paperSize: "auto",
+        //paperSize: "Letter",
         margin: 0,
         fileName: data.fileName,
         landscape: false,
