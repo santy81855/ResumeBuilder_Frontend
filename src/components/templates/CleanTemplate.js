@@ -163,6 +163,10 @@ const CleanTemplate = ({
     };
 
     /*
+
+    */
+
+    const ExperienceSection = () => {
         return (
             <div
                 className={sectionClass + " clean-section"}
@@ -174,7 +178,7 @@ const CleanTemplate = ({
                 <h3>Experience</h3>
                 <div className="clean-job-container">
                     {work.map((job, index) => (
-                        <div key={index}>
+                        <div key={index} className="job-item">
                             <h4>
                                 {resumeData.templateSections.clean.experience
                                     .startDate &&
@@ -201,46 +205,6 @@ const CleanTemplate = ({
                         </div>
                     ))}
                 </div>
-            </div>
-        );
-    */
-
-    const ExperienceSection = () => {
-        return (
-            <div
-                className={sectionClass + " clean-section"}
-                onClick={() => {
-                    handleSectionChange(7);
-                }}
-            >
-                <hr />
-                <h3>Experience</h3>
-                {work.map((job, index) => (
-                    <div key={index}>
-                        {resumeData.templateSections.clean.experience
-                            .startDate && (
-                            <h4>
-                                {getDate(job.startDate) +
-                                    " - " +
-                                    getDate(job.endDate)}
-                            </h4>
-                        )}
-                        <h4>{job.position + ", " + job.company}</h4>
-                        {resumeData.templateSections.clean.experience
-                            .summary && <p>{job.summary}</p>}
-                        {resumeData.templateSections.clean.experience
-                            .highlights && (
-                            <div className="bullet-list-container">
-                                {job.highlights.map((highlight, index) => (
-                                    <div key={index} className="bullet-item">
-                                        <div className="bullet"></div>
-                                        {highlight}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                ))}
             </div>
         );
     };

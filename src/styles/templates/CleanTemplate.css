@@ -114,6 +114,11 @@
     row-gap: 1em;
 }
 
+.clean-template .job-item {
+    display: flex;
+    flex-direction: column;
+}
+
 .clean-template .clean-section .bullet-list-container {
     display: flex;
     flex-direction: column;
