@@ -314,6 +314,12 @@ const CleanTemplate = ({
                     {resumeData.templateSections.clean.interests.show && (
                         <InterestsSection />
                     )}
+                    {resumeData.templateSections.clean.education.show && (
+                        <EducationSection />
+                    )}
+                    {resumeData.templateSections.clean.education.show && (
+                        <EducationSection />
+                    )}
                 </div>
             </div>
         </div>
