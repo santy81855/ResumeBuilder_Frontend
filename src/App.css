@@ -14,6 +14,7 @@ body {
     color: var(--text-color-rgb);
     background-color: var(--background-color-rgb);
     position: relative;
+    margin-top: var(--header-height);
 }
 
 a {
