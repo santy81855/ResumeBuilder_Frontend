@@ -13,4 +13,4 @@ npm install
 npm run build
 
 # Restart the Node.js app using pm2
-sudo pm2 restart index
+sudo pm2 restart ai-resume
