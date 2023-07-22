@@ -16,9 +16,6 @@ const Header = observer(() => {
         localStorage.getItem("token") ? true : false
     );
 
-    const handleDropdownClick = () => {
-        setIsDropdownClicked(!isDropdownClicked);
-    };
     const HAMBURGER_WIDTH = 480;
 
     useEffect(() => {
@@ -56,14 +53,6 @@ const Header = observer(() => {
 
     const handleUserLogout = () => {
         logoutQuery.refetch({});
-    };
-
-    const hideElement = (element) => {
-        element.style.display = "none";
-    };
-
-    const showElement = (element) => {
-        element.style.display = "flex";
     };
 
     const logoElement = (
