@@ -11,6 +11,10 @@ const Header = observer(() => {
     const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
     const [isDropdownClicked, setIsDropdownClicked] = useState(false);
     const [shortNav, setShortNav] = useState(false);
+    const [showVerticalMenu, setShowVerticalMenu] = useState(false);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(
+        localStorage.getItem("token") ? true : false
+    );
 
     const handleDropdownClick = () => {
         setIsDropdownClicked(!isDropdownClicked);
@@ -22,28 +26,10 @@ const Header = observer(() => {
             setShortNav(true);
         }
         function handleResize() {
-            const horMenu = document.getElementsByClassName("Header-right")[0];
-            const vertMenu = document.getElementsByClassName(
-                "Header-right-vertical"
-            )[0];
-            const hamMenu =
-                document.getElementsByClassName("Header-hamburger")[0];
-            if (window.innerWidth < HAMBURGER_WIDTH && isHamburgerClicked) {
-                showElement(vertMenu);
-                showElement(hamMenu);
-                hideElement(horMenu);
-            } else if (
-                window.innerWidth < HAMBURGER_WIDTH &&
-                !isHamburgerClicked
-            ) {
-                showElement(hamMenu);
-                hideElement(horMenu);
-                hideElement(vertMenu);
-            } else if (window.innerWidth >= HAMBURGER_WIDTH) {
-                setIsHamburgerClicked(false);
-                showElement(horMenu);
-                hideElement(hamMenu);
-                hideElement(vertMenu);
+            if (window.innerWidth < HAMBURGER_WIDTH) {
+                setShortNav(true);
+            } else {
+                setShortNav(false);
             }
         }
 
@@ -53,7 +39,7 @@ const Header = observer(() => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, []);
+    }, [shortNav]);
 
     const logoutQuery = useQuery({
         queryKey: ["logoutUser"],
@@ -80,75 +66,76 @@ const Header = observer(() => {
         element.style.display = "flex";
     };
 
-    const renderAuthButton = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            return (
-                <button
-                    className="Account-button"
-                    onClick={handleDropdownClick}
-                    alt="account-button"
-                >
-                    <img className="Header-account" src={accountIcon} />
-                    {isDropdownClicked && (
-                        <div className="Header-account-dropdown">
-                            <button onClick={handleUserLogout}>Logout</button>
-                        </div>
-                    )}
-                </button>
-            );
+    const logoElement = (
+        <div className="Header-left">
+            <img src={logo} className="Header-logo" alt="logo" />
+            <span className="Header-app-name">Ai Resume</span>
+        </div>
+    );
+
+    const navMenuElement = (
+        <nav className="Header-right">
+            <a className="Nav-link" href="/">
+                Home
+            </a>
+            {isUserLoggedIn ? (
+                <a className="Nav-link" href="/u/resumes">
+                    Dashboard
+                </a>
+            ) : (
+                <a className="Nav-link" href="/login">
+                    Login
+                </a>
+            )}
+        </nav>
+    );
+
+    const toggleMenu = () => {
+        const element = document.getElementById("verticalMenu");
+
+        if (!showVerticalMenu) {
+            console.log(element);
+            if (element) {
+                element.classList.remove("slideout");
+                element.classList.add("slidein");
+                setShowVerticalMenu(true);
+            }
+        } else {
+            element.classList.remove("slidein");
+            element.classList.add("slideout");
+            setShowVerticalMenu(false);
         }
     };
 
-    const handleMenuClick = () => {
-        const vertMenu = document.getElementsByClassName(
-            "Header-right-vertical"
-        )[0];
-        if (isHamburgerClicked == false) {
-            setIsHamburgerClicked(true);
-            showElement(vertMenu);
-        } else {
-            setIsHamburgerClicked(false);
-            hideElement(vertMenu);
-        }
-    };
+    const menuButton = (
+        <button className="Header-hamburger" onClick={toggleMenu}>
+            &#9776;
+        </button>
+    );
+
+    const verticalMenu = (
+        <div className="Header-right-vertical" id="verticalMenu">
+            <div className="menu-options">
+                <a href="/">Home</a>
+                {localStorage.getItem("token") ? (
+                    <a href="/u/resumes">Dashboard</a>
+                ) : (
+                    <a href="/login">Login</a>
+                )}
+                {localStorage.getItem("token") && (
+                    <a onClick={handleUserLogout}>Logout</a>
+                )}
+            </div>
+        </div>
+    );
 
     return (
         <header className="Header">
             <div className="navbar">
-                <div className="Header-left">
-                    <img src={logo} className="Header-logo" alt="logo" />
-                    <span className="Header-app-name">Ai Resume</span>
-                </div>
-                <button className="Header-hamburger" onClick={handleMenuClick}>
-                    &#9776;
-                </button>
-                <nav className="Header-right">
-                    <a className="Nav-link" href="/">
-                        Home
-                    </a>
-                    {localStorage.getItem("token") ? (
-                        <a className="Nav-link" href="/u/resumes">
-                            Dashboard
-                        </a>
-                    ) : (
-                        <a className="Nav-link" href="/login">
-                            Login
-                        </a>
-                    )}
-                    {renderAuthButton()}
-                </nav>
-                <div className="Header-right-vertical">
-                    <a href="/">Home</a>
-                    {localStorage.getItem("token") ? (
-                        <a href="/u/resumes">Dashboard</a>
-                    ) : (
-                        <a href="/login">Login</a>
-                    )}
-                    {localStorage.getItem("token") && (
-                        <button onClick={handleUserLogout}>Logout</button>
-                    )}
-                </div>
+                {logoElement}
+                {!shortNav && navMenuElement}
+                {(isUserLoggedIn || shortNav) && menuButton}
+                {verticalMenu}
             </div>
         </header>
     );

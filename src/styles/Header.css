@@ -15,14 +15,13 @@
 .navbar {
     height: 100%;
     width: 100%;
-    max-width: var(--max-width);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .Header-hamburger {
-    display: none;
     font-size: var(--font-large);
     cursor: pointer;
     background-color: transparent;
@@ -56,31 +55,46 @@
 }
 
 .Header-right-vertical {
-    display: none;
-    flex-direction: column;
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: var(--header-height);
+    right: -60vw;
+    width: 60vw;
+    max-width: 500px;
+    height: calc(100vh - var(--header-height));
+    background-color: rgb(241, 241, 241);
     z-index: 1;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.slidein {
+    animation: slideInAnimation 0.5s ease-in-out forwards;
+    /*run only once*/
+    animation-iteration-count: 1;
+}
+
+.slideout {
+    animation: slideOutAnimation 0.5s ease-in-out forwards;
+    /*run only once*/
+    animation-iteration-count: 1;
+}
+
+.Header-right-vertical .menu-options {
+    display: flex;
+    flex-direction: column;
+}
+
 .Header-right-vertical a {
     padding: var(--gap-small);
-    font-size: var(--font-medium);
+    font-size: var(--font-large);
     text-align: center;
     text-decoration: none;
     color: black;
-}
-
-.Header-right-vertical button {
-    padding: var(--gap-small);
-    background-color: transparent;
-    border: none;
     cursor: pointer;
-    font-size: var(--font-medium);
+    transition: transform 0.2s ease-in-out;
 }
 
 .Header-account {
@@ -105,49 +119,10 @@
     z-index: 999;
 }
 
-.Header-account-dropdown a {
-    padding: var(--gap-small);
-    cursor: pointer;
-    font-size: var(--font-medium);
-    text-decoration: none;
-    color: black;
-}
-
-.Header-account-dropdown button {
-    padding: var(--gap-small);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: var(--font-medium);
-}
-
-@media screen and (max-width: 450px) {
-    .Header-right {
-        display: none;
+@media (pointer: fine) {
+    .Header-right-vertical a:hover {
+        transform: scale(1.1);
     }
-
-    .Header-hamburger {
-        display: flex;
-    }
-
-    .Header {
-        height: var(--header-height);
-    }
-}
-
-.Header-logout {
-    text-decoration: none;
-    color: #333;
-}
-
-.Header-logout button {
-    border: none;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    text-decoration: none;
-    color: #333;
-    font-size: medium;
 }
 
 .Header-right .Nav-link {
@@ -158,4 +133,22 @@
 
 .Header-logo {
     height: 50px;
+}
+
+@keyframes slideInAnimation {
+    0% {
+        right: -60vw;
+    }
+    100% {
+        right: 0vw;
+    }
+}
+
+@keyframes slideOutAnimation {
+    0% {
+        right: 0vw;
+    }
+    100% {
+        right: -60vw;
+    }
 }
