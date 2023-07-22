@@ -85,7 +85,7 @@ const CleanTemplate = ({
             <div
                 className={sectionClass + " clean-section"}
                 onClick={() => {
-                    handleSectionChange(2);
+                    handleSectionChange(0);
                 }}
             >
                 <hr />
@@ -99,7 +99,7 @@ const CleanTemplate = ({
             <div
                 className={sectionClass + " clean-section"}
                 onClick={() => {
-                    handleSectionChange(5);
+                    handleSectionChange(3);
                 }}
             >
                 <hr />
@@ -121,7 +121,7 @@ const CleanTemplate = ({
             <div
                 className={sectionClass + " clean-section"}
                 onClick={() => {
-                    handleSectionChange(9);
+                    handleSectionChange(7);
                 }}
             >
                 <hr />
@@ -143,7 +143,7 @@ const CleanTemplate = ({
             <div
                 className={sectionClass + " clean-section"}
                 onClick={() => {
-                    handleSectionChange(8);
+                    handleSectionChange(6);
                 }}
             >
                 <hr />
@@ -171,7 +171,7 @@ const CleanTemplate = ({
             <div
                 className={sectionClass + " clean-section"}
                 onClick={() => {
-                    handleSectionChange(6);
+                    handleSectionChange(4);
                 }}
             >
                 <hr />
@@ -214,7 +214,7 @@ const CleanTemplate = ({
             <div
                 className={sectionClass + " clean-section"}
                 onClick={() => {
-                    handleSectionChange(7);
+                    handleSectionChange(5);
                 }}
             >
                 <hr />
@@ -257,7 +257,7 @@ const CleanTemplate = ({
                 <div
                     className={sectionClass + " header-label"}
                     onClick={() => {
-                        handleSectionChange(4);
+                        handleSectionChange(2);
                     }}
                 >
                     <h3>{contact.name}</h3>
@@ -270,7 +270,7 @@ const CleanTemplate = ({
                     <div
                         className={sectionClass + " header-contact-info"}
                         onClick={() => {
-                            handleSectionChange(3);
+                            handleSectionChange(1);
                         }}
                     >
                         {resumeData.templateSections.clean.contact.email && (

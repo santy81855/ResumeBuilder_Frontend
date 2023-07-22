@@ -8,8 +8,10 @@ import Home from "./components/Home"; // import the Home component
 import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
 import { Navigate } from "react-router-dom";
+import Modal from "react-modal";
 
 function App() {
+    Modal.setAppElement("#root"); // Assuming "#root" is the ID of the root element of your application.
     return (
         <div>
             <Router>

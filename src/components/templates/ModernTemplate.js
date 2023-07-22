@@ -83,7 +83,7 @@ const ModernTemplate = ({
                     sectionClass + " vertical-block-section languages-section"
                 }
                 onClick={() => {
-                    handleSectionChange(8);
+                    handleSectionChange(6);
                 }}
             >
                 <h2>Languages</h2>
@@ -108,7 +108,7 @@ const ModernTemplate = ({
                     sectionClass + " vertical-block-section skills-section"
                 }
                 onClick={() => {
-                    handleSectionChange(5);
+                    handleSectionChange(3);
                 }}
             >
                 <h2>Skills</h2>
@@ -129,7 +129,7 @@ const ModernTemplate = ({
                     sectionClass + " vertical-block-section education-section"
                 }
                 onClick={() => {
-                    handleSectionChange(7);
+                    handleSectionChange(5);
                 }}
             >
                 <h2>Education</h2>
@@ -156,7 +156,7 @@ const ModernTemplate = ({
                     sectionClass + " vertical-block-section contact-section"
                 }
                 onClick={() => {
-                    handleSectionChange(3);
+                    handleSectionChange(1);
                 }}
             >
                 <h2>Contact</h2>
@@ -207,7 +207,7 @@ const ModernTemplate = ({
             <div
                 className={sectionClass + " right-section header-section"}
                 onClick={() => {
-                    handleSectionChange(4);
+                    handleSectionChange(2);
                 }}
             >
                 <h1>{contact.name}</h1>
@@ -222,7 +222,7 @@ const ModernTemplate = ({
             <div
                 className={sectionClass + " right-section summary-section"}
                 onClick={() => {
-                    handleSectionChange(2);
+                    handleSectionChange(0);
                 }}
             >
                 <p>{summary}</p>
@@ -235,7 +235,7 @@ const ModernTemplate = ({
             <div
                 className={sectionClass + " right-section experience-section"}
                 onClick={() => {
-                    handleSectionChange(6);
+                    handleSectionChange(4);
                 }}
             >
                 <h2>Experience</h2>
@@ -283,7 +283,7 @@ const ModernTemplate = ({
             <div
                 className={sectionClass + " right-section interests-section"}
                 onClick={() => {
-                    handleSectionChange(9);
+                    handleSectionChange(7);
                 }}
             >
                 <h2>Interests</h2>

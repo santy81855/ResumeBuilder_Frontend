@@ -1,21 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../styles/CreateResume.css";
-import Loader from "./ui/Loader";
-import BasicInfo from "./questions/BasicInfo";
-import Summary from "./questions/Summary";
-import ContactInfo from "./questions/ContactInfo";
-import TitleInfo from "./questions/TitleInfo";
-import SkillsInfo from "./questions/SkillsInfo";
-import ExperienceInfo from "./questions/ExperienceInfo";
-import EducationInfo from "./questions/EducationInfo";
-import LanguagesInfo from "./questions/LanguagesInfo";
-import InterestsInfo from "./questions/InterestsInfo";
-import ResumeSkeleton from "./skeletons/ResumeSkeleton";
-
-import JSONResumeData from "../resume-schema.json";
-import CleanTemplate from "./templates/CleanTemplate";
-import ModernTemplate from "./templates/ModernTemplate";
 import {
     templateToString,
     templateToInt,
@@ -30,7 +14,21 @@ import {
     getResumeById,
 } from "../api/resume/ResumeRequests";
 import { ToastContainer, toast } from "react-toastify";
+import Loader from "./ui/Loader";
+import Summary from "./questions/Summary";
+import ContactInfo from "./questions/ContactInfo";
+import TitleInfo from "./questions/TitleInfo";
+import SkillsInfo from "./questions/SkillsInfo";
+import ExperienceInfo from "./questions/ExperienceInfo";
+import EducationInfo from "./questions/EducationInfo";
+import LanguagesInfo from "./questions/LanguagesInfo";
+import InterestsInfo from "./questions/InterestsInfo";
+import ResumeSkeleton from "./skeletons/ResumeSkeleton";
+import JSONResumeData from "../resume-schema.json";
+import CleanTemplate from "./templates/CleanTemplate";
+import ModernTemplate from "./templates/ModernTemplate";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/CreateResume.css";
 
 function CreateResume() {
     // get the resume title and description and job from the route
@@ -218,12 +216,6 @@ function CreateResume() {
         );
     }
 
-    const handleResumeDataChange = (newResumeData) => {
-        // callback function to update the resumeData state
-        setResumeData(newResumeData);
-        handleSave();
-    };
-
     function openModal() {
         setSummanyModalOpen(true);
     }
@@ -269,179 +261,39 @@ function CreateResume() {
         button.style.display = "flex";
     };
 
+    const inputModalProps = {
+        resumeData: resumeData,
+        setResumeData: setResumeData,
+        handleSave: handleSave,
+        closeModal: closeModal,
+        isLoadingState: isLoadingState,
+        jobTitle: resumeJob,
+    };
+
+    const inputModals = [
+        <Summary {...inputModalProps} />,
+        <ContactInfo {...inputModalProps} />,
+        <TitleInfo {...inputModalProps} />,
+        <SkillsInfo {...inputModalProps} />,
+        <ExperienceInfo {...inputModalProps} />,
+        <EducationInfo {...inputModalProps} />,
+        <LanguagesInfo {...inputModalProps} />,
+        <InterestsInfo {...inputModalProps} />,
+    ];
+
     const renderQuestion = () => {
-        switch (currentlySelectedSection) {
-            case 1:
-                return (
-                    <BasicInfo
-                        resumeData={resumeData}
-                        currentlySelectedSection={currentlySelectedSection}
-                        onResumeDataChange={handleResumeDataChange} // passing down the callback function as props
-                    />
-                );
-            case 2:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <Summary
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 3:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <ContactInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 4:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <TitleInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 5:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <SkillsInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 6:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <ExperienceInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 7:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <EducationInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 8:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <LanguagesInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            case 9:
-                return (
-                    <Modal
-                        className="modal"
-                        isOpen={summanyModalOpen}
-                        onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        contentLabel="summary-modal"
-                        overlayClassName="overlay"
-                    >
-                        <InterestsInfo
-                            resumeData={resumeData}
-                            setResumeData={setResumeData}
-                            handleSave={handleSave}
-                            closeModal={closeModal}
-                            isLoadingState={isLoadingState}
-                            jobTitle={resumeJob}
-                        />
-                    </Modal>
-                );
-            default:
-                return null;
-        }
+        return (
+            <Modal
+                className="modal"
+                isOpen={summanyModalOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                contentLabel="summary-modal"
+                overlayClassName="overlay"
+            >
+                {inputModals[currentlySelectedSection]}
+            </Modal>
+        );
     };
 
     const SectionContainer = () => {
@@ -621,7 +473,6 @@ function CreateResume() {
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
                         </div>
-                        {renderQuestion()}
                         <div className="create-resume-template-container">
                             <ResumeSkeleton />
                         </div>

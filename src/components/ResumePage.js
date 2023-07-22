@@ -1,14 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../styles/ResumePage.css";
-import { useNavigate } from "react-router-dom";
-import { getTemplateComponent } from "../lib/TemplateKeys";
-import ResumeSkeleton from "./skeletons/ResumeSkeleton";
-import CreateResumeModal from "./CreateResumeModal";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { getTemplateComponent } from "../lib/TemplateKeys";
 import {
     deleteResumeById,
     getAllUserResumes,
@@ -16,18 +10,21 @@ import {
 } from "../api/resume/ResumeRequests";
 import { getUser } from "../api/user/UserRequests";
 import { exportToPDF } from "../lib/ExportToPDF";
+import "react-toastify/dist/ReactToastify.css";
+import CreateResumeModal from "./CreateResumeModal";
+import ResumeSkeleton from "./skeletons/ResumeSkeleton";
+import ResumeTile from "./ResumeTile";
+import CreateResumeTile from "./CreateResumeTile";
+import "../styles/ResumePage.css";
 
 function ResumePage() {
     const [userName, setUserName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [resumeArr, setResumeArr] = useState([]);
     const [searchArr, setSearchArr] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [createModal, setCreateModal] = useState(false);
     const [showCreateResumeTile, setShowCreateResumeTile] = useState(true);
     const [resumeSearch, setResumeSearch] = useState("");
-    const navigate = useNavigate();
 
     // useEffect to fetch user data on load
     useEffect(() => {
@@ -42,7 +39,7 @@ function ResumePage() {
         } else {
             // otherwise, filter the resumeArr to only include the resumes that match the search
             const filteredArr = resumeArr.filter((item) => {
-                return item.key
+                return item.props.keyString
                     .toLowerCase()
                     .includes(resumeSearch.toLowerCase());
             });
@@ -63,11 +60,6 @@ function ResumePage() {
 
         window.addEventListener("resize", handleResize);
         handleResize();
-
-        // code for checking if the user already has a Clean entry in their json and if not then adding it
-
-        // loop through their templates array, and if "Clean" is not in the array then add it
-        // if the name is not there we add it
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -100,11 +92,26 @@ function ResumePage() {
 
             if (resumeArr.length === 0) {
                 const tempArr = [];
-                sortedByDate.forEach((element) => {
-                    tempArr.push(makeResumeTile(element));
+                sortedByDate.forEach((element, index) => {
+                    tempArr.push(
+                        <ResumeTile
+                            key={index}
+                            resumeData={element}
+                            getResumeQuery={getResumeQuery}
+                            deleteResumeMutation={deleteResumeMutation}
+                            openModal={openModal}
+                            getTemplateComponent={getTemplateComponent}
+                            keyString={
+                                element.resumeTitle +
+                                element.jobTitle +
+                                element.resumeDescription
+                            }
+                        />
+                    );
                 });
                 setResumeArr(tempArr);
                 setSearchArr(tempArr);
+                console.log(tempArr[1]);
             }
         },
         onError: (error, variables, context) => {
@@ -125,11 +132,10 @@ function ResumePage() {
         mutationFn: deleteResumeById,
         onSuccess: (data, variables, context) => {
             // remove the resume from the resume arr in order to remove it from the screen
-            const key = variables.key;
+            const id = variables.id;
             const updatedResumeArr = resumeArr.filter(
-                (item) => item.key !== key
+                (item) => item.props.resumeData._id !== id
             );
-
             setSearchArr(updatedResumeArr);
             setResumeArr(updatedResumeArr);
         },
@@ -146,8 +152,6 @@ function ResumePage() {
         queryFn: getUser,
         onSuccess: (data, variables, context) => {
             setUserName(data.user.username);
-            setFirstName(data.user.first);
-            setLastName(data.user.last);
         },
         onError: (error, variables, context) => {
             console.log(error);
@@ -160,29 +164,6 @@ function ResumePage() {
         setCreateModal(true);
     };
 
-    const handleResumeUnhover = (event, id) => {
-        // get the ResumePic element
-        const div = event.currentTarget;
-        // get the Template component
-        const child = div.children;
-        // show the template component
-        child[0].style.display = "flex";
-        // hide the options menu
-        child[1].style.display = "none";
-    };
-
-    const handleResumeHover = (event, id) => {
-        // get the ResumePic element
-        //const div = event.currentTarget;
-        const div = document.getElementById(id);
-        // get the Template component
-        const child = div.children;
-        // hide the template component
-        child[0].style.display = "none";
-        // show the options menu
-        child[1].style.display = "flex";
-    };
-
     function openModal() {
         setIsOpen(true);
     }
@@ -190,10 +171,6 @@ function ResumePage() {
 
     function closeModal() {
         setIsOpen(false);
-    }
-
-    function resumearrPrint() {
-        return resumeArr[0].resumeTitle;
     }
 
     const exportModal = (
@@ -254,109 +231,6 @@ function ResumePage() {
         </div>
     );
 
-    const handleEditClick = (event, id) => {
-        // add the resumeid to the local storage
-        localStorage.setItem("resumeId", id);
-        // go to edit resume page
-        navigate("/u/edit-resume");
-    };
-
-    const handleDeleteClick = (event, id, key) => {
-        deleteResumeMutation.mutate({
-            id: id,
-            key: key,
-        });
-    };
-
-    const handleExportClick = (event, id) => {
-        localStorage.setItem("resumeId", id);
-        getResumeQuery.refetch();
-        openModal();
-    };
-
-    function makeResumeTile(resumeData) {
-        const {
-            resumeTitle,
-            _id,
-            lastFetched,
-            template,
-            json,
-            jobTitle,
-            resumeDescription,
-        } = resumeData;
-        const dateString = lastFetched;
-        const date = new Date(dateString);
-        const formattedDate = date.toLocaleString("en-US", {
-            weekday: "long",
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-        });
-        const keyString = resumeTitle + jobTitle + resumeDescription;
-        // determine the correct template
-        const templateToShow = getTemplateComponent({
-            json: json,
-            isPreview: true,
-            handleSectionChange: () => {},
-            template: template,
-        });
-
-        return (
-            <div className="ResumeTile" key={keyString}>
-                <div
-                    className="ResumePic"
-                    id={_id}
-                    onMouseLeave={(event) => handleResumeUnhover(event, _id)}
-                >
-                    {templateToShow}
-                    <div className="ResumeOptionsMenu">
-                        <button
-                            className="EditResume"
-                            onClick={(event) => handleEditClick(event, _id)}
-                        >
-                            Edit
-                        </button>
-                        <button
-                            className="ExportResume"
-                            onClick={(event) => handleExportClick(event, _id)}
-                        >
-                            Export
-                        </button>
-                        <button
-                            className="DeleteResume"
-                            onClick={(event) =>
-                                handleDeleteClick(event, _id, keyString)
-                            }
-                        >
-                            Delete
-                        </button>
-                    </div>
-                </div>
-                <div className="ResumeDetails">
-                    <h2>{resumeTitle}</h2>
-                    <div className="DateButtonContainer">
-                        <p>{formattedDate}</p>
-                        <button
-                            className="ResumeTileOptionsButton"
-                            onClick={(event) => handleResumeHover(event, _id)}
-                        ></button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    const createResumeTile = (
-        <div
-            className="CreateResumeTile"
-            id="CreateResumeTile"
-            onClick={createResume}
-        >
-            <div className="EmptyResumePic">
-                <div className="ResumePlusIcon"></div>
-            </div>
-        </div>
-    );
-
     const skeletonResumeTile = (
         <div className="ResumeTile" onClick={createResume}>
             <div className="ResumePic">
@@ -395,7 +269,7 @@ function ResumePage() {
                         </div>
                     </div>
                     <div className="ResumeTiles">
-                        {createResumeTile}
+                        <CreateResumeTile createResume={createResume} />
                         {skeletonResumeTile}
                         {skeletonResumeTile}
                         {skeletonResumeTile}
@@ -456,7 +330,9 @@ function ResumePage() {
                             ></input>
                         </div>
                         <div className="ResumeTiles">
-                            {showCreateResumeTile && createResumeTile}
+                            {showCreateResumeTile && (
+                                <CreateResumeTile createResume={createResume} />
+                            )}
                             {searchArr}
                         </div>
                     </div>
