@@ -10,6 +10,7 @@ import { logoutUser } from "../api/user/UserRequests";
 const Header = observer(() => {
     const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
     const [isDropdownClicked, setIsDropdownClicked] = useState(false);
+    const [shortNav, setShortNav] = useState(false);
 
     const handleDropdownClick = () => {
         setIsDropdownClicked(!isDropdownClicked);
@@ -17,6 +18,9 @@ const Header = observer(() => {
     const HAMBURGER_WIDTH = 480;
 
     useEffect(() => {
+        if (window.innerWidth < HAMBURGER_WIDTH) {
+            setShortNav(true);
+        }
         function handleResize() {
             const horMenu = document.getElementsByClassName("Header-right")[0];
             const vertMenu = document.getElementsByClassName(
