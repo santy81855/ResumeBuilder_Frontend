@@ -94,7 +94,6 @@ const Header = observer(() => {
         const element = document.getElementById("verticalMenu");
 
         if (!showVerticalMenu) {
-            console.log(element);
             if (element) {
                 element.classList.remove("slideout");
                 element.classList.add("slidein");
