@@ -237,7 +237,7 @@ const EducationInfo = ({
                     ></input>
                 </div>
             </div>
-            <div className="job-summary">
+            <div className="job-summary-container">
                 <div className="add-highlight-container">
                     <p>Highlights</p>
                     <button
@@ -362,9 +362,9 @@ const EducationInfo = ({
                             {school.area} {school.studyType},{" "}
                             {school.institution}
                         </h3>
-                        <p>
+                        <h4>
                             {school.startDate} - {school.endDate}
-                        </p>
+                        </h4>
                         {school.gpa && <p>GPA: {school.gpa}</p>}
                         {school.courses.length > 0 && <h4>Highlights:</h4>}
                         <ul>

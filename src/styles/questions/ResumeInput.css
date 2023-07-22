@@ -226,6 +226,9 @@
     justify-content: space-between;
     background-color: var(--accent-color-2);
     flex-grow: 1;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-small);
+    border-radius: var(--border-radius-small);
 }
 
 .skill-item p {
@@ -251,19 +254,24 @@
     flex-direction: column;
     width: 100%;
     gap: var(--gap-small);
-    background-color: transparent;
 }
 
 .experience-item {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: transparent;
     width: 100%;
     max-width: 750px;
     border-radius: 5px;
-    padding-inline: 0.2em;
+    padding-inline: var(--padding-inline-large);
+    padding-block-end: var(--padding-block-medium);
+    padding-block-start: var(--padding-block-large);
     border: solid 1px var(--accent-color-2-light);
+    position: relative;
+}
+
+.experience-item li {
+    margin-inline-start: var(--padding-inline-xlarge);
 }
 
 .experience-item h4,
@@ -278,11 +286,11 @@
     border: none;
     color: var(--accent-color-2);
     align-self: flex-end;
-    margin-block-start: 2px;
-}
-.experience-item button:hover {
-    background-color: white;
-    color: var(--accent-color-2);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-inline-end: var(--padding-inline-small);
+    padding-block-start: var(--padding-inline-small);
 }
 
 .input-container-horizontal {
@@ -316,6 +324,9 @@
 
 .job-summary-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-medium);
 }
 
 .job-summary {
@@ -339,6 +350,7 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     gap: var(--gap-medium);
 }
 
@@ -370,9 +382,9 @@
 .prompt-buttons button {
     background-color: var(--accent-color-2);
     border: none;
-    padding-block: 0.5em;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
     cursor: pointer;
-
     color: white;
 }
 

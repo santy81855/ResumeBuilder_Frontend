@@ -62,39 +62,41 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
                 <div className="header">
                     <h2>Resume Information</h2>
                 </div>
-                <div className="horizontal-container">
-                    <h4>Title</h4>
-                    <input
-                        type="text"
-                        value={resumeTitle}
-                        placeholder="e.g. Google Junior Developer"
-                        onChange={(event) => {
-                            setResumeTitle(event.currentTarget.value);
-                        }}
-                    ></input>
-                </div>
-                <div className="horizontal-container">
-                    <h4>Job</h4>
-                    <input
-                        type="text"
-                        value={resumeJob}
-                        placeholder="e.g. Junior Developer"
-                        onChange={(event) => {
-                            setResumeJob(event.currentTarget.value);
-                        }}
-                    ></input>
-                </div>
-                <div className="horizontal-container">
-                    <h4>Description</h4>
-                    <textarea
-                        type="text"
-                        rows={3}
-                        value={resumeDescription}
-                        placeholder="e.g. Resume specialized to highlight full stack development experience."
-                        onChange={(event) => {
-                            setResumeDescription(event.currentTarget.value);
-                        }}
-                    ></textarea>
+                <div className="info-page">
+                    <div className="horizontal-container">
+                        <h4>Title</h4>
+                        <input
+                            type="text"
+                            value={resumeTitle}
+                            placeholder="e.g. Google Junior Developer"
+                            onChange={(event) => {
+                                setResumeTitle(event.currentTarget.value);
+                            }}
+                        ></input>
+                    </div>
+                    <div className="horizontal-container">
+                        <h4>Job</h4>
+                        <input
+                            type="text"
+                            value={resumeJob}
+                            placeholder="e.g. Junior Developer"
+                            onChange={(event) => {
+                                setResumeJob(event.currentTarget.value);
+                            }}
+                        ></input>
+                    </div>
+                    <div className="horizontal-container">
+                        <h4>Description</h4>
+                        <textarea
+                            type="text"
+                            rows={3}
+                            value={resumeDescription}
+                            placeholder="e.g. Resume specialized to highlight full stack development experience."
+                            onChange={(event) => {
+                                setResumeDescription(event.currentTarget.value);
+                            }}
+                        ></textarea>
+                    </div>
                 </div>
                 <div className="button-container">
                     <button onClick={closeCreateResumeModal}>Back</button>
