@@ -111,7 +111,6 @@ function ResumePage() {
                 });
                 setResumeArr(tempArr);
                 setSearchArr(tempArr);
-                console.log(tempArr[1]);
             }
         },
         onError: (error, variables, context) => {
