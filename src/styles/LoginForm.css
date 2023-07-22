@@ -7,14 +7,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
-    height: calc(100vh - var(--header-height) - 1px);
+    height: calc(100vh - var(--header-height));
+    padding-inline: var(--padding-inline-medium);
 }
 
 .login-form {
     padding-top: var(--gap-small);
     padding-inline: var(--gap-large);
-    width: 270px;
+    width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.4);
@@ -30,9 +31,18 @@
     color: var(--accent-color-2);
 }
 
+.login-form .input-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-block-start: var(--padding-block-large);
+}
+
 .login-form label {
     display: block;
     text-align: left;
+    width: 100%;
 }
 
 .login-form label p {

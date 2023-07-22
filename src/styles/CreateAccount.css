@@ -9,13 +9,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow-y: auto;
-    height: calc(100vh - var(--header-height) - 1px);
+    height: calc(100vh - var(--header-height));
+    padding-inline: var(--padding-inline-large);
 }
 
 .create-account-form {
     box-sizing: border-box;
-    max-height: 95%;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(9px);
@@ -24,11 +23,8 @@
     border-radius: var(--border-radius-large);
     padding-inline: var(--gap-large);
     padding-top: var(--gap-small);
-    min-width: 270px;
-    width: 80%;
+    width: 100%;
     max-width: var(--max-width-small);
-    margin-inline-start: var(--gap-large);
-    margin-inline-end: var(--gap-large);
 }
 
 .create-account-form h2 {
@@ -64,18 +60,6 @@
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.create-account-form .submit-btn {
-    background-color: var(--accent-color-2);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius-small);
-    cursor: pointer;
-    height: 50px;
-    font-size: var(--font-small);
-    margin-block-start: var(--gap-medium);
-    margin-block-end: var(--gap-large);
-}
-
 .create-account-form .cancel-btn {
     background-color: #db4437;
     color: white;
@@ -98,13 +82,56 @@
     gap: var(--gap-medium);
 }
 
-.create-account-form .input-field-container label {
+.create-account-form label {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
 }
 
 .create-account-form .user-input {
     display: flex;
     flex-direction: column;
+    margin-block-start: var(--padding-block-large);
+}
+
+.create-account-form .submit-btn {
+    background-color: var(--accent-color-2);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    height: 50px;
+    font-size: var(--font-small);
+    margin-block-start: var(--gap-medium);
+    margin-block-end: var(--gap-large);
+}
+
+.navigation-container {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: var(--gap-medium);
+    margin-block-end: var(--gap-medium);
+}
+
+.navigation-container a,
+.navigation-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: var(--accent-color-2);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-size: var(--font-small);
+    font-weight: 600;
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    text-align: center;
+    min-width: 100px;
+    height: 45px;
 }
 
 @media screen and (max-width: 400px) {

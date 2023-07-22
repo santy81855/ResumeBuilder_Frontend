@@ -86,22 +86,24 @@ function LoginForm() {
             <div className="login-form">
                 <form onSubmit={handleLoginSubmit}>
                     <h2>Login</h2>
-                    <label>
-                        <p>Email:</p>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        <p>Password:</p>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </label>
+                    <div className="input-fields">
+                        <label>
+                            <p>Email:</p>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            <p>Password:</p>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </label>
+                    </div>
                     <button className="login-btn" type="submit">
                         Login
                     </button>

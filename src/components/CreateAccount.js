@@ -14,6 +14,7 @@ function CreateAccount() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [pageNumber, setPageNumber] = useState(0);
 
     const createUserQuery = useMutation({
         queryKey: ["createUser"],
@@ -71,6 +72,72 @@ function CreateAccount() {
         }
     };
 
+    const firstPage = (
+        <>
+            <div className="input-field-container">
+                <label>
+                    <p>First Name:</p>
+                    <input
+                        type="text"
+                        value={first}
+                        onChange={(e) => setFirst(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <p>Last Name:</p>
+                    <input
+                        type="text"
+                        value={last}
+                        onChange={(e) => setLast(e.target.value)}
+                    />
+                </label>
+            </div>
+            <label>
+                <p>Username:</p>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </label>
+        </>
+    );
+
+    const secondPage = (
+        <>
+            <label>
+                <p>Email:</p>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </label>
+            <label>
+                <p>Password:</p>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </label>
+            <label>
+                <p>Confirm Password:</p>
+                <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </label>
+        </>
+    );
+
+    const createAccountButton = (
+        <button className="submit-btn" type="submit">
+            Create Account
+        </button>
+    );
+
     return (
         <div className="create-account-background">
             <Helmet>
@@ -84,62 +151,37 @@ function CreateAccount() {
                 <form onSubmit={handleCreateAccount}>
                     <h2>Create an Account</h2>
                     <div className="user-input">
-                        <div className="input-field-container">
-                            <label>
-                                <p>First Name:</p>
-                                <input
-                                    type="text"
-                                    value={first}
-                                    onChange={(e) => setFirst(e.target.value)}
-                                />
-                            </label>
-                            <label>
-                                <p>Last Name:</p>
-                                <input
-                                    type="text"
-                                    value={last}
-                                    onChange={(e) => setLast(e.target.value)}
-                                />
-                            </label>
-                        </div>
-                        <label>
-                            <p>Username:</p>
-                            <input
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            <p>Email:</p>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            <p>Password:</p>
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            <p>Confirm Password:</p>
-                            <input
-                                type="password"
-                                value={confirmPassword}
-                                onChange={(e) =>
-                                    setConfirmPassword(e.target.value)
-                                }
-                            />
-                        </label>
+                        {pageNumber === 0 && firstPage}
+                        {pageNumber === 1 && secondPage}
                     </div>
-                    <button className="submit-btn" type="submit">
-                        Create Account
-                    </button>
+                    <div className="navigation-container">
+                        {pageNumber === 0 ? (
+                            <>
+                                <a href="/login">Back</a>
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setPageNumber(1);
+                                    }}
+                                    type="button"
+                                >
+                                    Next
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    onClick={() => {
+                                        setPageNumber(0);
+                                    }}
+                                    type="button"
+                                >
+                                    Back
+                                </button>
+                                <button type="sumbit">Login</button>
+                            </>
+                        )}
+                    </div>
                 </form>
             </div>
             <ToastContainer />
