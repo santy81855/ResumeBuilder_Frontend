@@ -1,0 +1,13 @@
+.footer {
+    width: 100%;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-large);
+}
+
+.footer-list {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-small);
+    justify-content: center;
+    align-items: center;
+}

@@ -13,6 +13,7 @@ import SubscriptionModal from "./SubscriptionModal";
 import CreateResumeModal from "./CreateResumeModal";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "./Footer";
 
 const AccountPage = () => {
     const navigate = useNavigate();
@@ -173,6 +174,7 @@ const AccountPage = () => {
                 resumes={resumes}
             />
             <ToastContainer />
+            <Footer />
         </main>
     );
 };

@@ -11,6 +11,9 @@ import { Navigate } from "react-router-dom";
 import Modal from "react-modal";
 import Completion from "./components/Completion";
 import AccountPage from "./components/AccountPage";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import CookiePolicy from "./components/CookiePolicy";
+import Terms from "./components/Terms";
 
 function App() {
     Modal.setAppElement("#root"); // Assuming "#root" is the ID of the root element of your application.
@@ -19,6 +22,9 @@ function App() {
             <Router>
                 <Header />
                 <Routes>
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/cookie-policy" element={<CookiePolicy />} />
+                    <Route path="/terms-and-conditions" element={<Terms />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/account" element={<AccountPage />} />
                     <Route path="/completion" element={<Completion />} />

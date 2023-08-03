@@ -16,6 +16,7 @@ import ResumeSkeleton from "./skeletons/ResumeSkeleton";
 import ResumeTile from "./ResumeTile";
 import CreateResumeTile from "./CreateResumeTile";
 import "../styles/ResumePage.css";
+import Footer from "./Footer";
 
 function ResumePage() {
     const [userName, setUserName] = useState("");
@@ -342,6 +343,7 @@ function ResumePage() {
                     createModal={createModal}
                     setCreateModal={setCreateModal}
                 />
+                <Footer />
             </div>
         );
     }

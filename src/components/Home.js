@@ -5,13 +5,12 @@ import { TypeAnimation } from "react-type-animation";
 import CreateResumeModal from "./CreateResumeModal";
 import SubscriptionModal from "./SubscriptionModal";
 import { Helmet } from "react-helmet";
-
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../api/user/UserRequests";
 import { getAllUserResumes } from "../api/resume/ResumeRequests";
 import { getSubscription } from "../api/subscription/SubscriptionRequests";
-
 import { createCheckoutSession } from "../api/stripe/StripeRequests";
+import Footer from "./Footer";
 
 function Home() {
     const [createModal, setCreateModal] = useState(false);
@@ -298,6 +297,7 @@ function Home() {
                 setCreateModal={setCreateModal}
                 resumes={resumes}
             />
+            <Footer />
         </div>
     );
 }
