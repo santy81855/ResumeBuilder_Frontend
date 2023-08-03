@@ -521,6 +521,10 @@
     max-width: 500px;
 }
 
+.modal .create-resume-info-container .header {
+    text-align: center;
+}
+
 .modal .create-resume-info-container .info-page {
     margin-block-start: var(--padding-block-large);
     display: flex;
@@ -565,6 +569,8 @@
     max-width: 250px;
     flex-grow: 1;
     border: 1px solid var(--accent-color-2);
+    padding-inline: var(--gap-small);
+    padding-block: var(--gap-small);
 }
 
 .modal .create-resume-info-container .horizontal-container textarea {
@@ -572,6 +578,39 @@
     max-width: 250px;
     flex-grow: 1;
     border: 1px solid var(--accent-color-2);
+    padding-inline: var(--gap-small);
+    padding-block: var(--gap-small);
+}
+
+.modal .subscription-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-block: var(--gap-large);
+    gap: var(--gap-medium);
+}
+
+.modal .subscription-container .subscription {
+    width: 100%;
+    border: 1px solid var(--accent-color-2);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-inline: var(--gap-large);
+    padding-block: var(--gap-large);
+    cursor: pointer;
+}
+
+.modal ul {
+    width: 100%;
+    padding-inline: var(--gap-large);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 @media (max-width: 480px) {

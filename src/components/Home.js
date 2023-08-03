@@ -1,25 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom"; // go to another page when you click "Create-Resume button on homepage"
 import { TypeAnimation } from "react-type-animation";
 import CreateResumeModal from "./CreateResumeModal";
+import SubscriptionModal from "./SubscriptionModal";
 import { Helmet } from "react-helmet";
+
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../api/user/UserRequests";
+import { getAllUserResumes } from "../api/resume/ResumeRequests";
+import { getSubscription } from "../api/subscription/SubscriptionRequests";
+
+import { createCheckoutSession } from "../api/stripe/StripeRequests";
 
 function Home() {
     const [createModal, setCreateModal] = useState(false);
+    const [subscriptionModal, setSubscriptionModal] = useState(false);
     const [enhanceText, setEnhanceText] = useState(
         "Hard working person who works well in teams and learns fast."
     );
     const navigate = useNavigate();
 
+    // useEffect to fetch user data on load
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        // if there is a user logged in get the user info
+        if (token) {
+            // get user info
+            getUserQuery.refetch();
+            resumesQuery.refetch();
+        }
+    }, []);
+
     const createResumeHomeClick = () => {
         const token = localStorage.getItem("token");
         if (token) {
-            setCreateModal(true);
+            console.log(resumesQuery.data);
+            // if the user has a subscription just proceed as normal
+            if (subscriptionQuery.data?.length === 1) {
+                setCreateModal(true);
+            }
+            // if the user has no subscription
+            else {
+                // if they haven't created their free resume yet
+                if (resumesQuery.data?.length === 0) {
+                    setCreateModal(true);
+                } else if (resumesQuery.data?.length > 0) {
+                    // they have already created a free resume
+                    console.log("show subscription only modal");
+                } else {
+                    setSubscriptionModal(true);
+                }
+            }
         } else {
             navigate("/login");
         }
     };
+
+    const getUserQuery = useQuery({
+        queryKey: ["getUserByToken"],
+        queryFn: getUser,
+        onSuccess: (data, variables, context) => {},
+        onError: (error, variables, context) => {},
+        enabled: false,
+    });
+
+    const subscriptionQuery = useQuery({
+        queryKey: ["getSubscription"],
+        queryFn: getSubscription,
+        onSuccess: (data, variables, context) => {},
+        onError: (error, variables, context) => {},
+    });
+
+    const resumesQuery = useQuery({
+        queryKey: ["getAllUserResumes"],
+        queryFn: getAllUserResumes,
+        onSuccess: (data, variables, context) => {},
+        onError: (error, variables, context) => {},
+    });
 
     return (
         <div className="landing-page">
@@ -228,6 +286,13 @@ function Home() {
             </div>
             <CreateResumeModal
                 createModal={createModal}
+                setCreateModal={setCreateModal}
+            />
+            <SubscriptionModal
+                subscriptionModal={subscriptionModal}
+                setSubscriptionModal={setSubscriptionModal}
+                user={getUserQuery.data?.user}
+                createCheckoutSession={createCheckoutSession}
                 setCreateModal={setCreateModal}
             />
         </div>

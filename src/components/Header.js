@@ -68,9 +68,14 @@ const Header = observer(() => {
                 Home
             </a>
             {isUserLoggedIn ? (
-                <a className="Nav-link" href="/u/resumes">
-                    Dashboard
-                </a>
+                <>
+                    <a className="Nav-link" href="/u/resumes">
+                        Dashboard
+                    </a>
+                    <a className="Nav-link" href="/account">
+                        Account
+                    </a>
+                </>
             ) : (
                 <a className="Nav-link" href="/login">
                     Login
@@ -106,7 +111,10 @@ const Header = observer(() => {
             <div className="menu-options">
                 <a href="/">Home</a>
                 {localStorage.getItem("token") ? (
-                    <a href="/u/resumes">Dashboard</a>
+                    <>
+                        <a href="/u/resumes">Dashboard</a>
+                        <a href="/account">Account</a>
+                    </>
                 ) : (
                     <a href="/login">Login</a>
                 )}

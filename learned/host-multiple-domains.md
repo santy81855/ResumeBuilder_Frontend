@@ -103,5 +103,5 @@ npm install pm2 -g
     -   For Next application:
 
     ```
-    pm2 start npm --name "any-name-you-want" -- start
+    PORT=your-port-number pm2 start npm --name "any-name-you-want" -- start
     ```

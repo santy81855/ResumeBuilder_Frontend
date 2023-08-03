@@ -9,6 +9,8 @@ import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
 import { Navigate } from "react-router-dom";
 import Modal from "react-modal";
+import Completion from "./components/Completion";
+import AccountPage from "./components/AccountPage";
 
 function App() {
     Modal.setAppElement("#root"); // Assuming "#root" is the ID of the root element of your application.
@@ -17,7 +19,9 @@ function App() {
             <Router>
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Home />} />{" "}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/account" element={<AccountPage />} />
+                    <Route path="/completion" element={<Completion />} />
                     {/* add the new route for Home */}
                     <Route
                         path="/login"
