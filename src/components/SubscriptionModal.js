@@ -77,7 +77,6 @@ const SubscriptionModal = ({
                         <ul>
                             <div className="li-container">
                                 <li>Create 1 Resume</li>
-                                <li>Use the standard resume template</li>
                             </div>
                         </ul>
                     </div>
