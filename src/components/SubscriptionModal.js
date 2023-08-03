@@ -10,12 +10,9 @@ const SubscriptionModal = ({
     user,
     createCheckoutSession,
     setCreateModal,
+    resumes,
 }) => {
     const navigate = useNavigate();
-    // variables needed for creating new resume
-    const [resumeTitle, setResumeTitle] = useState("");
-    const [resumeJob, setResumeJob] = useState("");
-    const [resumeDescription, setResumeDescription] = useState("");
     const [selection, setSelection] = useState("pro");
     const freeRef = useRef(null);
     const proRef = useRef(null);
@@ -41,9 +38,14 @@ const SubscriptionModal = ({
 
     const nextClicked = () => {
         if (selection === "free") {
-            // open the create resume modal and close this modal
-            setCreateModal(true);
-            setSubscriptionModal(false);
+            // if they already have their 1 free resume take them to the dashboard
+            if (resumes.length >= 1) {
+                navigate("/u/resumes");
+            } else {
+                // open the create resume modal and close this modal
+                setCreateModal(true);
+                setSubscriptionModal(false);
+            }
         } else {
             createCheckoutSession(user);
         }

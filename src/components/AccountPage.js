@@ -3,18 +3,27 @@ import "../styles/AccountPage.css";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../api/user/UserRequests";
 import { getSubscription } from "../api/subscription/SubscriptionRequests";
+import { getAllUserResumes } from "../api/resume/ResumeRequests";
 import {
     cancelSubscription,
     createCheckoutSession,
+    renewSubscription,
 } from "../api/stripe/StripeRequests";
 import SubscriptionModal from "./SubscriptionModal";
+import CreateResumeModal from "./CreateResumeModal";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const AccountPage = () => {
+    const navigate = useNavigate();
     const [date, setDate] = useState(null);
+    const [isCancelled, setIsCancelled] = useState(null); // ["active", "canceled"
     const [cancel, setCancel] = useState(null);
     const [subscriptionModal, setSubscriptionModal] = useState(false);
+    const [subscription, setSubscription] = useState(null);
+    const [createModal, setCreateModal] = useState(false);
+    const [resumes, setResumes] = useState(null);
     useEffect(() => {
-        console.log(subscriptionQuery.data);
         getUserQuery.refetch();
         subscriptionQuery.refetch();
     }, [cancel]);
@@ -30,13 +39,65 @@ const AccountPage = () => {
         queryKey: ["getSubscription"],
         queryFn: getSubscription,
         onSuccess: (data, variables, context) => {
-            if (data.length > 0)
+            if (data.length > 0) {
+                setSubscription(data[0]);
+                setIsCancelled(data[0].subscription.cancel_at_period_end);
                 setDate(
                     new Date(data[0].subscription.current_period_end * 1000)
                 );
+            }
         },
         onError: (error, variables, context) => {},
     });
+
+    const resumesQuery = useQuery({
+        queryKey: ["getAllUserResumes"],
+        queryFn: getAllUserResumes,
+        onSuccess: (data, variables, context) => {
+            setResumes(data);
+        },
+        onError: (error, variables, context) => {},
+    });
+
+    const cancelSubscriptionHandler = async () => {
+        await cancelSubscription(getUserQuery.data?.user);
+        toast.success(
+            "Subscription set to be cancelled at the end of the billing period.",
+            {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }
+        );
+        setCancel(true);
+    };
+
+    const renewSubscriptionHandler = async () => {
+        await renewSubscription(getUserQuery.data?.user);
+        toast.success(
+            "Subscription will be renewed at the end of the current billing cycle.",
+            {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }
+        );
+        setCancel(false);
+    };
+
+    const handleUpgradeButtonClick = () => {
+        setSubscriptionModal(true);
+    };
 
     return (
         <main className="main">
@@ -45,14 +106,9 @@ const AccountPage = () => {
                     <h2>Subscription Details</h2>
                     <div>
                         <h4>Subscription Type: </h4>
-                        <p>
-                            {subscriptionQuery.data?.length < 1
-                                ? "Free"
-                                : "Pro"}
-                        </p>
+                        <p>{subscription === null ? "Free" : "Pro"}</p>
                     </div>
-
-                    {subscriptionQuery.data?.length === 1 && date && (
+                    {!!subscription && isCancelled === false && date && (
                         <>
                             <div>
                                 <h4>Subscription Renews</h4>
@@ -67,33 +123,56 @@ const AccountPage = () => {
                             </div>
                             <button
                                 className="cancel-button"
-                                onClick={() => {
-                                    cancelSubscription(getUserQuery.data?.user);
-                                    setCancel(true);
-                                }}
+                                onClick={cancelSubscriptionHandler}
                             >
                                 Cancel Subscription
                             </button>
                         </>
                     )}
-                    {subscriptionQuery.data?.length === 0 && (
+                    {!!subscription && isCancelled === true && date && (
+                        <>
+                            <div>
+                                <h4>Subscription ends</h4>
+                                <p>
+                                    {date.toLocaleString("en-US", {
+                                        weekday: "long",
+                                        month: "short",
+                                        day: "2-digit",
+                                        year: "numeric",
+                                    })}
+                                </p>
+                            </div>
+                            <button
+                                className="renew-button"
+                                onClick={renewSubscriptionHandler}
+                            >
+                                Renew Subscription
+                            </button>
+                        </>
+                    )}
+                    {subscription === null && (
                         <button
                             className="upgrade-button"
-                            onClick={() => {
-                                setSubscriptionModal(true);
-                            }}
+                            onClick={handleUpgradeButtonClick}
                         >
                             Upgrade to pro
                         </button>
                     )}
                 </div>
             </div>
+            <CreateResumeModal
+                createModal={createModal}
+                setCreateModal={setCreateModal}
+            />
             <SubscriptionModal
                 subscriptionModal={subscriptionModal}
                 setSubscriptionModal={setSubscriptionModal}
                 user={getUserQuery.data?.user}
                 createCheckoutSession={createCheckoutSession}
+                setCreateModal={setCreateModal}
+                resumes={resumes}
             />
+            <ToastContainer />
         </main>
     );
 };

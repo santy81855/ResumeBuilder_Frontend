@@ -15,6 +15,7 @@ import { createCheckoutSession } from "../api/stripe/StripeRequests";
 
 function Home() {
     const [createModal, setCreateModal] = useState(false);
+    const [resumes, setResumes] = useState(null);
     const [subscriptionModal, setSubscriptionModal] = useState(false);
     const [enhanceText, setEnhanceText] = useState(
         "Hard working person who works well in teams and learns fast."
@@ -35,7 +36,6 @@ function Home() {
     const createResumeHomeClick = () => {
         const token = localStorage.getItem("token");
         if (token) {
-            console.log(resumesQuery.data);
             // if the user has a subscription just proceed as normal
             if (subscriptionQuery.data?.length === 1) {
                 setCreateModal(true);
@@ -46,8 +46,8 @@ function Home() {
                 if (resumesQuery.data?.length === 0) {
                     setCreateModal(true);
                 } else if (resumesQuery.data?.length > 0) {
-                    // they have already created a free resume
-                    console.log("show subscription only modal");
+                    // they have already created a free resume show the subscription dialogue
+                    setSubscriptionModal(true);
                 } else {
                     setSubscriptionModal(true);
                 }
@@ -75,7 +75,9 @@ function Home() {
     const resumesQuery = useQuery({
         queryKey: ["getAllUserResumes"],
         queryFn: getAllUserResumes,
-        onSuccess: (data, variables, context) => {},
+        onSuccess: (data, variables, context) => {
+            setResumes(data);
+        },
         onError: (error, variables, context) => {},
     });
 
@@ -294,6 +296,7 @@ function Home() {
                 user={getUserQuery.data?.user}
                 createCheckoutSession={createCheckoutSession}
                 setCreateModal={setCreateModal}
+                resumes={resumes}
             />
         </div>
     );

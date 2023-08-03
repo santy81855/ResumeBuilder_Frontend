@@ -42,6 +42,17 @@
     border-radius: 1.2rem;
 }
 
+.account .renew-button {
+    margin-top: var(--padding-block-large);
+    border: 1px solid var(--accent-color-2);
+    outline: none;
+    background-color: var(--accent-color-2);
+    color: white;
+    padding: var(--padding-block-medium) var(--padding-inline-large);
+    cursor: pointer;
+    border-radius: 1.2rem;
+}
+
 .account .upgrade-button {
     margin-top: var(--padding-block-large);
     border: 1px solid var(--accent-color-2);

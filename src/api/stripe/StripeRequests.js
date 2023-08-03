@@ -16,7 +16,6 @@ const createCheckoutSession = (user) => {
             }
         )
         .then((res) => {
-            console.log(res.data.url);
             window.location = res.data.url;
         })
         .catch((e) => {
@@ -37,12 +36,29 @@ const cancelSubscription = (user) => {
                 },
             }
         )
-        .then((res) => {
-            console.log(res.data);
-        })
+        .then((res) => {})
         .catch((e) => {
             console.error(e.error);
         });
 };
 
-export { createCheckoutSession, cancelSubscription };
+const renewSubscription = (user) => {
+    return axios
+        .post(
+            URL + "/stripe/renew-subscription",
+            {
+                user: user,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+        .then((res) => {})
+        .catch((e) => {
+            console.error(e.error);
+        });
+};
+
+export { createCheckoutSession, cancelSubscription, renewSubscription };
