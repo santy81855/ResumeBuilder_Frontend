@@ -229,8 +229,11 @@
 
 .section-selection-container {
     width: 100%;
+    padding-inline: 1em;
+    padding-block: 0.5em;
     display: grid;
     column-gap: 0.5em;
+    row-gap: 0.5em;
     grid-template-columns: repeat(3, 1fr);
     border: 1px solid var(--accent-color-2-xlight);
     box-shadow: 0px 5px 15px var(--accent-color-2-light);
@@ -457,6 +460,7 @@
 
     background-color: transparent;
     backdrop-filter: blur(10px);
+    z-index: 10;
 }
 
 /*

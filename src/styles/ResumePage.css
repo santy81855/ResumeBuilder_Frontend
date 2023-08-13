@@ -43,6 +43,32 @@
     padding-inline: var(--padding-inline-large);
 }
 
+.displayOptionsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-large);
+    margin-block-start: -10rem;
+    margin-block-end: 1rem;
+    width: 100%;
+}
+
+.displayOptionsContainer .resumeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.5s ease;
+    background-color: rgba(179, 179, 179, 0.4);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px 0 rgba(62, 62, 62, 0.4);
+    border-radius: var(--border-radius-large);
+    font-weight: 600;
+}
+
 .PageContainer .Section {
     box-sizing: border-box;
     max-width: var(--max-width);
@@ -59,7 +85,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-block-start: -10rem;
     margin-block-end: var(--gap-x2large);
     padding-block-start: var(--gap-large);
     padding-block-end: var(--gap-xlarge);

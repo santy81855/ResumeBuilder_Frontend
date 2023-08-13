@@ -1,0 +1,27 @@
+{
+    "templateSections": {
+        "minimal": {
+            "Bar": true,
+            "Address": true,
+            "Address2": true
+        }
+    },
+    "template": "",
+    "companyName": "Company Name",
+    "position": "Position Title",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor risus quis orci cursus, quis vestibulum turpis hendrerit. Fusce at neque non justo scelerisque iaculis in id ligula. Quisque nec libero eu libero iaculis malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In a dui non ligula fermentum feugiat. Sed mattis elit ac ante facilisis, eget blandit felis iaculis. Integer volutpat lacinia ligula, vel tempus sapien fermentum id. Nullam varius magna eu metus suscipit, vitae aliquam augue dignissim. Donec id augue a justo mattis blandit. Duis porttitor erat a odio pharetra eleifend. Ut id tortor tellus. Nulla facilisi. Suspendisse id magna eget tortor tristique malesuada.\n\nNam gravida neque sed nisl sollicitudin, vitae dictum ex fringilla. Proin a libero a erat tincidunt posuere. In condimentum sollicitudin tortor non hendrerit. Nullam blandit ex non venenatis. Cras sed enim eget est rhoncus tristique vel vel libero. Quisque quis facilisis nunc. Praesent at varius quam. Integer euismod non metus id congue. Phasellus quis fringilla sapien. Ut at lobortis mauris, id dictum justo. In hac habitasse platea dictumst. Maecenas vestibulum arcu a varius venenatis. Nullam vulputate lacinia nulla, id tristique lorem commodo nec.\n\nPhasellus sed ex neque. In sed libero eget justo pellentesque cursus a non felis. Integer sed leo enim. Integer at arcu vitae nisl iaculis facilisis. Aenean vel tellus nec elit iaculis viverra vel nec arcu. In non metus nec tortor viverra semper. Praesent feugiat ex sit amet quam semper dictum. Nulla facilisi. Integer vel elit sed ante consequat consectetur. Ut dapibus in risus nec venenatis. Vivamus dignissim vehicula urna, eget fermentum arcu cursus a. Sed finibus dolor vel mauris vestibulum malesuada. Sed dignissim, mauris nec accumsan ultrices, sem purus pellentesque tellus, eget volutpat dolor urna id.",
+    "date": "10-18-2020",
+    "to": "Recipient name",
+    "from": "Your name",
+    "email": "Your-Name@example.com",
+    "phone": "123-456-7890",
+    "website": "www.example.com",
+    "toAddressTitle": "Address Title",
+    "toAddressLine1": "123 Main St",
+    "toAddressLine2": "P.O. Box 1234",
+    "toAddressLine3": "City, State, Zip Code",
+    "opener": "Dear",
+    "openerName": "Sir or Madam",
+    "closer": "Sincerely",
+    "closerName": "Your Name"
+}

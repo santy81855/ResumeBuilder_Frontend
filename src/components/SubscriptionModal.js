@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,8 +11,11 @@ const SubscriptionModal = ({
     createCheckoutSession,
     setCreateModal,
     resumes,
+    letters,
 }) => {
     const navigate = useNavigate();
+    // Inside your component
+    const location = useLocation();
     const [selection, setSelection] = useState("pro");
     const freeRef = useRef(null);
     const proRef = useRef(null);
@@ -39,8 +42,13 @@ const SubscriptionModal = ({
     const nextClicked = () => {
         if (selection === "free") {
             // if they already have their 1 free resume take them to the dashboard
-            if (resumes.length >= 1) {
-                navigate("/u/resumes");
+            if (resumes.length >= 1 || letters.length >= 1) {
+                if (location.pathname === "/u/resumes") {
+                    window.location.reload();
+                } else {
+                    navigate("/u/resumes");
+                }
+                console.log(location.pathname);
             } else {
                 // open the create resume modal and close this modal
                 setCreateModal(true);
@@ -77,6 +85,7 @@ const SubscriptionModal = ({
                         <ul>
                             <div className="li-container">
                                 <li>Create 1 Resume</li>
+                                <li>Create 1 Cover Letter</li>
                             </div>
                         </ul>
                     </div>
@@ -95,7 +104,9 @@ const SubscriptionModal = ({
                         <ul>
                             <div className="li-container">
                                 <li>Create unlimited resumes</li>
+                                <li>Create unlimited cover letters</li>
                                 <li>Unlock every resume template</li>
+                                <li>Unlock every cover letter template</li>
                                 <li>
                                     Unlimited help from artificial intelligence
                                 </li>

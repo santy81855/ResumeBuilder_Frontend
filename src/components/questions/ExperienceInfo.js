@@ -5,6 +5,8 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { sendChat } from "../../api/ai/AIRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const ExperienceInfo = ({
     resumeData,
@@ -16,9 +18,10 @@ const ExperienceInfo = ({
 }) => {
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
-    const [start, setStart] = useState("");
-    const [end, setEnd] = useState("");
+    const [start, setStart] = useState(new Date());
+    const [end, setEnd] = useState(new Date());
     const [summary, setSummary] = useState("");
+    const [isCurrent, setIsCurrent] = useState(false);
 
     const [experienceList, setExperienceList] = useState(resumeData.work);
 
@@ -267,9 +270,9 @@ const ExperienceInfo = ({
         // position
         var pos = positionRef.current.value;
         // start date
-        var st = startRef.current.value;
+        var st = start;
         // end date
-        var en = endRef.current.value;
+        var en = end;
         // job summary
         var sum = summaryRef.current.value;
         // job highlights
@@ -341,9 +344,29 @@ const ExperienceInfo = ({
         if (numHighlights > 0) setNumHighlights(numHighlights - 1);
     };
 
+    const editJob = (event, job) => {
+        // set the input fields to the job's values
+        setCompany(job.company);
+        setPosition(job.position);
+        setStart(job.startDate);
+        setEnd(job.endDate);
+        setSummary(job.summary);
+        setNumHighlights(job.highlights.length);
+        console.log(job.highlights);
+        job.highlights.forEach((highlight, index) => {
+            console.log(highlight);
+            setHighlightArray[index](highlight);
+        });
+        // remove the job from the work array
+        removeJob(event);
+        // scroll up to the top of the modal
+        const header = document.getElementById("header");
+        header.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
         <div className="question-container">
-            <div className="header">
+            <div id="header" className="header">
                 <h2>Employment History</h2>
                 <p>Enter your previous work experience in this section.</p>
             </div>
@@ -376,29 +399,23 @@ const ExperienceInfo = ({
                 </div>
                 <div className="input-item">
                     <p>Start Date</p>
-                    <input
-                        id="start"
-                        ref={startRef}
+                    <DatePicker
                         className="short-input"
-                        type="text"
-                        onChange={(event) => {
-                            setStart(event.target.value);
-                        }}
-                        value={start}
-                    ></input>
+                        ref={startRef}
+                        selected={start}
+                        onChange={(date) => setStart(date)}
+                    />
                 </div>
                 <div className="input-item">
-                    <p>End Date</p>
-                    <input
-                        id="end"
-                        ref={endRef}
+                    <div className="end-date-container">
+                        <p>End Date</p>
+                    </div>
+                    <DatePicker
                         className="short-input"
-                        type="text"
-                        onChange={(event) => {
-                            setEnd(event.target.value);
-                        }}
-                        value={end}
-                    ></input>
+                        ref={endRef}
+                        selected={end}
+                        onChange={(date) => setEnd(date)}
+                    />
                 </div>
             </div>
             <div className="job-summary-container">
@@ -436,19 +453,25 @@ const ExperienceInfo = ({
                     <p>Highlights</p>
                     <div className="highlight-button-container">
                         <button
-                            className="plus-button"
-                            onClick={addHighlightInput}
-                        >
-                            +
-                        </button>
-                        <button
                             className="minus-button"
                             onClick={removeHighlightInput}
                         >
                             -
                         </button>
+                        <p>{numHighlights}</p>
+                        <button
+                            className="plus-button"
+                            onClick={addHighlightInput}
+                        >
+                            +
+                        </button>
                     </div>
                 </div>
+                <p>
+                    You can change the number of highlights by adding or
+                    removing them with the buttons above. If you don't wish to
+                    add any highlights, leave the fields blank.
+                </p>
                 <div className="highlight-text-container">
                     {numHighlights >= 1 && (
                         <div>
@@ -773,30 +796,60 @@ const ExperienceInfo = ({
                 </button>
             </div>
             <div className="experience-history-container">
-                {experienceList.map((job, index) => (
-                    <div key={index} className="experience-item">
-                        <button
-                            className="delete-experience-item-button"
-                            key={index}
-                            id={index}
-                            onClick={removeJob}
-                        >
-                            Delete
-                        </button>
-                        <h3>
-                            {job.position}, {job.company}
-                        </h3>
-                        <p>
-                            {job.startDate} - {job.endDate}
-                        </p>
-                        <p>{job.summary}</p>
-                        <ul>
-                            {job.highlights.map((highlight, index) => (
-                                <li>{highlight}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {experienceList.map((job, index) => {
+                    const formattedDateStart = job.startDate.toLocaleString(
+                        "en-US",
+                        {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                        }
+                    );
+
+                    const formattedDateEnd = job.endDate.toLocaleString(
+                        "en-US",
+                        {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                        }
+                    );
+
+                    return (
+                        <div key={index} className="experience-item">
+                            <button
+                                className="delete-experience-item-button"
+                                key={index}
+                                id={index}
+                                onClick={removeJob}
+                            >
+                                Delete
+                            </button>
+                            <button
+                                className="edit-experience-item-button"
+                                key={index}
+                                id={index}
+                                onClick={(event) => {
+                                    editJob(event, job);
+                                }}
+                            >
+                                Edit
+                            </button>
+                            <h3>
+                                {job.position}, {job.company}
+                            </h3>
+                            <p>
+                                {formattedDateStart} - {formattedDateEnd}
+                            </p>
+                            <p>{job.summary}</p>
+                            <ul>
+                                {job.highlights.map((highlight, index) => (
+                                    <li>{highlight}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    );
+                })}
             </div>
 
             <div className="question-container-button-container">

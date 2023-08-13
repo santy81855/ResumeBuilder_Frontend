@@ -111,7 +111,7 @@
 
 .short-input {
     padding-block: var(--gap-small);
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .long-input {
@@ -280,6 +280,19 @@
     margin: 0;
 }
 
+.edit-experience-item-button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color-2);
+    align-self: flex-end;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-inline-start: var(--padding-inline-small);
+    padding-block-start: var(--padding-inline-small);
+}
+
 .delete-experience-item-button {
     cursor: pointer;
     background-color: transparent;
@@ -357,6 +370,8 @@
 .add-highlight-container .highlight-button-container {
     display: flex;
     gap: var(--gap-small);
+    justify-content: center;
+    align-items: center;
 }
 
 .add-highlight-container button {
@@ -401,6 +416,19 @@
     gap: 0.5em;
 }
 
+.current-button {
+    background-color: transparent;
+    border: 1px solid var(--accent-color-2);
+    width: 20px;
+    height: 20px;
+}
+
+.end-date-container {
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+}
+
 /*media query for when screen gets smaller than 545 px*/
 @media screen and (max-width: 680px) {
     .question-container .input-item {
@@ -413,6 +441,7 @@
 
     .short-input {
         flex-grow: 1;
+        width: 100%;
         padding-block: var(--gap-medium);
     }
 }

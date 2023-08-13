@@ -7,6 +7,7 @@ import CreateAccount from "./components/CreateAccount";
 import Home from "./components/Home"; // import the Home component
 import ResumePage from "./components/ResumePage";
 import CreateResume from "./components/CreateResume";
+import CreateLetter from "./components/CreateLetter";
 import { Navigate } from "react-router-dom";
 import Modal from "react-modal";
 import Completion from "./components/Completion";
@@ -70,10 +71,30 @@ function App() {
                         }
                     />
                     <Route
+                        path="/u/create-cover-letter/:routeLetterTitle/:routeLetterJob/:routeLetterDescription"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <CreateLetter />
+                            ) : (
+                                <Navigate to="/login" replace={true} />
+                            )
+                        }
+                    />
+                    <Route
                         path="/u/edit-resume/"
                         element={
                             localStorage.getItem("token") ? (
                                 <CreateResume />
+                            ) : (
+                                <Navigate to="/login" replace={true} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/u/edit-cover-letter/"
+                        element={
+                            localStorage.getItem("token") ? (
+                                <CreateLetter />
                             ) : (
                                 <Navigate to="/login" replace={true} />
                             )

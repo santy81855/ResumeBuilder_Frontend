@@ -128,18 +128,6 @@
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
             ]
-        },
-        {
-            "company": "John & Doe, Inc.",
-            "position": "Mid-level Software Engineer",
-            "website": "https://JnD.com",
-            "startDate": "2018-01-01",
-            "endDate": "2020-12-31",
-            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo condimentum magna, id placerat velit iaculis nec. Morbi aliquam luctus mi, at dictum ligula congue ut. Fusce mattis tellus id magna semper efficitur. Nullam consectetur venenatis consectetur. Cras pretium posuere urna, et dictum quam bibendum in.",
-            "highlights": [
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
-            ]
         }
     ],
     "education": [

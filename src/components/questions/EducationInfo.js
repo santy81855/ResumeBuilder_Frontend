@@ -3,6 +3,8 @@ import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const EducationInfo = ({
     resumeData,
@@ -15,8 +17,8 @@ const EducationInfo = ({
     const [degree, setDegree] = useState("");
     const [degreeArea, setDegreeArea] = useState("");
     const [gpa, setGpa] = useState("");
-    const [start, setStart] = useState("");
-    const [end, setEnd] = useState("");
+    const [start, setStart] = useState(new Date());
+    const [end, setEnd] = useState(new Date());
     const [summary, setSummary] = useState("");
 
     const [experienceList, setExperienceList] = useState(resumeData.education);
@@ -38,6 +40,25 @@ const EducationInfo = ({
     const [highlight6, setHighlight6] = useState("");
     const [highlight7, setHighlight7] = useState("");
 
+    const highlightArray = [
+        highlight1,
+        highlight2,
+        highlight3,
+        highlight4,
+        highlight5,
+        highlight6,
+        highlight7,
+    ];
+    const setHighlightArray = [
+        setHighlight1,
+        setHighlight2,
+        setHighlight3,
+        setHighlight4,
+        setHighlight5,
+        setHighlight6,
+        setHighlight7,
+    ];
+
     const addSchool = () => {
         // get all necessary variables
         // institution
@@ -49,31 +70,15 @@ const EducationInfo = ({
         // gpa
         var gp = gpaRef.current.value;
         // start date
-        var st = startRef.current.value;
+        var st = start;
         // end date
-        var en = endRef.current.value;
+        var en = end;
         // school highlights
         var hl = [];
-        if (numHighlights >= 1) {
-            hl.push(highlight1);
-        }
-        if (numHighlights >= 2) {
-            hl.push(highlight2);
-        }
-        if (numHighlights >= 3) {
-            hl.push(highlight3);
-        }
-        if (numHighlights >= 4) {
-            hl.push(highlight4);
-        }
-        if (numHighlights >= 5) {
-            hl.push(highlight5);
-        }
-        if (numHighlights >= 6) {
-            hl.push(highlight6);
-        }
-        if (numHighlights >= 7) {
-            hl.push(highlight7);
+        for (var i = 0; i < numHighlights; i++) {
+            if (highlightArray[i] !== "") {
+                hl.push(highlightArray[i]);
+            }
         }
         // ensure all the necessary values are filled
         if (ins === "" || deg === "" || st === "" || en === "") {
@@ -145,9 +150,30 @@ const EducationInfo = ({
         if (numHighlights > 0) setNumHighlights(numHighlights - 1);
     };
 
+    const editJob = (event, school) => {
+        console.log(school);
+        setInstitution(school.institution);
+        setDegree(school.studyType);
+        setDegreeArea(school.area);
+        setStart(school.startDate);
+        setEnd(school.endDate);
+        setGpa(school.gpa);
+        setNumHighlights(school.courses.length);
+        school.courses.forEach((highlight, index) => {
+            console.log(highlight);
+            setHighlightArray[index](highlight);
+        });
+
+        // remove the job from the work array
+        removeJob(event);
+        // scroll up to the top of the modal
+        const header = document.getElementById("header");
+        header.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
         <div className="question-container">
-            <div className="header">
+            <div id="header" className="header">
                 <h2>Education</h2>
                 <p>Enter your education history in this section.</p>
             </div>
@@ -195,7 +221,7 @@ const EducationInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>GPA</p>
+                    <p>GPA (optional)</p>
                     <input
                         id="gpa"
                         ref={gpaRef}
@@ -210,31 +236,21 @@ const EducationInfo = ({
                 </div>
                 <div className="input-item">
                     <p>Start Date</p>
-                    <input
-                        id="start"
-                        ref={startRef}
-                        placeholder="e.g. 10-18-2014"
+                    <DatePicker
                         className="short-input"
-                        type="text"
-                        onChange={(event) => {
-                            setStart(event.target.value);
-                        }}
-                        value={start}
-                    ></input>
+                        ref={startRef}
+                        selected={start}
+                        onChange={(date) => setStart(date)}
+                    />
                 </div>
                 <div className="input-item">
                     <p>End Date</p>
-                    <input
-                        id="end"
-                        ref={endRef}
-                        placeholder="e.g. 10-18-2016"
+                    <DatePicker
                         className="short-input"
-                        type="text"
-                        onChange={(event) => {
-                            setEnd(event.target.value);
-                        }}
-                        value={end}
-                    ></input>
+                        ref={endRef}
+                        selected={end}
+                        onChange={(date) => setEnd(date)}
+                    />
                 </div>
             </div>
             <div className="job-summary-container">
@@ -246,10 +262,16 @@ const EducationInfo = ({
                     >
                         -
                     </button>
+                    <p>{numHighlights}</p>
                     <button className="plus-button" onClick={addHighlightInput}>
                         +
                     </button>
                 </div>
+                <p>
+                    You can change the number of highlights by adding or
+                    removing them with the buttons above. If you don't wish to
+                    add any highlights, leave the fields blank.
+                </p>
                 {numHighlights >= 1 && (
                     <textarea
                         id={0}
@@ -348,32 +370,61 @@ const EducationInfo = ({
                 </button>
             </div>
             <div className="experience-history-container">
-                {experienceList.map((school, index) => (
-                    <div key={index} className="experience-item">
-                        <button
-                            className="delete-experience-item-button"
-                            id={index}
-                            key={index}
-                            onClick={removeJob}
-                        >
-                            Delete
-                        </button>
-                        <h3>
-                            {school.area} {school.studyType},{" "}
-                            {school.institution}
-                        </h3>
-                        <h4>
-                            {school.startDate} - {school.endDate}
-                        </h4>
-                        {school.gpa && <p>GPA: {school.gpa}</p>}
-                        {school.courses.length > 0 && <h4>Highlights:</h4>}
-                        <ul>
-                            {school.courses.map((highlight, index) => (
-                                <li key={index}>{highlight}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {experienceList.map((school, index) => {
+                    const formattedDateStart = school.startDate?.toLocaleString(
+                        "en-US",
+                        {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                        }
+                    );
+
+                    const formattedDateEnd = school.endDate?.toLocaleString(
+                        "en-US",
+                        {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                        }
+                    );
+                    return (
+                        <div key={index} className="experience-item">
+                            <button
+                                className="delete-experience-item-button"
+                                id={index}
+                                key={index}
+                                onClick={removeJob}
+                            >
+                                Delete
+                            </button>
+                            <button
+                                className="edit-experience-item-button"
+                                key={index}
+                                id={index}
+                                onClick={(event) => {
+                                    editJob(event, school);
+                                }}
+                            >
+                                Edit
+                            </button>
+                            <h3>
+                                {school.area} {school.studyType},{" "}
+                                {school.institution}
+                            </h3>
+                            <h4>
+                                {formattedDateStart} - {formattedDateEnd}
+                            </h4>
+                            {school.gpa && <p>GPA: {school.gpa}</p>}
+                            {school.courses.length > 0 && <h4>Highlights:</h4>}
+                            <ul>
+                                {school.courses.map((highlight, index) => (
+                                    <li key={index}>{highlight}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    );
+                })}
             </div>
 
             <div className="question-container-button-container">
