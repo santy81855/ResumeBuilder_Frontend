@@ -15,8 +15,18 @@ const Content = ({
     jobTitle,
 }) => {
     const [content, setSummary] = useState(letterData.content);
+    const [jobDescription, setJobDescription] = useState(
+        letterData.jobDescription
+    );
     const contentRef = useRef();
+    const descriptionRef = useRef();
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [isEnhancing, setIsEnhancing] = useState(false);
 
+    const [showDescription, setShowDescription] = useState(false);
+
+    const jobDescriptionInstructions =
+        " And also use the following job description to help you make the cover letter: ";
     const instructions =
         " And instead of using any page breaks in your response, please use two new line characters to signify a new paragraph. Also do not include any greetings or salutations or complimentary closing statements, so don't include anything like Dear Hiring Manager or Sincerely, or anything like that. Just write the body of the cover letter.";
     const enhancePrompt =
@@ -36,7 +46,8 @@ const Content = ({
         {
             onSuccess: (data) => {
                 setSummary(data.result.content);
-
+                setIsGenerating(false);
+                setIsEnhancing(false);
                 setLetterData({
                     ...letterData,
                     content: data.result.content,
@@ -83,14 +94,52 @@ const Content = ({
             });
             return;
         }
-        var userPrompt = enhancePrompt + content + instructions;
+        if (showDescription) {
+            var userPrompt =
+                enhancePrompt +
+                jobDescription +
+                instructions +
+                jobDescriptionInstructions +
+                jobDescription;
+        } else {
+            var userPrompt = enhancePrompt + content + instructions;
+        }
+        setIsEnhancing(true);
         fetchAIResponse(userPrompt);
     };
 
     const generate = () => {
         setSummary("");
-        var userPrompt = generatePrompt + instructions;
+        if (showDescription) {
+            var userPrompt =
+                generatePrompt +
+                instructions +
+                jobDescriptionInstructions +
+                jobDescription;
+        } else {
+            var userPrompt = generatePrompt + instructions;
+        }
+        setIsGenerating(true);
         fetchAIResponse(userPrompt);
+    };
+
+    const handleChange = (event) => {
+        switch (event.target.id) {
+            case "description":
+                var value = descriptionRef.current.value;
+                setJobDescription(value);
+                setLetterData({
+                    ...letterData,
+                    jobDescription: value,
+                });
+                return;
+            default:
+                return;
+        }
+    };
+
+    const clickToggle = (event) => {
+        setShowDescription(!showDescription);
     };
 
     return (
@@ -103,10 +152,36 @@ const Content = ({
                 </h3>
 
                 <p>
-                    A cover letter is a concise document accompanying a resume,
-                    introducing yourself, showcasing skills, and explaining
-                    suitability for a job.
+                    It can be beneficial to tailor each cover letter to each
+                    specific job, so you have the option to include the job
+                    description in this section.
                 </p>
+            </div>
+            <div className="long-input-container">
+                <div className="description-toggle-container">
+                    <button
+                        className="description-toggle"
+                        onClick={(event) => {
+                            clickToggle(event);
+                        }}
+                    >
+                        {showDescription && <div className="toggle-on"></div>}
+                    </button>
+                    <p>Job Description</p>
+                </div>
+                {showDescription && (
+                    <textarea
+                        id="description"
+                        ref={descriptionRef}
+                        className="long-input summary"
+                        type="text"
+                        name="job description"
+                        onChange={handleChange}
+                        value={jobDescription}
+                        placeholder="+ Paste the job description here."
+                        rows="10"
+                    />
+                )}
             </div>
             <div className="long-input-container">
                 <textarea
@@ -116,10 +191,11 @@ const Content = ({
                     placeholder="+ Write your cover letter here."
                     type="text"
                     name="content"
-                    value={content}
+                    value={isGenerating || isEnhancing ? "loading..." : content}
                     onChange={() => {
                         handleSummaryChange();
                     }}
+                    disabled={isGenerating || isEnhancing}
                     rows="20"
                 />
                 <div className="prompt-buttons">
@@ -129,11 +205,19 @@ const Content = ({
                         </button>
                     </div>
                     <div className="right">
-                        <button className="enhance-button" onClick={enhance}>
-                            enhance
+                        <button
+                            className="enhance-button"
+                            onClick={enhance}
+                            disabled={isEnhancing}
+                        >
+                            {isEnhancing ? <Loader /> : "enhance"}
                         </button>
-                        <button className="enhance-button" onClick={generate}>
-                            generate
+                        <button
+                            className="enhance-button"
+                            onClick={generate}
+                            disabled={isGenerating}
+                        >
+                            {isGenerating ? <Loader /> : "generate"}
                         </button>
                     </div>
                 </div>

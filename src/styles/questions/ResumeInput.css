@@ -57,12 +57,13 @@
 
 .question-container textarea {
     border: 1px solid var(--accent-color-2);
-    padding-inline: var(--gap-small);
+    padding-inline: var(--gap-medium);
+    padding-block: var(--gap-small);
     box-sizing: border-box;
 }
 .question-container input {
     border: 1px solid var(--accent-color-2);
-    padding-inline: var(--gap-small);
+    padding-inline: var(--gap-medium);
     box-sizing: border-box;
 }
 
@@ -427,6 +428,32 @@
     display: flex;
     gap: var(--gap-medium);
     align-items: center;
+}
+
+.description-toggle-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    margin-block-end: var(--gap-small);
+}
+
+.description-toggle {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 1px solid var(--accent-color-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle-on {
+    background-color: var(--accent-color-2);
+    width: 10px;
+    height: 10px;
 }
 
 /*media query for when screen gets smaller than 545 px*/
