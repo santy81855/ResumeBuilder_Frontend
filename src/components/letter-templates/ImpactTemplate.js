@@ -182,7 +182,6 @@ const ImpactTemplate = ({
                     <div className="contact-section-container">
                         {contactSection}
                     </div>
-
                     {headerSection}
                     {openerSection}
                     {contentSection}
