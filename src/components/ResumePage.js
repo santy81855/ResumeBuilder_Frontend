@@ -252,11 +252,11 @@ function ResumePage() {
         onSuccess: (data, variables, context) => {
             // remove the resume from the resume arr in order to remove it from the screen
             const id = variables.id;
-            const updatedResumeArr = resumeArr.filter(
-                (item) => item.props.resumeData._id !== id
+            const updatedLetterArr = letterArr.filter(
+                (item) => item.props.letterData._id !== id
             );
-            setSearchArr(updatedResumeArr);
-            setResumeArr(updatedResumeArr);
+            setLetterSearchArr(updatedLetterArr);
+            setLetterArr(updatedLetterArr);
         },
         onError: (error, variables, context) => {
             console.log(error);
