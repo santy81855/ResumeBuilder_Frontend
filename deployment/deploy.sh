@@ -9,6 +9,9 @@ git pull origin main
 # Install dependencies
 npm install
 
+# Increase the memory limit for Node.js
+export NODE_OPTIONS="--max-old-space-size=1024"
+
 # Build the Next.js app
 npm run build
 
