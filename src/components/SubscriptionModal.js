@@ -48,7 +48,6 @@ const SubscriptionModal = ({
                 } else {
                     navigate("/u/resumes");
                 }
-                console.log(location.pathname);
             } else {
                 // open the create resume modal and close this modal
                 setCreateModal(true);

@@ -20,6 +20,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/CreateResume.css";
 import JSONLetterData from "../letter-schema.json";
 import MinimalTemplate from "./letter-templates/MinimalTemplate";
+import CharmTemplate from "./letter-templates/CharmTemplate";
+import ImpactTemplate from "./letter-templates/ImpactTemplate";
 
 import Contact from "./letter-questions/Contact";
 import Header from "./letter-questions/Header";
@@ -172,7 +174,6 @@ function CreateLetter() {
             });
             // otherwise // create
         } else {
-            console.log("creating letter");
             createLetterMutation.mutate({
                 letterTitleParam: titleRef.current.value.toString(),
                 jobTitleParam: routeLetterJob,
@@ -363,6 +364,24 @@ function CreateLetter() {
                         setLetterData={setLetterData}
                     />
                 );
+            case 1:
+                return (
+                    <CharmTemplate
+                        letterData={letterData}
+                        handleSectionChange={handleSectionChange}
+                        isPreview={false}
+                        setLetterData={setLetterData}
+                    />
+                );
+            case 2:
+                return (
+                    <ImpactTemplate
+                        letterData={letterData}
+                        handleSectionChange={handleSectionChange}
+                        isPreview={false}
+                        setLetterData={setLetterData}
+                    />
+                );
             default:
                 return <div>naur</div>;
         }
@@ -381,7 +400,11 @@ function CreateLetter() {
     const toggleTemplates = () => {
         // hide sections component so that it can be updated to match the new template when we open it again
         setShowSectionsComponent(false);
-        if (currentTemplate == 0) {
+        if (currentTemplate === 0) {
+            setCurrentTemplate(1);
+        } else if (currentTemplate === 1) {
+            setCurrentTemplate(2);
+        } else if (currentTemplate === 2) {
             setCurrentTemplate(0);
         }
     };
@@ -414,7 +437,6 @@ function CreateLetter() {
                 </button>
                 <button
                     onClick={() => {
-                        console.log("here");
                         exportToPDF({
                             content:
                                 document.getElementById("template-to-print"),

@@ -17,7 +17,7 @@ const Header = ({
     const [phone, setPhone] = useState(letterData.phone);
     const [website, setWebsite] = useState(letterData.website);
 
-    const [date, setDate] = useState();
+    const [date, setDate] = useState(letterData.date);
     const [company, setCompany] = useState(letterData.companyName);
     const [addressTitle, setAddressTitle] = useState(letterData.toAddressTitle);
     const [addressLine1, setAddressLine1] = useState(letterData.toAddressLine1);
@@ -35,7 +35,6 @@ const Header = ({
     const handleChange = (event) => {
         switch (event.target.id) {
             case "date":
-                console.log(dateRef.current);
                 var value = dateRef.current.value;
                 setDate(value);
                 setLetterData({
@@ -105,7 +104,7 @@ const Header = ({
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Start Date</p>
+                    <p>Date</p>
                     <input
                         id="date"
                         ref={dateRef}

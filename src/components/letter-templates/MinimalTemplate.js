@@ -55,6 +55,7 @@ const MinimalTemplate = ({
     const companyName = letterData.companyName;
     const website = letterData.website;
     const position = letterData.position;
+    const location = letterData.location;
 
     const sectionClass = isPreview
         ? "minimal-letter-section-preview"
@@ -97,8 +98,14 @@ const MinimalTemplate = ({
                 <div className="horizontal-bar"></div>
             )}
             <p className="name">{from}</p>
+            {letterData.templateSections.minimal.Position && (
+                <p className="position">{position}</p>
+            )}
             <div className="hor-container">
                 <p>{phone}</p>|<p>{email}</p>|<p>{website}</p>
+                {letterData.templateSections.minimal.Location && (
+                    <p>{"| " + location}</p>
+                )}
             </div>
         </div>
     );
@@ -110,7 +117,7 @@ const MinimalTemplate = ({
                 handleSectionChange(1);
             }}
         >
-            <p>{getDate(date)}</p>
+            <p>{date}</p>
             {letterData.templateSections.minimal.Address && (
                 <div className="header-address">
                     <p>{companyName}</p>
@@ -171,7 +178,7 @@ const MinimalTemplate = ({
             >
                 <div
                     className="minimal-template-content"
-                    id="clean-template-content"
+                    id="minimal-template-content"
                 >
                     {contactSection}
                     {headerSection}

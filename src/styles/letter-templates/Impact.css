@@ -1,0 +1,158 @@
+.impact-template-container {
+    width: 100%;
+    aspect-ratio: 8.5/11;
+    background-color: white;
+    position: relative;
+}
+
+.impact-template {
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    color: #333;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    margin: 0em;
+    padding-inline: 4em;
+    padding-block: 2em;
+}
+
+.impact-template-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    background-color: white;
+}
+
+.impact-template-content .header-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-block-start: 2em;
+    position: relative;
+}
+
+.impact-template-content .header-section .header-address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    row-gap: 0.2em;
+}
+
+.impact-template-content .hor-line {
+    width: 100%;
+    height: 0.1em;
+    background-color: rgb(208, 185, 52);
+    margin-block-start: 2em;
+}
+
+.impact-template-content .opener-section {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 2em;
+    position: relative;
+}
+
+.impact-template-content .content-section {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 2em;
+    position: relative;
+}
+
+.impact-template-content .content-section p {
+    white-space: pre-line;
+}
+
+.impact-template-content .closer-section {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 2em;
+    position: relative;
+}
+
+.impact-template-content .contact-section-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-block: 1em;
+    background-color: rgb(95, 124, 152);
+}
+
+.impact-template-content .contact-section-container .name {
+    font-size: 300%;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.impact-template-content .contact-section-container .position {
+    font-size: 120%;
+    font-weight: bold;
+    color: rgb(233, 233, 233);
+    text-align: center;
+}
+
+.impact-template-content .contact-section-container .contact-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.impact-template-content
+    .contact-section-container
+    .contact-section
+    .contact-name {
+    display: flex;
+    flex-direction: column;
+    margin-block-end: 1em;
+}
+
+.impact-template-content .contact-section .hor-container {
+    display: flex;
+    gap: 0.5em;
+    color: rgb(255, 255, 255);
+}
+
+@media (pointer: fine) {
+    .impact-letter-section::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        align-self: center;
+    }
+
+    .impact-letter-section:hover::after {
+        background-color: var(--accent-color-2-light);
+        transform: scaleX(1.05);
+        cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+        .impact-letter-section:hover::after {
+            background-color: var(--accent-color-2-light);
+            transform: scaleX(1.05);
+            border-radius: 0px;
+            cursor: pointer;
+        }
+    }
+}

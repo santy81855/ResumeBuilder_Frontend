@@ -352,9 +352,7 @@ const ExperienceInfo = ({
         setEnd(job.endDate);
         setSummary(job.summary);
         setNumHighlights(job.highlights.length);
-        console.log(job.highlights);
         job.highlights.forEach((highlight, index) => {
-            console.log(highlight);
             setHighlightArray[index](highlight);
         });
         // remove the job from the work array

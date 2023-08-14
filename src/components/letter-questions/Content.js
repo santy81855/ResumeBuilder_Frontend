@@ -90,7 +90,6 @@ const Content = ({
     const generate = () => {
         setSummary("");
         var userPrompt = generatePrompt + instructions;
-        console.log(userPrompt);
         fetchAIResponse(userPrompt);
     };
 

@@ -13,11 +13,15 @@ const Contact = ({
     const [email, setEmail] = useState(letterData.email);
     const [phone, setPhone] = useState(letterData.phone);
     const [website, setWebsite] = useState(letterData.website);
+    const [location, setLocation] = useState(letterData.location);
+    const [position, setPosition] = useState(letterData.position);
 
     const emailRef = useRef();
     const phoneRef = useRef();
     const websiteRef = useRef();
     const nameRef = useRef();
+    const locationRef = useRef();
+    const positionRef = useRef();
 
     // update letterData useState variable everytime textbox is edited
     const handleChange = (event) => {
@@ -53,6 +57,23 @@ const Contact = ({
                     ...letterData,
                     website: value,
                 });
+                return;
+            case "location":
+                var value = locationRef.current.value;
+                setLocation(value);
+                setLetterData({
+                    ...letterData,
+                    location: value,
+                });
+                return;
+            case "position":
+                var value = positionRef.current.value;
+                setPosition(value);
+                setLetterData({
+                    ...letterData,
+                    position: value,
+                });
+                return;
             default:
                 return;
         }
@@ -116,6 +137,28 @@ const Contact = ({
                         type="text"
                         onChange={handleChange}
                         value={website}
+                    ></input>
+                </div>
+                <div className="input-item">
+                    <p>Position</p>
+                    <input
+                        id="position"
+                        ref={positionRef}
+                        className="short-input"
+                        type="text"
+                        onChange={handleChange}
+                        value={position}
+                    ></input>
+                </div>
+                <div className="input-item">
+                    <p>Location</p>
+                    <input
+                        id="location"
+                        ref={locationRef}
+                        className="short-input"
+                        type="text"
+                        onChange={handleChange}
+                        value={location}
                     ></input>
                 </div>
             </div>

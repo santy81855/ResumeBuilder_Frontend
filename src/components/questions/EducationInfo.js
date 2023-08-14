@@ -151,7 +151,6 @@ const EducationInfo = ({
     };
 
     const editJob = (event, school) => {
-        console.log(school);
         setInstitution(school.institution);
         setDegree(school.studyType);
         setDegreeArea(school.area);
@@ -160,7 +159,6 @@ const EducationInfo = ({
         setGpa(school.gpa);
         setNumHighlights(school.courses.length);
         school.courses.forEach((highlight, index) => {
-            console.log(highlight);
             setHighlightArray[index](highlight);
         });
 

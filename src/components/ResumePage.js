@@ -287,7 +287,6 @@ function ResumePage() {
 
     // when they click on the create resume button
     const createResume = () => {
-        console.log("here");
         const token = localStorage.getItem("token");
         if (token) {
             // if the user has a subscription

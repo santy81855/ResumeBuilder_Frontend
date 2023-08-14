@@ -29,7 +29,6 @@ const createLetter = (data) => {
 
 const getLetterById = () => {
     const letterId = localStorage.getItem("letterId");
-    console.log(letterId);
     return axios.get(URL + "/letter/" + letterId).then((res) => res.data);
 };
 

@@ -422,7 +422,6 @@ function CreateResume() {
                 </button>
                 <button
                     onClick={() => {
-                        console.log("here");
                         exportToPDF({
                             content:
                                 document.getElementById("template-to-print"),
