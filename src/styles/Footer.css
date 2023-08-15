@@ -6,8 +6,8 @@
 
 .footer-list {
     display: flex;
-    flex-direction: row;
-    gap: var(--gap-small);
+    flex-direction: column;
+    gap: var(--gap-large);
     justify-content: center;
     align-items: center;
 }

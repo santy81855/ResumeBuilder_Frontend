@@ -12,7 +12,6 @@ const Footer = () => {
                 >
                     Privacy Policy
                 </a>
-                |
                 <a
                     href="https://myairesumes.com/cookie-policy"
                     target="_blank"
@@ -20,7 +19,6 @@ const Footer = () => {
                 >
                     Cookie Policy
                 </a>
-                |
                 <a
                     href="https://myairesumes.com/terms-and-conditions"
                     target="_blank"
