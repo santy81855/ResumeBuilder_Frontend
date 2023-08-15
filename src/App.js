@@ -18,6 +18,21 @@ import Terms from "./components/Terms";
 
 function App() {
     Modal.setAppElement("#root"); // Assuming "#root" is the ID of the root element of your application.
+
+    useEffect(() => {
+        const doc = document.documentElement;
+        doc.style.setProperty("--doc-height", `${window.innerHeight}px`);
+        function handleResize() {
+            const doc = document.documentElement;
+            doc.style.setProperty("--doc-height", `${window.innerHeight}px`);
+        }
+        window.addEventListener("resize", handleResize);
+        // Clean up event listener when component is unmounted
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <div>
             <Router>

@@ -68,6 +68,7 @@ a {
     --max-width-small: 500px;
     --max-width-medium: 800px;
     --max-width-large: 1000px;
+    --doc-height: 100%;
 }
 
 .App {

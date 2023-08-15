@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - var(--header-height));
+    height: calc(var(--doc-height) - var(--header-height));
     padding-inline: var(--padding-inline-medium);
 }
 

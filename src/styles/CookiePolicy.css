@@ -1,6 +1,6 @@
 .cookie-policy-main {
     overflow-y: auto;
-    height: calc(100vh - var(--header-height));
+    height: calc(var(--doc-height) - var(--header-height));
     padding-inline: var(--padding-inline-large);
     padding-block: var(--padding-block-large);
 }
