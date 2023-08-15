@@ -5,6 +5,7 @@ import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PromptButtons from "../PromptButtons";
 
 const Summary = ({
     resumeData,
@@ -16,6 +17,8 @@ const Summary = ({
 }) => {
     const [summary, setSummary] = useState(resumeData.summary);
     const summaryRef = useRef();
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [isEnhancing, setIsEnhancing] = useState(false);
 
     const enhancePrompt =
         "enhance the following resume summary for a " +
@@ -36,6 +39,8 @@ const Summary = ({
                     ...resumeData,
                     summary: data.result.content,
                 });
+                setIsGenerating(false);
+                setIsEnhancing(false);
             },
             onError: (error) => {
                 console.log(error);
@@ -79,12 +84,14 @@ const Summary = ({
             return;
         }
         var userPrompt = enhancePrompt + summary;
+        setIsEnhancing(true);
         fetchAIResponse(userPrompt);
     };
 
     const generate = () => {
         setSummary("");
         var userPrompt = generatePrompt + jobTitle;
+        setIsGenerating(true);
         fetchAIResponse(userPrompt);
     };
 
@@ -117,23 +124,14 @@ const Summary = ({
                     }}
                     rows="10"
                 />
-                <div className="prompt-buttons">
-                    <div className="left">
-                        <button className="enhance-button" onClick={clear}>
-                            Clear
-                        </button>
-                    </div>
-                    <div className="right">
-                        <button className="enhance-button" onClick={enhance}>
-                            enhance
-                        </button>
-                        <button className="enhance-button" onClick={generate}>
-                            generate
-                        </button>
-                    </div>
-                </div>
+                <PromptButtons
+                    isGenerating={isGenerating}
+                    isEnhancing={isEnhancing}
+                    generate={generate}
+                    enhance={enhance}
+                    clear={clear}
+                />
             </div>
-
             <div className="question-container-button-container">
                 <button
                     className="question-container-close-button"

@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import PromptButtons from "../PromptButtons";
 
 const ExperienceInfo = ({
     resumeData,
@@ -22,6 +23,8 @@ const ExperienceInfo = ({
     const [end, setEnd] = useState(new Date());
     const [summary, setSummary] = useState("");
     const [isCurrent, setIsCurrent] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [isEnhancing, setIsEnhancing] = useState(false);
 
     const [experienceList, setExperienceList] = useState(resumeData.work);
 
@@ -135,6 +138,8 @@ const ExperienceInfo = ({
                 } else {
                     setHighlightArray[queryType](data.result.content);
                 }
+                setIsGenerating(false);
+                setIsEnhancing(false);
             },
             onError: (error) => {
                 console.log(error);
@@ -164,7 +169,6 @@ const ExperienceInfo = ({
             fillOutCompanyToast();
             return;
         }
-
         var userPrompt =
             "in 20 words or less, write a job highlight for when I worked as a " +
             positionRef.current.value +
@@ -235,6 +239,7 @@ const ExperienceInfo = ({
                     jobTitle +
                     ": " +
                     summary;
+                setIsEnhancing(true);
                 fetchAIResponse(userPrompt, -1);
             }
         }
@@ -260,6 +265,7 @@ const ExperienceInfo = ({
             positionRef.current.value +
             " that is professional and engaging for applying to be a " +
             jobTitle;
+        setIsGenerating(true);
         fetchAIResponse(userPrompt, -1);
     };
 
@@ -430,21 +436,13 @@ const ExperienceInfo = ({
                     value={summary}
                     rows="10"
                 />
-                <div className="prompt-buttons">
-                    <div className="left">
-                        <button className="enhance-button" onClick={clear}>
-                            Clear
-                        </button>
-                    </div>
-                    <div className="right">
-                        <button className="enhance-button" onClick={enhance}>
-                            enhance
-                        </button>
-                        <button className="enhance-button" onClick={generate}>
-                            generate
-                        </button>
-                    </div>
-                </div>
+                <PromptButtons
+                    clear={clear}
+                    enhance={enhance}
+                    generate={generate}
+                    isGenerating={isGenerating}
+                    isEnhancing={isEnhancing}
+                />
             </div>
             <div className="job-summary-container">
                 <div className="add-highlight-container">

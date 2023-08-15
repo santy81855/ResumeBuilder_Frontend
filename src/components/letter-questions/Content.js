@@ -5,6 +5,7 @@ import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PromptButtons from "../PromptButtons";
 
 const Content = ({
     letterData,
@@ -198,29 +199,13 @@ const Content = ({
                     disabled={isGenerating || isEnhancing}
                     rows="20"
                 />
-                <div className="prompt-buttons">
-                    <div className="left">
-                        <button className="enhance-button" onClick={clear}>
-                            Clear
-                        </button>
-                    </div>
-                    <div className="right">
-                        <button
-                            className="enhance-button"
-                            onClick={enhance}
-                            disabled={isEnhancing}
-                        >
-                            {isEnhancing ? <Loader /> : "enhance"}
-                        </button>
-                        <button
-                            className="enhance-button"
-                            onClick={generate}
-                            disabled={isGenerating}
-                        >
-                            {isGenerating ? <Loader /> : "generate"}
-                        </button>
-                    </div>
-                </div>
+                <PromptButtons
+                    clear={clear}
+                    enhance={enhance}
+                    generate={generate}
+                    isGenerating={isGenerating}
+                    isEnhancing={isEnhancing}
+                />
             </div>
 
             <div className="question-container-button-container">
