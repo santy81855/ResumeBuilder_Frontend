@@ -29,6 +29,7 @@ import CleanTemplate from "./templates/CleanTemplate";
 import ModernTemplate from "./templates/ModernTemplate";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/CreateResume.css";
+import ProjectsInfo from "./questions/ProjectsInfo";
 
 function CreateResume() {
     // get the resume title and description and job from the route
@@ -279,6 +280,7 @@ function CreateResume() {
         <EducationInfo {...inputModalProps} />,
         <LanguagesInfo {...inputModalProps} />,
         <InterestsInfo {...inputModalProps} />,
+        <ProjectsInfo {...inputModalProps} />,
     ];
 
     const renderQuestion = () => {

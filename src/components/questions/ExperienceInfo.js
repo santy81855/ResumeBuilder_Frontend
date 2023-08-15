@@ -290,7 +290,7 @@ const ExperienceInfo = ({
         }
 
         // ensure all the necessary values are filled
-        if (comp === "" || pos === "" || st === "" || en === "" || sum === "") {
+        if (comp === "" || pos === "" || st === "" || en === "") {
             fillOutAllFieldsToast();
 
             return;
@@ -498,7 +498,7 @@ const ExperienceInfo = ({
                 </div>
             </div>
             <div className="job-summary-container">
-                <p>Job Summary</p>
+                <p>Job Summary (optional)</p>
                 <textarea
                     ref={summaryRef}
                     className="job-summary"

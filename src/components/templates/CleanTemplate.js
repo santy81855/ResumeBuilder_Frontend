@@ -47,6 +47,7 @@ const CleanTemplate = ({
     const skills = resumeData.skills;
     const languages = resumeData.languages;
     const interests = resumeData.interests;
+    const projects = resumeData.projects;
 
     const [name, setName] = useState(contact.name);
 
@@ -187,7 +188,8 @@ const CleanTemplate = ({
                             </h4>
                             <h4>{job.position + ", " + job.company}</h4>
                             {resumeData.templateSections.clean.experience
-                                .summary && <p>{job.summary}</p>}
+                                .summary &&
+                                job.summary !== "" && <p>{job.summary}</p>}
                             {resumeData.templateSections.clean.experience
                                 .highlights && (
                                 <div className="bullet-list-container">
@@ -197,13 +199,72 @@ const CleanTemplate = ({
                                             className="bullet-item"
                                         >
                                             <div className="bullet"></div>
-                                            {highlight}
+                                            <p>{highlight}</p>
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
                     ))}
+                </div>
+            </div>
+        );
+    };
+
+    const ProjectsSection = () => {
+        return (
+            <div
+                className={sectionClass + " clean-section"}
+                onClick={() => {
+                    handleSectionChange(8);
+                }}
+            >
+                <hr />
+                <h3>Projects</h3>
+                <div className="clean-project-container">
+                    {projects.map((project, index) => {
+                        return (
+                            <div key={index} className="project-item">
+                                <div className="project-name">
+                                    <p>{project.name}</p>
+                                    {project.link !== "" && (
+                                        <>
+                                            <p>-</p>
+                                            <a href={project.link}>
+                                                <i>link</i>
+                                            </a>
+                                        </>
+                                    )}
+                                    {project.demo !== "" && (
+                                        <>
+                                            <p>|</p>
+                                            <a href={project.demo}>
+                                                <i>demo</i>
+                                            </a>
+                                        </>
+                                    )}
+                                </div>
+                                <div className="project-description">
+                                    <p>
+                                        <i>{project.shortDescription}</i>
+                                    </p>
+                                </div>
+                                <div className="bullet-list-container">
+                                    {project.highlights.map(
+                                        (highlight, index) => (
+                                            <div
+                                                key={index}
+                                                className="bullet-item"
+                                            >
+                                                <div className="bullet"></div>
+                                                <p>{highlight}</p>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         );
@@ -308,6 +369,9 @@ const CleanTemplate = ({
                     )}
                     {resumeData.templateSections.clean.experience.show && (
                         <ExperienceSection />
+                    )}
+                    {resumeData.templateSections.clean.projects.show && (
+                        <ProjectsSection />
                     )}
                     {resumeData.templateSections.clean.skills.show && (
                         <SkillsSection />

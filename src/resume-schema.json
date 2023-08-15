@@ -34,6 +34,10 @@
             "languages": {
                 "show": true,
                 "fluency": false
+            },
+            "projects": {
+                "show": false,
+                "highlights": true
             }
         },
         "modern": {
@@ -70,6 +74,10 @@
             "languages": {
                 "show": true,
                 "fluency": false
+            },
+            "projects": {
+                "show": false,
+                "highlights": true
             }
         }
     },
@@ -104,6 +112,48 @@
             }
         ]
     },
+    "projects": [
+        {
+            "name": "Project 1",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "name": "Project 2",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "name": "Project 3",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "name": "Project 4",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        }
+    ],
     "work": [
         {
             "company": "ABC Company",

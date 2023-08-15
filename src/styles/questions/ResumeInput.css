@@ -465,6 +465,11 @@
     cursor: pointer;
 }
 
+.experience-item .project-name-container {
+    display: flex;
+    gap: var(--gap-small);
+}
+
 /*media query for when screen gets smaller than 545 px*/
 @media screen and (max-width: 680px) {
     .question-container .input-item {
