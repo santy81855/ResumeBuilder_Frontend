@@ -22,10 +22,9 @@ const ExperienceInfo = ({
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
     const [summary, setSummary] = useState("");
-    const [isCurrent, setIsCurrent] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
     const [isEnhancing, setIsEnhancing] = useState(false);
-
+    const [isCurrent, setIsCurrent] = useState(false);
     const [experienceList, setExperienceList] = useState(resumeData.work);
 
     const companyRef = useRef();
@@ -278,7 +277,7 @@ const ExperienceInfo = ({
         // start date
         var st = start;
         // end date
-        var en = end;
+        var en = isCurrent ? "Current" : end;
         // job summary
         var sum = summaryRef.current.value;
         // job highlights
@@ -325,6 +324,7 @@ const ExperienceInfo = ({
             highlight("");
         });
         setNumHighlights(1);
+        setIsCurrent(false);
     };
 
     const removeJob = (event) => {
@@ -350,12 +350,47 @@ const ExperienceInfo = ({
         if (numHighlights > 0) setNumHighlights(numHighlights - 1);
     };
 
+    const isDateObject = (item) => {
+        return item instanceof Date;
+    };
+
+    const isValidDate = (dateString) => {
+        try {
+            var date = new Date(dateString);
+            if (date.toString() === "Invalid Date") {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (e) {
+            return false;
+        }
+    };
+
     const editJob = (event, job) => {
         // set the input fields to the job's values
         setCompany(job.company);
         setPosition(job.position);
-        setStart(job.startDate);
-        setEnd(job.endDate);
+        // if the start date is already a date object then just set it
+        if (isDateObject(job.startDate) === true) {
+            setStart(job.startDate);
+        } else {
+            // otherwise check if it is a valid date string
+            if (isValidDate(job.startDate) === true) {
+                setStart(new Date(job.startDate));
+            }
+        }
+        // if the end date is already a date object then just set it
+        if (isDateObject(job.endDate) === true) {
+            setEnd(job.endDate);
+        } else {
+            // otherwise check if it is a valid date string
+            if (isValidDate(job.endDate) === true) {
+                setEnd(new Date(job.endDate));
+            } else {
+                setIsCurrent(true);
+            }
+        }
         setSummary(job.summary);
         setNumHighlights(job.highlights.length);
         job.highlights.forEach((highlight, index) => {
@@ -413,13 +448,53 @@ const ExperienceInfo = ({
                 <div className="input-item">
                     <div className="end-date-container">
                         <p>End Date</p>
+                        <div
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "var(--gap-small)",
+                            }}
+                        >
+                            <p>Current:</p>
+                            <button
+                                className="isCurrentButton"
+                                onClick={(event) => {
+                                    if (isCurrent) {
+                                        event.target.style.backgroundColor =
+                                            "white";
+                                        event.target.style.color =
+                                            "var(--accent-color-2)";
+                                    } else {
+                                        event.target.style.backgroundColor =
+                                            "var(--accent-color-2)";
+                                        event.target.style.color = "white";
+                                    }
+                                    setIsCurrent(!isCurrent);
+                                }}
+                            >
+                                {isCurrent ? "X" : ""}
+                            </button>
+                        </div>
                     </div>
-                    <DatePicker
-                        className="short-input"
-                        ref={endRef}
-                        selected={end}
-                        onChange={(date) => setEnd(date)}
-                    />
+                    {isCurrent ? (
+                        <input
+                            id="date"
+                            className="short-input"
+                            type="text"
+                            value="Current"
+                            disabled
+                        />
+                    ) : (
+                        <DatePicker
+                            className="short-input"
+                            ref={endRef}
+                            selected={end}
+                            onChange={(date) => {
+                                setEnd(date);
+                            }}
+                        />
+                    )}
                 </div>
             </div>
             <div className="job-summary-container">
@@ -801,7 +876,6 @@ const ExperienceInfo = ({
                             year: "numeric",
                         }
                     );
-
                     const formattedDateEnd = job.endDate.toLocaleString(
                         "en-US",
                         {
@@ -810,12 +884,10 @@ const ExperienceInfo = ({
                             year: "numeric",
                         }
                     );
-
                     return (
                         <div key={index} className="experience-item">
                             <button
                                 className="delete-experience-item-button"
-                                key={index}
                                 id={index}
                                 onClick={removeJob}
                             >
@@ -823,7 +895,6 @@ const ExperienceInfo = ({
                             </button>
                             <button
                                 className="edit-experience-item-button"
-                                key={index}
                                 id={index}
                                 onClick={(event) => {
                                     editJob(event, job);
@@ -840,7 +911,7 @@ const ExperienceInfo = ({
                             <p>{job.summary}</p>
                             <ul>
                                 {job.highlights.map((highlight, index) => (
-                                    <li>{highlight}</li>
+                                    <li key={highlight}>{highlight}</li>
                                 ))}
                             </ul>
                         </div>

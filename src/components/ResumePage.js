@@ -340,7 +340,8 @@ function ResumePage() {
                 overlayClassName="export-overlay"
             >
                 <div className="export-container">
-                    {display === "resumes" && getResumeQuery.isSuccess ? (
+                    {display === "resumes" &&
+                        getResumeQuery.isSuccess &&
                         // determine the correct template
                         getTemplateComponent({
                             json: getResumeQuery.data.json,
@@ -348,11 +349,9 @@ function ResumePage() {
                             handleSectionChange: () => {},
                             template: getResumeQuery.data.template,
                             isExport: false,
-                        })
-                    ) : (
-                        <div>Could not find resume</div>
-                    )}
-                    {display === "coverLetters" && getLetterQuery.isSuccess ? (
+                        })}
+                    {display === "coverLetters" &&
+                        getLetterQuery.isSuccess &&
                         // determine the correct template
                         getLetterTemplateComponent({
                             json: getLetterQuery.data.json,
@@ -360,10 +359,7 @@ function ResumePage() {
                             handleSectionChange: () => {},
                             template: getLetterQuery.data.template,
                             isExport: false,
-                        })
-                    ) : (
-                        <div>Could not find letter</div>
-                    )}
+                        })}
 
                     <div className="export-modal-buttons">
                         <button onClick={closeModal}>Close</button>

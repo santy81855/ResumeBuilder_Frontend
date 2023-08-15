@@ -109,7 +109,7 @@
             "company": "ABC Company",
             "position": "Job Title",
             "website": "https://abc.com",
-            "startDate": "2018-01-01",
+            "startDate": "10-18-2019",
             "endDate": "current",
             "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo condimentum magna, id placerat velit iaculis nec. Morbi aliquam luctus mi, at dictum ligula congue ut. Fusce mattis tellus id magna semper efficitur. Nullam consectetur venenatis consectetur. Cras pretium posuere urna, et dictum quam bibendum in.",
             "highlights": [
@@ -121,8 +121,8 @@
             "company": "XYZ Inc.",
             "position": "Job Title",
             "website": "https://xyz.com",
-            "startDate": "2016-01-01",
-            "endDate": "2017-12-31",
+            "startDate": "10-10-2018",
+            "endDate": "10-10-2019",
             "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo condimentum magna, id placerat velit iaculis nec. Morbi aliquam luctus mi, at dictum ligula congue ut. Fusce mattis tellus id magna semper efficitur. Nullam consectetur venenatis consectetur. Cras pretium posuere urna, et dictum quam bibendum in.",
             "highlights": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -135,8 +135,8 @@
             "institution": "University of XYZ",
             "area": "General Studies",
             "studyType": "Bachelor's Degree",
-            "startDate": "2014-01-01",
-            "endDate": "2018-12-31",
+            "startDate": "10-18-2018",
+            "endDate": "10-18-2022",
             "gpa": "",
             "courses": ["Highlight1", "Highlight2", "Highlight3"]
         }

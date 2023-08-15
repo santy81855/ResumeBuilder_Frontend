@@ -426,6 +426,7 @@
 
 .end-date-container {
     display: flex;
+    justify-content: space-between;
     gap: var(--gap-medium);
     align-items: center;
 }
@@ -454,6 +455,14 @@
     background-color: var(--accent-color-2);
     width: 10px;
     height: 10px;
+}
+
+.isCurrentButton {
+    background-color: transparent;
+    border: 1px solid var(--accent-color-2);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 /*media query for when screen gets smaller than 545 px*/

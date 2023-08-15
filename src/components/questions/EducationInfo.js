@@ -19,7 +19,7 @@ const EducationInfo = ({
     const [gpa, setGpa] = useState("");
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
-    const [summary, setSummary] = useState("");
+    const [isCurrent, setIsCurrent] = useState(false);
 
     const [experienceList, setExperienceList] = useState(resumeData.education);
 
@@ -72,7 +72,7 @@ const EducationInfo = ({
         // start date
         var st = start;
         // end date
-        var en = end;
+        var en = isCurrent ? "Current" : end;
         // school highlights
         var hl = [];
         for (var i = 0; i < numHighlights; i++) {
@@ -125,6 +125,7 @@ const EducationInfo = ({
         setHighlight5("");
         setHighlight6("");
         setHighlight7("");
+        setIsCurrent(false);
     };
 
     const removeJob = (event) => {
@@ -150,12 +151,47 @@ const EducationInfo = ({
         if (numHighlights > 0) setNumHighlights(numHighlights - 1);
     };
 
+    const isDateObject = (item) => {
+        return item instanceof Date;
+    };
+
+    const isValidDate = (dateString) => {
+        try {
+            var date = new Date(dateString);
+            if (date.toString() === "Invalid Date") {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (e) {
+            return false;
+        }
+    };
+
     const editJob = (event, school) => {
         setInstitution(school.institution);
         setDegree(school.studyType);
         setDegreeArea(school.area);
-        setStart(school.startDate);
-        setEnd(school.endDate);
+        // if the start date is already a date object then just set it
+        if (isDateObject(school.startDate) === true) {
+            setStart(school.startDate);
+        } else {
+            // otherwise check if it is a valid date string
+            if (isValidDate(school.startDate) === true) {
+                setStart(new Date(school.startDate));
+            }
+        }
+        // if the end date is already a date object then just set it
+        if (isDateObject(school.endDate) === true) {
+            setEnd(school.endDate);
+        } else {
+            // otherwise check if it is a valid date string
+            if (isValidDate(school.endDate) === true) {
+                setEnd(new Date(school.endDate));
+            } else {
+                setIsCurrent(true);
+            }
+        }
         setGpa(school.gpa);
         setNumHighlights(school.courses.length);
         school.courses.forEach((highlight, index) => {
@@ -242,13 +278,55 @@ const EducationInfo = ({
                     />
                 </div>
                 <div className="input-item">
-                    <p>End Date</p>
-                    <DatePicker
-                        className="short-input"
-                        ref={endRef}
-                        selected={end}
-                        onChange={(date) => setEnd(date)}
-                    />
+                    <div className="end-date-container">
+                        <p>End Date</p>
+                        <div
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "var(--gap-small)",
+                            }}
+                        >
+                            <p>Current:</p>
+                            <button
+                                className="isCurrentButton"
+                                onClick={(event) => {
+                                    if (isCurrent) {
+                                        event.target.style.backgroundColor =
+                                            "white";
+                                        event.target.style.color =
+                                            "var(--accent-color-2)";
+                                    } else {
+                                        event.target.style.backgroundColor =
+                                            "var(--accent-color-2)";
+                                        event.target.style.color = "white";
+                                    }
+                                    setIsCurrent(!isCurrent);
+                                }}
+                            >
+                                {isCurrent ? "X" : ""}
+                            </button>
+                        </div>
+                    </div>
+                    {isCurrent ? (
+                        <input
+                            id="date"
+                            className="short-input"
+                            type="text"
+                            value="Current"
+                            disabled
+                        />
+                    ) : (
+                        <DatePicker
+                            className="short-input"
+                            ref={endRef}
+                            selected={end}
+                            onChange={(date) => {
+                                setEnd(date);
+                            }}
+                        />
+                    )}
                 </div>
             </div>
             <div className="job-summary-container">
@@ -369,7 +447,7 @@ const EducationInfo = ({
             </div>
             <div className="experience-history-container">
                 {experienceList.map((school, index) => {
-                    const formattedDateStart = school.startDate?.toLocaleString(
+                    const formattedDateStart = school.startDate.toLocaleString(
                         "en-US",
                         {
                             month: "short",
@@ -378,7 +456,7 @@ const EducationInfo = ({
                         }
                     );
 
-                    const formattedDateEnd = school.endDate?.toLocaleString(
+                    const formattedDateEnd = school.endDate.toLocaleString(
                         "en-US",
                         {
                             month: "short",
@@ -391,14 +469,12 @@ const EducationInfo = ({
                             <button
                                 className="delete-experience-item-button"
                                 id={index}
-                                key={index}
                                 onClick={removeJob}
                             >
                                 Delete
                             </button>
                             <button
                                 className="edit-experience-item-button"
-                                key={index}
                                 id={index}
                                 onClick={(event) => {
                                     editJob(event, school);
@@ -417,7 +493,7 @@ const EducationInfo = ({
                             {school.courses.length > 0 && <h4>Highlights:</h4>}
                             <ul>
                                 {school.courses.map((highlight, index) => (
-                                    <li key={index}>{highlight}</li>
+                                    <li key={highlight}>{highlight}</li>
                                 ))}
                             </ul>
                         </div>
