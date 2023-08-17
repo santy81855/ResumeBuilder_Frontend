@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const TitleInfo = ({
     resumeData,
@@ -9,6 +10,7 @@ const TitleInfo = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [name, setName] = useState(resumeData.contact.name);
     const [label, setLabel] = useState(resumeData.label);
 
@@ -44,11 +46,11 @@ const TitleInfo = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Header Information</h2>
+                <h2>{t("resumeTitleInfo.title")}</h2>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Name</p>
+                    <p>{t("resumeTitleInfo.name")}</p>
                     <input
                         id="name"
                         ref={nameRef}
@@ -59,7 +61,7 @@ const TitleInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Label</p>
+                    <p>{t("resumeTitleInfo.label")}</p>
                     <input
                         id="label"
                         ref={labelRef}
@@ -75,7 +77,7 @@ const TitleInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeTitleInfo.back")}
                 </button>
 
                 <button
@@ -83,7 +85,7 @@ const TitleInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeTitleInfo.apply")}
                 </button>
             </div>
         </div>

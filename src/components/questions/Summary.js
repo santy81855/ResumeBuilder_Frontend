@@ -6,6 +6,7 @@ import Loader from "../ui/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PromptButtons from "../PromptButtons";
+import { useTranslation, Trans } from "react-i18next";
 
 const Summary = ({
     resumeData,
@@ -15,6 +16,7 @@ const Summary = ({
     isLoadingState,
     jobTitle,
 }) => {
+    const { i18n, t } = useTranslation();
     const [summary, setSummary] = useState(resumeData.summary);
     const summaryRef = useRef();
     const [isGenerating, setIsGenerating] = useState(false);
@@ -71,7 +73,7 @@ const Summary = ({
 
     const enhance = () => {
         if (summary === "") {
-            toast.info("There is no summary to enhance.", {
+            toast.info(t("resumeSummary.enhanceToastError"), {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -98,24 +100,17 @@ const Summary = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Summary</h2>
-                <h3>
-                    Describe your work experience, skills, and achievements in a
-                    concise and informative manner in this section.
-                </h3>
+                <h2>{t("resumeSummary.title")}</h2>
+                <h3>{t("resumeSummary.description1")}</h3>
 
-                <p>
-                    This section should highlight your unique value proposition
-                    as a candidate and grab the attention of the hiring manager.
-                </p>
+                <p>{t("resumeSummary.description2")}</p>
             </div>
             <div className="long-input-container">
-                <p>Summary</p>
                 <textarea
                     ref={summaryRef}
                     id="summary"
                     className="long-input summary"
-                    placeholder="+ Write your summary here."
+                    placeholder={t("resumeSummary.summaryPlaceholder")}
                     type="text"
                     name="summary"
                     value={summary}
@@ -137,7 +132,7 @@ const Summary = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeSummary.back")}
                 </button>
 
                 <button
@@ -145,7 +140,7 @@ const Summary = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeSummary.apply")}
                 </button>
             </div>
         </div>

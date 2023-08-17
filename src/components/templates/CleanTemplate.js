@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/CleanTemplate.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const CleanTemplate = ({
     resumeData,
@@ -9,6 +10,7 @@ const CleanTemplate = ({
     handleSectionChange,
     isExport,
 }) => {
+    const { i18n, t } = useTranslation();
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Clean";
@@ -90,7 +92,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Summary</h3>
+                <h3>{t("cleanTemplate.summary")}</h3>
                 <p>{summary}</p>
             </div>
         );
@@ -104,7 +106,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Skills</h3>
+                <h3>{t("cleanTemplate.skills")}</h3>
                 <div className="bullet-list-container">
                     {skills.map((skill, index) => (
                         <div key={index} className="bullet-item">
@@ -126,7 +128,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Interests</h3>
+                <h3>{t("cleanTemplate.interests")}</h3>
                 <div className="bullet-list-container">
                     {interests.map((interest, index) => (
                         <div key={index} className="bullet-item">
@@ -148,7 +150,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Languages</h3>
+                <h3>{t("cleanTemplate.languages")}</h3>
                 <div className="bullet-list-container">
                     {languages.map((language, index) => (
                         <div key={index} className="bullet-item">
@@ -176,7 +178,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Experience</h3>
+                <h3>{t("cleanTemplate.experience")}</h3>
                 <div className="clean-job-container">
                     {work.map((job, index) => (
                         <div key={index}>
@@ -211,6 +213,7 @@ const CleanTemplate = ({
         );
     };
 
+    const link = t("cleanTemplate.projectLink");
     const ProjectsSection = () => {
         return (
             <div
@@ -220,7 +223,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Projects</h3>
+                <h3>{t("cleanTemplate.projects")}</h3>
                 <div className="clean-project-container">
                     {projects.map((project, index) => {
                         return (
@@ -231,7 +234,11 @@ const CleanTemplate = ({
                                         <>
                                             <p>-</p>
                                             <a href={project.link}>
-                                                <i>link</i>
+                                                <i>
+                                                    {t(
+                                                        "cleanTemplate.projectLink"
+                                                    )}
+                                                </i>
                                             </a>
                                         </>
                                     )}
@@ -239,7 +246,11 @@ const CleanTemplate = ({
                                         <>
                                             <p>|</p>
                                             <a href={project.demo}>
-                                                <i>demo</i>
+                                                <i>
+                                                    {t(
+                                                        "cleanTemplate.projectDemo"
+                                                    )}
+                                                </i>
                                             </a>
                                         </>
                                     )}
@@ -279,7 +290,7 @@ const CleanTemplate = ({
                 }}
             >
                 <hr />
-                <h3>Education</h3>
+                <h3>{t("cleanTemplate.education")}</h3>
                 {education.map((school, index) => (
                     <div key={index}>
                         <h4>

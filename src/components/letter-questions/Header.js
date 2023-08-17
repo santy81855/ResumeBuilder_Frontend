@@ -3,6 +3,7 @@ import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const Header = ({
     letterData,
@@ -12,6 +13,7 @@ const Header = ({
     isLoadingState,
     template,
 }) => {
+    const { i18n, t } = useTranslation();
     const [name, setName] = useState(letterData.from);
     const [email, setEmail] = useState(letterData.email);
     const [phone, setPhone] = useState(letterData.phone);
@@ -90,21 +92,13 @@ const Header = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Company Information</h2>
-                <h3>
-                    Write the company information you want to show on your cover
-                    letter.
-                </h3>
-                <p>
-                    Including the date, company name, and address adds
-                    professionalism, shows attention to detail, and tailors the
-                    cover letter, demonstrating genuine interest in the specific
-                    company and position.
-                </p>
+                <h2>{t("letterHeader.title")}</h2>
+                <h3>{t("letterHeader.description1")}</h3>
+                <p>{t("letterHeader.description2")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Date</p>
+                    <p>{t("letterHeader.date")}</p>
                     <input
                         id="date"
                         ref={dateRef}
@@ -115,7 +109,7 @@ const Header = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Company Name</p>
+                    <p>{t("letterHeader.company")}</p>
                     <input
                         id="company"
                         ref={companyRef}
@@ -126,7 +120,7 @@ const Header = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Address Title</p>
+                    <p>{t("letterHeader.addressTitle")}</p>
                     <input
                         id="addressTitle"
                         ref={addressTitleRef}
@@ -137,7 +131,7 @@ const Header = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Address Line 1</p>
+                    <p>{t("letterHeader.address1")}</p>
                     <input
                         id="addressLine1"
                         ref={addressLine1Ref}
@@ -149,7 +143,7 @@ const Header = ({
                 </div>
 
                 <div className="input-item">
-                    <p>Address Line 2</p>
+                    <p>{t("letterHeader.address2")}</p>
                     <input
                         id="addressLine2"
                         ref={addressLine2Ref}
@@ -161,7 +155,7 @@ const Header = ({
                 </div>
 
                 <div className="input-item">
-                    <p>Address Line 3</p>
+                    <p>{t("letterHeader.address3")}</p>
                     <input
                         id="addressLine3"
                         ref={addressLine3Ref}
@@ -177,7 +171,7 @@ const Header = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("letterHeader.back")}
                 </button>
 
                 <button
@@ -185,7 +179,7 @@ const Header = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("letterHeader.apply")}
                 </button>
             </div>
         </div>

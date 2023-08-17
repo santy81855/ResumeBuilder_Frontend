@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "@progress/kendo-theme-default/dist/all.css";
 import "../../styles/templates/ModernTemplate.css";
 import userImage from "../../images/account-pics/option1.png";
+import { useTranslation, Trans } from "react-i18next";
 
 const ModernTemplate = ({
     resumeData,
@@ -10,6 +11,7 @@ const ModernTemplate = ({
     handleSectionChange,
     isExport,
 }) => {
+    const { i18n, t } = useTranslation();
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
     const TEMPLATE_NAME = "Modern";
@@ -86,7 +88,7 @@ const ModernTemplate = ({
                     handleSectionChange(6);
                 }}
             >
-                <h2>Languages</h2>
+                <h2>{t("modernTemplate.languages")}</h2>
                 {horizontalLine}
                 <div className="container">
                     {languages.map((language, index) => (
@@ -111,7 +113,7 @@ const ModernTemplate = ({
                     handleSectionChange(3);
                 }}
             >
-                <h2>Skills</h2>
+                <h2>{t("modernTemplate.skills")}</h2>
                 {horizontalLine}
                 <div className="container">
                     {skills.map((skill, index) => (
@@ -132,7 +134,7 @@ const ModernTemplate = ({
                     handleSectionChange(5);
                 }}
             >
-                <h2>Education</h2>
+                <h2>{t("modernTemplate.education")}</h2>
                 {horizontalLine}
                 {education.map((school, index) => (
                     <div key={index} className="container">
@@ -159,24 +161,24 @@ const ModernTemplate = ({
                     handleSectionChange(1);
                 }}
             >
-                <h2>Contact</h2>
+                <h2>{t("modernTemplate.contact")}</h2>
                 {horizontalLine}
                 <div className="container">
                     {resumeData.templateSections.modern.contact.email && (
                         <div className="contact-info-entry">
-                            <h3>Email</h3>
+                            <h3>{t("modernTemplate.email")}</h3>
                             <p>{contact.email}</p>
                         </div>
                     )}
                     {resumeData.templateSections.modern.contact.phone && (
                         <div className="contact-info-entry">
-                            <h3>Phone</h3>
+                            <h3>{t("modernTemplate.phone")}</h3>
                             <p>{contact.phone}</p>
                         </div>
                     )}
                     {resumeData.templateSections.modern.contact.website && (
                         <div className="contact-info-entry">
-                            <h3>Website</h3>
+                            <h3>{t("modernTemplate.website")}</h3>
                             <p>{contact.website}</p>
                         </div>
                     )}
@@ -238,7 +240,7 @@ const ModernTemplate = ({
                     handleSectionChange(4);
                 }}
             >
-                <h2>Experience</h2>
+                <h2>{t("modernTemplate.experience")}</h2>
                 {horizontalLine}
 
                 <div className="container">
@@ -286,7 +288,7 @@ const ModernTemplate = ({
                     handleSectionChange(7);
                 }}
             >
-                <h2>Interests</h2>
+                <h2>{t("modernTemplate.interests")}</h2>
                 {horizontalLine}
                 <ul>
                     {interests.map((interest, index) => (

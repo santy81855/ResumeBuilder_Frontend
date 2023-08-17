@@ -28,8 +28,10 @@ import Header from "./letter-questions/Header";
 import Greeting from "./letter-questions/Greeting";
 import Content from "./letter-questions/Content";
 import Closer from "./letter-questions/Closer";
+import { useTranslation, Trans } from "react-i18next";
 
 function CreateLetter() {
+    const { i18n, t } = useTranslation();
     // get the resume title and description and job from the route
     const { routeLetterTitle, routeLetterJob, routeLetterDescription } =
         useParams();
@@ -143,19 +145,16 @@ function CreateLetter() {
             descriptionRef.current.value === ""
         ) {
             flashError(titleRef.current, descriptionRef.current);
-            toast.info(
-                "Please fill out a cover letter title and description.",
-                {
-                    position: "bottom-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                }
-            );
+            toast.info(t("createLetter.toastError"), {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
@@ -295,16 +294,29 @@ function CreateLetter() {
                 contentLabel="summary-modal"
                 overlayClassName="overlay"
             >
+                <ToastContainer />
                 {inputModals[currentlySelectedSection]}
             </Modal>
         );
     };
 
     const SectionContainer = () => {
+        /*
+        const sectionArr = Object.entries(
+            resumeData.templateSections[templateToString[currentTemplate]]
+        ).map(([name, field]) => ({
+            name: t(`resumeSections.${name}`),
+            show: field.show,
+        }));
+        */
         // get the sections available for the current template
         const sectionArr = Object.entries(
             letterData.templateSections[templateToString[currentTemplate]]
-        ).map(([name, field]) => ({ name, show: field }));
+        ).map(([name, field]) => ({
+            name,
+            display: t(`coverLetterSections.${name}`),
+            show: field,
+        }));
 
         const buttonClick = (event, name, status) => {
             // update the array with the section status switched
@@ -346,7 +358,7 @@ function CreateLetter() {
                                 }
                             ></div>
                         )}
-                        <p>{item.name}</p>
+                        <p>{item.display}</p>
                     </div>
                 ))}
             </div>
@@ -416,14 +428,14 @@ function CreateLetter() {
                     className="create-resume-button back-button"
                     onClick={handleBack}
                 >
-                    <p>back</p>
+                    <p>{t("sideBar.back")}</p>
                     <span className="back-icon icon"></span>
                 </button>
                 <button
                     className="create-resume-button"
                     onClick={toggleTemplates}
                 >
-                    <p>Template</p>
+                    <p>{t("sideBar.template")}</p>
                     <span className="template-icon icon"></span>
                 </button>
                 <button
@@ -432,7 +444,7 @@ function CreateLetter() {
                         setShowSectionsComponent(!showSectionsComponent);
                     }}
                 >
-                    <p>Sections</p>
+                    <p>{t("sideBar.sections")}</p>
                     <span className="sections-icon icon"></span>
                 </button>
                 <button
@@ -445,7 +457,7 @@ function CreateLetter() {
                     }}
                     className="create-resume-button"
                 >
-                    <p>Export</p>
+                    <p>{t("sideBar.export")}</p>
                     <span className="export-icon icon"></span>
                 </button>
                 {isLoadingState ? (
@@ -460,7 +472,7 @@ function CreateLetter() {
                         className="create-resume-button save-button"
                         onClick={handleSave}
                     >
-                        <p>Save</p>
+                        <p>{t("sideBar.save")}</p>
                         <span className="save-icon icon"></span>
                     </button>
                 )}
@@ -477,16 +489,14 @@ function CreateLetter() {
                         <div className="create-resume-title-container">
                             <input
                                 className="resume-title input"
-                                ref={titleRef}
-                                placeholder="Untitled"
-                                onChange={handleletterTitleChange}
+                                placeholder={t("createLetter.titlePlaceholder")}
                                 title="title"
                             ></input>
                             <textarea
                                 className="resume-description input"
-                                ref={descriptionRef}
-                                placeholder="No description..."
-                                onChange={handleletterDescriptionChange}
+                                placeholder={t(
+                                    "createLetter.descriptionPlaceholder"
+                                )}
                                 title="description"
                             ></textarea>
                         </div>
@@ -511,7 +521,7 @@ function CreateLetter() {
                             <input
                                 className="resume-title input"
                                 ref={titleRef}
-                                placeholder="Untitled"
+                                placeholder={t("createLetter.titlePlaceholder")}
                                 value={letterTitle}
                                 onChange={handleletterTitleChange}
                                 title="title"
@@ -519,7 +529,9 @@ function CreateLetter() {
                             <textarea
                                 className="resume-description input"
                                 ref={descriptionRef}
-                                placeholder="No description..."
+                                placeholder={t(
+                                    "createLetter.descriptionPlaceholder"
+                                )}
                                 value={letterDescription}
                                 onChange={handleletterDescriptionChange}
                                 title="description"

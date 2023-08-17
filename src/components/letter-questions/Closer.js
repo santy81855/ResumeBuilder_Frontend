@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const Closer = ({
     letterData,
@@ -9,6 +10,7 @@ const Closer = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [closer, setCloser] = useState(letterData.closer);
     const [recipient, setRecipient] = useState(letterData.closerName);
 
@@ -41,22 +43,13 @@ const Closer = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Complimentary Close</h2>
-                <h3>
-                    Alternating complimentary closers, such as "sincerely" and
-                    "regards," keeps the tone fresh, indicates flexibility, and
-                    adapts to various recipient relationships, maintaining a
-                    dynamic and engaging communication style.
-                </h3>
-                <p>
-                    Using a complimentary close, like "sincerely," adds a polite
-                    and professional touch to a letter, concluding it with a
-                    respectful tone and leaving a positive impression.
-                </p>
+                <h2>{t("letterCloser.title")}</h2>
+                <h3>{t("letterCloser.description1")}</h3>
+                <p>{t("letterCloser.description2")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Greeting</p>
+                    <p>{t("letterCloser.greeting")}</p>
                     <input
                         id="closer"
                         ref={closerRef}
@@ -67,7 +60,7 @@ const Closer = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Recipient</p>
+                    <p>{t("letterCloser.recipient")}</p>
                     <input
                         id="recipient"
                         ref={recipientRef}
@@ -83,7 +76,7 @@ const Closer = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("letterCloser.back")}
                 </button>
 
                 <button
@@ -91,7 +84,7 @@ const Closer = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("letterCloser.apply")}
                 </button>
             </div>
         </div>

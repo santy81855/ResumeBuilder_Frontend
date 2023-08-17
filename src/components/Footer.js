@@ -1,7 +1,9 @@
 import React from "react";
 import "../styles/Footer.css";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+    const { i18n, t } = useTranslation();
     return (
         <footer className="footer">
             <div className="footer-list">
@@ -10,21 +12,21 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Privacy Policy
+                    {t("footer.privacy")}
                 </a>
                 <a
                     href="https://myairesumes.com/cookie-policy"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Cookie Policy
+                    {t("footer.cookie")}
                 </a>
                 <a
                     href="https://myairesumes.com/terms-and-conditions"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Terms & Conditions
+                    {t("footer.terms")}
                 </a>
             </div>
         </footer>

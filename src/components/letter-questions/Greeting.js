@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const Greeting = ({
     letterData,
@@ -9,6 +10,7 @@ const Greeting = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [greeting, setGreeting] = useState(letterData.opener);
     const [recipient, setRecipient] = useState(letterData.openerName);
 
@@ -41,21 +43,13 @@ const Greeting = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Letter Greeting</h2>
-                <h3>
-                    Customize the greeting of your cover letter to the hiring
-                    manager or recruiter you are sending it to.
-                </h3>
-                <p>
-                    Alternating greetings like "Dear Hiring Manager" or "To the
-                    [job title]" personalizes the letter when the recipient's
-                    name is unknown, displaying adaptability and respect for
-                    diverse roles within the company.
-                </p>
+                <h2>{t("letterGreeting.title")}</h2>
+                <h3>{t("letterGreeting.description1")}</h3>
+                <p>{t("letterGreeting.description2")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Greeting</p>
+                    <p>{t("letterGreeting.greeting")}</p>
                     <input
                         id="greeting"
                         ref={greetingRef}
@@ -66,7 +60,7 @@ const Greeting = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Recipient</p>
+                    <p>{t("letterGreeting.recipient")}</p>
                     <input
                         id="recipient"
                         ref={recipientRef}
@@ -82,7 +76,7 @@ const Greeting = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("letterGreeting.back")}
                 </button>
 
                 <button
@@ -90,7 +84,7 @@ const Greeting = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("letterGreeting.apply")}
                 </button>
             </div>
         </div>

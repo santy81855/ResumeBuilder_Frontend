@@ -6,6 +6,7 @@ import Loader from "../ui/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PromptButtons from "../PromptButtons";
+import { useTranslation, Trans } from "react-i18next";
 
 const Content = ({
     letterData,
@@ -15,6 +16,7 @@ const Content = ({
     isLoadingState,
     jobTitle,
 }) => {
+    const { i18n, t } = useTranslation();
     const [content, setSummary] = useState(letterData.content);
     const [jobDescription, setJobDescription] = useState(
         letterData.jobDescription
@@ -146,17 +148,10 @@ const Content = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Cover Letter</h2>
-                <h3>
-                    Describe your work experience, skills, and achievements in a
-                    concise and informative manner in this section.
-                </h3>
+                <h2>{t("letterContent.title")}</h2>
+                <h3>{t("letterContent.description1")}</h3>
 
-                <p>
-                    It can be beneficial to tailor each cover letter to each
-                    specific job, so you have the option to include the job
-                    description in this section.
-                </p>
+                <p>{t("letterContent.description2")}</p>
             </div>
             <div className="long-input-container">
                 <div className="description-toggle-container">
@@ -168,7 +163,7 @@ const Content = ({
                     >
                         {showDescription && <div className="toggle-on"></div>}
                     </button>
-                    <p>Job Description</p>
+                    <p>{t("letterContent.jobDescription")}</p>
                 </div>
                 {showDescription && (
                     <textarea
@@ -179,7 +174,9 @@ const Content = ({
                         name="job description"
                         onChange={handleChange}
                         value={jobDescription}
-                        placeholder="+ Paste the job description here."
+                        placeholder={t(
+                            "letterContent.jobDescriptionPlaceholder"
+                        )}
                         rows="10"
                     />
                 )}
@@ -189,7 +186,7 @@ const Content = ({
                     ref={contentRef}
                     id="content"
                     className="long-input summary"
-                    placeholder="+ Write your cover letter here."
+                    placeholder={t("letterContent.contentPlaceholder")}
                     type="text"
                     name="content"
                     value={isGenerating || isEnhancing ? "loading..." : content}
@@ -213,7 +210,7 @@ const Content = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("letterContent.back")}
                 </button>
 
                 <button
@@ -221,7 +218,7 @@ const Content = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("letterContent.apply")}
                 </button>
             </div>
         </div>

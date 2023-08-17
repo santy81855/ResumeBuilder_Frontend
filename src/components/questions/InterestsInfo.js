@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const InterestsInfo = ({
     resumeData,
@@ -9,6 +10,7 @@ const InterestsInfo = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [interestList, setInterestList] = useState([]);
     const [interestInput, setInterestInput] = useState("");
 
@@ -66,17 +68,9 @@ const InterestsInfo = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Interests</h2>
-                <h3>Include any of your interests.</h3>
-                <p>
-                    Including interests can help portray you as a well-rounded
-                    individual with diverse passions and hobbies outside of
-                    work. It provides employers with a glimpse into your
-                    personality and can help establish a connection beyond your
-                    professional qualifications. Sharing interests can make you
-                    more relatable and memorable, potentially setting you apart
-                    from other candidates.
-                </p>
+                <h2>{t("resumeInterests.title")}</h2>
+                <h3>{t("resumeInterests.description1")}</h3>
+                <p>{t("resumeInterests.description2")}</p>
             </div>
             <div className="skill-input-container">
                 <input
@@ -88,7 +82,9 @@ const InterestsInfo = ({
                         setInterestInput(event.currentTarget.value);
                     }}
                 ></input>
-                <button onClick={addInterest}>+</button>
+                <button onClick={addInterest}>
+                    {t("resumeInterests.add")}
+                </button>
             </div>
             <div className="skill-container">
                 {interestList.map((skill, index) => (
@@ -106,7 +102,7 @@ const InterestsInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeInterests.back")}
                 </button>
 
                 <button
@@ -114,7 +110,7 @@ const InterestsInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeInterests.apply")}
                 </button>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const SubscriptionModal = ({
     subscriptionModal,
@@ -13,6 +14,7 @@ const SubscriptionModal = ({
     resumes,
     letters,
 }) => {
+    const { i18n, t } = useTranslation();
     const navigate = useNavigate();
     // Inside your component
     const location = useLocation();
@@ -69,7 +71,7 @@ const SubscriptionModal = ({
         >
             <div className="create-resume-info-container">
                 <div className="header">
-                    <h2>Subscribe to unlock all of the features</h2>
+                    <h2>{t("subscriptionModal.heading")}</h2>
                 </div>
                 <div className="subscription-container">
                     <div
@@ -79,12 +81,12 @@ const SubscriptionModal = ({
                             optionSelected("free");
                         }}
                     >
-                        <h3>AI Resume - Free</h3>
-                        <p>See what AI Resume has to offer.</p>
+                        <h3>{t("subscriptionModal.freeTitle")}</h3>
+                        <p>{t("subscriptionModal.freeDescription")}</p>
                         <ul>
                             <div className="li-container">
-                                <li>Create 1 Resume</li>
-                                <li>Create 1 Cover Letter</li>
+                                <li>{t("subscriptionModal.freeFeature1")}</li>
+                                <li>{t("subscriptionModal.freeFeature2")}</li>
                             </div>
                         </ul>
                     </div>
@@ -96,31 +98,29 @@ const SubscriptionModal = ({
                         }}
                         style={{ backgroundColor: "lightgrey" }}
                     >
-                        <h3>AI Resume Pro - $4.99/month</h3>
-                        <p>
-                            Experience everything that AI Resume has to offer.
-                        </p>
+                        <h3>{t("subscriptionModal.proTitle")}</h3>
+                        <p>{t("subscriptionModal.proDescription")}</p>
                         <ul>
                             <div className="li-container">
-                                <li>Create unlimited resumes</li>
-                                <li>Create unlimited cover letters</li>
-                                <li>Unlock every resume template</li>
-                                <li>Unlock every cover letter template</li>
-                                <li>
-                                    Unlimited help from artificial intelligence
-                                </li>
+                                <li>{t("subscriptionModal.proFeature1")}</li>
+                                <li>{t("subscriptionModal.proFeature2")}</li>
+                                <li>{t("subscriptionModal.proFeature3")}</li>
+                                <li>{t("subscriptionModal.proFeature4")}</li>
+                                <li>{t("subscriptionModal.proFeature5")}</li>
                             </div>
                         </ul>
                     </div>
                 </div>
                 <div className="button-container">
-                    <button onClick={closeCreateResumeModal}>Back</button>
+                    <button onClick={closeCreateResumeModal}>
+                        {t("subscriptionModal.back")}
+                    </button>
                     <button
                         onClick={() => {
                             nextClicked();
                         }}
                     >
-                        Next
+                        {t("subscriptionModal.next")}
                     </button>
                 </div>
             </div>

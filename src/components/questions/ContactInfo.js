@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const ContactInfo = ({
     resumeData,
@@ -9,6 +10,7 @@ const ContactInfo = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [email, setEmail] = useState(resumeData.contact.email);
     const [phone, setPhone] = useState(resumeData.contact.phone);
     const [website, setWebsite] = useState(resumeData.contact.website);
@@ -60,21 +62,13 @@ const ContactInfo = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Contact Information</h2>
-                <h3>
-                    Write the contact information you want to show on your
-                    resume.
-                </h3>
-                <p>
-                    A well-presented and comprehensive contact information
-                    section on a resume enhances your chances of being contacted
-                    for job interviews or further discussions about potential
-                    employment
-                </p>
+                <h2>{t("resumeContact.title")}</h2>
+                <h3>{t("resumeContact.description1")}</h3>
+                <p>{t("resumeContact.description2")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Email</p>
+                    <p>{t("resumeContact.email")}</p>
                     <input
                         id="email"
                         ref={emailRef}
@@ -85,7 +79,7 @@ const ContactInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Phone</p>
+                    <p>{t("resumeContact.phone")}</p>
                     <input
                         id="phone"
                         ref={phoneRef}
@@ -96,7 +90,7 @@ const ContactInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Website</p>
+                    <p>{t("resumeContact.website")}</p>
                     <input
                         id="website"
                         ref={websiteRef}
@@ -112,7 +106,7 @@ const ContactInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeContact.back")}
                 </button>
 
                 <button
@@ -120,7 +114,7 @@ const ContactInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeContact.apply")}
                 </button>
             </div>
         </div>

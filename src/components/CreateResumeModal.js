@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const CreateResumeModal = ({ createModal, setCreateModal }) => {
+    const { i18n, t } = useTranslation();
     const navigate = useNavigate();
     // variables needed for creating new resume
     const [resumeTitle, setResumeTitle] = useState("");
@@ -60,11 +62,11 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
         >
             <div className="create-resume-info-container">
                 <div className="header">
-                    <h2>Resume Information</h2>
+                    <h2>{t("createResumeModal.heading")}</h2>
                 </div>
                 <div className="info-page">
                     <div className="horizontal-container">
-                        <h4>Title</h4>
+                        <h4>{t("createResumeModal.title")}</h4>
                         <input
                             type="text"
                             value={resumeTitle}
@@ -75,7 +77,7 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
                         ></input>
                     </div>
                     <div className="horizontal-container">
-                        <h4>Job</h4>
+                        <h4>{t("createResumeModal.job")}</h4>
                         <input
                             type="text"
                             value={resumeJob}
@@ -86,7 +88,7 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
                         ></input>
                     </div>
                     <div className="horizontal-container">
-                        <h4>Description</h4>
+                        <h4>{t("createResumeModal.description")}</h4>
                         <textarea
                             type="text"
                             rows={3}
@@ -99,8 +101,12 @@ const CreateResumeModal = ({ createModal, setCreateModal }) => {
                     </div>
                 </div>
                 <div className="button-container">
-                    <button onClick={closeCreateResumeModal}>Back</button>
-                    <button onClick={navigateCreateResumePage}>Next</button>
+                    <button onClick={closeCreateResumeModal}>
+                        {t("createResumeModal.back")}
+                    </button>
+                    <button onClick={navigateCreateResumePage}>
+                        {t("createResumeModal.next")}
+                    </button>
                 </div>
             </div>
             <ToastContainer />

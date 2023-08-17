@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const LanguagesInfo = ({
     resumeData,
@@ -9,6 +10,7 @@ const LanguagesInfo = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [languageList, setLanguageList] = useState([]);
     const [languageInput, setLanguageInput] = useState("");
 
@@ -66,12 +68,9 @@ const LanguagesInfo = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Languages</h2>
-                <h3>Include any languages that you are proficient in.</h3>
-                <p>
-                    Including languages in a resume can provide several benefits
-                    and can be seen as a valuable asset by employers
-                </p>
+                <h2>{t("resumeLanguages.title")}</h2>
+                <h3>{t("resumeLanguages.description1")}</h3>
+                <p>{t("resumeLanguages.description2")}</p>
             </div>
             <div className="skill-input-container">
                 <input
@@ -83,7 +82,9 @@ const LanguagesInfo = ({
                         setLanguageInput(event.currentTarget.value);
                     }}
                 ></input>
-                <button onClick={addLanguage}>+</button>
+                <button onClick={addLanguage}>
+                    {t("resumeLanguages.add")}
+                </button>
             </div>
 
             <div className="skill-container">
@@ -102,7 +103,7 @@ const LanguagesInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeLanguages.back")}
                 </button>
 
                 <button
@@ -110,7 +111,7 @@ const LanguagesInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeLanguages.apply")}
                 </button>
             </div>
         </div>

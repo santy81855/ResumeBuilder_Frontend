@@ -14,8 +14,10 @@ import CreateResumeModal from "./CreateResumeModal";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "./Footer";
+import { useTranslation, Trans } from "react-i18next";
 
 const AccountPage = () => {
+    const { i18n, t } = useTranslation();
     const navigate = useNavigate();
     const [date, setDate] = useState(null);
     const [isCancelled, setIsCancelled] = useState(null); // ["active", "canceled"
@@ -104,15 +106,19 @@ const AccountPage = () => {
         <main className="main">
             <div className="account-container">
                 <div className="account">
-                    <h2>Subscription Details</h2>
+                    <h2>{t("account.title")}</h2>
                     <div>
-                        <h4>Subscription Type: </h4>
-                        <p>{subscription === null ? "Free" : "Pro"}</p>
+                        <h4>{t("account.type")}</h4>
+                        <p>
+                            {subscription === null
+                                ? t("account.free")
+                                : t("account.pro")}
+                        </p>
                     </div>
                     {!!subscription && isCancelled === false && date && (
                         <>
                             <div>
-                                <h4>Subscription Renews</h4>
+                                <h4>{t("account.renewal")}</h4>
                                 <p>
                                     {date.toLocaleString("en-US", {
                                         weekday: "long",
@@ -126,14 +132,14 @@ const AccountPage = () => {
                                 className="cancel-button"
                                 onClick={cancelSubscriptionHandler}
                             >
-                                Cancel Subscription
+                                {t("account.cancelSubscription")}
                             </button>
                         </>
                     )}
                     {!!subscription && isCancelled === true && date && (
                         <>
                             <div>
-                                <h4>Subscription ends</h4>
+                                <h4>{t("account.ends")}</h4>
                                 <p>
                                     {date.toLocaleString("en-US", {
                                         weekday: "long",
@@ -147,7 +153,7 @@ const AccountPage = () => {
                                 className="renew-button"
                                 onClick={renewSubscriptionHandler}
                             >
-                                Renew Subscription
+                                {t("account.renewSubscription")}
                             </button>
                         </>
                     )}
@@ -156,7 +162,7 @@ const AccountPage = () => {
                             className="upgrade-button"
                             onClick={handleUpgradeButtonClick}
                         >
-                            Upgrade to pro
+                            {t("account.upgrade")}
                         </button>
                     )}
                 </div>

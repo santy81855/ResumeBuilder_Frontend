@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
@@ -15,9 +15,12 @@ import AccountPage from "./components/AccountPage";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import CookiePolicy from "./components/CookiePolicy";
 import Terms from "./components/Terms";
+import { AppStateProvider } from "./AppStateContext";
+import i18n from "./i18n"; // Import your i18n configuration
 
 function App() {
     Modal.setAppElement("#root"); // Assuming "#root" is the ID of the root element of your application.
+    const [websiteLanguage, setWebsiteLanguage] = useState("English");
 
     useEffect(() => {
         const doc = document.documentElement;
@@ -33,91 +36,106 @@ function App() {
         };
     }, []);
 
+    useEffect(() => {
+        i18n.changeLanguage(websiteLanguage);
+    }, [websiteLanguage]);
+
     return (
-        <div>
-            <Router>
-                <Header />
-                <Routes>
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/cookie-policy" element={<CookiePolicy />} />
-                    <Route path="/terms-and-conditions" element={<Terms />} />
-                    <Route path="/" element={<Home />} />
-                    <Route path="/account" element={<AccountPage />} />
-                    <Route path="/completion" element={<Completion />} />
-                    {/* add the new route for Home */}
-                    <Route
-                        path="/login"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <Navigate to="/" replace={true} />
-                            ) : (
-                                <LoginForm />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/create-account"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <Navigate to="/" replace={true} />
-                            ) : (
-                                <CreateAccount />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/u/resumes"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <ResumePage />
-                            ) : (
-                                <Navigate to="/login" replace={true} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/u/create-resume/:routeResumeTitle/:routeResumeJob/:routeResumeDescription"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <CreateResume />
-                            ) : (
-                                <Navigate to="/login" replace={true} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/u/create-cover-letter/:routeLetterTitle/:routeLetterJob/:routeLetterDescription"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <CreateLetter />
-                            ) : (
-                                <Navigate to="/login" replace={true} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/u/edit-resume/"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <CreateResume />
-                            ) : (
-                                <Navigate to="/login" replace={true} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/u/edit-cover-letter/"
-                        element={
-                            localStorage.getItem("token") ? (
-                                <CreateLetter />
-                            ) : (
-                                <Navigate to="/login" replace={true} />
-                            )
-                        }
-                    />
-                </Routes>
-            </Router>
-        </div>
+        <>
+            <AppStateProvider>
+                <Router>
+                    <Header setWebsiteLanguage={setWebsiteLanguage} />
+                    <Routes>
+                        <Route
+                            path="/privacy-policy"
+                            element={<PrivacyPolicy />}
+                        />
+                        <Route
+                            path="/cookie-policy"
+                            element={<CookiePolicy />}
+                        />
+                        <Route
+                            path="/terms-and-conditions"
+                            element={<Terms />}
+                        />
+                        <Route path="/" element={<Home />} />
+                        <Route path="/account" element={<AccountPage />} />
+                        <Route path="/completion" element={<Completion />} />
+                        {/* add the new route for Home */}
+                        <Route
+                            path="/login"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <Navigate to="/" replace={true} />
+                                ) : (
+                                    <LoginForm />
+                                )
+                            }
+                        />
+                        <Route
+                            path="/create-account"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <Navigate to="/" replace={true} />
+                                ) : (
+                                    <CreateAccount />
+                                )
+                            }
+                        />
+                        <Route
+                            path="/u/resumes"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <ResumePage />
+                                ) : (
+                                    <Navigate to="/login" replace={true} />
+                                )
+                            }
+                        />
+                        <Route
+                            path="/u/create-resume/:routeResumeTitle/:routeResumeJob/:routeResumeDescription"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <CreateResume />
+                                ) : (
+                                    <Navigate to="/login" replace={true} />
+                                )
+                            }
+                        />
+                        <Route
+                            path="/u/create-cover-letter/:routeLetterTitle/:routeLetterJob/:routeLetterDescription"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <CreateLetter />
+                                ) : (
+                                    <Navigate to="/login" replace={true} />
+                                )
+                            }
+                        />
+                        <Route
+                            path="/u/edit-resume/"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <CreateResume />
+                                ) : (
+                                    <Navigate to="/login" replace={true} />
+                                )
+                            }
+                        />
+                        <Route
+                            path="/u/edit-cover-letter/"
+                            element={
+                                localStorage.getItem("token") ? (
+                                    <CreateLetter />
+                                ) : (
+                                    <Navigate to="/login" replace={true} />
+                                )
+                            }
+                        />
+                    </Routes>
+                </Router>
+            </AppStateProvider>
+        </>
     );
 }
 

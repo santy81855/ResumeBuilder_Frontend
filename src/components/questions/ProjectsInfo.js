@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import PromptButtons from "../PromptButtons";
+import { useTranslation, Trans } from "react-i18next";
 
 const ProjectsInfo = ({
     resumeData,
@@ -17,6 +17,7 @@ const ProjectsInfo = ({
     isLoadingState,
     jobTitle,
 }) => {
+    const { i18n, t } = useTranslation();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
@@ -72,7 +73,7 @@ const ProjectsInfo = ({
     const summaryRef = useRef();
 
     const noEnhanceToast = () =>
-        toast.info("There is nothing to enhance.", {
+        toast.info(t("resumeProjects.toastEnhanceError"), {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -84,7 +85,7 @@ const ProjectsInfo = ({
         });
 
     const fillOutAllFieldsToast = () => {
-        toast.info("Please fill out all of the required fields.", {
+        toast.info(t("resumeProjects.toastFieldError"), {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -230,12 +231,12 @@ const ProjectsInfo = ({
     return (
         <div className="question-container">
             <div id="header" className="header">
-                <h2>Projects</h2>
-                <p>Display the projects you have completed.</p>
+                <h2>{t("resumeProjects.title")}</h2>
+                <p>{t("resumeProjects.description1")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Project Name</p>
+                    <p>{t("resumeProjects.projectName")}</p>
                     <input
                         id="name"
                         ref={nameRef}
@@ -248,7 +249,7 @@ const ProjectsInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Description (short)</p>
+                    <p>{t("resumeProjects.shortDescription")}</p>
                     <input
                         id="description"
                         ref={descriptionRef}
@@ -261,7 +262,7 @@ const ProjectsInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Link (optional)</p>
+                    <p>{t("resumeProjects.link")}</p>
                     <input
                         id="link"
                         ref={linkRef}
@@ -274,7 +275,7 @@ const ProjectsInfo = ({
                     />
                 </div>
                 <div className="input-item">
-                    <p>Demo Link (optional)</p>
+                    <p>{t("resumeProjects.demo")}</p>
                     <input
                         id="demo"
                         ref={demoRef}
@@ -289,7 +290,7 @@ const ProjectsInfo = ({
             </div>
             <div className="job-summary-container">
                 <div className="add-highlight-container">
-                    <p>Highlights</p>
+                    <p>{t("resumeProjects.highlights")}</p>
                     <div className="highlight-button-container">
                         <button
                             className="minus-button"
@@ -306,18 +307,16 @@ const ProjectsInfo = ({
                         </button>
                     </div>
                 </div>
-                <p>
-                    You can change the number of highlights by adding or
-                    removing them with the buttons above. If you don't wish to
-                    add any highlights, leave the fields blank.
-                </p>
+                <p>{t("resumeProjects.highlightsDescription")}</p>
                 <div className="highlight-text-container">
                     {numHighlights >= 1 && (
                         <div>
                             <textarea
                                 id={0}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeProjects.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight1(event.target.value);
@@ -333,7 +332,7 @@ const ProjectsInfo = ({
                                             clearHighlight(0);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -343,7 +342,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(0);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -370,7 +369,7 @@ const ProjectsInfo = ({
                                             clearHighlight(1);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -380,7 +379,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(1);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -407,7 +406,7 @@ const ProjectsInfo = ({
                                             clearHighlight(2);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -417,7 +416,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(2);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -444,7 +443,7 @@ const ProjectsInfo = ({
                                             clearHighlight(3);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -454,7 +453,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(3);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -481,7 +480,7 @@ const ProjectsInfo = ({
                                             clearHighlight(4);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -491,7 +490,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(4);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -518,7 +517,7 @@ const ProjectsInfo = ({
                                             clearHighlight(5);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -528,7 +527,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(5);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -555,7 +554,7 @@ const ProjectsInfo = ({
                                             clearHighlight(6);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeProjects.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -565,7 +564,7 @@ const ProjectsInfo = ({
                                             enhanceHighlight(6);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeProjects.enhance")}
                                     </button>
                                 </div>
                             </div>
@@ -575,7 +574,7 @@ const ProjectsInfo = ({
             </div>
             <div className="experience-button-container">
                 <button className="experience-button" onClick={addJob}>
-                    Add Project
+                    {t("resumeProjects.addProject")}
                 </button>
             </div>
             <div className="experience-history-container">
@@ -587,7 +586,7 @@ const ProjectsInfo = ({
                                 id={index}
                                 onClick={removeJob}
                             >
-                                Delete
+                                {t("resumeProjects.delete")}
                             </button>
                             <button
                                 className="edit-experience-item-button"
@@ -596,7 +595,7 @@ const ProjectsInfo = ({
                                     editJob(event, project);
                                 }}
                             >
-                                Edit
+                                {t("resumeProjects.edit")}
                             </button>
                             <div className="project-name-container">
                                 <p>{project.name}</p>
@@ -608,7 +607,7 @@ const ProjectsInfo = ({
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            Link
+                                            {t("resumeProjects.linkDisplay")}
                                         </a>
                                     </>
                                 )}
@@ -620,7 +619,7 @@ const ProjectsInfo = ({
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            Demo
+                                            {t("resumeProjects.demoDisplay")}
                                         </a>
                                     </>
                                 )}
@@ -642,7 +641,7 @@ const ProjectsInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeProjects.back")}
                 </button>
 
                 <button
@@ -650,7 +649,7 @@ const ProjectsInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeProjects.apply")}
                 </button>
             </div>
         </div>

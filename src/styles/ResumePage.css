@@ -691,3 +691,16 @@
         width: 240px;
     }
 }
+
+@media (max-width: 400px) {
+    .modal .create-resume-info-container .horizontal-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .modal .create-resume-info-container input {
+        width: 100%;
+    }
+    .modal .create-resume-info-container textarea {
+        width: 100%;
+    }
+}

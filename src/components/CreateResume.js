@@ -30,8 +30,10 @@ import ModernTemplate from "./templates/ModernTemplate";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/CreateResume.css";
 import ProjectsInfo from "./questions/ProjectsInfo";
+import { useTranslation, Trans } from "react-i18next";
 
 function CreateResume() {
+    const { i18n, t } = useTranslation();
     // get the resume title and description and job from the route
     const { routeResumeTitle, routeResumeJob, routeResumeDescription } =
         useParams();
@@ -145,7 +147,7 @@ function CreateResume() {
             descriptionRef.current.value === ""
         ) {
             flashError(titleRef.current, descriptionRef.current);
-            toast.info("Please fill out a resume title and description.", {
+            toast.info(t("createResume.toastError"), {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -293,6 +295,7 @@ function CreateResume() {
                 contentLabel="summary-modal"
                 overlayClassName="overlay"
             >
+                <ToastContainer />
                 {inputModals[currentlySelectedSection]}
             </Modal>
         );
@@ -302,7 +305,11 @@ function CreateResume() {
         // get the sections available for the current template
         const sectionArr = Object.entries(
             resumeData.templateSections[templateToString[currentTemplate]]
-        ).map(([name, field]) => ({ name, show: field.show }));
+        ).map(([name, field]) => ({
+            name,
+            display: t(`resumeSections.${name}`),
+            show: field.show,
+        }));
 
         const buttonClick = (event, name, status) => {
             // update the array with the section status switched
@@ -344,7 +351,7 @@ function CreateResume() {
                                 }
                             ></div>
                         )}
-                        <p>{item.name}</p>
+                        <p>{item.display}</p>
                     </div>
                 ))}
             </div>
@@ -372,7 +379,7 @@ function CreateResume() {
                     />
                 );
             default:
-                return <div>naur</div>;
+                return <div>Error</div>;
         }
     };
 
@@ -403,14 +410,14 @@ function CreateResume() {
                     className="create-resume-button back-button"
                     onClick={handleBack}
                 >
-                    <p>back</p>
+                    <p>{t("sideBar.back")}</p>
                     <span className="back-icon icon"></span>
                 </button>
                 <button
                     className="create-resume-button"
                     onClick={toggleTemplates}
                 >
-                    <p>Template</p>
+                    <p>{t("sideBar.template")}</p>
                     <span className="template-icon icon"></span>
                 </button>
                 <button
@@ -419,7 +426,7 @@ function CreateResume() {
                         setShowSectionsComponent(!showSectionsComponent);
                     }}
                 >
-                    <p>Sections</p>
+                    <p>{t("sideBar.sections")}</p>
                     <span className="sections-icon icon"></span>
                 </button>
                 <button
@@ -432,7 +439,7 @@ function CreateResume() {
                     }}
                     className="create-resume-button"
                 >
-                    <p>Export</p>
+                    <p>{t("sideBar.export")}</p>
                     <span className="export-icon icon"></span>
                 </button>
                 {isLoadingState ? (
@@ -447,7 +454,7 @@ function CreateResume() {
                         className="create-resume-button save-button"
                         onClick={handleSave}
                     >
-                        <p>Save</p>
+                        <p>{t("sideBar.save")}</p>
                         <span className="save-icon icon"></span>
                     </button>
                 )}
@@ -464,15 +471,15 @@ function CreateResume() {
                         <div className="create-resume-title-container">
                             <input
                                 className="resume-title input"
-                                ref={titleRef}
-                                placeholder="Untitled"
-                                onChange={handleResumeTitleChange}
+                                placeholder={t("createResume.titlePlaceholder")}
+                                disabled
                             ></input>
                             <textarea
                                 className="resume-description input"
-                                ref={descriptionRef}
-                                placeholder="No description..."
-                                onChange={handleResumeDescriptionChange}
+                                placeholder={t(
+                                    "createResume.descriptionPlaceholder"
+                                )}
+                                disabled
                             ></textarea>
                         </div>
                         <div className="create-resume-template-container">
@@ -496,14 +503,16 @@ function CreateResume() {
                             <input
                                 className="resume-title input"
                                 ref={titleRef}
-                                placeholder="Untitled"
+                                placeholder={t("createResume.titlePlaceholder")}
                                 value={resumeTitle}
                                 onChange={handleResumeTitleChange}
                             ></input>
                             <textarea
                                 className="resume-description input"
                                 ref={descriptionRef}
-                                placeholder="No description..."
+                                placeholder={t(
+                                    "createResume.descriptionPlaceholder"
+                                )}
                                 value={resumeDescription}
                                 onChange={handleResumeDescriptionChange}
                             ></textarea>
@@ -530,7 +539,7 @@ function CreateResume() {
                             isExport: true,
                         })
                     ) : (
-                        <div>getResumeQueryError</div>
+                        <div>Error getting resume</div>
                     )}
                 </div>
             </div>

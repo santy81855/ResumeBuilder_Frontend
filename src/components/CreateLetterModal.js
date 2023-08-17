@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const CreateLetterModal = ({ createModal, setCreateModal }) => {
+    const { i18n, t } = useTranslation();
     const navigate = useNavigate();
     // variables needed for creating new resume
     const [resumeTitle, setResumeTitle] = useState("");
@@ -60,11 +62,11 @@ const CreateLetterModal = ({ createModal, setCreateModal }) => {
         >
             <div className="create-resume-info-container">
                 <div className="header">
-                    <h2>Cover Letter Information</h2>
+                    <h2>{t("createCoverLetterModal.heading")}</h2>
                 </div>
                 <div className="info-page">
                     <div className="horizontal-container">
-                        <h4>Title</h4>
+                        <h4>{t("createCoverLetterModal.title")}</h4>
                         <input
                             type="text"
                             value={resumeTitle}
@@ -75,7 +77,7 @@ const CreateLetterModal = ({ createModal, setCreateModal }) => {
                         ></input>
                     </div>
                     <div className="horizontal-container">
-                        <h4>Job</h4>
+                        <h4>{t("createCoverLetterModal.job")}</h4>
                         <input
                             type="text"
                             value={resumeJob}
@@ -86,7 +88,7 @@ const CreateLetterModal = ({ createModal, setCreateModal }) => {
                         ></input>
                     </div>
                     <div className="horizontal-container">
-                        <h4>Description</h4>
+                        <h4>{t("createCoverLetterModal.description")}</h4>
                         <textarea
                             type="text"
                             rows={3}
@@ -99,8 +101,12 @@ const CreateLetterModal = ({ createModal, setCreateModal }) => {
                     </div>
                 </div>
                 <div className="button-container">
-                    <button onClick={closeCreateResumeModal}>Back</button>
-                    <button onClick={navigateCreateResumePage}>Next</button>
+                    <button onClick={closeCreateResumeModal}>
+                        {t("createCoverLetterModal.back")}
+                    </button>
+                    <button onClick={navigateCreateResumePage}>
+                        {t("createCoverLetterModal.next")}
+                    </button>
                 </div>
             </div>
             <ToastContainer />

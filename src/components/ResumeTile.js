@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation, Trans } from "react-i18next";
 
 const ResumeTile = ({
     resumeData,
@@ -9,6 +10,7 @@ const ResumeTile = ({
     getTemplateComponent,
     keyString,
 }) => {
+    const { i18n, t } = useTranslation();
     const navigate = useNavigate();
     const handleResumeUnhover = (event, id) => {
         // get the ResumePic element
@@ -83,13 +85,13 @@ const ResumeTile = ({
                         className="EditResume"
                         onClick={(event) => handleEditClick(event, _id)}
                     >
-                        Edit
+                        {t("resumeTile.edit")}
                     </button>
                     <button
                         className="ExportResume"
                         onClick={(event) => handleExportClick(event, _id)}
                     >
-                        Export
+                        {t("resumeTile.export")}
                     </button>
                     <button
                         className="DeleteResume"
@@ -97,7 +99,7 @@ const ResumeTile = ({
                             handleDeleteClick(event, _id, keyString)
                         }
                     >
-                        Delete
+                        {t("resumeTile.delete")}
                     </button>
                 </div>
             </div>

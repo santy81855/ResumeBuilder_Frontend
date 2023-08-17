@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PromptButtons from "../PromptButtons";
+import { useTranslation, Trans } from "react-i18next";
 
 const ExperienceInfo = ({
     resumeData,
@@ -17,6 +18,7 @@ const ExperienceInfo = ({
     isLoadingState,
     jobTitle,
 }) => {
+    const { i18n, t } = useTranslation();
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
     const [start, setStart] = useState(new Date());
@@ -62,7 +64,7 @@ const ExperienceInfo = ({
     ];
 
     const noEnhanceToast = () =>
-        toast.info("There is nothing to enhance.", {
+        toast.info(t("resumeExperience.toastEnhanceError"), {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -73,22 +75,19 @@ const ExperienceInfo = ({
             theme: "light",
         });
     const fillOutCompanyAndPositionToast = () => {
-        toast.info(
-            "Please fill out the company name and your position in that company.",
-            {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            }
-        );
+        toast.info(t("resumeExperience.toastCompanyPositionError"), {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     };
     const fillOutPositionToast = () => {
-        toast.info("Please fill out the position for this job.", {
+        toast.info(t("resumeExperience.toastPositionError"), {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -100,7 +99,7 @@ const ExperienceInfo = ({
         });
     };
     const fillOutCompanyToast = () => {
-        toast.info("Please fill out the company name.", {
+        toast.info(t("resumeExperience.toastCompanyError"), {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -112,7 +111,7 @@ const ExperienceInfo = ({
         });
     };
     const fillOutAllFieldsToast = () => {
-        toast.info("Please fill out all of the fields.", {
+        toast.info(t("resumeExperience.toastFieldError"), {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -406,12 +405,12 @@ const ExperienceInfo = ({
     return (
         <div className="question-container">
             <div id="header" className="header">
-                <h2>Employment History</h2>
-                <p>Enter your previous work experience in this section.</p>
+                <h2>{t("resumeExperience.title")}</h2>
+                <p>{t("resumeExperience.description1")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Company</p>
+                    <p>{t("resumeExperience.company")}</p>
                     <input
                         id="company"
                         ref={companyRef}
@@ -424,7 +423,7 @@ const ExperienceInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Position</p>
+                    <p>{t("resumeExperience.position")}</p>
                     <input
                         id="position"
                         ref={positionRef}
@@ -437,7 +436,7 @@ const ExperienceInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Start Date</p>
+                    <p>{t("resumeExperience.startDate")}</p>
                     <DatePicker
                         className="short-input"
                         ref={startRef}
@@ -447,7 +446,7 @@ const ExperienceInfo = ({
                 </div>
                 <div className="input-item">
                     <div className="end-date-container">
-                        <p>End Date</p>
+                        <p>{t("resumeExperience.endDate")}</p>
                         <div
                             style={{
                                 display: "flex",
@@ -456,7 +455,7 @@ const ExperienceInfo = ({
                                 gap: "var(--gap-small)",
                             }}
                         >
-                            <p>Current:</p>
+                            <p>{t("resumeExperience.current")}</p>
                             <button
                                 className="isCurrentButton"
                                 onClick={(event) => {
@@ -498,11 +497,11 @@ const ExperienceInfo = ({
                 </div>
             </div>
             <div className="job-summary-container">
-                <p>Job Summary (optional)</p>
+                <p>{t("resumeExperience.jobSummary")}</p>
                 <textarea
                     ref={summaryRef}
                     className="job-summary"
-                    placeholder="+ Write your summary here."
+                    placeholder={t("resumeExperience.jobSummaryPlaceholder")}
                     type="text"
                     name="summary"
                     onChange={(event) => {
@@ -521,7 +520,7 @@ const ExperienceInfo = ({
             </div>
             <div className="job-summary-container">
                 <div className="add-highlight-container">
-                    <p>Highlights</p>
+                    <p>{t("resumeExperience.highlights")}</p>
                     <div className="highlight-button-container">
                         <button
                             className="minus-button"
@@ -538,18 +537,16 @@ const ExperienceInfo = ({
                         </button>
                     </div>
                 </div>
-                <p>
-                    You can change the number of highlights by adding or
-                    removing them with the buttons above. If you don't wish to
-                    add any highlights, leave the fields blank.
-                </p>
+                <p>{t("resumeExperience.highlightsDescription")}</p>
                 <div className="highlight-text-container">
                     {numHighlights >= 1 && (
                         <div>
                             <textarea
                                 id={0}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight1(event.target.value);
@@ -565,7 +562,7 @@ const ExperienceInfo = ({
                                             clearHighlight(0);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -575,7 +572,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(0);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -583,7 +580,7 @@ const ExperienceInfo = ({
                                             generateHighlight(0);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -594,7 +591,9 @@ const ExperienceInfo = ({
                             <textarea
                                 id={1}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight2(event.target.value);
@@ -610,7 +609,7 @@ const ExperienceInfo = ({
                                             clearHighlight(1);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -620,7 +619,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(1);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -628,7 +627,7 @@ const ExperienceInfo = ({
                                             generateHighlight(1);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -639,7 +638,9 @@ const ExperienceInfo = ({
                             <textarea
                                 id={2}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight3(event.target.value);
@@ -655,7 +656,7 @@ const ExperienceInfo = ({
                                             clearHighlight(2);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -665,7 +666,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(2);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -673,7 +674,7 @@ const ExperienceInfo = ({
                                             generateHighlight(2);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -684,7 +685,9 @@ const ExperienceInfo = ({
                             <textarea
                                 id={3}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight4(event.target.value);
@@ -700,7 +703,7 @@ const ExperienceInfo = ({
                                             clearHighlight(3);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -710,7 +713,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(3);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -718,7 +721,7 @@ const ExperienceInfo = ({
                                             generateHighlight(3);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -729,7 +732,9 @@ const ExperienceInfo = ({
                             <textarea
                                 id={4}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight5(event.target.value);
@@ -745,7 +750,7 @@ const ExperienceInfo = ({
                                             clearHighlight(4);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -755,7 +760,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(4);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -763,7 +768,7 @@ const ExperienceInfo = ({
                                             generateHighlight(4);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -774,7 +779,9 @@ const ExperienceInfo = ({
                             <textarea
                                 id={5}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight6(event.target.value);
@@ -790,7 +797,7 @@ const ExperienceInfo = ({
                                             clearHighlight(5);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -800,7 +807,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(5);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -808,7 +815,7 @@ const ExperienceInfo = ({
                                             generateHighlight(5);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -819,7 +826,9 @@ const ExperienceInfo = ({
                             <textarea
                                 id={6}
                                 className="job-summary"
-                                placeholder="+ Write your highlight here."
+                                placeholder={t(
+                                    "resumeExperience.highlightPlaceholder"
+                                )}
                                 type="text"
                                 onChange={(event) => {
                                     setHighlight7(event.target.value);
@@ -835,7 +844,7 @@ const ExperienceInfo = ({
                                             clearHighlight(6);
                                         }}
                                     >
-                                        Clear
+                                        {t("resumeExperience.clear")}
                                     </button>
                                 </div>
                                 <div className="right">
@@ -845,7 +854,7 @@ const ExperienceInfo = ({
                                             enhanceHighlight(6);
                                         }}
                                     >
-                                        enhance
+                                        {t("resumeExperience.enhance")}
                                     </button>
                                     <button
                                         className="enhance-button"
@@ -853,7 +862,7 @@ const ExperienceInfo = ({
                                             generateHighlight(6);
                                         }}
                                     >
-                                        generate
+                                        {t("resumeExperience.generate")}
                                     </button>
                                 </div>
                             </div>
@@ -863,7 +872,7 @@ const ExperienceInfo = ({
             </div>
             <div className="experience-button-container">
                 <button className="experience-button" onClick={addJob}>
-                    Add Job
+                    {t("resumeExperience.addJob")}
                 </button>
             </div>
             <div className="experience-history-container">
@@ -891,7 +900,7 @@ const ExperienceInfo = ({
                                 id={index}
                                 onClick={removeJob}
                             >
-                                Delete
+                                {t("resumeExperience.delete")}
                             </button>
                             <button
                                 className="edit-experience-item-button"
@@ -900,7 +909,7 @@ const ExperienceInfo = ({
                                     editJob(event, job);
                                 }}
                             >
-                                Edit
+                                {t("resumeExperience.edit")}
                             </button>
                             <h3>
                                 {job.position}, {job.company}
@@ -924,7 +933,7 @@ const ExperienceInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeExperience.back")}
                 </button>
 
                 <button
@@ -932,7 +941,7 @@ const ExperienceInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeExperience.apply")}
                 </button>
             </div>
         </div>

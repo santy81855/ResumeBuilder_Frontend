@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const EducationInfo = ({
     resumeData,
@@ -13,6 +14,7 @@ const EducationInfo = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [institution, setInstitution] = useState("");
     const [degree, setDegree] = useState("");
     const [degreeArea, setDegreeArea] = useState("");
@@ -82,7 +84,7 @@ const EducationInfo = ({
         }
         // ensure all the necessary values are filled
         if (ins === "" || deg === "" || st === "" || en === "") {
-            toast.info("Please fill out all of the fields.", {
+            toast.info(t("resumeEducation.toastError"), {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -208,12 +210,12 @@ const EducationInfo = ({
     return (
         <div className="question-container">
             <div id="header" className="header">
-                <h2>Education</h2>
-                <p>Enter your education history in this section.</p>
+                <h2>{t("resumeEducation.title")}</h2>
+                <p>{t("resumeEducation.description1")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Institution</p>
+                    <p>{t("resumeEducation.institution")}</p>
                     <input
                         id="institution"
                         ref={institutionRef}
@@ -227,7 +229,7 @@ const EducationInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Degree Type</p>
+                    <p>{t("resumeEducation.degreeType")}</p>
                     <input
                         id="degree"
                         ref={degreeRef}
@@ -241,7 +243,7 @@ const EducationInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Degree Area</p>
+                    <p>{t("resumeEducation.degreeArea")}</p>
                     <input
                         id="area"
                         ref={degreeAreaRef}
@@ -255,7 +257,7 @@ const EducationInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>GPA (optional)</p>
+                    <p>{t("resumeEducation.gpa")}</p>
                     <input
                         id="gpa"
                         ref={gpaRef}
@@ -269,7 +271,7 @@ const EducationInfo = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Start Date</p>
+                    <p>{t("resumeEducation.startDate")}</p>
                     <DatePicker
                         className="short-input"
                         ref={startRef}
@@ -279,7 +281,7 @@ const EducationInfo = ({
                 </div>
                 <div className="input-item">
                     <div className="end-date-container">
-                        <p>End Date</p>
+                        <p>{t("resumeEducation.endDate")}</p>
                         <div
                             style={{
                                 display: "flex",
@@ -288,7 +290,7 @@ const EducationInfo = ({
                                 gap: "var(--gap-small)",
                             }}
                         >
-                            <p>Current:</p>
+                            <p>{t("resumeEducation.current")}</p>
                             <button
                                 className="isCurrentButton"
                                 onClick={(event) => {
@@ -331,7 +333,7 @@ const EducationInfo = ({
             </div>
             <div className="job-summary-container">
                 <div className="add-highlight-container">
-                    <p>Highlights</p>
+                    <p>{t("resumeEducation.highlights")}</p>
                     <button
                         className="minus-button"
                         onClick={removeHighlightInput}
@@ -343,11 +345,7 @@ const EducationInfo = ({
                         +
                     </button>
                 </div>
-                <p>
-                    You can change the number of highlights by adding or
-                    removing them with the buttons above. If you don't wish to
-                    add any highlights, leave the fields blank.
-                </p>
+                <p>{t("resumeEducation.highlightsDescription")}</p>
                 {numHighlights >= 1 && (
                     <textarea
                         id={0}
@@ -442,7 +440,7 @@ const EducationInfo = ({
             </div>
             <div className="experience-button-container">
                 <button className="experience-button" onClick={addSchool}>
-                    Add School
+                    {t("resumeEducation.addSchool")}
                 </button>
             </div>
             <div className="experience-history-container">
@@ -471,7 +469,7 @@ const EducationInfo = ({
                                 id={index}
                                 onClick={removeJob}
                             >
-                                Delete
+                                {t("resumeEducation.delete")}
                             </button>
                             <button
                                 className="edit-experience-item-button"
@@ -480,7 +478,7 @@ const EducationInfo = ({
                                     editJob(event, school);
                                 }}
                             >
-                                Edit
+                                {t("resumeEducation.edit")}
                             </button>
                             <h3>
                                 {school.area} {school.studyType},{" "}
@@ -489,8 +487,18 @@ const EducationInfo = ({
                             <h4>
                                 {formattedDateStart} - {formattedDateEnd}
                             </h4>
-                            {school.gpa && <p>GPA: {school.gpa}</p>}
-                            {school.courses.length > 0 && <h4>Highlights:</h4>}
+                            {school.gpa && (
+                                <p>
+                                    <Trans i18nKey="resumeEducation.gpaDisplay">
+                                        GPA: {school.gpa}
+                                    </Trans>
+                                </p>
+                            )}
+                            {school.courses.length > 0 && (
+                                <h4>
+                                    {t("resumeEducation.highlightsDisplay")}
+                                </h4>
+                            )}
                             <ul>
                                 {school.courses.map((highlight, index) => (
                                     <li key={highlight}>{highlight}</li>
@@ -506,7 +514,7 @@ const EducationInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeEducation.back")}
                 </button>
 
                 <button
@@ -514,7 +522,7 @@ const EducationInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeEducation.apply")}
                 </button>
             </div>
         </div>

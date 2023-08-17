@@ -29,8 +29,10 @@ import Footer from "./Footer";
 import { getSubscription } from "../api/subscription/SubscriptionRequests";
 import SubscriptionModal from "./SubscriptionModal";
 import { createCheckoutSession } from "../api/stripe/StripeRequests";
+import { useTranslation, Trans } from "react-i18next";
 
 function ResumePage() {
+    const { i18n, t } = useTranslation();
     const [userName, setUserName] = useState("");
     const [resumeArr, setResumeArr] = useState([]);
     const [searchArr, setSearchArr] = useState([]);
@@ -362,7 +364,9 @@ function ResumePage() {
                         })}
 
                     <div className="export-modal-buttons">
-                        <button onClick={closeModal}>Close</button>
+                        <button onClick={closeModal}>
+                            {t("exportModal.close")}
+                        </button>
                         <button
                             onClick={() => {
                                 exportToPDF({
@@ -377,7 +381,7 @@ function ResumePage() {
                                 });
                             }}
                         >
-                            Export Resume
+                            {t("exportModal.export")}
                         </button>
                     </div>
                 </div>
@@ -423,19 +427,17 @@ function ResumePage() {
         <div className="HeaderSection">
             <div className="introContainer Section">
                 <h1>
-                    <span>Welcome back, </span>
-                    {userName}!
+                    <Trans i18nKey="resumePage.title">
+                        <span>Welcome back, </span>
+                        {userName}!
+                    </Trans>
                 </h1>
                 <p className="HeaderDescription">
-                    Keep track of all your resumes and tailor them to specific
-                    job applications. You'll be able to quickly and easily
-                    access your resume history in one place.
+                    {t("resumePage.description")}
                 </p>
             </div>
         </div>
     );
-
-    const resumeButtons = <div className="DisplayOptionsContainer"></div>;
 
     const displayButtonClicked = (e) => {
         if (display === "resumes") {
@@ -462,10 +464,12 @@ function ResumePage() {
                 {headerSection}
                 <div className="ResumeSection Section">
                     <div className="PageTitleContainer">
-                        <div className="PageTitle">Resumes</div>
+                        <div className="PageTitle">
+                            {t("resumePage.resumeButton")}
+                        </div>
                         <div className="Button" onClick={createResume}>
-                            <p>+</p>
-                            <p>Create New</p>
+                            <p>{t("resumePage.plus")}</p>
+                            <p>{t("resumePage.createResume")}</p>
                         </div>
                     </div>
                     <div className="ResumeTiles">
@@ -521,7 +525,7 @@ function ResumePage() {
                                 border: "2px solid var(--accent-color-2)",
                             }}
                         >
-                            Resumes
+                            {t("resumePage.resumeButton")}
                         </button>
                         <button
                             id="coverLetterButton"
@@ -530,27 +534,27 @@ function ResumePage() {
                                 displayButtonClicked(event);
                             }}
                         >
-                            Cover Letters
+                            {t("resumePage.coverLetterButton")}
                         </button>
                     </div>
                     <div className="ResumeSection Section">
                         <div className="PageTitleContainer">
                             <h1 className="PageTitle">
                                 {display === "resumes"
-                                    ? "Resumes"
-                                    : "Cover Letters"}
+                                    ? t("resumePage.resumeButton")
+                                    : t("resumePage.coverLetterButton")}
                             </h1>
                             <button className="Button" onClick={createResume}>
-                                <p>+</p>
-                                <p>Create New</p>
+                                <p>{t("resumePage.plus")}</p>
+                                <p>{t("resumePage.createResume")}</p>
                             </button>
                         </div>
                         <div className="SearchBarContainer">
-                            <h4>Search:</h4>
+                            <h4>{t("resumePage.search")}</h4>
                             <input
                                 className="SearchBar"
                                 type="text"
-                                placeholder="search by name, job, or description"
+                                placeholder={t("resumePage.searchPlaceHolder")}
                                 value={resumeSearch}
                                 onChange={(event) => {
                                     setResumeSearch(event.currentTarget.value);

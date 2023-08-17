@@ -11,14 +11,18 @@ import { getAllUserResumes } from "../api/resume/ResumeRequests";
 import { getSubscription } from "../api/subscription/SubscriptionRequests";
 import { createCheckoutSession } from "../api/stripe/StripeRequests";
 import Footer from "./Footer";
+import { useTranslation, Trans } from "react-i18next";
+import { useAppState } from "../AppStateContext";
 
 function Home() {
+    const { i18n, t } = useTranslation();
     const [createModal, setCreateModal] = useState(false);
     const [resumes, setResumes] = useState(null);
     const [subscriptionModal, setSubscriptionModal] = useState(false);
     const [enhanceText, setEnhanceText] = useState(
-        "Hard working person who works well in teams and learns fast."
+        t("homepage.section3ContentBefore")
     );
+    const { appState, setAppState } = useAppState();
     const navigate = useNavigate();
 
     // useEffect to fetch user data on load
@@ -31,6 +35,14 @@ function Home() {
             resumesQuery.refetch();
         }
     }, []);
+
+    useEffect(() => {
+        // wait 2 seconds
+        setTimeout(() => {
+            // set the enhance text to the first language
+            setEnhanceText(t("homepage.section3ContentBefore"));
+        }, 2000);
+    }, [appState]);
 
     const createResumeHomeClick = () => {
         const token = localStorage.getItem("token");
@@ -94,17 +106,16 @@ function Home() {
             <div className="landing-page-background">
                 <div className="content-container">
                     <p className="landing-page-title-banner">
-                        <span>Artificial Intelligence Resume Builder</span>
+                        <span>{t("homepage.banner")}</span>
                     </p>
                     <h1>
-                        Create your perfect resume in <span>minutes</span> with
-                        the help of <span>AI.</span>
+                        <Trans i18nKey="homepage.title">
+                            Create your perfect resume in <span>minutes</span>
+                            with the help of <span>AI.</span>
+                        </Trans>
                     </h1>
                     <p className="landing-page-description">
-                        Say goodbye to endless hours spent perfecting your
-                        resume - with Ai Resume, our AI-powered platform makes
-                        creating a professional resume fast and easy - Try it
-                        now!
+                        {t("homepage.description")}
                     </p>
 
                     <button
@@ -113,7 +124,7 @@ function Home() {
                             createResumeHomeClick();
                         }}
                     >
-                        <span> Create Your Resume</span>
+                        <span>{t("homepage.button")}</span>
                     </button>
                 </div>
                 <div className="circle-transition"></div>
@@ -123,25 +134,25 @@ function Home() {
                     <div className="left-feature-container">
                         <div className="feature-left">
                             <div className="feature-text-section">
-                                <p className="header">Tailor each resume</p>
+                                <p className="header">
+                                    {t("homepage.section1Title")}
+                                </p>
                                 <p className="body">
-                                    Our user-friendly interface allows you to
-                                    effortlessly craft unique resumes that
-                                    perfectly match the requirements of each
-                                    opportunity. It's as simple as filling in
-                                    the essential details - title, description,
-                                    and job - to create a standout resume that
-                                    showcases your skills and experience
+                                    {t("homepage.section1Description")}
                                 </p>
                             </div>
                             <div className="feature-image-section">
                                 <div className="step-one-image">
                                     <div className="step-one-header">
-                                        Resume Information
+                                        {t("homepage.section1ImageHeader")}
                                     </div>
                                     <div className="step-one-body">
                                         <div className="step-one-element">
-                                            <p>Title</p>
+                                            <p>
+                                                {t(
+                                                    "homepage.section1ImageLine1"
+                                                )}
+                                            </p>
                                             <div className="type-input-wrapper">
                                                 <TypeAnimation
                                                     className="type-input"
@@ -163,7 +174,11 @@ function Home() {
                                             </div>
                                         </div>
                                         <div className="step-one-element">
-                                            <p>Description</p>
+                                            <p>
+                                                {t(
+                                                    "homepage.section1ImageLine2"
+                                                )}
+                                            </p>
                                             <div className="type-input-wrapper">
                                                 <TypeAnimation
                                                     className="type-input"
@@ -185,7 +200,11 @@ function Home() {
                                             </div>
                                         </div>
                                         <div className="step-one-element">
-                                            <p>Job</p>
+                                            <p>
+                                                {t(
+                                                    "homepage.section1ImageLine3"
+                                                )}
+                                            </p>
                                             <div className="type-input-wrapper">
                                                 <TypeAnimation
                                                     className="type-input"
@@ -218,20 +237,13 @@ function Home() {
                         <div className="feature-right">
                             <div className="feature-text-section">
                                 <p className="header">
-                                    See your resume as you build it
+                                    {t("homepage.section2Title")}
                                 </p>
                                 <div className="feature-image-section">
                                     <div className="step2"></div>
                                 </div>
                                 <p className="body">
-                                    See your resume come to life as you make
-                                    changes, ensuring that every modification
-                                    reflects instantly. No more guesswork or
-                                    surprises. With our live preview feature,
-                                    you have full control and visibility of your
-                                    resume's appearance, allowing you to craft
-                                    the perfect document that truly represents
-                                    your skills and achievements.
+                                    {t("homepage.section2Description")}
                                 </p>
                             </div>
                         </div>
@@ -242,20 +254,15 @@ function Home() {
                     <div className="right-feature-container">
                         <div className="feature-right-last">
                             <div className="feature-text-section-last">
-                                <p className="header">Don't overthink it</p>
-                                <p className="body">
-                                    Our powerful 'Enhance' feature analyzes your
-                                    resume content and optimizes it to make it
-                                    more professional and tailored to the job
-                                    you're applying for. With just a click,
-                                    watch as your skills, experience, and
-                                    achievements are highlighted in a way that
-                                    captures the attention of employers. Impress
-                                    potential employers with a resume that
-                                    stands out from the crowd and increases your
-                                    chances of landing your dream job.
+                                <p className="header">
+                                    {t("homepage.section3Title")}
                                 </p>
-                                <p className="body">Try it out below!</p>
+                                <p className="body">
+                                    {t("homepage.section3Description")}
+                                </p>
+                                <p className="body">
+                                    {t("homepage.section3Description2")}
+                                </p>
                                 <div className="feature-image-section-last">
                                     <div className="step3">
                                         <div className="step3-box">
@@ -266,17 +273,21 @@ function Home() {
                                             onClick={() => {
                                                 setTimeout(function () {
                                                     setEnhanceText(
-                                                        "Result-driven professional with a strong work ethic and a proven ability to thrive in a team-oriented environment. Committed to continuous learning and development, with a track record of quickly adapting to new processes, technologies, and systems."
+                                                        t(
+                                                            "homepage.section3ContentAfter"
+                                                        )
                                                     );
                                                     setTimeout(function () {
                                                         setEnhanceText(
-                                                            "Hard working person who works well in teams and learns fast."
+                                                            t(
+                                                                "homepage.section3ContentBefore"
+                                                            )
                                                         );
                                                     }, 15000);
                                                 }, 1000);
                                             }}
                                         >
-                                            Enhance
+                                            {t("homepage.section3Enhance")}
                                         </button>
                                     </div>
                                 </div>

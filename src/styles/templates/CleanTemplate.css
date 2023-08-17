@@ -148,7 +148,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    row-gap: 0.8em;
+    row-gap: 0.5em;
 }
 
 .clean-template .clean-project-container p {
@@ -167,9 +167,6 @@
 
 .clean-template .clean-project-container .project-name a {
     text-decoration: solid;
-}
-
-.clean-template .clean-project-container .project-description {
 }
 
 @media (pointer: fine) {

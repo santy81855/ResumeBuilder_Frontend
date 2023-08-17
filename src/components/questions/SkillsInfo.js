@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { sendChat } from "../../api/ai/AIRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation, Trans } from "react-i18next";
 
 const SkillsInfo = ({
     resumeData,
@@ -14,6 +15,7 @@ const SkillsInfo = ({
     isLoadingState,
     jobTitle,
 }) => {
+    const { i18n, t } = useTranslation();
     const [skillList, setSkillList] = useState([]);
     const [skillInput, setSkillInput] = useState("");
 
@@ -56,7 +58,7 @@ const SkillsInfo = ({
 
     const enhance = () => {
         if (skillInput === "") {
-            toast.info("There is nothing to enhance.", {
+            toast.info(t("resumeSkills.enhanceErrorToast"), {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -128,17 +130,9 @@ const SkillsInfo = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Skills</h2>
-                <h3>Write any relevant skills.</h3>
-                <p>
-                    Be specific and relevant: Instead of listing generic skills,
-                    try to be specific and tailor your skills to the job or
-                    industry you're applying for. Consider including skills that
-                    directly align with the job requirements or skills that
-                    demonstrate your expertise in a particular area. This will
-                    help employers quickly identify your relevant skills and
-                    qualifications.
-                </p>
+                <h2>{t("resumeSkills.title")}</h2>
+                <h3>{t("resumeSkills.description1")}</h3>
+                <p>{t("resumeSkills.description2")}</p>
             </div>
             <div className="skill-input-container">
                 <div className="input-and-prompt-container">
@@ -154,7 +148,7 @@ const SkillsInfo = ({
                     <div className="prompt-buttons">
                         <div className="left">
                             <button className="enhance-button" onClick={clear}>
-                                Clear
+                                {t("resumeSkills.clear")}
                             </button>
                         </div>
                         <div className="right">
@@ -162,18 +156,18 @@ const SkillsInfo = ({
                                 className="enhance-button"
                                 onClick={enhance}
                             >
-                                enhance
+                                {t("resumeSkills.enhance")}
                             </button>
                             <button
                                 className="enhance-button"
                                 onClick={generate}
                             >
-                                generate
+                                {t("resumeSkills.generate")}
                             </button>
                         </div>
                     </div>
                 </div>
-                <button onClick={addSkill}>Add</button>
+                <button onClick={addSkill}>{t("resumeSkills.add")}</button>
             </div>
 
             <div className="skill-container">
@@ -191,7 +185,7 @@ const SkillsInfo = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("resumeSkills.back")}
                 </button>
 
                 <button
@@ -199,7 +193,7 @@ const SkillsInfo = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("resumeSkills.apply")}
                 </button>
             </div>
         </div>

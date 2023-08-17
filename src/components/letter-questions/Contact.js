@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "../../styles/questions/ResumeInput.css";
 import Loader from "../ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const Contact = ({
     letterData,
@@ -9,6 +10,7 @@ const Contact = ({
     closeModal,
     isLoadingState,
 }) => {
+    const { i18n, t } = useTranslation();
     const [name, setName] = useState(letterData.from);
     const [email, setEmail] = useState(letterData.email);
     const [phone, setPhone] = useState(letterData.phone);
@@ -82,21 +84,13 @@ const Contact = ({
     return (
         <div className="question-container">
             <div className="header">
-                <h2>Contact Information</h2>
-                <h3>
-                    Write the contact information you want to show on your cover
-                    letter.
-                </h3>
-                <p>
-                    A well-presented and comprehensive contact information
-                    section on a cover letter enhances your chances of being
-                    contacted for job interviews or further discussions about
-                    potential employment
-                </p>
+                <h2>{t("letterContact.title")}</h2>
+                <h3>{t("letterContact.description1")}</h3>
+                <p>{t("letterContact.description2")}</p>
             </div>
             <div className="input-container-horizontal">
                 <div className="input-item">
-                    <p>Name</p>
+                    <p>{t("letterContact.name")}</p>
                     <input
                         id="name"
                         ref={nameRef}
@@ -107,7 +101,7 @@ const Contact = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Email</p>
+                    <p>{t("letterContact.email")}</p>
                     <input
                         id="email"
                         ref={emailRef}
@@ -118,7 +112,7 @@ const Contact = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Phone</p>
+                    <p>{t("letterContact.phone")}</p>
                     <input
                         id="phone"
                         ref={phoneRef}
@@ -129,7 +123,7 @@ const Contact = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Website</p>
+                    <p>{t("letterContact.website")}</p>
                     <input
                         id="website"
                         ref={websiteRef}
@@ -140,7 +134,7 @@ const Contact = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Position</p>
+                    <p>{t("letterContact.position")}</p>
                     <input
                         id="position"
                         ref={positionRef}
@@ -151,7 +145,7 @@ const Contact = ({
                     ></input>
                 </div>
                 <div className="input-item">
-                    <p>Location</p>
+                    <p>{t("letterContact.location")}</p>
                     <input
                         id="location"
                         ref={locationRef}
@@ -167,7 +161,7 @@ const Contact = ({
                     className="question-container-close-button"
                     onClick={closeModal}
                 >
-                    Back
+                    {t("letterContact.back")}
                 </button>
 
                 <button
@@ -175,7 +169,7 @@ const Contact = ({
                     onClick={handleSave}
                     disabled={isLoadingState}
                 >
-                    {isLoadingState ? <Loader /> : "apply"}
+                    {isLoadingState ? <Loader /> : t("letterContact.apply")}
                 </button>
             </div>
         </div>
