@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PromptButtons from "../PromptButtons";
 import { useTranslation, Trans } from "react-i18next";
+import { useAppState } from "../../AppStateContext";
 
 const Summary = ({
     resumeData,
@@ -17,6 +18,7 @@ const Summary = ({
     jobTitle,
 }) => {
     const { i18n, t } = useTranslation();
+    const { appState, setAppState } = useAppState();
     const [summary, setSummary] = useState(resumeData.summary);
     const summaryRef = useRef();
     const [isGenerating, setIsGenerating] = useState(false);
@@ -85,14 +87,22 @@ const Summary = ({
             });
             return;
         }
-        var userPrompt = enhancePrompt + summary;
+        var userPrompt =
+            enhancePrompt +
+            summary +
+            " and write the response in " +
+            appState.language;
         setIsEnhancing(true);
         fetchAIResponse(userPrompt);
     };
 
     const generate = () => {
         setSummary("");
-        var userPrompt = generatePrompt + jobTitle;
+        var userPrompt =
+            generatePrompt +
+            jobTitle +
+            " job and write the response in " +
+            appState.language;
         setIsGenerating(true);
         fetchAIResponse(userPrompt);
     };

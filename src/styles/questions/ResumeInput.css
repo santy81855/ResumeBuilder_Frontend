@@ -203,6 +203,8 @@
     border: none;
     border-radius: 5px;
     color: white;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
 }
 
 .skill-input-container button:hover {
@@ -484,5 +486,11 @@
         flex-grow: 1;
         width: 100%;
         padding-block: var(--gap-medium);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .skill-input-container {
+        flex-direction: column;
     }
 }

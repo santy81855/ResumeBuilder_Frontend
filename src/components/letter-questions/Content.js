@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PromptButtons from "../PromptButtons";
 import { useTranslation, Trans } from "react-i18next";
+import { useAppState } from "../../AppStateContext";
 
 const Content = ({
     letterData,
@@ -17,6 +18,7 @@ const Content = ({
     jobTitle,
 }) => {
     const { i18n, t } = useTranslation();
+    const { appState, setAppState } = useAppState();
     const [content, setSummary] = useState(letterData.content);
     const [jobDescription, setJobDescription] = useState(
         letterData.jobDescription
@@ -31,15 +33,16 @@ const Content = ({
     const jobDescriptionInstructions =
         " And also use the following job description to help you make the cover letter: ";
     const instructions =
-        " And instead of using any page breaks in your response, please use two new line characters to signify a new paragraph. Also do not include any greetings or salutations or complimentary closing statements, so don't include anything like Dear Hiring Manager or Sincerely, or anything like that. Just write the body of the cover letter.";
+        " And instead of using any page breaks in your response, please use two new line characters to signify a new paragraph. Also do not include any greetings or salutations or complimentary closing statements, so don't include anything like Dear Hiring Manager or Sincerely, or anything like that. Just write the body of the cover letter. Also write the response in " +
+        appState.language;
     const enhancePrompt =
         "enhance the following cover letter for a " +
         jobTitle +
-        " job to make it more professional and better." +
-        instructions;
+        " job to make it more professional and better. ";
     const generatePrompt =
         "write a 3 paragraph, 400 words or less cover letter that is professional and engaging for a " +
-        jobTitle;
+        jobTitle +
+        " job. ";
 
     var prompt = { content: "" };
 

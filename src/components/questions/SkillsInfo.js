@@ -6,6 +6,7 @@ import { sendChat } from "../../api/ai/AIRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation, Trans } from "react-i18next";
+import { useAppState } from "../../AppStateContext";
 
 const SkillsInfo = ({
     resumeData,
@@ -16,6 +17,7 @@ const SkillsInfo = ({
     jobTitle,
 }) => {
     const { i18n, t } = useTranslation();
+    const { appState, setAppState } = useAppState();
     const [skillList, setSkillList] = useState([]);
     const [skillInput, setSkillInput] = useState("");
 
@@ -73,7 +75,9 @@ const SkillsInfo = ({
                 "enhance the following resume skill to make it more professional and to make it better for applying to be a " +
                 jobTitle +
                 ", but keep it under 15 words: " +
-                skillInput;
+                skillInput +
+                " and write the response in " +
+                appState.language;
             fetchAIResponse(userPrompt);
         }
     };
@@ -84,7 +88,9 @@ const SkillsInfo = ({
             "write a 15 words or less resume skill that is useful and professional for applying to be a " +
             jobTitle +
             " and it should be something different from the following: " +
-            skillList.toString();
+            skillList.toString() +
+            " and write the response in " +
+            appState.language;
         fetchAIResponse(userPrompt);
     };
 

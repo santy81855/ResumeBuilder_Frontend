@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PromptButtons from "../PromptButtons";
 import { useTranslation, Trans } from "react-i18next";
+import { useAppState } from "../../AppStateContext";
 
 const ExperienceInfo = ({
     resumeData,
@@ -18,6 +19,7 @@ const ExperienceInfo = ({
     isLoadingState,
     jobTitle,
 }) => {
+    const { appState, setAppState } = useAppState();
     const { i18n, t } = useTranslation();
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
@@ -171,7 +173,9 @@ const ExperienceInfo = ({
             "in 20 words or less, write a job highlight for when I worked as a " +
             positionRef.current.value +
             " that is professional and better for a resume for applying to be a " +
-            jobTitle;
+            jobTitle +
+            " and write the response in " +
+            appState.language;
         fetchAIResponse(userPrompt, index);
     };
 
@@ -199,7 +203,9 @@ const ExperienceInfo = ({
                 " to make it better for a resume and to make it better for applying to be a " +
                 jobTitle +
                 ": " +
-                highlightArray[index];
+                highlightArray[index] +
+                " and write the response in " +
+                appState.language;
             fetchAIResponse(userPrompt, index);
         }
     };
@@ -236,7 +242,9 @@ const ExperienceInfo = ({
                     " job to make it more professional and to make it better for applying to be a " +
                     jobTitle +
                     ": " +
-                    summary;
+                    summary +
+                    " and write the response in " +
+                    appState.language;
                 setIsEnhancing(true);
                 fetchAIResponse(userPrompt, -1);
             }
@@ -262,7 +270,9 @@ const ExperienceInfo = ({
             "write a 40 words or less job summary for when I was a " +
             positionRef.current.value +
             " that is professional and engaging for applying to be a " +
-            jobTitle;
+            jobTitle +
+            " and write the response in " +
+            appState.language;
         setIsGenerating(true);
         fetchAIResponse(userPrompt, -1);
     };

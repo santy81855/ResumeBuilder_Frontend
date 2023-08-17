@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useTranslation, Trans } from "react-i18next";
+import { useAppState } from "../../AppStateContext";
 
 const ProjectsInfo = ({
     resumeData,
@@ -18,6 +19,7 @@ const ProjectsInfo = ({
     jobTitle,
 }) => {
     const { i18n, t } = useTranslation();
+    const { appState, setAppState } = useAppState();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
@@ -129,7 +131,9 @@ const ProjectsInfo = ({
                 "in 20 words or less, enhance the following highlight for a project i created to make it better for a resume and to make it better for applying to be a " +
                 jobTitle +
                 ": " +
-                highlightArray[index];
+                highlightArray[index] +
+                " and write the response in " +
+                appState.language;
             fetchAIResponse(userPrompt, index);
         }
     };

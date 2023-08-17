@@ -20,7 +20,7 @@ import i18n from "./i18n"; // Import your i18n configuration
 
 function App() {
     Modal.setAppElement("#root"); // Assuming "#root" is the ID of the root element of your application.
-    const [websiteLanguage, setWebsiteLanguage] = useState("English");
+    const [websiteLanguage, setWebsiteLanguage] = useState("en");
 
     useEffect(() => {
         const doc = document.documentElement;

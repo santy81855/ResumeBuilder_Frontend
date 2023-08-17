@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/questions/ResumeInput.css";
 import Loader from "./ui/Loader";
+import { useTranslation, Trans } from "react-i18next";
 
 const PromptButtons = ({
     isGenerating,
@@ -9,6 +10,7 @@ const PromptButtons = ({
     enhance,
     clear,
 }) => {
+    const { i18n, t } = useTranslation();
     return (
         <div className="prompt-buttons">
             <div className="left">
@@ -18,7 +20,7 @@ const PromptButtons = ({
                         clear();
                     }}
                 >
-                    Clear
+                    {t("resumeExperience.clear")}
                 </button>
             </div>
             <div className="right">
@@ -29,7 +31,7 @@ const PromptButtons = ({
                     }}
                     disabled={isEnhancing}
                 >
-                    {isEnhancing ? <Loader /> : "enhance"}
+                    {isEnhancing ? <Loader /> : t("resumeExperience.enhance")}
                 </button>
                 <button
                     className="enhance-button"
@@ -38,7 +40,7 @@ const PromptButtons = ({
                     }}
                     disabled={isGenerating}
                 >
-                    {isGenerating ? <Loader /> : "generate"}
+                    {isGenerating ? <Loader /> : t("resumeExperience.generate")}
                 </button>
             </div>
         </div>

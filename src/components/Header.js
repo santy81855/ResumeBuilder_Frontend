@@ -192,9 +192,12 @@ const Header = observer(({ setWebsiteLanguage }) => {
         // if the user changed the language
         if (language !== "") {
             setAppState({ ...appState, language: language });
-            updateUserMutation.mutate({
-                language: language,
-            });
+            const token = localStorage.getItem("token");
+            if (token) {
+                updateUserMutation.mutate({
+                    language: language,
+                });
+            }
         }
     };
 

@@ -81,6 +81,7 @@ function Home() {
         queryFn: getSubscription,
         onSuccess: (data, variables, context) => {},
         onError: (error, variables, context) => {},
+        enabled: localStorage.getItem("token") ? true : false,
     });
 
     const resumesQuery = useQuery({
@@ -90,6 +91,7 @@ function Home() {
             setResumes(data);
         },
         onError: (error, variables, context) => {},
+        enabled: localStorage.getItem("token") ? true : false,
     });
 
     return (
